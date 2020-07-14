@@ -6,6 +6,5 @@
 ## dependencies/tools 
  * Insomnia REST api client (https://insomnia.rest/download/)
  * PHPCS (standard PSR-2)
-   Install PHPCS VSCode extension 
-   Then run 'composer global require squizlabs/php_codesniffer' to install dependencie
-
+   * Install PHPCS VSCode extension 
+   * Then run 'composer global require squizlabs/php_codesniffer' to install dependencie
