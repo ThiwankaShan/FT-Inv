@@ -1,0 +1,28 @@
+.bg-color-custom{
+    background-color:#C21E56 !important;
+}
+
+
+.form-card-header-custom
+{
+    background-color:#691330 !important;
+}
+.card-border-custom{
+    border:1px #691330 solid !important;
+}
+.form-tab-custom:hover
+{
+    border-color: #691330 !important;
+
+}
+.form-tab-custom:focus
+{
+    transition: #691330 0.15s ease-in-out, box-shadow 0.15s ease-in-out !important;
+
+}
+.form-tab-custom:active
+{
+    transition: #691330 0.15s ease-in-out, box-shadow 0.15s ease-in-out !important;
+
+}
+
