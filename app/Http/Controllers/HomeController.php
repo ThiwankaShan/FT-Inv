@@ -28,6 +28,8 @@ class HomeController extends Controller
             return view('pages.admin');
         } elseif (Auth::user()->email=="manager@gmail.com") {
             return view('pages.manager');
+        } elseif (Auth::user()->email=="user@gmail.com") {
+            return view('pages.user');
         } else {
             return view('home');
         }
