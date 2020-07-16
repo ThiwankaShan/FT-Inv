@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Auth;
 use Illuminate\Http\Request;
 
@@ -23,9 +24,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(Auth::user()->email="admin@gmail.com"){
-         return view('pages.admin');
+        if (Auth::user()->email=="admin@gmail.com") {
+            return view('pages.admin');
+        } elseif (Auth::user()->email=="manager@gmail.com") {
+            return view('pages.manager');
+        } elseif (Auth::user()->email=="user@gmail.com") {
+            return view('pages.user');
+        } else {
+            return view('home');
         }
-        return view('home');
     }
 }
