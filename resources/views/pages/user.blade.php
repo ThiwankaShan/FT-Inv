@@ -2,8 +2,8 @@
 @section('content')
 
 <div class="container-fluid">
- <button class="btn btn-danger mr-3">Add Items</button>
-
+ 
+ <a class="btn btn-warning" href="{{ route('item.create') }}">Create Items</a>
 </div>
 <hr>
 

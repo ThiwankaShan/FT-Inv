@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
+    protected $primaryKey='c_id';
+
     //creating the relation between Division And Category
    public function division(){
     return $this->belongsTo('App\Division');
