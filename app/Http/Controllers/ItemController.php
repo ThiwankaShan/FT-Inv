@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use DB;
 
 
-class ItemQuantityController extends Controller
+class ItemController extends Controller
 {
     /**
      * Display a listing of the resource.
