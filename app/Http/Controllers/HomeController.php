@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Auth;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\auth;
+/*
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,11 +25,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->email=="admin@gmail.com") {
+        if (Auth::user()->role=="admin") {
             return view('pages.admin');
-        } elseif (Auth::user()->email=="manager@gmail.com") {
+        } elseif (Auth::user()->role=="manager") {
             return view('pages.manager');
-        } elseif (Auth::user()->email=="user@gmail.com") {
+        } elseif (Auth::user()->role=="user") {
             return view('pages.user');
         } else {
             return view('home');
