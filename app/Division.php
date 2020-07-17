@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Division extends Model
 
 {
+
+   protected $primaryKey='d_id';
+
    //creating the relation between Division And SubDivision
    public function subdivision(){
     return   $this->hasMany('App\SubDivision');
