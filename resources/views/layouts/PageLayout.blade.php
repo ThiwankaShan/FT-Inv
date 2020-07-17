@@ -22,7 +22,10 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-success  shadow-sm">
-            <div class="container">
+            <div class="container-fluid">
+                <a class="navbar-brand text-center " href="{{ url('/') }}">
+                    <strong class="text-dark mr-5 pr-5">FT-Inv</strong> 
+                </a>
                <h1 class="text-center text-light" style="font-weight:900;">{{ Auth::user()->name}} Page</h1>
                
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
