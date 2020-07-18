@@ -63,26 +63,35 @@ class ItemController extends Controller
          if($request->subcategory !== "000"){
             $div4=SubCategory::findOrFail($request->subcategory);
             $scname=$div4->sc_code; 
+            $subcate_id=$request->subcategory;
          }else{
-            $scname="000";  
+            $scname="000";
+            $subcate_id=0;  
          }
          
 
          //get the quantity
          $count=$request->quantity;
-         $i= ItemQuantity::count(); 
+        //  $i= ItemQuantity::count(); 
          
+          $item=ItemQuantity::where('d_id',$request->division)
+                            ->where('sd_id',$request->subdivision)
+                            ->where('c_id',$request->category)
+                            ->where('sc_id',$subcate_id)
+                            ->count();
+                            
+            $i= (int)$item;       
         
-         for($num=$i;$num<$count+$i;$num++){
-          $item=new ItemQuantity();
-          $item->q_name=$div2->sd_name;
-          $item->item_code=$dname.'/'.$sdname.'/'.$cname.'/'.$scname.'/'.$num;
-          $item->d_id=$request->division;
-          $item->sd_id=$request->subdivision;
-          $item->c_id=$request->category;
-
-          $item->save();
-         }
+          for($num=$i;$num<$count+$i;$num++){
+           $item=new ItemQuantity();
+           $item->q_name=$div2->sd_name;
+           $item->item_code=$dname.'/'.$sdname.'/'.$cname.'/'.$scname.'/'.($num+1);
+           $item->d_id=$request->division;
+           $item->sd_id=$request->subdivision;
+           $item->c_id=$request->category;
+           $item->sc_id=$subcate_id;
+           $item->save();
+          }
        
           return view('pages.admin');
     }
