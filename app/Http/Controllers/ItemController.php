@@ -1,14 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Division;
-use App\SubDivision;
-use App\Category;
-use App\SubCategory;
-use App\ItemQuantity;
-use Illuminate\Http\Request;
-use DB;
 
+use App\Category;
+use App\Division;
+use App\ItemQuantity;
+use App\SubCategory;
+use App\SubDivision;
+use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
@@ -28,15 +27,14 @@ class ItemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {    
+    {
         //data
-        $div=Division::all();
-        $subdiv=SubDivision::all();
-        $cate=Category::all();
-        $subcate=SubCategory::all();
+        $div = Division::all();
+        $subdiv = SubDivision::all();
+        $cate = Category::all();
+        $subcate = SubCategory::all();
 
-
-        return view('item.create',compact('div','subdiv','cate','subcate'));
+        return view('item.create', compact('div', 'subdiv', 'cate', 'subcate'));
     }
 
     /**
@@ -46,45 +44,53 @@ class ItemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {    
-        //select the divition 
-        $div1=Division::findOrFail($request->division);
-        $dname=$div1->ds_name; 
+    {
+        //select the divition
+        $div1 = Division::findOrFail($request->division);
+        $dname = $div1->ds_name;
 
-         //select the subdivition 
-         $div2=SubDivision::findOrFail($request->subdivision);
-         $sdname=$div2->sd_short_name; 
+        //select the subdivition
+        $div2 = SubDivision::findOrFail($request->subdivision);
+        $sdname = $div2->sd_short_name;
 
-          //select the category 
-        $div3=Category::findOrFail($request->category);
-        $cname=$div3->code; 
+        //select the category
+        $div3 = Category::findOrFail($request->category);
+        $cname = $div3->code;
 
-         //select the subcategory 
-         if($request->subcategory !== "000"){
-            $div4=SubCategory::findOrFail($request->subcategory);
-            $scname=$div4->sc_code; 
-         }else{
-            $scname="000";  
-         }
-         
+        //select the subcategory
+        if ($request->subcategory !== "000") {
+            $div4 = SubCategory::findOrFail($request->subcategory);
+            $scname = $div4->sc_code;
+            $subcate_id = $request->subcategory;
+        } else {
+            $scname = "000";
+            $subcate_id = 0;
+        }
 
-         //get the quantity
-         $count=$request->quantity;
-         $i= ItemQuantity::count(); 
-         
-        
-         for($num=$i;$num<$count+$i;$num++){
-          $item=new ItemQuantity();
-          $item->q_name=$div2->sd_name;
-          $item->item_code=$dname.'/'.$sdname.'/'.$cname.'/'.$scname.'/'.$num;
-          $item->d_id=$request->division;
-          $item->sd_id=$request->subdivision;
-          $item->c_id=$request->category;
+        //get the quantity
+        $count = $request->quantity;
+        //  $i= ItemQuantity::count();
 
-          $item->save();
-         }
-       
-          return view('pages.admin');
+        $item = ItemQuantity::where('division_id', $request->division)
+            ->where('sub-division_id', $request->subdivision)
+            ->where('category_id', $request->category)
+            ->where('sub-category_id', $subcategory_id)
+            ->count();
+
+        $i = (int) $item;
+
+        for ($num = $i; $num < $count + $i; $num++) {
+            $item = new ItemQuantity();
+            $item->quantity_name = $div2->sd_name;
+            $item->item_code = $dname . '/' . $sdname . '/' . $cname . '/' . $scname . '/' . ($num + 1);
+            $item->division_id = $request->division;
+            $item->sub_division_id = $request->subdivision;
+            $item->category_id = $request->category;
+            $item->sub_category_id = $subcategory_id;
+            $item->save();
+        }
+
+        return view('pages.admin');
     }
 
     /**
@@ -95,7 +101,6 @@ class ItemController extends Controller
      */
     public function show(ItemQuantity $itemQuantity)
     {
-        
     }
 
     /**

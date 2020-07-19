@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\auth;
+
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+    // Create a new controller instance
+
+     // @return void
     public function __construct()
     {
         $this->middleware('auth');
     }
+
 
     /**
      * Show the application dashboard.
@@ -24,14 +25,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->email=="admin@gmail.com") {
+        if (Auth::user()->role=="admin") {
             return view('pages.admin');
-        } elseif (Auth::user()->email=="manager@gmail.com") {
+        } elseif (Auth::user()->role=="manager") {
             return view('pages.manager');
-        } elseif (Auth::user()->email=="user@gmail.com") {
+        } elseif (Auth::user()->role=="user") {
             return view('pages.user');
         } else {
             return view('home');
         }
     }
+
+
+
+
+
 }
