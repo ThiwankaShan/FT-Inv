@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Division extends Model
 {
 
-    protected $primaryKey = 'd_id';
+    protected $primaryKey = 'division_id';
 
     //creating the relation between Division And SubDivision
     public function subdivision()

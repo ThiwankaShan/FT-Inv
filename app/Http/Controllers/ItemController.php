@@ -71,22 +71,22 @@ class ItemController extends Controller
         $count = $request->quantity;
         //  $i= ItemQuantity::count();
 
-        $item = ItemQuantity::where('d_id', $request->division)
-            ->where('sd_id', $request->subdivision)
-            ->where('c_id', $request->category)
-            ->where('sc_id', $subcate_id)
+        $item = ItemQuantity::where('division_id', $request->division)
+            ->where('sub-division_id', $request->subdivision)
+            ->where('category_id', $request->category)
+            ->where('sub-category_id', $subcategory_id)
             ->count();
 
         $i = (int) $item;
 
         for ($num = $i; $num < $count + $i; $num++) {
             $item = new ItemQuantity();
-            $item->q_name = $div2->sd_name;
+            $item->quantity_name = $div2->sd_name;
             $item->item_code = $dname . '/' . $sdname . '/' . $cname . '/' . $scname . '/' . ($num + 1);
-            $item->d_id = $request->division;
-            $item->sd_id = $request->subdivision;
-            $item->c_id = $request->category;
-            $item->sc_id = $subcate_id;
+            $item->division_id = $request->division;
+            $item->sub_division_id = $request->subdivision;
+            $item->category_id = $request->category;
+            $item->sub_category_id = $subcategory_id;
             $item->save();
         }
 
