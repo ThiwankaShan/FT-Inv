@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\auth;
-
+use App\Http\Controllers\TestCasegen;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
