@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SubCategory extends Model
 {
-    protected $primaryKey = 'sc_id';
+    protected $primaryKey = 'sub_category_id';
 
     //creating the relation between Division And SubCategory
     public function division()

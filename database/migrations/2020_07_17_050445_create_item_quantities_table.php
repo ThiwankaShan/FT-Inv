@@ -16,12 +16,12 @@ class CreateItemQuantitiesTable extends Migration
     public function up()
     {
         Schema::create('item_quantities', function (Blueprint $table) {
-            $table->bigIncrements('q_id');
-            $table->string('q_name');
+            $table->bigIncrements('quantity_id');
+            $table->string('quantity_name');
             $table->string('item_code');
-            $table->bigInteger('d_id');
-            $table->bigInteger('sd_id');
-            $table->bigInteger('c_id');
+            $table->bigInteger('division_id');
+            $table->bigInteger('sub_division_id');
+            $table->bigInteger('category_id');
             $table->timestamps();
         });
     }
