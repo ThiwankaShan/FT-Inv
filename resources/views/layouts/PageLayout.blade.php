@@ -38,8 +38,7 @@
 
                     </ul>
 
-
-                            <div class=" mr-5">
+                    <div class=" mr-5">
  <div class="btn-group">
   <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Division
@@ -86,6 +85,7 @@
   </div>
 </div>
 </div>
+
   <!-- Right Side Of Navbar -->
   <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
