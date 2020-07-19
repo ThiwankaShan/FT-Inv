@@ -39,6 +39,53 @@
                     </ul>
 
 
+                            <div class=" mr-5">
+ <div class="btn-group">
+  <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Division
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="#">Division 1</a>
+    <a class="dropdown-item" href="#">Division 2</a>
+    <a class="dropdown-item" href="#">Division 3</a>
+    <a class="dropdown-item" href="#">Division 4</a>
+  </div>
+</div>
+<div class="btn-group">
+  <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Sub-Division
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="#">Sub-Division 1</a>
+    <a class="dropdown-item" href="#">Sub-Division 2</a>
+    <a class="dropdown-item" href="#">Sub-Division 3</a>
+    <a class="dropdown-item" href="#">Sub-Division 4</a>
+  </div>
+</div>
+
+<div class="btn-group">
+  <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Category
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="#">Category 1</a>
+    <a class="dropdown-item" href="#">Category 2</a>
+    <a class="dropdown-item" href="#">Category 3</a>
+    <a class="dropdown-item" href="#">Category 4</a>
+  </div>
+</div>
+<div class="btn-group">
+  <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Sub-Category
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="#">Sub-Category 1</a>
+    <a class="dropdown-item" href="#">Sub-Category 2</a>
+    <a class="dropdown-item" href="#">Sub-Category 3</a>
+    <a class="dropdown-item" href="#">Sub-Category 4</a>
+  </div>
+</div>
+</div>
   <!-- Right Side Of Navbar -->
   <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
