@@ -24,10 +24,10 @@
         <nav class="navbar navbar-expand-md navbar-light bg-success  shadow-sm">
             <div class="container-fluid">
                 <a class="navbar-brand text-center " href="{{ url('/') }}">
-                    <strong class="text-dark mr-5 pr-5">FT-Inv</strong> 
+                    <strong class="text-dark mr-5 pr-5">FT-Inv</strong>
                 </a>
                <h1 class="text-center text-light" style="font-weight:900;">{{ Auth::user()->name}} Page</h1>
-               
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -38,8 +38,9 @@
 
                     </ul>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+
+  <!-- Right Side Of Navbar -->
+  <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
@@ -66,6 +67,7 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
+
                                 </div>
                             </li>
                         @endguest
