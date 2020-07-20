@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ItemQuantity extends Model
+class Items extends Model
 {
     public function division()
     {
