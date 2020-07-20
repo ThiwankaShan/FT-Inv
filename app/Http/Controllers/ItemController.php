@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Division;
-use App\ItemQuantity;
+use App\Items;
 use App\SubCategory;
 use App\SubDivision;
 use Illuminate\Http\Request;
@@ -47,11 +47,11 @@ class ItemController extends Controller
     {
         //select the divition
         $div1 = Division::findOrFail($request->division);
-        $dname = $div1->ds_name;
+        $dname = $div1->division_name;
 
         //select the subdivition
         $div2 = SubDivision::findOrFail($request->subdivision);
-        $sdname = $div2->sd_short_name;
+        $sdname = $div2->subDivision_shortName;
 
         //select the category
         $div3 = Category::findOrFail($request->category);
@@ -60,7 +60,7 @@ class ItemController extends Controller
         //select the subcategory
         if ($request->subcategory !== "000") {
             $div4 = SubCategory::findOrFail($request->subcategory);
-            $scname = $div4->sc_code;
+            $scname = $div4->subCategory_code;
             $subcate_id = $request->subcategory;
         } else {
             $scname = "000";
@@ -69,24 +69,24 @@ class ItemController extends Controller
 
         //get the quantity
         $count = $request->quantity;
-        //  $i= ItemQuantity::count();
+        //  $i= Items::count();
 
-        $item = ItemQuantity::where('division_id', $request->division)
-            ->where('sub-division_id', $request->subdivision)
+        $item = Items::where('division_id', $request->division)
+            ->where('subDivision_id', $request->subdivision)
             ->where('category_id', $request->category)
-            ->where('sub-category_id', $subcategory_id)
+            ->where('subCategory_id', $request->subcategory_id)
             ->count();
 
         $i = (int) $item;
 
         for ($num = $i; $num < $count + $i; $num++) {
-            $item = new ItemQuantity();
-            $item->quantity_name = $div2->sd_name;
+            $item = new Items();
+            $item->quantity_name = $scname;
             $item->item_code = $dname . '/' . $sdname . '/' . $cname . '/' . $scname . '/' . ($num + 1);
             $item->division_id = $request->division;
-            $item->sub_division_id = $request->subdivision;
+            $item->subDivision_id = $request->subdivision;
             $item->category_id = $request->category;
-            $item->sub_category_id = $subcategory_id;
+            $item->subCategory_id = $request->subcategory;
             $item->save();
         }
 
@@ -96,20 +96,20 @@ class ItemController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\ItemQuantity  $itemQuantity
+     * @param  \App\Items  $itemQuantity
      * @return \Illuminate\Http\Response
      */
-    public function show(ItemQuantity $itemQuantity)
+    public function show(Items $itemQuantity)
     {
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ItemQuantity  $itemQuantity
+     * @param  \App\Items  $itemQuantity
      * @return \Illuminate\Http\Response
      */
-    public function edit(ItemQuantity $itemQuantity)
+    public function edit(Items $itemQuantity)
     {
         //
     }
@@ -118,10 +118,10 @@ class ItemController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ItemQuantity  $itemQuantity
+     * @param  \App\Items  $itemQuantity
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ItemQuantity $itemQuantity)
+    public function update(Request $request, Items $itemQuantity)
     {
         //
     }
@@ -129,10 +129,10 @@ class ItemController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ItemQuantity  $itemQuantity
+     * @param  \App\Items  $itemQuantity
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ItemQuantity $itemQuantity)
+    public function destroy(Items $itemQuantity)
     {
         //
     }

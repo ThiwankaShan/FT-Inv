@@ -1,6 +1,5 @@
 <?php
 
-namespace database\migrations;
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -19,7 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->bigIncrements('category_id');
             $table->string('category_name');
             $table->string('code');
-            $table->bigInteger('sub_division_id');
+            $table->bigInteger('subDivision_id');
             $table->bigInteger('division_id');
             $table->timestamps();
         });
