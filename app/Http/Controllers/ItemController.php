@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Division;
-use App\ItemQuantity;
+use App\Items;
 use App\SubCategory;
 use App\SubDivision;
 use Illuminate\Http\Request;
@@ -45,71 +45,67 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        //select the divition
-        $div1 = Division::findOrFail($request->division);
-        $dname = $div1->ds_name;
+          $dname=$request->division;
+          $sdname=$request->subdivision; 
 
-        //select the subdivition
-        $div2 = SubDivision::findOrFail($request->subdivision);
-        $sdname = $div2->sd_short_name;
+          //select the category 
+         $div3=Category::where('category_id',$request->category)->firstOrFail();
+         $cname=$request->category; 
 
-        //select the category
-        $div3 = Category::findOrFail($request->category);
-        $cname = $div3->code;
+         //select the subcategory 
+         if($request->subcategory !== "000"){
+            $div4=SubCategory::where('subCategory_id',$request->subcategory)->firstOrFail();
+            $scname=$request->subcategory; 
+            $subcate_name=$div4->subCategory_name;
+         }else{
+            $scname="000";
+            $subcate_name=$div3->category_name;
+         }
+         
 
-        //select the subcategory
-        if ($request->subcategory !== "000") {
-            $div4 = SubCategory::findOrFail($request->subcategory);
-            $scname = $div4->sc_code;
-            $subcate_id = $request->subcategory;
-        } else {
-            $scname = "000";
-            $subcate_id = 0;
-        }
-
-        //get the quantity
-        $count = $request->quantity;
-        //  $i= ItemQuantity::count();
-
-        $item = ItemQuantity::where('d_id', $request->division)
-            ->where('sd_id', $request->subdivision)
-            ->where('c_id', $request->category)
-            ->where('sc_id', $subcate_id)
-            ->count();
-
-        $i = (int) $item;
-
-        for ($num = $i; $num < $count + $i; $num++) {
-            $item = new ItemQuantity();
-            $item->q_name = $div2->sd_name;
-            $item->item_code = $dname . '/' . $sdname . '/' . $cname . '/' . $scname . '/' . ($num + 1);
-            $item->d_id = $request->division;
-            $item->sd_id = $request->subdivision;
-            $item->c_id = $request->category;
-            $item->sc_id = $subcate_id;
-            $item->save();
-        }
-
-        return view('pages.admin');
+         //get the quantity
+         $count=$request->quantity;
+        //  $i= ItemQuantity::count(); 
+         
+          $item=Items::where('division_id',$request->division)
+                            ->where('subdivision_id',$request->subdivision)
+                            ->where('category_id',$request->category)
+                            ->where('subcategory_id',$scname)
+                            ->count();
+                            
+            $i= (int)$item;       
+        
+          for($num=$i;$num<$count+$i;$num++){
+           $item=new Items();
+           $item->item_name=$subcate_name;
+           $item->item_code=$dname.'/'.$sdname.'/'.$cname.'/'.$scname.'/'.($num+1);
+           $item->division_id=$request->division;
+           $item->subdivision_id=$request->subdivision;
+           $item->category_id=$request->category;
+           $item->subcategory_id=$scname;
+           $item->save();
+          }
+       
+          return view('pages.admin');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\ItemQuantity  $itemQuantity
+     * @param  \App\Items  $itemQuantity
      * @return \Illuminate\Http\Response
      */
-    public function show(ItemQuantity $itemQuantity)
+    public function show(Items $itemQuantity)
     {
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ItemQuantity  $itemQuantity
+     * @param  \App\Items  $itemQuantity
      * @return \Illuminate\Http\Response
      */
-    public function edit(ItemQuantity $itemQuantity)
+    public function edit(Items $itemQuantity)
     {
         //
     }
@@ -118,10 +114,10 @@ class ItemController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ItemQuantity  $itemQuantity
+     * @param  \App\Items  $itemQuantity
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ItemQuantity $itemQuantity)
+    public function update(Request $request, Items $itemQuantity)
     {
         //
     }
@@ -129,10 +125,10 @@ class ItemController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ItemQuantity  $itemQuantity
+     * @param  \App\Items  $itemQuantity
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ItemQuantity $itemQuantity)
+    public function destroy(Items $itemQuantity)
     {
         //
     }

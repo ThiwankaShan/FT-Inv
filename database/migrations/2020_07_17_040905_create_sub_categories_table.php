@@ -1,6 +1,5 @@
 <?php
 
-namespace database\migrations;
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -16,12 +15,9 @@ class CreateSubCategoriesTable extends Migration
     public function up()
     {
         Schema::create('sub_categories', function (Blueprint $table) {
-            $table->bigIncrements('sc_id');
-            $table->string('sc_name');
-            $table->string('sc_code');
-            $table->bigInteger('c_id');
-            $table->bigInteger('sd_id');
-            $table->bigInteger('d_id');
+            $table->string('subCategory_id')->primarykey();
+            $table->string('subCategory_name');
+            $table->string('category_id');
             $table->timestamps();
         });
     }

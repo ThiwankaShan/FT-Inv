@@ -1,6 +1,5 @@
 <?php
 
-namespace database\migrations;
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -15,8 +14,8 @@ class AddScIdToItemQuantitiesTable extends Migration
      */
     public function up()
     {
-        Schema::table('item_quantities', function (Blueprint $table) {
-            $table->bigInteger('sc_id');
+        Schema::table('items', function (Blueprint $table) {
+            $table->string('subCategory_id');
         });
     }
 

@@ -1,6 +1,5 @@
 <?php
 
-namespace database\migrations;
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -18,7 +17,7 @@ class NewItemLog extends Migration
         Schema::create('newItem_log', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('item_code');
-            $table->dateTime('bid_open_date');
+            $table->dateTime('bid_openDate');
             $table->string('PO_number');
             $table->string('bidder');
             $table->dateTime('due_date');

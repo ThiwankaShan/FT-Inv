@@ -1,6 +1,5 @@
 <?php
 
-namespace database\migrations;
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -16,10 +15,9 @@ class CreateSubDivisionsTable extends Migration
     public function up()
     {
         Schema::create('sub_divisions', function (Blueprint $table) {
-            $table->bigIncrements('sd_id');
-            $table->string('sd_name');
-            $table->string('sd_short_name');
-            $table->bigInteger('d_id');
+            $table->string('subDivision_id')->primarykey();
+            $table->string('subDivision_name');
+            $table->string('division_id');
             $table->timestamps();
         });
     }

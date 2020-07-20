@@ -24,14 +24,14 @@
         <nav class="navbar navbar-expand-md navbar-light bg-success  shadow-sm">
             <div class="container-fluid">
                 <a class="navbar-brand text-center " href="{{ url('/') }}">
-                    <strong class="text-dark mr-5 pr-5">FT-Inv</strong> 
+                    <strong class="text-dark mr-5 pr-5">FT-Inv</strong>
                 </a>
                 <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" id='searchValue' type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0 " type="submit">Search</button>
                 </form>
                <h1 class="text-center text-light" style="font-weight:900;">{{ Auth::user()->name}} Page</h1>
-               
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -42,8 +42,56 @@
 
                     </ul>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <div class=" mr-5">
+ <div class="btn-group">
+  <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Division
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="#">Division 1</a>
+    <a class="dropdown-item" href="#">Division 2</a>
+    <a class="dropdown-item" href="#">Division 3</a>
+    <a class="dropdown-item" href="#">Division 4</a>
+  </div>
+</div>
+<div class="btn-group">
+  <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Sub-Division
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="#">Sub-Division 1</a>
+    <a class="dropdown-item" href="#">Sub-Division 2</a>
+    <a class="dropdown-item" href="#">Sub-Division 3</a>
+    <a class="dropdown-item" href="#">Sub-Division 4</a>
+  </div>
+</div>
+
+<div class="btn-group">
+  <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Category
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="#">Category 1</a>
+    <a class="dropdown-item" href="#">Category 2</a>
+    <a class="dropdown-item" href="#">Category 3</a>
+    <a class="dropdown-item" href="#">Category 4</a>
+  </div>
+</div>
+<div class="btn-group">
+  <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Sub-Category
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="#">Sub-Category 1</a>
+    <a class="dropdown-item" href="#">Sub-Category 2</a>
+    <a class="dropdown-item" href="#">Sub-Category 3</a>
+    <a class="dropdown-item" href="#">Sub-Category 4</a>
+  </div>
+</div>
+</div>
+
+  <!-- Right Side Of Navbar -->
+  <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
@@ -70,6 +118,7 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
+
                                 </div>
                             </li>
                         @endguest
