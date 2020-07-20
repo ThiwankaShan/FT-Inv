@@ -45,52 +45,48 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        //select the divition
-        $div1 = Division::findOrFail($request->division);
-        $dname = $div1->division_name;
+          $dname=$request->division;
+          $sdname=$request->subdivision; 
 
-        //select the subdivition
-        $div2 = SubDivision::findOrFail($request->subdivision);
-        $sdname = $div2->subDivision_shortName;
+          //select the category 
+         $div3=Category::where('category_id',$request->category)->firstOrFail();
+         $cname=$request->category; 
 
-        //select the category
-        $div3 = Category::findOrFail($request->category);
-        $cname = $div3->code;
+         //select the subcategory 
+         if($request->subcategory !== "000"){
+            $div4=SubCategory::where('subCategory_id',$request->subcategory)->firstOrFail();
+            $scname=$request->subcategory; 
+            $subcate_name=$div4->subCategory_name;
+         }else{
+            $scname="000";
+            $subcate_name=$div3->category_name;
+         }
+         
 
-        //select the subcategory
-        if ($request->subcategory !== "000") {
-            $div4 = SubCategory::findOrFail($request->subcategory);
-            $scname = $div4->subCategory_code;
-            $subcate_id = $request->subcategory;
-        } else {
-            $scname = "000";
-            $subcate_id = 0;
-        }
-
-        //get the quantity
-        $count = $request->quantity;
-        //  $i= Items::count();
-
-        $item = Items::where('division_id', $request->division)
-            ->where('subDivision_id', $request->subdivision)
-            ->where('category_id', $request->category)
-            ->where('subCategory_id', $request->subcategory_id)
-            ->count();
-
-        $i = (int) $item;
-
-        for ($num = $i; $num < $count + $i; $num++) {
-            $item = new Items();
-            $item->quantity_name = $scname;
-            $item->item_code = $dname . '/' . $sdname . '/' . $cname . '/' . $scname . '/' . ($num + 1);
-            $item->division_id = $request->division;
-            $item->subDivision_id = $request->subdivision;
-            $item->category_id = $request->category;
-            $item->subCategory_id = $request->subcategory;
-            $item->save();
-        }
-
-        return view('pages.admin');
+         //get the quantity
+         $count=$request->quantity;
+        //  $i= ItemQuantity::count(); 
+         
+          $item=Items::where('division_id',$request->division)
+                            ->where('subdivision_id',$request->subdivision)
+                            ->where('category_id',$request->category)
+                            ->where('subcategory_id',$scname)
+                            ->count();
+                            
+            $i= (int)$item;       
+        
+          for($num=$i;$num<$count+$i;$num++){
+           $item=new Items();
+           $item->item_name=$subcate_name;
+           $item->item_code=$dname.'/'.$sdname.'/'.$cname.'/'.$scname.'/'.($num+1);
+           $item->division_id=$request->division;
+           $item->subdivision_id=$request->subdivision;
+           $item->category_id=$request->category;
+           $item->subcategory_id=$scname;
+           $item->save();
+          }
+       
+          return view('pages.admin');
     }
 
     /**
