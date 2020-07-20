@@ -15,10 +15,9 @@ class CreateSubDivisionsTable extends Migration
     public function up()
     {
         Schema::create('sub_divisions', function (Blueprint $table) {
-            $table->bigIncrements('subDivision_id');
+            $table->string('subDivision_id')->primarykey();
             $table->string('subDivision_name');
-            $table->string('subDivision_shortName');
-            $table->bigInteger('division_id');
+            $table->string('division_id');
             $table->timestamps();
         });
     }

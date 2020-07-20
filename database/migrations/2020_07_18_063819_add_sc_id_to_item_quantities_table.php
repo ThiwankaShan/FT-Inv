@@ -15,7 +15,7 @@ class AddScIdToItemQuantitiesTable extends Migration
     public function up()
     {
         Schema::table('items', function (Blueprint $table) {
-            $table->bigInteger('subCategory_id');
+            $table->string('subCategory_id');
         });
     }
 

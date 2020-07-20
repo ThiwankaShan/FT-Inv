@@ -8,6 +8,8 @@ class Division extends Model
 {
 
     protected $primaryKey = 'division_id';
+    public $incrementing=false;
+    protected $keyType="string";
 
     //creating the relation between Division And SubDivision
     public function subdivision()
