@@ -137,38 +137,16 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
-
-  <script type="text/javascript">
-
-  $('body').on('keyup','#searchValue',function(){
-            var searchQuerry= $(this).val();
-            console.log(searchQuerry);
-            $.ajax({
-            method:'POST',
-            url:'{{ route("search")}}',
-            dataType:'json',
-            data:{
-                '_token':'{{ csrf_token()}}',
-                searchQuerry:searchQuerry,
-            },
-            success:function(res){
-                console.log(res);
-                var tableRow='';
-                $('#dynamic-row').html('');
-                  $.each(res[4],function(index,value){
-                  $tableRow='<li class="list-group-item">'+value.item_code+'</li><li class="list-group-item">'+value.division_id+'</li><li class="list-group-item">'+value.item_name+'</li>';
-
-
-                  $('#dynamic-row').append($tableRow);
-                });
-
-            }
-        });
-
-    });
-
-
-</script>
+        <script>
+        var config = {
+        routes: {
+            search: "{{ route('search')}}"
+        },
+        tokens: {
+            token: "{{ csrf_token()}}"
+        }
+    };  </script>
+        <script src="{{ asset('js/autofill.js') }}"> </script>
 
     </div>
 </body>

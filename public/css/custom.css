@@ -30,3 +30,7 @@
     color:black !important;
 }
 
+.list-group-item{
+    cursor: pointer;
+}
+
