@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class SubDivision extends Model
 {
-    protected $primaryKey = 'sub_division_id';
+    protected $primaryKey = 'subDivision_id';
+    public $incrementing=false;
+    protected $keyType="string";
 
     ///creating the relation between Division And SubDivision
     public function division()
