@@ -26,13 +26,16 @@
                 <a class="navbar-brand text-center " href="{{ url('/') }}">
                     <strong class="text-dark mr-5 pr-5">FT-Inv</strong>
                 </a>
-                <form class="form-inline my-2 my-lg-0">
+
+                <form class="form-inline my-2 my-lg-0" autocomplete="off" method="POST" action="{{route('search')}}">
+                @csrf
                 <div class="autocomplete" style="position:relative;">
-                <input class="form-control mr-sm-2" id="searchValue" type="search" placeholder="Search" aria-label="Search">
+                <input class="form-control mr-sm-2" id="searchValue" name="value" type="search" placeholder="Search" aria-label="Search">
                 <ul class="list-group position-relative" id="dynamic-row"  style="z-index:100;"></ul>
                 </div>
                 <button class="btn btn-outline-success my-2 my-sm-0 " type="submit">Search</button>
                 </form>
+
                <h1 class="text-center text-light" style="font-weight:900;">{{ Auth::user()->name}} Page</h1>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -129,23 +132,23 @@
                 </div>
             </div>
         </nav>
-        
+
+
+
         <main class="py-4">
             @yield('content')
         </main>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script>
         var config = {
-        routes: {
-            search: "{{ route('search')}}"
-        },
-        tokens: {
+          routes: {
+            search: "{{ route('autofill')}}"
+          },
+          tokens: {
             token: "{{ csrf_token()}}"
-        }
-    };  </script>
+          }
+        };
+        </script>
         <script src="{{ asset('js/autofill.js') }}"> </script>
 
     </div>

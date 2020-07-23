@@ -4,19 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\auth;
-use App\Http\Controllers\TestCasegen;
-use Illuminate\Http\Request;
+use Session;
 
 class HomeController extends Controller
 {
     // Create a new controller instance
 
-     // @return void
+    // @return void
     public function __construct()
     {
         $this->middleware('auth');
     }
-
 
     /**
      * Show the application dashboard.
@@ -25,19 +23,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->role=="admin") {
+        $value = Session::get('key');
+        if (Auth::user()->role == "admin") {
             return view('pages.admin');
-        } elseif (Auth::user()->role=="manager") {
+        } elseif (Auth::user()->role == "manager") {
             return view('pages.manager');
-        } elseif (Auth::user()->role=="user") {
-            return view('pages.user');
+        } elseif (Auth::user()->role == "user") {
+            return view('pages.user', ['data' => $value]);
         } else {
             return view('home');
         }
     }
-
-
-
-
-
 }

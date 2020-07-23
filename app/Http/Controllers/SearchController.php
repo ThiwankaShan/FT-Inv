@@ -3,44 +3,43 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\SubCategory;
 use App\Division;
 use App\Items;
-use App\SubCategory;
 use App\SubDivision;
 use Illuminate\Http\Request;
+use Session;
 
 class SearchController extends Controller
 {
 
     public function search(Request $request)
     {
-        error_log($request->get('searchQuerry'));
-        if ($request->get('searchQuerry') != null) {
-            $itemResult = Items::where('item_code', 'like', '%' . $request->get('searchQuerry') . '%')
-                ->orwhere('item_name', 'like', '%' . $request->get('searchQuerry') . '%')
-                ->orwhere('division_id', 'like', '%' . $request->get('searchQuerry') . '%')
-                ->orwhere('subdivision_id', 'like', '%' . $request->get('searchQuerry') . '%')
-                ->orwhere('category_id', 'like', '%' . $request->get('searchQuerry') . '%')
-                ->take(10)
-                ->get();
-            $divsionResult = Division::where('division_name', 'like', '%' . $request->get('searchQuerry') . '%')
-                ->take(10)
-                ->get();
-            $subdivsionResult = SubDivision::where('subDivision_name', 'like', '%' . $request->get('searchQuerry') . '%')
-                ->take(10)
-                ->get();
-            $categoryResult = Category::where('category_name', 'like', '%' . $request->get('searchQuerry') . '%')
-                ->take(10)
-                ->get();
-            $subcategoryResult = SubCategory::where('subCategory_name', 'like', '%' . $request->get('searchQuerry') . '%')
-                ->take(10)
-                ->get();
+        $divsionResult = Division::where('division_name', 'like', '%' . $request->get('value') . '%')
+            ->pluck('division_id');
+        $subdivsionResult = SubDivision::where('subDivision_name', 'like', '%' . $request->get('value') . '%')
+            ->pluck('subdivision_id');
+        $categoryResult = Category::where('category_name', 'like', '%' . $request->get('value') . '%')
+            ->pluck('category_id');
+        $subcategoryResult = SubCategory::where('subCategory_name', 'like', '%' . $request->get('value') . '%')
+            ->pluck('subCategory_id');
 
-            $data = [$divsionResult, $subdivsionResult, $categoryResult, $subcategoryResult, $itemResult];
-        } else {
-            $data = [];
+        function isempty($result)
+        {
+            if ($result->isEmpty()) {
+                $result = '';
+            }
+            return $result;
         }
-
-        return json_encode($data);
+        
+        $itemResult = Items::where('item_code', 'like', '%' . $request->get('value') . '%')
+            ->orwhere('division_id', isempty($divsionResult))
+            ->orwhere('subdivision_id', isempty($subdivsionResult))
+            ->orwhere('category_id', isempty($categoryResult))
+            ->orwhere('subCategory_id', isempty($subcategoryResult))
+            ->get();
+        error_log('result = ' . $itemResult);
+        Session::put('key', $itemResult);
+        return redirect()->route('home');
     }
 }
