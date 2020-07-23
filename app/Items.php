@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Items extends Model
 {
+    protected $primaryKey='item_id';
     public function division()
     {
         return $this->belongsTo('App\Division');

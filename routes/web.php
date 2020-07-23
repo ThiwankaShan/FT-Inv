@@ -22,3 +22,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/user', 'UserController');
 Route::resource('/item', 'ItemController');
+Route::post('/ajax/division','AjaxController@getSubDivision')->name('ajax.getSubdivision');
+Route::post('/ajax/category','AjaxController@getSubCategory')->name('ajax.getSubcategory');
+Route::post('/ajax/filter','AjaxController@getFilter')->name('ajax.filter');

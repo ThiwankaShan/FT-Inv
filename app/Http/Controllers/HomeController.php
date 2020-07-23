@@ -10,6 +10,7 @@ use App\SubDivision;
 use App\Category;
 use App\SubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 
 class HomeController extends Controller
 {
@@ -29,18 +30,31 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $div = Division::all();
-        $subdiv = SubDivision::all();
-        $cate = Category::all();
-        $subcate = SubCategory::all();
-
+       
         if (Auth::user()->role=="admin") {
-            return view('pages.admin');
+
+            $div = Division::all();
+            $cate = Category::all();
+            $items=Items::paginate(10);
+
+            return view('pages.admin',compact('div','cate','items'));
+
         } elseif (Auth::user()->role=="manager") {
-            return view('pages.manager');
+
+            $div = Division::all();
+            $cate = Category::all();
+            $items=Items::paginate(10);
+
+            return view('pages.manager',compact('div','cate','items'));
+
         } elseif (Auth::user()->role=="user") {
-            $items=Items::all();
-            return view('pages.user', compact('items','div','cate','subcate','subdiv'));
+
+            $div = Division::all();
+            $cate = Category::all();
+            $items=Items::paginate(10);
+
+            return view('pages.user',compact('div','cate','items'));
+            
         } else {
             return view('home');
         }

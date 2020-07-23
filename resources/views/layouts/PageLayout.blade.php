@@ -11,6 +11,10 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
+     
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,9 +22,11 @@
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+
 </head>
 <body>
-    <div id="app">
+    <div id="app" >
         <nav class="navbar navbar-expand-md navbar-light bg-success  shadow-sm">
             <div class="container-fluid">
                 <a class="navbar-brand text-center " href="{{ url('/') }}">
@@ -82,5 +88,6 @@
             @yield('content')
         </main>
     </div>
+   
 </body>
 </html>
