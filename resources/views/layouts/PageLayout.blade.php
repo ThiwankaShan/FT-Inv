@@ -27,7 +27,7 @@
                     <strong class="text-dark mr-5 pr-5">FT-Inv</strong>
                 </a>
                 <!--Live search -->
-                <form class="form-inline my-2 my-lg-0" autocomplete="off" method="POST" action="">
+                <form class="form-inline my-2 my-lg-0" autocomplete="off" method="POST" action="{{route('search')}}">
                 @csrf
                 <div class="autocomplete" style="position:relative;">
                 <input class="form-control mr-sm-2" id="searchValue" name="value" type="search" placeholder="Search" aria-label="Search">

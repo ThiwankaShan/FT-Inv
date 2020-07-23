@@ -63,15 +63,15 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($items as $item)
-                <tr>               
-                    <td>{{ $item->item_id }}</td>
-                    <td>{{ $item->item_code }}</td>
-                    <td>{{$item->item_name}}</td>
-                    <td>@mdo</td>
-                
-                </tr>
-                @endforeach      
+            @isset($data)
+            @foreach($data as $item)
+                <tr>
+                    <td>{{$item['item_id']}}</td>
+                    <td>{{$item['item_name']}}</td>
+                    <td>{{$item['item_code']}}</td>
+                </tr> 
+            @endforeach
+            @endisset     
             </tbody>
             </table>
         </div>
