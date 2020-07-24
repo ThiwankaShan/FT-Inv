@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DB;
 use App\Category;
 use App\Division;
 use App\Items;
 use App\SubCategory;
 use App\SubDivision;
 use Illuminate\Http\Request;
-
+use DataTables;
 class ItemController extends Controller
 {
     /**
@@ -18,11 +18,12 @@ class ItemController extends Controller
      */
     public function index()
     {
-        //data
         
 
-        
+         return view('item.view',compact('div','items','cate'));
+     
     }
+    
 
     /**
      * Show the form for creating a new resource.

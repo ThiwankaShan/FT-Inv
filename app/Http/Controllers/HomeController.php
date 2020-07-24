@@ -10,6 +10,8 @@ use App\SubDivision;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\auth;
 use Session;
+use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 
 class HomeController extends Controller
 {
@@ -28,19 +30,33 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $div = Division::all();
-        $subdiv = SubDivision::all();
-        $cate = Category::all();
-        $subcate = SubCategory::all();
-        $data = Session::get('key');
 
-        if (Auth::user()->role == "admin") {
-            return view('pages.admin');
-        } elseif (Auth::user()->role == "manager") {
-            return view('pages.manager');
-        } elseif (Auth::user()->role == "user") {
-            $items = Items::all();
-            return view('pages.user', compact('items', 'div', 'cate', 'subcate', 'subdiv', 'data'));
+        $data = Session::get('key');
+      
+        if (Auth::user()->role=="admin") {
+
+            $div = Division::all();
+            $cate = Category::all();
+            $items=Items::paginate(10);
+
+            return view('pages.admin',compact('div','cate','items'));
+
+        } elseif (Auth::user()->role=="manager") {
+
+            $div = Division::all();
+            $cate = Category::all();
+            $items=Items::paginate(10);
+
+            return view('pages.manager',compact('div','cate','items'));
+
+        } elseif (Auth::user()->role=="user") {
+
+            $div = Division::all();
+            $cate = Category::all();
+            $items=Items::paginate(10);
+
+            return view('pages.user',compact('div','cate','items','data'));
+            
         } else {
             return view('home');
         }
