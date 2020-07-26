@@ -19,7 +19,7 @@ class CreateItemQuantitiesTable extends Migration
             $table->string('item_name');
             $table->string('item_code');
             $table->string('division_id');
-            $table->string('subdivision_id');
+            $table->string('subDivision_id');
             $table->string('category_id');
             $table->timestamps();
         });
