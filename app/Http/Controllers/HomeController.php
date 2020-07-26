@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\Division;
+use App\Items;
+use App\SubCategory;
+use App\SubDivision;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\auth;
-use App\Items;
-use App\Division;
-use App\SubDivision;
-use App\Category;
-use App\SubCategory;
+use Session;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 
@@ -16,12 +17,11 @@ class HomeController extends Controller
 {
     // Create a new controller instance
 
-     // @return void
+    // @return void
     public function __construct()
     {
         $this->middleware('auth');
     }
-
 
     /**
      * Show the application dashboard.
@@ -30,7 +30,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-       
+
+        $data = Session::get('key');
+      
         if (Auth::user()->role=="admin") {
 
             $div = Division::all();
@@ -53,15 +55,10 @@ class HomeController extends Controller
             $cate = Category::all();
             $items=Items::paginate(10);
 
-            return view('pages.user',compact('div','cate','items'));
+            return view('pages.user',compact('div','cate','items','data'));
             
         } else {
             return view('home');
         }
     }
-
-
-
-
-
 }

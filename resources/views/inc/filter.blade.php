@@ -69,6 +69,16 @@
                                     <td><a href="" class="btn btn-success">Update</a></td>
                                  </tr>  
                               @endforeach
+                              
+                              @isset($data)
+                              @foreach($data as $item)
+                                 <tr>
+                                    <td>{{$item['item_id']}}</td>
+                                    <td>{{$item['item_name']}}</td>
+                                    <td>{{$item['item_code']}}</td>
+                                 </tr> 
+                              @endforeach
+                              @endisset 
                            </tbody>
                            
                         </table>
@@ -89,4 +99,3 @@
 
 
 
-   

@@ -32,6 +32,16 @@
                 <a class="navbar-brand text-center " href="{{ url('/') }}">
                     <strong class="text-dark mr-5 pr-5">FT-Inv</strong>
                 </a>
+                <!--Live search -->
+                <form class="form-inline my-2 my-lg-0" autocomplete="off" method="POST" action="{{route('search')}}">
+                @csrf
+                <div class="autocomplete" style="position:relative;">
+                <input class="form-control mr-sm-2" id="searchValue" name="value" type="search" placeholder="Search" aria-label="Search">
+                <ul class="list-group position-relative" id="dynamic-row"  style="z-index:100;"></ul>
+                </div>
+                <button class="btn btn-outline-success my-2 my-sm-0 " type="submit">Search</button>
+                </form>
+                <!--Live search end-->
                <h1 class="text-center text-light" style="font-weight:900;">{{ Auth::user()->name}} Page</h1>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -87,6 +97,20 @@
         <main class="py-4">
             @yield('content')
         </main>
+        <!--Live search -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script>
+        var config = {
+          routes: {
+            liveSearch: "{{ route('liveSearch')}}"
+          },
+          tokens: {
+            token: "{{ csrf_token()}}"
+          }
+        };
+        </script>
+        <script src="{{ asset('js/liveSearch.js') }}"> </script>
+        <!--Live search end -->
     </div>
    
 </body>
