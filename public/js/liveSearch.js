@@ -19,7 +19,7 @@ $("body").on("keyup", "#searchValue", function () {
                     case 0:
                         $.each(object, function (index, value) {
                             $tableRow =
-                                '<li class="list-group-item" id="result" href="#"> <a>' +
+                                '<li class="list-group-item " id="result" href="#"> <a>' +
                                 value.division_name +
                                 '</a>';
                             $("#dynamic-row").append($tableRow);

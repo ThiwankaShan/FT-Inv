@@ -18,19 +18,19 @@ class ItemController extends Controller
      */
     public function index()
     {
-        
 
-         return view('item.view',compact('div','items','cate'));
-     
     }
-    
+
+
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+
+        public function create()
+
     {
         //data
         $div = Division::all();
@@ -50,35 +50,35 @@ class ItemController extends Controller
     public function store(Request $request)
     {
           $dname=$request->division;
-          $sdname=$request->subdivision; 
+          $sdname=$request->subdivision;
 
-          //select the category 
+          //select the category
          $div3=Category::where('category_id',$request->category)->firstOrFail();
-         $cname=$request->category; 
+         $cname=$request->category;
 
-         //select the subcategory 
+         //select the subcategory
          if($request->subcategory !== "000"){
             $div4=SubCategory::where('subCategory_id',$request->subcategory)->firstOrFail();
-            $scname=$request->subcategory; 
+            $scname=$request->subcategory;
             $subcate_name=$div4->subCategory_name;
          }else{
             $scname="000";
             $subcate_name=$div3->category_name;
          }
-         
+
 
          //get the quantity
          $count=$request->quantity;
-        //  $i= ItemQuantity::count(); 
-         
+        //  $i= ItemQuantity::count();
+
           $item=Items::where('division_id',$request->division)
                             ->where('subdivision_id',$request->subdivision)
                             ->where('category_id',$request->category)
                             ->where('subcategory_id',$scname)
                             ->count();
-                            
-            $i= (int)$item;       
-        
+
+            $i= (int)$item;
+
           for($num=$i;$num<$count+$i;$num++){
            $item=new Items();
            $item->item_name=$subcate_name;
@@ -89,7 +89,7 @@ class ItemController extends Controller
            $item->subcategory_id=$scname;
            $item->save();
           }
-       
+
           return view('pages.admin');
     }
 

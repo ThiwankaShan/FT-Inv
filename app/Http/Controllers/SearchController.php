@@ -37,7 +37,7 @@ class SearchController extends Controller
             ->orwhere('category_id', isempty($categoryResult))
             ->orwhere('subCategory_id', isempty($subcategoryResult))
             ->get();
-        
+
         Session::put('key', $itemResult);
         return redirect()->route('home');
     }
