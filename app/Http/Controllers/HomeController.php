@@ -2,25 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\Division;
+use App\Items;
+use App\SubCategory;
+use App\SubDivision;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\auth;
-use App\Items;
-use App\Division;
-use App\SubDivision;
-use App\Category;
-use App\SubCategory;
+use Session;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 
 class HomeController extends Controller
 {
     // Create a new controller instance
 
-     // @return void
+    // @return void
     public function __construct()
     {
         $this->middleware('auth');
     }
-
 
     /**
      * Show the application dashboard.
@@ -29,25 +30,35 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $div = Division::all();
-        $subdiv = SubDivision::all();
-        $cate = Category::all();
-        $subcate = SubCategory::all();
 
+        $data = Session::get('key');
+      
         if (Auth::user()->role=="admin") {
-            return view('pages.admin');
+
+            $div = Division::all();
+            $cate = Category::all();
+            $items=Items::paginate(10);
+
+            return view('pages.admin',compact('div','cate','items'));
+
         } elseif (Auth::user()->role=="manager") {
-            return view('pages.manager');
+
+            $div = Division::all();
+            $cate = Category::all();
+            $items=Items::paginate(10);
+
+            return view('pages.manager',compact('div','cate','items'));
+
         } elseif (Auth::user()->role=="user") {
-            $items=Items::all();
-            return view('pages.user', compact('items','div','cate','subcate','subdiv'));
+
+            $div = Division::all();
+            $cate = Category::all();
+            $items=Items::paginate(10);
+
+            return view('pages.user',compact('div','cate','items','data'));
+            
         } else {
             return view('home');
         }
     }
-
-
-
-
-
 }
