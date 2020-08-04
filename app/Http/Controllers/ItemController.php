@@ -16,9 +16,16 @@ class ItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        
+         $div = Division::all();
+         $cate = Category::all();
+         $items=Items::paginate(10);
 
          return view('item.view',compact('div','items','cate'));
      

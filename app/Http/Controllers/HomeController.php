@@ -35,27 +35,27 @@ class HomeController extends Controller
       
         if (Auth::user()->role=="admin") {
 
-            $div = Division::all();
-            $cate = Category::all();
-            $items=Items::paginate(10);
+            //  $div = Division::all();
+            //  $cate = Category::all();
+            //  $items=Items::paginate(10);
 
-            return view('pages.admin',compact('div','cate','items'));
+            return view('pages.admin');
 
         } elseif (Auth::user()->role=="manager") {
 
-            $div = Division::all();
-            $cate = Category::all();
-            $items=Items::paginate(10);
+            // $div = Division::all();
+            // $cate = Category::all();
+            // $items=Items::paginate(10);
 
-            return view('pages.manager',compact('div','cate','items'));
+            return view('pages.manager');
 
         } elseif (Auth::user()->role=="user") {
 
-            $div = Division::all();
-            $cate = Category::all();
-            $items=Items::paginate(10);
+            // $div = Division::all();
+            // $cate = Category::all();
+            // $items=Items::paginate(10);
 
-            return view('pages.user',compact('div','cate','items','data'));
+            return view('pages.user');
             
         } else {
             return view('home');
