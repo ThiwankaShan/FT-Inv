@@ -1,4 +1,6 @@
 <script>
+// -------This whole file should be in a seperate .js file --------------
+
 $(document).ready(function () {
     var _token=$('input[name="_token"]').val();
        $('#division').change(function() {
