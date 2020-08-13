@@ -15,12 +15,22 @@ class CreateItemQuantitiesTable extends Migration
     public function up()
     {
         Schema::create('items', function (Blueprint $table) {
-            $table->bigIncrements('item_id');
-            $table->string('item_name');
-            $table->string('item_code');
-            $table->string('division_id');
-            $table->string('subDivision_id');
-            $table->string('category_id');
+            $table->bigIncrements('item_code');
+            $table->string('location_code');
+            $table->string('subLocation_code');
+            $table->string('category_code');
+            $table->integer('num_of_sub_items');
+            $table->string('type');
+            $table->string('GRN_no');
+            $table->float('vat%');
+            $table->float('vat*rate*vat');
+            $table->string('procurement_id');
+            $table->float('rate');
+
+
+
+
+
             $table->timestamps();
         });
     }
@@ -32,6 +42,6 @@ class CreateItemQuantitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('item_quantities');
+        Schema::dropIfExists('items');
     }
 }

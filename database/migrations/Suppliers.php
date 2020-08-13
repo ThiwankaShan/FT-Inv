@@ -1,3 +1,4 @@
+
 <?php
 
 
@@ -14,9 +15,13 @@ class CreateDivisionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('locations', function (Blueprint $table) {
-            $table->string('location_code')->primarykey();
-            $table->string('location_name');
+        Schema::create('suppliers', function (Blueprint $table) {
+            $table->string('supplier_code')->primarykey();
+            $table->string('supplier_name');
+            $table->string('supplier_address');
+            $table->string('telephone_number');
+            $table->string('email_address');
+            $table->string('vat_register_no');
             $table->timestamps();
         });
     }

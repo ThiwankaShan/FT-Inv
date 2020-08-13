@@ -5,7 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDivisionsTable extends Migration
+class CreateSubCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,12 @@ class CreateDivisionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('locations', function (Blueprint $table) {
-            $table->string('location_code')->primarykey();
-            $table->string('location_name');
+        Schema::create('GRN', function (Blueprint $table) {
+            $table->string('GRN_no')->primarykey();
+            $table->date('GRN_date');
+            $table->string('invoice_no');
+            $table->date('invoice_date');
+            $table->string('supplier_code');
             $table->timestamps();
         });
     }
@@ -28,6 +31,5 @@ class CreateDivisionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('locations');
+        Schema::dropIfExists('GRN');
     }
-}

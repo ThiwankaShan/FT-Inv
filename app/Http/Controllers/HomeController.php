@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Category;
-use App\Division;
+use App\Location;
 use App\Items;
 use App\SubCategory;
-use App\SubDivision;
+use App\SubLocation;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\auth;
 use Session;
@@ -32,10 +32,10 @@ class HomeController extends Controller
     {
 
         $data = Session::get('key');
-      
+
         if (Auth::user()->role=="admin") {
 
-            //  $div = Division::all();
+            //  $div = Location::all();
             //  $cate = Category::all();
             //  $items=Items::paginate(10);
 
@@ -43,7 +43,7 @@ class HomeController extends Controller
 
         } elseif (Auth::user()->role=="manager") {
 
-            // $div = Division::all();
+            // $div = Location::all();
             // $cate = Category::all();
             // $items=Items::paginate(10);
 
@@ -51,12 +51,12 @@ class HomeController extends Controller
 
         } elseif (Auth::user()->role=="user") {
 
-            // $div = Division::all();
+            // $div = Location::all();
             // $cate = Category::all();
             // $items=Items::paginate(10);
 
             return view('pages.user');
-            
+
         } else {
             return view('home');
         }
