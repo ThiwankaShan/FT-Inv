@@ -70,3 +70,23 @@ $("body").on("keyup", "#searchValue", function () {
         },
     });
 });
+
+
+$(document).ready(function(){
+    $('#toggleButton').click(function(){
+        $('.pimage').toggleClass("profile_img");
+        $('.userName').toggleClass("uname");
+        $('.sideMenu').toggleClass("sideMenu_1");
+        $('.content').toggleClass("content_1");
+        $('.textLink').toggleClass("text1");
+        $('.nav-link').toggleClass("navLink");
+    })
+     
+    $("#side_bar").click(function(){
+        $('.sideMenu').toggleClass("sideMenu_2");
+    })
+
+    $(document).on('click', 'ul li', function(){
+        $(this).addClass('active').siblings().removeClass('active');
+    })
+ })

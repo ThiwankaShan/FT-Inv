@@ -9,7 +9,7 @@
 
 <hr>
 <div class="container-fluid">
-   @include('inc.filter')
+   
 </div>
 
 
