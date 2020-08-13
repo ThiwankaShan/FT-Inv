@@ -3,36 +3,36 @@
 namespace App\Http\Controllers;
 use DB;
 use App\Category;
-use App\Division;
+use App\Location;
 use App\Items;
 use App\SubCategory;
-use App\SubDivision;
+use App\SubLocation;
 
 use Illuminate\Http\Request;
 
 class AjaxController extends Controller
 {
-    public function getSubDivision(Request $request){
-         $data=SubDivision::where('division_id',$request->divisionid)->get();
+    public function getSubLocation(Request $request){
+         $data=SubLocation::where('Location_code',$request->Locationcode)->get();
 
          return response()->json($data);
     }
 
     public function getSubCategory(Request $request){
-        $data=SubCategory::where('category_id',$request->categoryid)->get();
+        $data=SubCategory::where('category_code',$request->categorycode)->get();
 
         return response()->json($data);
    }
 
    public function getFilter(Request $request){
-    
+
       $data=DB::table('items')
-                  ->where('division_id',$request->div)
-                  ->where('subDivision_id',$request->subdiv)
-                  ->where('category_id',$request->cate)
-                  ->where('subCategory_id',$request->subcate)
+                  ->where('Location_code',$request->div)
+                  ->where('subLocation_code',$request->subdiv)
+                  ->where('category_code',$request->cate)
+                  ->where('subCategory_code',$request->subcate)
                   ->get();
-         
+
            return response()->json($data);
   }
 }
