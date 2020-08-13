@@ -45,7 +45,7 @@ class ItemController extends Controller
         $cate = Category::all();
         $subcate = SubCategory::all();
 
-        return view('item.create', compact('div', 'subdiv', 'cate', 'subcate'));
+        return view('forms.createitem', compact('div', 'subdiv', 'cate', 'subcate'));
     }
 
     /**
