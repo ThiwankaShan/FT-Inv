@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Category;
-use App\Division;
+use App\Location;
 use App\Items;
 use App\SubCategory;
-use App\SubDivision;
+use App\SubLocation;
 use Illuminate\Http\Request;
 
 class LiveSearchController extends Controller
@@ -16,15 +16,15 @@ class LiveSearchController extends Controller
         if ($request->get('searchQuerry') != null) {
             $itemResult = Items::where('item_code', 'like', '%' . $request->get('searchQuerry') . '%')
                 ->orwhere('item_name', 'like', '%' . $request->get('searchQuerry') . '%')
-                ->orwhere('division_id', 'like', '%' . $request->get('searchQuerry') . '%')
-                ->orwhere('subdivision_id', 'like', '%' . $request->get('searchQuerry') . '%')
+                ->orwhere('Location_id', 'like', '%' . $request->get('searchQuerry') . '%')
+                ->orwhere('subLocation_id', 'like', '%' . $request->get('searchQuerry') . '%')
                 ->orwhere('category_id', 'like', '%' . $request->get('searchQuerry') . '%')
                 ->take(5)
                 ->get();
-            $divsionResult = Division::where('division_name', 'like', '%' . $request->get('searchQuerry') . '%')
+            $divsionResult = Location::where('Location_name', 'like', '%' . $request->get('searchQuerry') . '%')
                 ->take(5)
                 ->get();
-            $subdivsionResult = SubDivision::where('subDivision_name', 'like', '%' . $request->get('searchQuerry') . '%')
+            $subdivsionResult = SubLocation::where('subLocation_name', 'like', '%' . $request->get('searchQuerry') . '%')
                 ->take(5)
                 ->get();
             $categoryResult = Category::where('category_name', 'like', '%' . $request->get('searchQuerry') . '%')

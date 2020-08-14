@@ -14,10 +14,10 @@ class CreateSubDivisionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sub_divisions', function (Blueprint $table) {
-            $table->string('subDivision_id')->primarykey();
-            $table->string('subDivision_name');
-            $table->string('division_id');
+        Schema::create('sub_locations', function (Blueprint $table) {
+            $table->string('subLocation_code')->primarykey();
+            $table->string('subLocation_name');
+            $table->string('Location_code');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateSubDivisionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sub_divisions');
+        Schema::dropIfExists('sub_locations');
     }
 }

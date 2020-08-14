@@ -19,30 +19,28 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <script src="https://use.fontawesome.com/6a3acfdd48.js"></script>
+
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
+    <link href="{{ asset('css/mycss.css') }}" rel="stylesheet">
 
 </head>
 <body>
     <div id="app" >
-        <nav class="navbar navbar-expand-md navbar-light bg-success  shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark  shadow-sm fixed-top">
             <div class="container-fluid">
+
+                 <button class="navbar-toggler ml-2" type="button" id="side_bar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
                 <a class="navbar-brand text-center " href="{{ url('/') }}">
-                    <strong class="text-dark mr-5 pr-5">FT-Inv</strong>
+                    <strong class="text-light mr-5 pr-5">FT-Inv</strong>
                 </a>
-                <!--Live search -->
-                <form class="form-inline my-2 my-lg-0" autocomplete="off" method="POST" action="{{route('search')}}">
-                @csrf
-                <div class="autocomplete" style="position:relative;">
-                <input class="form-control mr-sm-2" id="searchValue" name="value" type="search" placeholder="Search" aria-label="Search">
-                <ul class="list-group position-relative" id="dynamic-row"  style="z-index:100;"></ul>
-                </div>
-                <button class="btn btn-outline-success my-2 my-sm-0 " type="submit">Search</button>
-                </form>
-                <!--Live search end-->
-               <h1 class="text-center text-light" style="font-weight:900;">{{ Auth::user()->name}} Page</h1>
+               
+              
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -93,10 +91,34 @@
                 </div>
             </div>
         </nav>
+</div>
+<div class="wrapper d-flex ">
+            <div class="sideMenu  " >
+                <div class="sideBar ">
+                    <img src="/images/default.jpg" alt="profile image" class="pimage ml-5 mt-4 mb-2" style="width:150px; height:150px; border-radius:50%; transition: linear .5s;">
+                    <h3 class="text-center text-white  font-weight-bold mb-2 userName">{{Auth::user()->name}}</h3>
+                  <hr>
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a href="/" class="nav-link sideBarLink "><i class="fa fa-home mx-2" aria-hidden="true"></i><span class="textLink ml-1">Home</span></a></li>
+                        <li class="nav-item"><a href="/home" class="nav-link sideBarLink "><i class="fa fa-tachometer mx-2" aria-hidden="true"></i><span class="textLink ml-1">Dashbord</span></a></li>
+                        <li class="nav-item"><a href="#" class="nav-link sideBarLink "><i class="fa fa-user mx-2" aria-hidden="true"></i><span class="textLink ml-1">Profile</span></a></li>
+                        <li class="nav-item"><a href="{{route('item.index')}}" role="button" class="nav-link sideBarLink "><i class="fa fa-sitemap mx-2" aria-hidden="true"></i><span class="textLink ml-1">View Items</span></a></li>
+                        <li class="nav-item"><a href="#" class="nav-link sideBarLink "><i class="fa fa-cogs mx-2" aria-hidden="true"></i><span class="textLink ml-1">Settings</span></a></li>
+                        <li class="nav-item"><a  class="nav-link sideBarLink  text-light" type="button" id="toggleButton"><i class="fa fa-arrows-alt mx-2" aria-hidden="true"></i><span class="textLink ml-1">Resize</span></a></li>
+                    </ul>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+                    
+                </div>
+            </div>
+            <div class="content ">
+                <main class="bord pt-4">
+                   <div class="container-fluid pl-0  main-body  ">
+                       @yield('content')
+                   </div>
+                </main>
+            </div>
+        </div>
+
         <!--Live search -->
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script>
@@ -111,6 +133,8 @@
         </script>
         <script src="{{ asset('js/liveSearch.js') }}"> </script>
         <!--Live search end -->
+
+        
     </div>
    
 </body>

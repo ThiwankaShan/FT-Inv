@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Category;
-use App\Division;
+use App\Location;
 use App\Items;
 use App\SubCategory;
-use App\SubDivision;
+use App\SubLocation;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\auth;
 use Session;
@@ -32,31 +32,31 @@ class HomeController extends Controller
     {
 
         $data = Session::get('key');
-      
+
         if (Auth::user()->role=="admin") {
 
-            $div = Division::all();
-            $cate = Category::all();
-            $items=Items::paginate(10);
+            //  $div = Location::all();
+            //  $cate = Category::all();
+            //  $items=Items::paginate(10);
 
-            return view('pages.admin',compact('div','cate','items'));
+            return view('pages.admin');
 
         } elseif (Auth::user()->role=="manager") {
 
-            $div = Division::all();
-            $cate = Category::all();
-            $items=Items::paginate(10);
+            // $div = Location::all();
+            // $cate = Category::all();
+            // $items=Items::paginate(10);
 
-            return view('pages.manager',compact('div','cate','items'));
+            return view('pages.manager');
 
         } elseif (Auth::user()->role=="user") {
 
-            $div = Division::all();
-            $cate = Category::all();
-            $items=Items::paginate(10);
+            // $div = Location::all();
+            // $cate = Category::all();
+            // $items=Items::paginate(10);
 
-            return view('pages.user',compact('div','cate','items','data'));
-            
+            return view('pages.user');
+
         } else {
             return view('home');
         }
