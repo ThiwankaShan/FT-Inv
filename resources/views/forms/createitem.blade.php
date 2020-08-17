@@ -19,7 +19,7 @@
             <label for="item-name ">Division</label>
             <select class="form-control " id="exampleFormControlSelect1" name="division">
             @foreach($div as $division)
-             <option value="{{$division->division_id}}">{{$division->division_name}}</option>
+             <option value="{{$division->location_code}}">{{$division->division_name}}</option>
             @endforeach
             </select>
 
@@ -29,7 +29,7 @@
             <label for="item-name ">Sub Division</label>
             <select class="form-control " id="exampleFormControlSelect1" name="subdivision">
             @foreach($subdiv as $subdivision)
-             <option value="{{$subdivision->subDivision_id}}">{{$subdivision->subDivision_name}}</option>
+             <option value="{{$subdivision->subLocation_code}}">{{$subdivision->subDivision_name}}</option>
             @endforeach
             </select>
 
@@ -49,7 +49,7 @@
             <select class="form-control " id="exampleFormControlSelect1" name="subcategory">
             <option value="000">None</option>
             @foreach($subcate as $subcategory)
-             <option value="{{$subcategory->subCategory_id}}">{{$subcategory->subCategory_name}}</option>
+             <option value="{{$subcategory->subCategory_code}}">{{$subcategory->subCategory_name}}</option>
             @endforeach
             </select>
 
