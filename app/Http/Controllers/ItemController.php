@@ -27,7 +27,7 @@ class ItemController extends Controller
          $cate = Category::all();
          $items=Items::paginate(10);
 
-         return view('item.view',compact('div','items','cate'));
+         return view('layouts.view',compact('div','items','cate'));
 
     }
 

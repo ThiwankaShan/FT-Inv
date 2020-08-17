@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use \Illuminate\Http\Response;
 
-class updatedbController extends Controller
+class locationController extends Controller
 {
     public function __construct()
     {

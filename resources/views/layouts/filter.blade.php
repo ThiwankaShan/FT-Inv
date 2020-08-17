@@ -2,7 +2,7 @@
 <div class="card">
         <div class="card-header pr-0">
              <div class="row align-items-center">
-               
+
                         <!--Live search -->
                             <form class="form-inline my-2 my-lg-0" autocomplete="off" method="POST" action="{{route('search')}}">
                             @csrf
@@ -13,15 +13,15 @@
                                  <button class="btn btn-outline-success my-2 my-sm-0 ml-3" type="submit">Search</button>
                             </form>
                         <!--Live search end-->
-                
-                
+
+
              </div>
-             
+
         </div>
-        
+
             <div class="card-body">
             <table class="table" id="itemtable">
-  
+
                         <thead>
                             <tr>
                             <th >Item Number</th>
@@ -37,33 +37,33 @@
                                     <td>{{$item->item_name}}</td>
                                     <td>{{$item->item_code}}</td>
                                     <td><a href="" class="btn btn-success">Update</a></td>
-                                 </tr>  
+                                 </tr>
                               @endforeach
-                              
+
                               @isset($data)
                               @foreach($data as $item)
                                  <tr>
                                     <td>{{$item['item_id']}}</td>
                                     <td>{{$item['item_name']}}</td>
                                     <td>{{$item['item_code']}}</td>
-                                 </tr> 
+                                 </tr>
                               @endforeach
-                              @endisset 
+                              @endisset
                            </tbody>
-                           
+
                         </table>
                       {{ csrf_field() }}
               </div>
               <div class="card-footer">
-              
+
                 {{$items->links()}}
-                           
+
               </div>
-       
-        
+
+
 </div>
 
-@include('inc.filterJS')
+@include('layouts.filterJS')
 
 
 

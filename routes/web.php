@@ -24,10 +24,12 @@ Route::resource('/user', 'UserController');
 Route::resource('/item', 'ItemController');
 Route::post('/home', 'LiveSearchController@autofill')->name('liveSearch');
 Route::post('/search', 'SearchController@search')->name('search');
-Route::post('/ajax/division','AjaxController@getSubDivision')->name('ajax.getSubdivision');
+Route::post('/ajax/division','AjaxController@getSubLocation')->name('ajax.getSubdivision');
 Route::post('/ajax/category','AjaxController@getSubCategory')->name('ajax.getSubcategory');
 Route::post('/ajax/filter','AjaxController@getFilter')->name('ajax.filter');
-Route::get('insert','updatedbController@insert');
-Route::post('/create', 'updatedbController@storeLocation');
+Route::get('insert','locationController@insert');
+Route::post('/create', 'locationController@storeLocation');
+
+
 
 
