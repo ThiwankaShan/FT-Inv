@@ -37,25 +37,18 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        error_log('came here');
-        $validator = Validator::make($request->all(), [
-        'category_name' => 'required|string|unique:categories',
-        'category_code' => 'required|string|unique:categories',
+        
+        $validatedData = $request->validate([
+            'category_name' => 'required|unique:categories',
+            'category_code' => 'required|unique:categories',
         ]);
-       
-        if ($validator->fails()) {
-            
-            return redirect('/category')
-                        ->withErrors($validator)
-                        ->withInput();
-        }
-        else{ 
+    
         $category=new Category;
         $category->category_name=$request->category_name;
         $category->category_code=$request->category_code;
         $category->save();
-        return redirect('/home');
-        }
+        return redirect('/category')->with('success',"Created successfully");;
+ 
     }
 
     /**

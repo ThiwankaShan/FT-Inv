@@ -4,19 +4,27 @@
 <div class='container'>
 <form action="{{ route('category.store') }}" method="POST">
 @csrf
+@if (session('success'))
+<div class="alert alert-success" role="alert">
+                            {{ session('success') }}
+                        </div>
+                    @endif
   <div class="form-group">
-    <label for="exampleInputEmail1">Category Name</label>
-    <input type="text" class="form-control" name="category_name" aria-describedby="emailHelp" >
-    @error('category_code')
-    <span class="invalid-feedback" role="alert" >
-    {{ session('failed') }}
-    </span>
+    <label for="category_name">Category Name</label>
+    <input type="text" class="form-control" id="category_name" name="category_name">
+  
+    @error('category_name')
+    <div class="alert alert-danger">{{ $message }}</div>
     @enderror
+    
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Category Code</label>
     <input type="text" class="form-control" name="category_code" aria-describedby="emailHelp">
-  
+    @error('category_code')
+    <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
+    
   </div>
 
  
