@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Category;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use App\SubLocation;
+use App\Location;
 
-class CategoryController extends Controller
+class subLocationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-         
-        return view('forms.createCategory');
+        $Locations = Location::all();
+       
+        return view('forms.createSubLocation',compact('Locations'));
     }
 
     /**
@@ -37,18 +38,18 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-            
+        
         $validatedData = $request->validate([
-            'category_name' => 'required|unique:categories',
-            'category_code' => 'required|unique:categories',
+            'subLocation_name' => 'required|unique:sub_locations',
+            'subLocation_code' => 'required|unique:sub_locations',
         ]);
-    
-        $category=new Category;
-        $category->category_name=$request->category_name;
-        $category->category_code=$request->category_code;
-        $category->save();
-        return redirect('/category')->with('success',"Created successfully");
- 
+        
+        $subLocation=new SubLocation;
+        $subLocation->Location_code=$request->Location_code;
+        $subLocation->subLocation_name=$request->subLocation_name;
+        $subLocation->subLocation_code=$request->subLocation_code;
+        $subLocation->save();
+        return redirect('/sublocation')->with('success',"Created successfully");
     }
 
     /**

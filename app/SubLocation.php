@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class subLocation extends Model
+class SubLocation extends Model
 {
     protected $fillable = [
         'location_code',

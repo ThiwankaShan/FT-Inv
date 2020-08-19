@@ -30,6 +30,7 @@ Route::post('/ajax/filter','AjaxController@getFilter')->name('ajax.filter');
 Route::get('insert','locationController@insert');
 Route::post('/create', 'locationController@storeLocation');
 Route::resource('/category','CategoryController');
+Route::resource('/sublocation','subLocationController');
 
 
 
