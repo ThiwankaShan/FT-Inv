@@ -31,7 +31,7 @@
   <div class="form-group">
     <label for="subLocarion_code">Sub Location Code</label>
     <input type="text" class="form-control" name="subLocation_code" aria-describedby="emailHelp">
-    @error('subLocarion_code')
+    @error('subLocation_code')
     <div class="alert alert-danger">{{ $message }}</div>
     @enderror
     
