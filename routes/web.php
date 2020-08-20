@@ -37,6 +37,10 @@ Route::resource('/category','CategoryController');
 Route::resource('sublocation','subLocationController');
 Route::resource('/subcategory','SubCategoryController');
 
+Route::resource('grn','GRNController');
+
+
+
 //suppliers
 Route::get('/supplier/create','SupplierController@create')->name('supplier.create');
 Route::post('/supplier/store','SupplierController@store')->name('supplier.store');

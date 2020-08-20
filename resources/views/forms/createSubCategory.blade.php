@@ -10,7 +10,7 @@
                             {{ session('success') }}
                         </div>
                     @endif
-                    <div class="form-group ">
+    <div class="form-group ">
     <label for="item-name ">Categories</label>
     <select class="form-control form-custom" id="exampleFormControlSelect1" name="Category_code">
             @foreach($Categories as $Category)
@@ -19,8 +19,13 @@
             @endforeach
     </select>
 
+
 </div>
   <div class="form-group form-custom">
+
+    </div>
+  <div class="form-group">
+
     <label for="subCategory_name">Sub Category Name</label>
     <input type="text" class="form-control" id="subCategory_name" name="subCategory_name">
 
