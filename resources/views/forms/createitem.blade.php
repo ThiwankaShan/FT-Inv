@@ -15,6 +15,7 @@
     <div class="card-body">
     <form action="{{ route('item.store') }}" method="POST">
     @csrf
+
         <div class="form-group row">
             <div class="col-9 row">
                 <div class="col-sm-3">
@@ -66,6 +67,7 @@
                 <button class="btn btn-outline-success" type="button">Add New Category</button>
             </div>
         </div>
+
 
         <div class="form-group row">
            <div class="col-9 row">
@@ -154,7 +156,7 @@
             </div>
            
         </div> 
-
+        
         <div class="form-group row">
             <div class="col-9 row">
                 <div class="col-sm-3">
