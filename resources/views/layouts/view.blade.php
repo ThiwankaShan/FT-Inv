@@ -1,3 +1,4 @@
+
 @extends('layouts.PageLayout')
 @section('content')
 
@@ -18,7 +19,7 @@
             <select class="form-control selector mr-4 mb-1" id="category" name="category" data-column="2">
                 <option value="">Select Category</option>
                 @foreach($cate as $category)
-                    <option value="{{$category->category_id}}">{{$category->category_name}}</option>
+                    <option value="{{$category->category_code}}">{{$category->category_name}}</option>
                 @endforeach
             </select>
 
@@ -34,6 +35,9 @@
 </div>
 
 <div class="container-fluid mt-4">
-@include('layouts.filter');
+
+@include('layouts.filter')
+
+
 </div>
 @endsection

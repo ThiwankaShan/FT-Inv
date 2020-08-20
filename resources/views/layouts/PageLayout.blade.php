@@ -13,8 +13,8 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-    
-     
+
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -39,8 +39,8 @@
                 <a class="navbar-brand text-center " href="{{ url('/') }}">
                     <strong class="text-light mr-5 pr-5">FT-Inv</strong>
                 </a>
-               
-              
+
+
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -53,7 +53,7 @@
                     </ul>
 
                     <div class=" mr-5">
- 
+
 
   <!-- Right Side Of Navbar -->
   <ul class="navbar-nav ml-auto">
@@ -101,13 +101,14 @@
                     <ul class="navbar-nav">
                         <li class="nav-item"><a href="/" class="nav-link sideBarLink "><i class="fa fa-home mx-2" aria-hidden="true"></i><span class="textLink ml-1">Home</span></a></li>
                         <li class="nav-item"><a href="/home" class="nav-link sideBarLink "><i class="fa fa-tachometer mx-2" aria-hidden="true"></i><span class="textLink ml-1">Dashbord</span></a></li>
-                        <li class="nav-item"><a href="#" class="nav-link sideBarLink "><i class="fa fa-user mx-2" aria-hidden="true"></i><span class="textLink ml-1">Profile</span></a></li>
-                        <li class="nav-item"><a href="{{route('item.index')}}" role="button" class="nav-link sideBarLink "><i class="fa fa-sitemap mx-2" aria-hidden="true"></i><span class="textLink ml-1">View Items</span></a></li>
-                        <li class="nav-item"><a href="#" class="nav-link sideBarLink "><i class="fa fa-cogs mx-2" aria-hidden="true"></i><span class="textLink ml-1">Settings</span></a></li>
+                        <!-- <li class="nav-item"><a href="#" class="nav-link sideBarLink "><i class="fa fa-user mx-2" aria-hidden="true"></i><span class="textLink ml-1">Profile</span></a></li> -->
+                        <li class="nav-item"><a href="{{route('item.create')}}" role="button" class="nav-link sideBarLink "><i class="fa fa-sitemap mx-2" aria-hidden="true"></i><span class="textLink ml-1">Create Items</span></a></li>
+                        <li class="nav-item"><a href="{{ route('supplier.create') }}" role="button" class="nav-link sideBarLink "><i class="fa fa-suitcase mx-2" aria-hidden="true"></i><span class="textLink ml-1">Suppliers</span></a></li>
+                        <!-- <li class="nav-item"><a href="#" class="nav-link sideBarLink "><i class="fa fa-cogs mx-2" aria-hidden="true"></i><span class="textLink ml-1">Settings</span></a></li> -->
                         <li class="nav-item"><a  class="nav-link sideBarLink  text-light" type="button" id="toggleButton"><i class="fa fa-arrows-alt mx-2" aria-hidden="true"></i><span class="textLink ml-1">Resize</span></a></li>
                     </ul>
 
-                    
+
                 </div>
             </div>
             <div class="content ">
@@ -134,8 +135,8 @@
         <script src="{{ asset('js/liveSearch.js') }}"> </script>
         <!--Live search end -->
 
-        
+
     </div>
-   
+
 </body>
 </html>
