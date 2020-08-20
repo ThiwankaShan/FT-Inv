@@ -4,7 +4,7 @@
 
 
 <div class='container'>
-<form action="{{ route('category.store') }}" method="POST">
+<form action="{{ route('grn.store') }}" method="POST">
 @csrf
 @if (session('success'))
 <div class="alert alert-success" role="alert">

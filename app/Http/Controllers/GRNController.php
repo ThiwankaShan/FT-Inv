@@ -39,7 +39,24 @@ class GRNController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedata=$request->validate([
+            'GRN_no' => 'required|numeric|unique:grns',
+            'GRN_date' => 'required',
+            'invoice_no' => 'required|unique:grns',
+            'invoice_date' => 'required',
+            'supplier_code' => 'required',
+        ]);
+
+        $grn=new Grn();
+        $grn->GRN_no=$request->GRN_no;
+        $grn->GRN_date=$request->GRN_date;
+        $grn->invoice_no=$request->invoice_no;
+        $grn->invoice_date=$request->invoice_date;
+        $grn->supplier_code=$request->supplier_code;
+        
+        $grn->save();
+
+        return redirect('/grn')->with('success','Created successfully');
     }
 
     /**
