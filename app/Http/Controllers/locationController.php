@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use DB;
+<<<<<<< HEAD
 
 use App\Location;
 
@@ -8,6 +9,18 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Validator;
 
+=======
+use App\Category;
+use App\Location;
+use App\Items;
+use App\SubCategory;
+use App\SubLocation;
+use Illuminate\Http\Request;
+use DataTables;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+use \Illuminate\Http\Response;
+>>>>>>> 9b4d5802558f7134135c38212e2feaecfff9b23d
 
 class locationController extends Controller
 {

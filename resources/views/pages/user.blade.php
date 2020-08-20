@@ -41,7 +41,11 @@
 
   </div>
 </div>
+<<<<<<< HEAD
 <div class="card mt-3">
+=======
+<!-- <div class="card mt-3">
+>>>>>>> 9b4d5802558f7134135c38212e2feaecfff9b23d
 @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
@@ -57,7 +61,11 @@
     <form method="post" action="/create">
     @csrf
 <label for="location_code">Location Code</label>
+<<<<<<< HEAD
 <select name="Location_code">
+=======
+<select name="location_code">
+>>>>>>> 9b4d5802558f7134135c38212e2feaecfff9b23d
 
 	</select>
                                 @error('Location_code')
@@ -76,7 +84,11 @@
     </form>
 
   </div>
+<<<<<<< HEAD
 </div>
+=======
+</div> -->
+>>>>>>> 9b4d5802558f7134135c38212e2feaecfff9b23d
 </div>
 
 
