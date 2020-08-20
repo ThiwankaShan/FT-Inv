@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="col-3">
-                <button class="btn btn-outline-success" type="button">Add New Location</button>
+                <a class="btn btn-outline-success"  href="{{route('location.insert')}}" class="button">Add New Location</a>
             </div>
         </div>
 
@@ -47,7 +47,7 @@
                 </div>
             </div>
             <div class="col-3">
-                <button class="btn btn-outline-success" type="button">Add New Sub Location</button>
+                <a class="btn btn-outline-success" href="{{route('sublocation.index')}}" class="button">Add New Sub Location</a>
             </div>
         </div>
         <div class="form-group row">
@@ -65,7 +65,7 @@
                 </div>
             </div>
             <div class="col-3">
-                <button class="btn btn-outline-success" type="button">Add New Category</button>
+                <a class="btn btn-outline-success" href="{{route('category.index')}}" class="button">Add New Category</a>
             </div>
         </div>
 
@@ -83,7 +83,7 @@
              </div>
            </div>
            <div class="col-3">
-                <button class="btn btn-outline-success" type="button">Add New Sub Category</button>
+                <a class="btn btn-outline-success" href="{{route('subcategory.index')}}" class="button">Add New Sub Category</a>
             </div>
         </div>
 

@@ -29,10 +29,12 @@ Route::post('/ajax/category','AjaxController@getSubCategory')->name('ajax.getSub
 Route::post('/ajax/division','AjaxController@getSubLocation')->name('ajax.getSubLocation');
 Route::post('/ajax/category','AjaxController@getSubCategory')->name('ajax.getSubCategory');
 Route::post('/ajax/filter','AjaxController@getFilter')->name('ajax.filter');
-Route::get('insert','locationController@insert');
-Route::post('/create', 'locationController@storeLocation');
+
+Route::get('location','locationController@index')->name('location.insert');
+Route::post('location/store', 'locationController@storeLocation')->name('location.store');
+
 Route::resource('/category','CategoryController');
-Route::resource('/sublocation','subLocationController');
+Route::resource('sublocation','subLocationController');
 Route::resource('/subcategory','SubCategoryController');
 
 //suppliers

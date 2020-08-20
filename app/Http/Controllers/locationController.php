@@ -28,37 +28,32 @@ class locationController extends Controller
         $this->middleware('auth');
     }
 
-    public function insert(){
+    public function index(){
 
-        return view('pages.user');
+        return view('forms.createLocation');
     }
     //validation
     public function storeLocation(Request $request){
-        $rules = [
+        $validatedata = $request->validate([
 			'location_code' => 'required|string|unique:locations',
-			'location_name' => 'required|string',
+			'location_name' => 'required|string|unique:locations',
 
-		];
-		$validator = Validator::make($request->all(),$rules);
-		if ($validator->fails()) {
-			return redirect('insert')
-			->withInput()
-			->withErrors($validator);
+		]);
+		
+		
+        $data = $request->input();
+
+		try{
+			$location = new Location;
+            $location->location_code = $data['location_code'];
+            $location->location_name = $data['location_name'];
+
+			$location->save();
+			return redirect('location')->with('status',"Insert successfully");
 		}
-		else{
-            $data = $request->input();
-
-			try{
-				$location = new Location;
-                $location->location_code = $data['location_code'];
-                $location->location_name = $data['location_name'];
-
-				$location->save();
-				return redirect('insert')->with('status',"Insert successfully");
-			}
-			catch(Exception $e){
-				return redirect('insert')->with('failed',"operation failed");
-			}
+		catch(Exception $e){
+			return redirect('location')->with('failed',"operation failed");
 		}
+		
     }
 }
