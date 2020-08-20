@@ -7,10 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Location extends Model
 {
 
-    protected $primaryKey = 'Location_code';
+    protected $primaryKey = 'location_code';
     public $incrementing=false;
     protected $keyType="string";
 
+    protected $fillable = [
+        'location_code',
+        'location_name',
+        // add all other fields
+    ];
     //creating the relation between Location And SubLocation
     public function subLocation()
     {
@@ -28,4 +33,5 @@ class Location extends Model
     {
         return $this->hasMany('App\SubCategory');
     }
+    protected $table = 'locations';
 }

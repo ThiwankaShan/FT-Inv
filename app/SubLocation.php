@@ -4,8 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class subLocation extends Model
+class SubLocation extends Model
 {
+    protected $fillable = [
+        'location_code',
+        'subLocation_code',
+        'subLocation_name',
+        // add all other fields
+    ];
     protected $primaryKey = 'subLocation_code';
     public $incrementing=false;
     protected $keyType="string";
@@ -27,4 +33,5 @@ class subLocation extends Model
     {
         return $this->hasMany('App\SubCategory');
     }
+    protected $table = 'sub_locations';
 }

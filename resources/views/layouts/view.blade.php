@@ -34,6 +34,6 @@
 </div>
 
 <div class="container-fluid mt-4">
-@include('inc.filter')
+@include('layouts.filter');
 </div>
 @endsection
