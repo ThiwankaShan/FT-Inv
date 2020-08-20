@@ -1,11 +1,10 @@
 <?php
 
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubCategoriesTable extends Migration
+class CreateGrnsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +13,7 @@ class CreateSubCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('GRN', function (Blueprint $table) {
+        Schema::create('grns', function (Blueprint $table) {
             $table->string('GRN_no')->primarykey();
             $table->date('GRN_date');
             $table->string('invoice_no');
@@ -31,5 +30,6 @@ class CreateSubCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('GRN');
+        Schema::dropIfExists('grns');
     }
+}

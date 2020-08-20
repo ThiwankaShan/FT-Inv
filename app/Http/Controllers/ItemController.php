@@ -1,14 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
+use Validator;
 use DB;
+use App\Grn;
 use App\Category;
 use App\Location;
 use App\Items;
 use App\SubCategory;
 use App\SubLocation;
+
 use Illuminate\Http\Request;
-use DataTables;
+
+
 class ItemController extends Controller
 {
     /**
@@ -27,7 +31,7 @@ class ItemController extends Controller
          $cate = Category::all();
          $items=Items::paginate(10);
 
-         return view('item.view',compact('div','items','cate'));
+         return view('layouts.view',compact('div','items','cate'));
 
     }
 
@@ -44,8 +48,8 @@ class ItemController extends Controller
         $subdiv = SubLocation::all();
         $cate = Category::all();
         $subcate = SubCategory::all();
-
-        return view('forms.createitem', compact('div', 'subdiv', 'cate', 'subcate'));
+         $grn = Grn::all();
+        return view('forms.createitem', compact('div', 'subdiv', 'cate', 'subcate','grn'));
     }
 
     /**
@@ -56,44 +60,51 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-          $dname=$request->Location;
-          $sdname=$request->subLocation;
+        $this->validate($request, [
+            'sub_item' => 'integer|nullable',
+            'procument_id' => 'string|nullable',
+            'Quantity' => 'required|integer',
+            'Vat' => 'required',
+            'Rate' => 'required'
+        ]);
 
-          //select the category
-         $div3=Category::where('category_code',$request->category)->firstOrFail();
+
+         $lname=$request->Location;
+         $slname=$request->subLocation;
          $cname=$request->category;
-
-         //select the subcategory
-         if($request->subcategory !== "000"){
-            $div4=SubCategory::where('subCategory_code',$request->subcategory)->firstOrFail();
-            $scname=$request->subcategory;
-            $subcate_name=$div4->subCategory_name;
-         }else{
-            $scname="000";
-            $subcate_name=$div3->category_name;
-         }
-
+         $scname=$request->subCategory;
+         $vat = $request->Vat;
+         $rate = $request->Rate;
+        
 
          //get the quantity
-         $count=$request->quantity;
+         $count=$request->Quantity;
         //  $i= ItemQuantity::count();
 
-          $item=Items::where('Location_code',$request->Location)
+          $item=Items::where('location_code',$request->Location)
                             ->where('subLocation_code',$request->subLocation)
                             ->where('category_code',$request->category)
-                            ->where('subcategory_code',$scname)
+                            ->where('subCategory_code',$scname)
                             ->count();
 
             $i= (int)$item;
 
+
           for($num=$i;$num<$count+$i;$num++){
            $item=new Items();
-           $item->item_name=$subcate_name;
-           $item->item_code=$dname.'/'.$sdname.'/'.$cname.'/'.$scname.'/'.($num+1);
-           $item->Location_code=$request->Location;
-           $item->subLocation_code=$request->subLocation;
-           $item->category_code=$request->category;
-           $item->subcategory_code=$scname;
+          
+           $item->item_code=$lname.'/'.$slname.'/'.$cname.'/'.$scname.'/'.($num+1);
+           $item->Location_code=$lname;
+           $item->subLocation_code=$slname;
+           $item->category_code=$cname;
+           $item->subCategory_code=$scname;
+           $item->type=$request->types;
+           $item->num_of_sub_items=$request->sub_item;
+           $item->GRN_no=$request->grn_no;
+           $item->vat = $vat;
+           $item->procurement_id = $request->procument_id;
+           $item->rate = $request->rate;
+           $item->vat_rate_vat = ($vat*$rate);
            $item->save();
           }
 

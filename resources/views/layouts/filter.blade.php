@@ -52,7 +52,7 @@
                            </tbody>
                            
                         </table>
-                      {{ csrf_field() }}
+                        {{ csrf_field() }}
               </div>
               <div class="card-footer">
               
@@ -63,7 +63,7 @@
         
 </div>
 
-@include('inc.filterJS')
+@include('layouts.filterJS')
 
 
 

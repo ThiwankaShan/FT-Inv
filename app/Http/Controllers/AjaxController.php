@@ -13,13 +13,13 @@ use Illuminate\Http\Request;
 class AjaxController extends Controller
 {
     public function getSubLocation(Request $request){
-         $data=SubLocation::where('Location_code',$request->Locationcode)->get();
+         $data=SubLocation::where('Location_code',$request->locationId)->get();
 
          return response()->json($data);
     }
 
     public function getSubCategory(Request $request){
-        $data=SubCategory::where('category_code',$request->categorycode)->get();
+        $data=SubCategory::where('category_code',$request->categoryid)->get();
 
         return response()->json($data);
    }

@@ -2,25 +2,25 @@
 // -------This whole file should be in a seperate .js file --------------
 
 $(document).ready(function () {
-    var _token=$('input[name="_token"]').val();
+  var _token=$('input[name="_token"]').val();
        $('#division').change(function() {
-
+       
            var div_id=$(this).val();   
            var form=$(this).parent();
            var op='';     
            $.ajax({
                
-               url:"{{ route('ajax.getSubdivision') }}",
+               url:"{{ route('ajax.getSubLocation') }}",
                method:"POST",
                data:{
-                   divisionid:div_id,
+                   locationId:div_id,
                    _token:_token,
                 },
                success:function(data){
                 
-                 op+='<option value="" selected disabled>Select Sub Division</option>';
+                 op+='<option value="" selected disabled>Select Sub Location</option>';
                  for(var i=0;i<data.length;i++){
-                    op+='<option value="'+data[i].subDivision_id+'" >'+data[i].subDivision_name+'</option>';
+                    op+='<option value="'+data[i].subLocation_code+'" >'+data[i].subLocation_name+'</option>';
                       }
                          $('#subDivision').html('');
                          $('#subDivision').append(op);                      
@@ -40,7 +40,7 @@ $(document).ready(function () {
            var op='';     
            $.ajax({
                
-               url:"{{ route('ajax.getSubcategory') }}",
+               url:"{{ route('ajax.getSubCategory') }}",
                type:"POST",
                data:{
                    categoryid:cate_id,
@@ -50,7 +50,7 @@ $(document).ready(function () {
                 
                  op+='<option value="000" >Select Sub Category</option>';
                  for(var i=0;i<data.length;i++){
-                    op+='<option value="'+data[i].subCategory_id+'" >'+data[i].subCategory_name+'</option>';
+                    op+='<option value="'+data[i].subCategory_code+'" >'+data[i].subCategory_name+'</option>';
                       }
                          $('#subCategory').html('');
                          $('#subCategory').append(op);                      
@@ -85,7 +85,7 @@ $(document).ready(function () {
                   
                   for(var i=0;i<data.length;i++){
                     output+='<tr>';
-                    output+='<td>'+data[i].item_id+'</td>';
+                    output+='<td>'+data[i].item_code+'</td>';
                     output+='<td>'+data[i].item_name+'</td>';
                     output+='<td>'+data[i].item_code+'</td>';
                     output+='<td><a href="" class="btn btn-success">Update</a></td>';
