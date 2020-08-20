@@ -27,8 +27,6 @@ Route::post('/search', 'SearchController@search')->name('search');
 Route::post('/ajax/division','AjaxController@getSubLocation')->name('ajax.getSubdivision');
 Route::post('/ajax/category','AjaxController@getSubCategory')->name('ajax.getSubcategory');
 Route::post('/ajax/filter','AjaxController@getFilter')->name('ajax.filter');
-Route::get('insert','locationController@insert');
-Route::post('/create', 'locationController@storeLocation');
 
 
 

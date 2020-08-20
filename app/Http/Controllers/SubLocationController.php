@@ -1,15 +1,11 @@
 <?php
+
 namespace App\Http\Controllers;
-use DB;
-
-use App\Location;
-
+use App\subLocation;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Validator;
 
-
-class locationController extends Controller
+class SubLocationController extends Controller
 {
     public function __construct()
     {
@@ -21,10 +17,10 @@ class locationController extends Controller
         return view('pages.user');
     }
     //validation
-    public function storeLocation(Request $request){
+    public function storeSubLocation(Request $request){
         $rules = [
-			'location_code' => 'required|string|unique:locations',
-			'location_name' => 'required|string',
+			// 'location_code' => 'required|string|unique:locations',
+			// 'location_name' => 'required|string',
 
 		];
 		$validator = Validator::make($request->all(),$rules);
@@ -37,9 +33,10 @@ class locationController extends Controller
             $data = $request->input();
 
 			try{
-				$location = new Location;
-                $location->location_code = $data['location_code'];
-                $location->location_name = $data['location_name'];
+                $sublocation = new subLocation;
+                $sublocation->Location_code = $data['Location_code'];
+                $sublocation->subLocation_code = $data['sub_location_code'];
+                $sublocation->subLocation_name = $data['sub_location_name'];
 
 				$location->save();
 				return redirect('insert')->with('status',"Insert successfully");

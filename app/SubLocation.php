@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class subLocation extends Model
 {
     protected $fillable = [
-        'location_code',
+        'Location_code',
         'subLocation_code',
         'subLocation_name',
         // add all other fields
