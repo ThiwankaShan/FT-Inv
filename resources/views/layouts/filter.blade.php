@@ -52,7 +52,7 @@
                            </tbody>
 
                         </table>
-                      {{ csrf_field() }}
+                        {{ csrf_field() }}
               </div>
               <div class="card-footer">
 
