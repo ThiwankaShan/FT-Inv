@@ -2,14 +2,14 @@
 @section('content')
 
 <div class="container-fluid pt-2">
-    
-    <a href="" class="btn btn-primary mr-2">Add New Supplier</a>
-    <a class="btn btn-warning" href="/home">Back</a>
+
+    <a href="" class="btn btn-outline-warning mr-2 ">Add New Supplier</a>
+    <a class="btn btn-dark text-white" href="/home">Back</a>
 </div>
 <hr>
 
 <div class="card w-75 ml-5">
-  <div class="card-header bg-success">
+  <div class="card-header form-card-header-custom">
     <h1 class="text-center text-white">Add New Supplier</h1>
   </div>
   <form action="{{route('supplier.store')}}" method="post">
@@ -23,7 +23,7 @@
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
                         </span>
-                    
+
                  @enderror
         </div>
     </div>
@@ -35,7 +35,7 @@
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
                         </span>
-                    
+
                  @enderror
         </div>
     </div>
@@ -47,7 +47,7 @@
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
                         </span>
-                    
+
                  @enderror
     </div>
     </div>
@@ -59,7 +59,7 @@
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
                         </span>
-                    
+
                  @enderror
         </div>
     </div>
@@ -71,8 +71,8 @@
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
                         </span>
-                    
-                 @enderror 
+
+                 @enderror
         </div>
     </div>
     <div class="form-group row">
@@ -83,19 +83,19 @@
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
                         </span>
-                    
+
                  @enderror
         </div>
     </div>
     @if(session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong class="text-center">{{ session('success') }}</strong> 
+        <strong class="text-center">{{ session('success') }}</strong>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     @endif
-    <button href="" class="btn btn-primary" type="submit">Save Supplier Details</button>
+    <button href="" class="btn form-tab-custom bg-color-custom text-light form-card-header-custom" type="submit">Save Supplier Details</button>
   </div>
   </form>
 </div>

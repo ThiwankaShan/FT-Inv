@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers;
 use DB;
-<<<<<<< HEAD
 
 use App\Location;
 
@@ -9,7 +8,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Validator;
 
-=======
+=
 use App\Category;
 use App\Location;
 use App\Items;

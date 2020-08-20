@@ -7,15 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class SubLocation extends Model
 {
     protected $fillable = [
-<<<<<<< HEAD
-        'Location_code',
-=======
         'location_code',
->>>>>>> 9b4d5802558f7134135c38212e2feaecfff9b23d
+
         'subLocation_code',
         'subLocation_name',
         // add all other fields
     ];
+
     protected $primaryKey = 'subLocation_code';
     public $incrementing=false;
     protected $keyType="string";
