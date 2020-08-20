@@ -34,7 +34,7 @@ Route::post('location/store', 'locationController@storeLocation')->name('locatio
 Route::resource('/category','CategoryController');
 Route::resource('sublocation','subLocationController');
 Route::resource('/subcategory','SubCategoryController');
-
+Route::resource('grn','GRNController');
 
 
 //suppliers

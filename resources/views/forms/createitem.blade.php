@@ -135,7 +135,7 @@
                 </div>
             </div>
             <div class="col-3">
-                <button class="btn btn-outline-success" type="button">Add New GRN</button>
+                <a class="btn btn-outline-success" href="{{route('grn.index')}}" class="button">Add New GRN</a>
             </div>
         </div> 
 
