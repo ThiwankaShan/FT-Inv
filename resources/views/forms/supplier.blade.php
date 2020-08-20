@@ -1,14 +1,14 @@
 @extends('layouts.PageLayout')
 @section('content')
 
-<div class="container-fluid pt-2">
-
-    <a href="" class="btn btn-outline-warning mr-2 ">Add New Supplier</a>
+<div class="container-fluid ">
+<!--
+    <a href="" class="btn btn-outline-warning mr-2 ">Add New Supplier</a> -->
     <a class="btn btn-dark text-white" href="/home">Back</a>
 </div>
 <hr>
 
-<div class="card w-75 ml-5">
+<div class="card container">
   <div class="card-header form-card-header-custom">
     <h1 class="text-center text-white">Add New Supplier</h1>
   </div>
@@ -95,7 +95,9 @@
         </button>
     </div>
     @endif
-    <button href="" class="btn form-tab-custom bg-color-custom text-light form-card-header-custom" type="submit">Save Supplier Details</button>
+    <div class="text-center">
+    <button href="" class="btn form-tab-custom bg-color-custom text-light form-card-header-custom "  type="submit">Save Supplier Details</button>
+    </div>
   </div>
   </form>
 </div>
