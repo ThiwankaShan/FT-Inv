@@ -14,7 +14,7 @@ class CreateGrnsTable extends Migration
     public function up()
     {
         Schema::create('grns', function (Blueprint $table) {
-            $table->string('GRN_no')->primarykey();
+            $table->integer('GRN_no')->primarykey();
             $table->date('GRN_date');
             $table->string('invoice_no');
             $table->date('invoice_date');
