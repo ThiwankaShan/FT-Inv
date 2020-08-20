@@ -137,7 +137,9 @@
             </div>
             <div class="col-3">
 
+
                 <a class="btn btn-warning text-danger form-control" href="{{route('grn.index')}}" >Add New GRN</a>
+
 
 
 
