@@ -7,7 +7,7 @@ use App\Location;
 use App\Items;
 use App\SubCategory;
 use App\SubLocation;
-
+use Romans\Filter\IntToRoman;
 use Illuminate\Http\Request;
 
 class AjaxController extends Controller
@@ -35,4 +35,17 @@ class AjaxController extends Controller
 
            return response()->json($data);
   }
+
+  public function getRomanNumber(Request $request){
+ 
+         $sub = $request->no_of_sub; 
+         $data = array();
+                for($i=1;$i<=$sub;$i++){
+                    $filter = new IntToRoman();
+                    $result = $filter->filter($i);
+                    $data[] = $result;
+                }
+
+          return response()->json([$data]);
+ }
 }
