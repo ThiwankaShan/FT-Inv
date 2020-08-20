@@ -31,6 +31,7 @@ Route::get('insert','locationController@insert');
 Route::post('/create', 'locationController@storeLocation');
 Route::resource('/category','CategoryController');
 Route::resource('/sublocation','subLocationController');
+Route::resource('/subcategory','SubCategoryController');
 
 
 
