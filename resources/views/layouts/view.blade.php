@@ -1,3 +1,4 @@
+
 @extends('layouts.PageLayout')
 @section('content')
 
@@ -28,14 +29,15 @@
             </select>
 
             <button class="btn btn-outline-success  px-5" id="filter" type='button'>Filter</button>
-           
+
         </form>
 
 </div>
 
 <div class="container-fluid mt-4">
 
-@include('layouts.filter');
+@include('layouts.filter')
+
 
 </div>
 @endsection

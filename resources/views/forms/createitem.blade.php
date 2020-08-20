@@ -1,17 +1,18 @@
 
 
+
 @extends('layouts.PageLayout')
 @section('content')
 
-<div class="container-fluid pt-2">
-    <button class="btn btn-danger mr-3">Delete Items</button>
-    <button class="btn btn-info mr-3">View Logs</button>
-    <a class="btn btn-warning" href="/home">Back</a>
+<div class="container-fluid pt-2 ">
+    <button class="btn fa fa-trash mr-3 " data-toggle="tooltip" data-placement="top" title="Delete" alt="Delete"></button>
+    <button class="btn fa fa-history mr-3" data-toggle="tooltip" data-placement="top" title="logs" alt="log"></button>
+    <a class="btn btn-dark text-light"  href="/home">Back</a>
 </div>
 <hr>
 
     <div class="card w-75  item-create">
-          <h1 class="card-header bg-primary"><strong class="text-light"> Add Item Form</strong></h1>
+          <h1 class="card-header form-card-header-custom"><strong class="text-light"> Add Item Form</strong></h1>
     <div class="card-body">
     <form action="{{ route('item.store') }}" method="POST">
     @csrf
@@ -30,7 +31,7 @@
                 </div>
             </div>
             <div class="col-3">
-                <a class="btn btn-outline-success"  href="{{route('location.insert')}}" class="button">Add New Location</a>
+                <a class="btn btn-warning text-danger form-control"  href="{{route('location.insert')}}" class="button">Add New Location</a>
             </div>
         </div>
 
@@ -46,7 +47,7 @@
                 </div>
             </div>
             <div class="col-3">
-                <a class="btn btn-outline-success" href="{{route('sublocation.index')}}" class="button">Add New Sub Location</a>
+                <a class="btn btn-warning text-danger form-control"  href="{{route('sublocation.index')}}" class="button">Add New Sub Location</a>
             </div>
         </div>
         <div class="form-group row">
@@ -56,7 +57,7 @@
                 </div>
                 <div class="col-sm-9 mb-1">
                     <select class="form-control " id="category" name="category">
-                    
+
                     @foreach($cate as $category)
                     <option value="{{$category->category_code}}">{{$category->category_name}}</option>
                     @endforeach
@@ -64,7 +65,7 @@
                 </div>
             </div>
             <div class="col-3">
-                <a class="btn btn-outline-success" href="{{route('category.index')}}" class="button">Add New Category</a>
+                <a class="btn btn-warning text-danger form-control"  href="{{route('category.index')}}" class="button">Add New Category</a>
             </div>
         </div>
 
@@ -77,12 +78,12 @@
              <div class="col-sm-9">
                 <select class="form-control " id="subcategory" name="subCategory">
                 <option value = "000">Select Sub Category</option>
-                   
+
                     </select>
-             </div>   
+             </div>
            </div>
            <div class="col-3">
-                <a class="btn btn-outline-success" href="{{route('subcategory.index')}}" class="button">Add New Sub Category</a>
+                <a class="btn btn-warning text-danger form-control"  href="{{route('subcategory.index')}}" class="button">Add New Sub Category</a>
             </div>
         </div>
 
@@ -94,7 +95,7 @@
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
                         </span>
-                    
+
                  @enderror
             </div>
             <div class="form-group col-sm-6 ">
@@ -135,9 +136,13 @@
                 </div>
             </div>
             <div class="col-3">
+
+                <button class="btn btn-warning text-danger form-control"  type="button">Add New GRN</button>
+
                 <a class="btn btn-outline-success" href="{{route('grn.index')}}" class="button">Add New GRN</a>
+
             </div>
-        </div> 
+        </div>
 
         <div class="form-group row">
             <div class="col-9 row">
@@ -150,13 +155,13 @@
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
                         </span>
-                    
+
                  @enderror
                 </div>
             </div>
-           
-        </div> 
-        
+
+        </div>
+
         <div class="form-group row">
             <div class="col-9 row">
                 <div class="col-sm-3">
@@ -168,12 +173,12 @@
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
                         </span>
-                    
+
                     @enderror
                 </div>
             </div>
-           
-        </div> 
+
+        </div>
 
         <div class="form-group row">
             <div class="col-9 row">
@@ -186,16 +191,16 @@
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
                         </span>
-                    
+
                     @enderror
                 </div>
             </div>
-           
-        </div> 
 
-        <button  class="btn btn-outline-success" id="preview" data-toggle="modal" data-target="#itemCodes" type="button">Display List of Item Codes Created</button>
-        <button type="submit" class="btn btn-outline-success" type="button">Save Item Details</button>
-
+        </div>
+        <div class="text-center">
+        <button  class="btn form-card-header-custom text-light" id="preview" data-toggle="modal" data-target="#itemCodes" type="button">Display List of Item Codes Created</button>
+        <button type="submit" class="btn form-card-header-custom text-light" type="button">Save Item Details</button>
+        </div>
     </form>
     {{ csrf_field() }}
     </div>
@@ -209,9 +214,9 @@
                        </div>
                         <div class="modal-body">
                            <table class="w-100">
-                               
+
                                <tboday id="itemCode" class="w-100 p-3">
-                                 
+
                                </tboday>
                            </table>
                         </div>
@@ -219,6 +224,7 @@
                     </div>
                 </div>
     </div>
+
 
 
 @endsection
