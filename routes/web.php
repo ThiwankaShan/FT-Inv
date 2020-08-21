@@ -28,6 +28,7 @@ Route::post('/ajax/division','AjaxController@getSubLocation')->name('ajax.getSub
 Route::post('/ajax/category','AjaxController@getSubCategory')->name('ajax.getSubcategory');
 Route::post('/ajax/division','AjaxController@getSubLocation')->name('ajax.getSubLocation');
 Route::post('/ajax/category','AjaxController@getSubCategory')->name('ajax.getSubCategory');
+Route::post('/ajax/roman','AjaxController@getRomanNumber');
 Route::post('/ajax/filter','AjaxController@getFilter')->name('ajax.filter');
 
 Route::get('location','locationController@index')->name('location.insert');
