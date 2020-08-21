@@ -24,10 +24,18 @@
                 </div>
                 <div class="col-sm-9 mb-1">
                     <select class="form-control " id="location" name="Location">
+                    <option value="">Select Location</option>
                     @foreach($div as $location)
                     <option value="{{$location->location_code}}">{{$location->location_name}}</option>
                     @endforeach
                     </select>
+
+                    @error('Location')
+                        <span class="" role="alert">
+                            <small style="color:red"><strong>{{ $message }}</strong></small>
+                        </span>
+
+                   @enderror
                 </div>
             </div>
             <div class="col-3">
@@ -62,6 +70,13 @@
                     <option value="{{$category->category_code}}">{{$category->category_name}}</option>
                     @endforeach
                     </select>
+
+                    @error('category')
+                        <span class="" role="alert">
+                            <small style="color:red"><strong>{{ $message }}</strong></small>
+                        </span>
+
+                   @enderror
                 </div>
             </div>
             <div class="col-3">
@@ -100,7 +115,7 @@
             </div>
             <div class="form-group col-sm-6 ">
                 <label for="quantiy">No. Of Sub Items </label>
-                <input type="number" class="form-control" id="exampleInputPassword1" placeholder="" name="sub_item">
+                <input type="number" class="form-control" id="NoSub" placeholder="" name="sub_item">
             </div>
         </div>
         <div class=" col-sm-9 row pl-0">
@@ -136,11 +151,7 @@
                 </div>
             </div>
             <div class="col-3">
-
                 <a class="btn btn-warning text-danger form-control" href="{{route('grn.index')}}" >Add New GRN</a>
-
-
-
             </div>
         </div>
 
@@ -197,6 +208,17 @@
             </div>
 
         </div>
+<<<<<<< HEAD
+=======
+        @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+        <strong class="text-center">{{ session('success') }}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
+>>>>>>> ba99f21bd903c00185bf0ffc2d99e81d3e02aad8
         <div class="text-center">
         <button  class="btn form-card-header-custom text-light" id="preview" data-toggle="modal" data-target="#itemCodes" type="button">Display List of Item Codes Created</button>
         <button type="submit" class="btn form-card-header-custom text-light" type="button">Save Item Details</button>
@@ -215,9 +237,15 @@
                         <div class="modal-body">
                            <table class="w-100">
 
+<<<<<<< HEAD
                                <tboday id="itemCode" class="w-100 p-3">
 
                                </tboday>
+=======
+                               <ul id="itemCode" class="w-100 p-3">
+
+                               </ul>
+>>>>>>> ba99f21bd903c00185bf0ffc2d99e81d3e02aad8
                            </table>
                         </div>
                         </div>

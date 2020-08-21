@@ -9,7 +9,7 @@ use App\Location;
 use App\Items;
 use App\SubCategory;
 use App\SubLocation;
-
+use Romans\Filter\IntToRoman;
 use Illuminate\Http\Request;
 
 
@@ -65,7 +65,9 @@ class ItemController extends Controller
             'procument_id' => 'string|nullable',
             'Quantity' => 'required|integer',
             'Vat' => 'required',
-            'Rate' => 'required'
+            'Rate' => 'required',
+            'Location'=>'required|string',
+            'category' => 'required|string'
         ]);
 
 
@@ -88,27 +90,34 @@ class ItemController extends Controller
                             ->count();
 
             $i= (int)$item;
-
+            $sub = $request->sub_item;
 
           for($num=$i;$num<$count+$i;$num++){
-           $item=new Items();
+              for($j=1;$j<=$sub;$j++){
+                
+                $filter = new IntToRoman();
+                $result = $filter->filter($j);
+
+                $item=new Items();
           
-           $item->item_code=$lname.'/'.$slname.'/'.$cname.'/'.$scname.'/'.($num+1);
-           $item->Location_code=$lname;
-           $item->subLocation_code=$slname;
-           $item->category_code=$cname;
-           $item->subCategory_code=$scname;
-           $item->type=$request->types;
-           $item->num_of_sub_items=$request->sub_item;
-           $item->GRN_no=$request->grn_no;
-           $item->vat = $vat;
-           $item->procurement_id = $request->procument_id;
-           $item->rate = $request->rate;
-           $item->vat_rate_vat = ($vat*$rate);
-           $item->save();
+                $item->item_code=$lname.'/'.$slname.'/'.$cname.'/'.$scname.'/'.($num+1).'/'.$result;
+                $item->Location_code=$lname;
+                $item->subLocation_code=$slname;
+                $item->category_code=$cname;
+                $item->subCategory_code=$scname;
+                $item->type=$request->types;
+                $item->num_of_sub_items=$request->sub_item;
+                $item->GRN_no=$request->grn_no;
+                $item->vat = $vat;
+                $item->procurement_id = $request->procument_id;
+                $item->rate = $request->Rate;
+                $item->vat_rate_vat = ($vat*$rate);
+                $item->save();
+              }
+           
           }
 
-          return view('pages.admin');
+          return back()->with('success','Items Saved Successfuly!');
     }
 
     /**

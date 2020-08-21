@@ -22,10 +22,12 @@
 
 </div>
 
+
   <div class="form-group">
 
     <label for="subCategory_name">Sub Category Name</label>
     <input type="text" class="form-control form-custom" id="subCategory_name" name="subCategory_name">
+
 
     @error('subCategory_name')
     <div class="alert alert-danger">{{ $message }}</div>
