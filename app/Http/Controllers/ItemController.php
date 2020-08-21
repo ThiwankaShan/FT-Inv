@@ -61,6 +61,8 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+            'Location'=>'required|string',
+            'subLocation'=>'required|string',
             'sub_item' => 'integer|nullable',
             'procument_id' => 'string|nullable',
             'Quantity' => 'required|integer',
@@ -90,10 +92,12 @@ class ItemController extends Controller
             $i= (int)$item;
 
 
-          for($num=$i;$num<$count+$i;$num++){
+          for($num=$i+1;$num<$count+$i;$num++){
            $item=new Items();
-          
-           $item->item_code='FT'.'/'.$lname.'/'.$slname.'/'.$cname.'/'.$scname.'/'.($num+1);
+            
+           $fnumber=sprintf('%03d',$num);
+           
+           $item->item_code='FT'.'/'.$lname.'/'.$slname.'/'.$cname.'/'.$scname.'/'.$fnumber;
            $item->Location_code=$lname;
            $item->subLocation_code=$slname;
            $item->category_code=$cname;
@@ -103,12 +107,12 @@ class ItemController extends Controller
            $item->GRN_no=$request->grn_no;
            $item->vat = $vat;
            $item->procurement_id = $request->procument_id;
-           $item->rate = $request->rate;
+           $item->rate = $request->Rate;
            $item->vat_rate_vat = ($vat*$rate);
            $item->save();
           }
 
-          return view('pages.admin');
+          return redirect('/item/create');
     }
 
     /**

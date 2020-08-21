@@ -1,6 +1,3 @@
-
-
-
 @extends('layouts.PageLayout')
 @section('content')
 
@@ -79,6 +76,7 @@
              </div>
              <div class="col-sm-9">
                 <select class="form-control " id="subcategory" name="subCategory">
+                <option value = "000">Select Sub Category</option>
                 @foreach($subcate as $subcategory)
                     <option value="{{$subcategory->subCategory_code}}">{{$subcategory->subCategory_name}}</option>
                     @endforeach
@@ -103,7 +101,7 @@
             </div>
             <div class="form-group col-sm-6 ">
                 <label for="quantiy">No. Of Sub Items </label>
-                <input type="number" class="form-control" id="exampleInputPassword1" placeholder="" name="sub_item">
+                <input type="number" class="form-control" value="0" id="exampleInputPassword1" placeholder="" name="sub_item">
             </div>
         </div>
         <div class=" col-sm-9 row pl-0">
