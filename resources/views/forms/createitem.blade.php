@@ -5,14 +5,13 @@
 @section('content')
 
 <div class="container-fluid pt-2 ">
-    <button class="btn fa fa-trash mr-3 " data-toggle="tooltip" data-placement="top" title="Delete" alt="Delete"></button>
-    <button class="btn fa fa-history mr-3" data-toggle="tooltip" data-placement="top" title="logs" alt="log"></button>
+    
     <a class="btn btn-dark text-light"  href="/home">Back</a>
 </div>
 <hr>
 
     <div class="card w-75  item-create">
-          <h1 class="card-header form-card-header-custom"><strong class="text-light"> Add Item Form</strong></h1>
+          <h5 class="card-header form-card-header-custom"><strong class="text-light"> Add Item Form</strong></h5>
     <div class="card-body">
     <form action="{{ route('item.store') }}" method="POST">
     @csrf
@@ -43,6 +42,9 @@
                 <div class="col-sm-9 mb-1">
                     <select class="form-control " id="subLocation" name="subLocation">
                        <option value = "000">Select Sub Location</option>
+                       @foreach($subloc as $subLocation)
+                    <option value="{{$subLocation->subLocation_code}}">{{$subLocation->subLocation_name}}</option>
+                    @endforeach
                     </select>
                 </div>
             </div>
@@ -77,9 +79,10 @@
              </div>
              <div class="col-sm-9">
                 <select class="form-control " id="subcategory" name="subCategory">
-                <option value = "000">Select Sub Category</option>
-
-                    </select>
+                @foreach($subcate as $subcategory)
+                    <option value="{{$subcategory->subCategory_code}}">{{$subcategory->subCategory_name}}</option>
+                    @endforeach
+                </select>
              </div>
            </div>
            <div class="col-3">
@@ -137,9 +140,9 @@
             </div>
             <div class="col-3">
 
-                <button class="btn btn-warning text-danger form-control"  type="button">Add New GRN</button>
+                
 
-                <a class="btn btn-outline-success" href="{{route('grn.index')}}" class="button">Add New GRN</a>
+                <a class="btn btn-warning text-danger form-control" href="{{route('grn.index')}}" class="button">Add New GRN</a>
 
             </div>
         </div>

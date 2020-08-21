@@ -29,7 +29,7 @@
 </head>
 <body>
     <div id="app" >
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark  shadow-sm fixed-top">
+        <nav class="navbar navbar-expand-md navbar-dark shadow-sm fixed-top">
             <div class="container-fluid">
 
                  <button class="navbar-toggler ml-2" type="button" id="side_bar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -37,7 +37,7 @@
                 </button>
 
                 <a class="navbar-brand text-center " href="{{ url('/') }}">
-                    <strong class="text-light mr-5 pr-5">FT-Inv</strong>
+                    <strong class="text-light mr-5 pr-5">FT-IMS</strong>
                 </a>
 
 
@@ -92,25 +92,27 @@
             </div>
         </nav>
 </div>
-<div class="wrapper d-flex ">
-            <div class="sideMenu  " >
-                <div class="sideBar ">
-                    <img src="/images/default.jpg" alt="profile image" class="pimage ml-5 mt-4 mb-2" style="width:150px; height:150px; border-radius:50%; transition: linear .5s;">
-                    <h3 class="text-center text-white  font-weight-bold mb-2 userName">{{Auth::user()->name}}</h3>
+<div class="wrapper d-flex">
+            <div class="sideMenu" >
+                <div class="sideBar">
+                    <img src="/images/default.jpg" alt="profile image" class="pimage ml-5 mt-4 mb-2" style="width:100px; height:100px; border-radius:50%; transition: linear .5s;">
+                   
+                    <h3 class="text-center text-white  mb-2 userName">{{Auth::user()->name}}</h3>
                   <hr>
                     <ul class="navbar-nav">
-                        <li class="nav-item"><a href="/" class="nav-link sideBarLink "><i class="fa fa-home mx-2" aria-hidden="true"></i><span class="textLink ml-1">Home</span></a></li>
-                        <li class="nav-item"><a href="/home" class="nav-link sideBarLink "><i class="fa fa-tachometer mx-2" aria-hidden="true"></i><span class="textLink ml-1">Dashbord</span></a></li>
+                        <li class="nav-item"><a href="/" class="nav-link sideBarLink "><i class="fa fa-home mx-2 sideBar-icon" aria-hidden="true"></i><span class="textLink ml-1">Home</span></a></li>
+                        <li class="nav-item"><a href="/home" class="nav-link sideBarLink "><i class="fa fa-tachometer mx-2 sideBar-icon" aria-hidden="true"></i><span class="textLink ml-1">Dashbord</span></a></li>
                         <!-- <li class="nav-item"><a href="#" class="nav-link sideBarLink "><i class="fa fa-user mx-2" aria-hidden="true"></i><span class="textLink ml-1">Profile</span></a></li> -->
-                        <li class="nav-item"><a href="{{route('item.create')}}" role="button" class="nav-link sideBarLink "><i class="fa fa-sitemap mx-2" aria-hidden="true"></i><span class="textLink ml-1">Create Items</span></a></li>
-                        <li class="nav-item"><a href="{{ route('supplier.create') }}" role="button" class="nav-link sideBarLink "><i class="fa fa-suitcase mx-2" aria-hidden="true"></i><span class="textLink ml-1">Suppliers</span></a></li>
+                        <li class="nav-item"><a href="{{route('item.create')}}" role="button" class="nav-link sideBarLink "><i class="fa fa-sitemap mx-2 sideBar-icon" aria-hidden="true"></i><span class="textLink ml-1">Create Items</span></a></li>
+                        <li class="nav-item"><a href="{{ route('supplier.create') }}" role="button" class="nav-link sideBarLink "><i class="fa fa-suitcase mx-2 sideBar-icon" aria-hidden="true"></i><span class="textLink ml-1">Suppliers</span></a></li>
                         <!-- <li class="nav-item"><a href="#" class="nav-link sideBarLink "><i class="fa fa-cogs mx-2" aria-hidden="true"></i><span class="textLink ml-1">Settings</span></a></li> -->
-                        <li class="nav-item"><a  class="nav-link sideBarLink  text-light" type="button" id="toggleButton"><i class="fa fa-arrows-alt mx-2" aria-hidden="true"></i><span class="textLink ml-1">Resize</span></a></li>
+                        <li class="nav-item"><a  class="nav-link sideBarLink  text-light" type="button" id="toggleButton"><i class="fa fa-arrows-alt mx-2 sideBar-icon" aria-hidden="true"></i><span class="textLink ml-1">Resize</span></a></li>
                     </ul>
 
 
                 </div>
             </div>
+
             <div class="content ">
                 <main class="bord pt-4">
                    <div class="container-fluid pl-0  main-body  ">

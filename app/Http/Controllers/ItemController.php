@@ -45,11 +45,11 @@ class ItemController extends Controller
     {
         //data
         $div = Location::all();
-        $subdiv = SubLocation::all();
+        $subloc = SubLocation::all();
         $cate = Category::all();
         $subcate = SubCategory::all();
          $grn = Grn::all();
-        return view('forms.createitem', compact('div', 'subdiv', 'cate', 'subcate','grn'));
+        return view('forms.createitem', compact('div', 'subloc', 'cate', 'subcate','grn'));
     }
 
     /**
@@ -93,7 +93,7 @@ class ItemController extends Controller
           for($num=$i;$num<$count+$i;$num++){
            $item=new Items();
           
-           $item->item_code=$lname.'/'.$slname.'/'.$cname.'/'.$scname.'/'.($num+1);
+           $item->item_code='FT'.'/'.$lname.'/'.$slname.'/'.$cname.'/'.$scname.'/'.($num+1);
            $item->Location_code=$lname;
            $item->subLocation_code=$slname;
            $item->category_code=$cname;

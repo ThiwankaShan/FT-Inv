@@ -2,15 +2,14 @@
 @section('content')
 
 <div class="container-fluid ">
-<!--
-    <a href="" class="btn btn-outline-warning mr-2 ">Add New Supplier</a> -->
+
     <a class="btn btn-dark text-white" href="/home">Back</a>
 </div>
 <hr>
 
 <div class="card container">
   <div class="card-header form-card-header-custom">
-    <h1 class="text-center text-white">Add New Supplier</h1>
+    <h5 class="text-center form-card-header-custom"><strong class="text-light">Add New Supplier</strong></h5>
   </div>
   <form action="{{route('supplier.store')}}" method="post">
       @csrf
