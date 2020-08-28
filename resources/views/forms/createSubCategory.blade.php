@@ -25,13 +25,18 @@
 
 
 </div>
-  <div class="form-group form-custom">
 
+<<<<<<< HEAD
     </div>
   <div class="form-group form-custom">
+=======
+
+  <div class="form-group">
+>>>>>>> development
 
     <label for="subCategory_name">Sub Category Name</label>
-    <input type="text" class="form-control" id="subCategory_name" name="subCategory_name">
+    <input type="text" class="form-control form-custom" id="subCategory_name" name="subCategory_name">
+
 
     @error('subCategory_name')
     <div class="alert alert-danger">{{ $message }}</div>

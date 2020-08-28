@@ -11,6 +11,7 @@ use App\SubCategory;
 use App\SubLocation;
 use Session;
 
+use Romans\Filter\IntToRoman;
 use Illuminate\Http\Request;
 
 
@@ -73,7 +74,9 @@ class ItemController extends Controller
             'procument_id' => 'string|nullable',
             'Quantity' => 'required|integer',
             'Vat' => 'required',
-            'Rate' => 'required'
+            'Rate' => 'required',
+            'Location'=>'required|string',
+            'category' => 'required|string'
         ]);
 
             
@@ -83,7 +86,7 @@ class ItemController extends Controller
          $scname=$request->subCategory;
          $vat = $request->Vat;
          $rate = $request->Rate;
-
+         $sub = $request->sub_item;   
          
 
          //get the quantity
@@ -102,11 +105,16 @@ class ItemController extends Controller
             if($request->action=='show'){
                 error_log('came here');
                 for($num=$i+1;$num<$count+$i+1;$num++){
-                    $fnumber=sprintf('%03d',$num);
-                    $itemCode='FT'.'/'.$lname.'/'.$slname.'/'.$cname.'/'.$scname.'/'.$fnumber;
-                    array_push($itemCodes,$itemCode);
+
+                    for($j=0;$j<=$sub;$j++){
+                        $filter = new IntToRoman();
+                        $subNum = $filter->filter($j);
+                        $fnumber=sprintf('%03d',$num);
+                        $itemCode='FT'.'/'.$lname.'/'.$slname.'/'.$cname.'/'.$scname.'/'.$fnumber.'/'.$subNum;
+                        array_push($itemCodes,$itemCode);
                     
                 }
+            }
                 
                 return json_encode($itemCodes);
 
@@ -114,11 +122,16 @@ class ItemController extends Controller
                 
 
             for($num=$i+1;$num<$count+$i+1;$num++){
+                for($j=0;$j<=$sub;$j++){
            $item=new Items();
+
+            $filter = new IntToRoman();
+            $subNum = $filter->filter($j);
+
             
            $fnumber=sprintf('%03d',$num);
            
-           $item->item_code='FT'.'/'.$lname.'/'.$slname.'/'.$cname.'/'.$scname.'/'.$fnumber;
+           $item->item_code='FT'.'/'.$lname.'/'.$slname.'/'.$cname.'/'.$scname.'/'.$fnumber.'/'.$subNum;
            $item->Location_code=$lname;
            $item->subLocation_code=$slname;
            $item->category_code=$cname;
@@ -132,8 +145,8 @@ class ItemController extends Controller
            $item->vat_rate_vat = ($vat*$rate);
            $item->save();
           }
-
-          return redirect()->route('item.create');
+        }
+          return back()->with('success','Items Saved Successfuly!');
         }
     }
 

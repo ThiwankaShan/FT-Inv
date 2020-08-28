@@ -5,7 +5,8 @@
     <a class="btn btn-dark text-white" href="/item/create">Back</a>
 </div>
 <div class="container">
-<div>
+
+
 @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}

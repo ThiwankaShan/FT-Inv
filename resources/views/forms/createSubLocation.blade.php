@@ -28,16 +28,19 @@
 </div>
   <div class="form-group  form-custom">
     <label for="subLocation_name">Sub Location Name</label>
-    <input type="text" class="form-control" id="subLocation_name" name="subLocation_name">
+
+    <input type="text" class="form-control form-custom" id="subLocation_name" name="subLocation_name">
+
 
     @error('subLocation_name')
     <div class="alert alert-danger">{{ $message }}</div>
     @enderror
 
   </div>
-  <div class="form-group form-custom">
-    <label for="subLocarion_code">Sub Location Code</label>
-    <input type="text" class="form-control" name="subLocation_code" aria-describedby="emailHelp">
+
+  <div class="form-group ">
+    <label for="subLocarion_code ">Sub Location Code</label>
+    <input type="text" class="form-control form-custom" name="subLocation_code" aria-describedby="emailHelp">
     @error('subLocation_code')
     <div class="alert alert-danger">{{ $message }}</div>
     @enderror
