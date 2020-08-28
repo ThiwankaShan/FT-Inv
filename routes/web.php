@@ -31,6 +31,7 @@ Route::post('/ajax/category','AjaxController@getSubCategory')->name('ajax.getSub
 Route::post('/ajax/roman','AjaxController@getRomanNumber');
 Route::post('/ajax/filter','AjaxController@getFilter')->name('ajax.filter');
 
+
 Route::get('location','locationController@index')->name('location.insert');
 Route::post('location/store', 'locationController@storeLocation')->name('location.store');
 

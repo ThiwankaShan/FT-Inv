@@ -65,7 +65,7 @@
                 </div>
                 <div class="col-sm-9 mb-1">
                     <select class="form-control " id="category" name="category">
-
+                    <option value="">Select Category</option>
                     @foreach($cate as $category)
                     <option value="{{$category->category_code}}">{{$category->category_name}}</option>
                     @endforeach
@@ -210,8 +210,7 @@
             </div>
 
         </div>
-<<<<<<< HEAD
-=======
+
         @if(session('success'))
         <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
         <strong class="text-center">{{ session('success') }}</strong>
@@ -220,7 +219,7 @@
         </button>
     </div>
     @endif
->>>>>>> ba99f21bd903c00185bf0ffc2d99e81d3e02aad8
+    
         <div class="text-center">
         <button  class="btn form-card-header-custom text-light" id="preview" data-toggle="modal" data-target="#itemCodes" type="button">Display List of Item Codes Created</button>
         <button type="submit" class="btn form-card-header-custom text-light" type="button">Save Item Details</button>
@@ -239,15 +238,15 @@
                         <div class="modal-body">
                            <table class="w-100">
 
-<<<<<<< HEAD
                                <tboday id="itemCode" class="w-100 p-3">
 
                                </tboday>
-=======
+
                                <ul id="itemCode" class="w-100 p-3">
 
                                </ul>
->>>>>>> ba99f21bd903c00185bf0ffc2d99e81d3e02aad8
+
+
                            </table>
                         </div>
                         </div>
