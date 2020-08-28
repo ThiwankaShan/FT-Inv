@@ -48,4 +48,6 @@ class AjaxController extends Controller
 
           return response()->json([$data]);
  }
+
+
 }
