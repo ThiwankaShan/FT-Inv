@@ -103,7 +103,8 @@ class ItemController extends Controller
 
             $itemCodes=[];
             if($request->action=='show'){
-                error_log('came here');
+        
+               
                 for($num=$i+1;$num<$count+$i+1;$num++){
 
                     for($j=0;$j<=$sub;$j++){
@@ -115,12 +116,12 @@ class ItemController extends Controller
                     
                 }
             }
-                
+            
                 return json_encode($itemCodes);
 
             }else{
                 
-
+               
             for($num=$i+1;$num<$count+$i+1;$num++){
                 for($j=0;$j<=$sub;$j++){
            $item=new Items();

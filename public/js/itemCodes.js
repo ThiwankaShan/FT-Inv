@@ -1,5 +1,5 @@
 $(document).on("click","#preview",function(){
-   
+   console.log('came to js function');
     var location = $('#location').val();
     var sublocation = $('#subLocation').val();
     var category = $('#category').val();
@@ -29,7 +29,7 @@ $(document).on("click","#preview",function(){
 
         },
         success: function (res) {
-            
+            console.log('came ajax sucess');
             $("#vatError").fadeOut();
             $("#quantityError").fadeOut();
             $("#procumentIdError").fadeOut();

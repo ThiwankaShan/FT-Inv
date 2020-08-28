@@ -146,44 +146,4 @@ $(document).ready(function(){
         })
     })
 
-<<<<<<< HEAD
-
-=======
-    $('#preview').click(function(){
-        var location = $('#location').val();
-        var sublocation = $('#subLocation').val();
-        var category = $('#category').val();
-        var subcategory = $('#subcategory').val();
-        var no_of_items = $('#noItems').val();
-        var no_of_SubItems = $('#NoSub').val();
-        var tb = "";
-
-        $.ajax({
-          url:"/ajax/roman",
-          method:"POST",
-          data:{
-            no_of_sub: no_of_SubItems,
-            _token:_token,
-          },
-          success:function(data){
-             console.log(data);
-            for(var a=0;a<no_of_items;a++){
-                for(b=0;b<data[0].length;b++){
-                    tb += '<tr>';
-                    tb += '<td>'+location+'/'+sublocation+'/'+category+'/'+subcategory+'/'+(a+1)+'/'+data[0][b]+'</td>';
-                    tb += '</tr>';
-                    tb += '<hr>';
-                }
-               
-            }
-            $('#itemCode').html("");
-            $('#itemCode').append(tb);
-          },
-
-        })
-
-       
-        
-    })
->>>>>>> development
  }
