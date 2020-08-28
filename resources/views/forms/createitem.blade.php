@@ -160,13 +160,9 @@
             </div>
             <div class="col-3">
 
-<<<<<<< HEAD
                 
 
                 <a class="btn btn-warning text-danger form-control" href="{{route('grn.index')}}" class="button">Add New GRN</a>
-=======
-                <a class="btn btn-warning text-danger form-control" href="{{route('grn.index')}}" >Add New GRN</a>
->>>>>>> development
 
             </div>
         </div>
