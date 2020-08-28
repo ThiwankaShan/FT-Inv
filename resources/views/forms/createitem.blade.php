@@ -219,7 +219,7 @@
         </button>
     </div>
     @endif
-
+    
         <div class="text-center">
         <button  class="btn form-card-header-custom text-light" id="preview" data-toggle="modal" data-target="#itemCodes" type="button">Display List of Item Codes Created</button>
         <button type="submit" class="btn form-card-header-custom text-light" type="button">Save Item Details</button>
@@ -238,12 +238,14 @@
                         <div class="modal-body">
                            <table class="w-100">
 
+                               <tboday id="itemCode" class="w-100 p-3">
+
+                               </tboday>
+
                                <ul id="itemCode" class="w-100 p-3">
 
                                </ul>
-                               <ul id="itemCode" class="w-100 p-3">
 
-                               </ul>
 
                            </table>
                         </div>
