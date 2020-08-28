@@ -119,11 +119,7 @@
             </div>
             <div class="form-group col-sm-6 ">
                 <label for="quantiy">No. Of Sub Items </label>
-<<<<<<< HEAD
-                <input type="number" class="form-control" value="0" id="exampleInputPassword1" placeholder="" name="sub_item">
-=======
-                <input type="number" class="form-control" id="NoSub" placeholder="" name="sub_item">
->>>>>>> development
+                <input type="number" class="form-control" value="0" id="NoSub" placeholder="" name="sub_item">
             </div>
         </div>
         <div class=" col-sm-9 row pl-0">
