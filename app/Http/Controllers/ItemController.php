@@ -9,6 +9,8 @@ use App\Location;
 use App\Items;
 use App\SubCategory;
 use App\SubLocation;
+use Session;
+
 use Romans\Filter\IntToRoman;
 use Illuminate\Http\Request;
 
@@ -45,11 +47,13 @@ class ItemController extends Controller
     {
         //data
         $div = Location::all();
-        $subdiv = SubLocation::all();
+        $subloc = SubLocation::all();
         $cate = Category::all();
         $subcate = SubCategory::all();
-         $grn = Grn::all();
-        return view('forms.createitem', compact('div', 'subdiv', 'cate', 'subcate','grn'));
+        $grn = Grn::all();
+        $itemCodes=Session::get('itemCodes');
+       
+        return view('forms.createitem', compact('div', 'subloc', 'cate', 'subcate','grn','itemCodes'));
     }
 
     /**
@@ -58,9 +62,14 @@ class ItemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+   
     public function store(Request $request)
     {
+        
+        
         $this->validate($request, [
+            'Location'=>'required|string',
+            'subLocation'=>'required|string',
             'sub_item' => 'integer|nullable',
             'procument_id' => 'string|nullable',
             'Quantity' => 'required|integer',
@@ -70,14 +79,15 @@ class ItemController extends Controller
             'category' => 'required|string'
         ]);
 
-
+            
          $lname=$request->Location;
          $slname=$request->subLocation;
          $cname=$request->category;
          $scname=$request->subCategory;
          $vat = $request->Vat;
          $rate = $request->Rate;
-        
+         $sub = $request->sub_item;   
+         
 
          //get the quantity
          $count=$request->Quantity;
@@ -90,34 +100,55 @@ class ItemController extends Controller
                             ->count();
 
             $i= (int)$item;
-            $sub = $request->sub_item;
 
-          for($num=$i;$num<$count+$i;$num++){
-              for($j=1;$j<=$sub;$j++){
+            $itemCodes=[];
+            if($request->action=='show'){
+        
+               
+                for($num=$i+1;$num<$count+$i+1;$num++){
+
+                    for($j=0;$j<=$sub;$j++){
+                        $filter = new IntToRoman();
+                        $subNum = $filter->filter($j);
+                        $fnumber=sprintf('%03d',$num);
+                        $itemCode='FT'.'/'.$lname.'/'.$slname.'/'.$cname.'/'.$scname.'/'.$fnumber.'/'.$subNum;
+                        array_push($itemCodes,$itemCode);
+                    
+                }
+            }
+            
+                return json_encode($itemCodes);
+
+            }else{
                 
-                $filter = new IntToRoman();
-                $result = $filter->filter($j);
+               
+            for($num=$i+1;$num<$count+$i+1;$num++){
+                for($j=0;$j<=$sub;$j++){
+           $item=new Items();
 
-                $item=new Items();
-          
-                $item->item_code=$lname.'/'.$slname.'/'.$cname.'/'.$scname.'/'.($num+1).'/'.$result;
-                $item->Location_code=$lname;
-                $item->subLocation_code=$slname;
-                $item->category_code=$cname;
-                $item->subCategory_code=$scname;
-                $item->type=$request->types;
-                $item->num_of_sub_items=$request->sub_item;
-                $item->GRN_no=$request->grn_no;
-                $item->vat = $vat;
-                $item->procurement_id = $request->procument_id;
-                $item->rate = $request->Rate;
-                $item->vat_rate_vat = ($vat*$rate);
-                $item->save();
-              }
+            $filter = new IntToRoman();
+            $subNum = $filter->filter($j);
+
+            
+           $fnumber=sprintf('%03d',$num);
            
+           $item->item_code='FT'.'/'.$lname.'/'.$slname.'/'.$cname.'/'.$scname.'/'.$fnumber.'/'.$subNum;
+           $item->Location_code=$lname;
+           $item->subLocation_code=$slname;
+           $item->category_code=$cname;
+           $item->subCategory_code=$scname;
+           $item->type=$request->types;
+           $item->num_of_sub_items=$request->sub_item;
+           $item->GRN_no=$request->grn_no;
+           $item->vat = $vat;
+           $item->procurement_id = $request->procument_id;
+           $item->rate = $request->Rate;
+           $item->vat_rate_vat = ($vat*$rate);
+           $item->save();
           }
-
+        }
           return back()->with('success','Items Saved Successfuly!');
+        }
     }
 
     /**

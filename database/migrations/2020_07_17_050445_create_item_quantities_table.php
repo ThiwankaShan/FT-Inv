@@ -25,8 +25,8 @@ class CreateItemQuantitiesTable extends Migration
             $table->string('GRN_no');
             $table->float('vat');
             $table->float('vat_rate_vat');
-            $table->string('procurement_id');
-            $table->float('rate');
+            $table->string('procurement_id')->nullable();
+            $table->float('rate',10,5);
             $table->timestamps();
         });
     }

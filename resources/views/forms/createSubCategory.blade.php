@@ -1,8 +1,12 @@
 @extends('layouts.PageLayout')
 @section('content')
 
+<div class="container-fluid ">
+    <a class="btn btn-dark text-white" href="/item/create">Back</a>
+</div>
+
 <div class='container'>
-<h5 class="form-card-header-custom text-white p-3">Add New Sub Category</h5>
+<h5 class="form-card-header-custom text-white p-3"><strong class="text-light">Add New Sub Category</strong></h5>
 <form action="{{ route('subcategory.store') }}" class=" form-align-custom" method="POST">
 @csrf
 @if (session('success'))
@@ -22,8 +26,13 @@
 
 </div>
 
+<<<<<<< HEAD
+    </div>
+  <div class="form-group form-custom">
+=======
 
   <div class="form-group">
+>>>>>>> development
 
     <label for="subCategory_name">Sub Category Name</label>
     <input type="text" class="form-control form-custom" id="subCategory_name" name="subCategory_name">
@@ -45,7 +54,7 @@
 
 
 <div class="text-center">
-  <button type="submit" class="btn form-card-header-custom text-light">Create</button>
+  <button type="submit" class="btn form-card-header-custom text-light ">Create</button>
 </div>
 </form>
 </div>

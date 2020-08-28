@@ -1,8 +1,13 @@
 
-@extends('layouts.pageLayout')
+@extends('layouts.PageLayout')
 @section('content')
+
+<div class="container-fluid ">
+    <a class="btn btn-dark text-white" href="/item/create">Back</a>
+</div>
+
 <div class='container'>
-<h5 class="form-card-header-custom text-white p-3">Add New Sub Location</h5>
+<h5 class="form-card-header-custom text-white p-3"><strong class="text-light">Add New Sub Location</strong></h5>
 <form action="{{ route('sublocation.store') }} " class="form-align-custom" method="POST">
 @csrf
 @if (session('success'))
