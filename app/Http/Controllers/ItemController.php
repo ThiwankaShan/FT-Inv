@@ -9,6 +9,7 @@ use App\Location;
 use App\Items;
 use App\SubCategory;
 use App\SubLocation;
+use Session;
 
 use Illuminate\Http\Request;
 
@@ -48,8 +49,10 @@ class ItemController extends Controller
         $subloc = SubLocation::all();
         $cate = Category::all();
         $subcate = SubCategory::all();
-         $grn = Grn::all();
-        return view('forms.createitem', compact('div', 'subloc', 'cate', 'subcate','grn'));
+        $grn = Grn::all();
+        $itemCodes=Session::get('itemCodes');
+       
+        return view('forms.createitem', compact('div', 'subloc', 'cate', 'subcate','grn','itemCodes'));
     }
 
     /**
@@ -58,8 +61,11 @@ class ItemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+   
     public function store(Request $request)
     {
+        
+        
         $this->validate($request, [
             'Location'=>'required|string',
             'subLocation'=>'required|string',
@@ -70,14 +76,15 @@ class ItemController extends Controller
             'Rate' => 'required'
         ]);
 
-
+            
          $lname=$request->Location;
          $slname=$request->subLocation;
          $cname=$request->category;
          $scname=$request->subCategory;
          $vat = $request->Vat;
          $rate = $request->Rate;
-        
+
+         
 
          //get the quantity
          $count=$request->Quantity;
@@ -91,8 +98,22 @@ class ItemController extends Controller
 
             $i= (int)$item;
 
+            $itemCodes=[];
+            if($request->action=='show'){
+                error_log('came here');
+                for($num=$i+1;$num<$count+$i+1;$num++){
+                    $fnumber=sprintf('%03d',$num);
+                    $itemCode='FT'.'/'.$lname.'/'.$slname.'/'.$cname.'/'.$scname.'/'.$fnumber;
+                    array_push($itemCodes,$itemCode);
+                    
+                }
+                
+                return json_encode($itemCodes);
 
-          for($num=$i+1;$num<$count+$i;$num++){
+            }else{
+                
+
+            for($num=$i+1;$num<$count+$i;$num++){
            $item=new Items();
             
            $fnumber=sprintf('%03d',$num);
@@ -112,7 +133,8 @@ class ItemController extends Controller
            $item->save();
           }
 
-          return redirect('/item/create');
+          return redirect()->route('item.create');
+        }
     }
 
     /**

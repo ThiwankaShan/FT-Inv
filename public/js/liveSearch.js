@@ -146,21 +146,5 @@ $(document).ready(function(){
         })
     })
 
-    $('#preview').click(function(){
-        var location = $('#location').val();
-        var sublocation = $('#subLocation').val();
-        var category = $('#category').val();
-        var subcategory = $('#subcategory').val();
-        var no_of_items = $('#noItems').val();
 
-        var tb = "";
-
-        for(var a=0;a<no_of_items;a++){
-            tb += '<tr>';
-            tb += '<td>'+location+'/'+sublocation+'/'+category+'/'+subcategory+'/'+(a+1)+'</td>';
-            tb += '</tr>';
-        }
-        $('#itemCode').html("");
-        $('#itemCode').append(tb);
-    })
  }
