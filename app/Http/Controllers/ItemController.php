@@ -113,7 +113,7 @@ class ItemController extends Controller
             }else{
                 
 
-            for($num=$i+1;$num<$count+$i;$num++){
+            for($num=$i+1;$num<$count+$i+1;$num++){
            $item=new Items();
             
            $fnumber=sprintf('%03d',$num);
