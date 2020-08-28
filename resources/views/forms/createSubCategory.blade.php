@@ -26,13 +26,8 @@
 
 </div>
 
-<<<<<<< HEAD
-    </div>
-  <div class="form-group form-custom">
-=======
 
   <div class="form-group">
->>>>>>> development
 
     <label for="subCategory_name">Sub Category Name</label>
     <input type="text" class="form-control form-custom" id="subCategory_name" name="subCategory_name">
