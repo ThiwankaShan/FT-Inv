@@ -43,10 +43,10 @@ class HomeController extends Controller
 
         } elseif (Auth::user()->role=="manager") {
 
-            $items = Items::paginate(20);
+            $items = Items::orderBy('created_at','DESC')->paginate(20);
 
       return view('pages.manager',compact('items'));
-      
+
         } elseif (Auth::user()->role=="user") {
 
             // $div = Location::all();
