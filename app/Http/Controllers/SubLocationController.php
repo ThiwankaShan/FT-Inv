@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 
 class SubLocationController extends Controller
 {
+	
     public function __construct()
     {
         $this->middleware('auth');

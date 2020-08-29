@@ -41,6 +41,7 @@
 
             .content {
                 text-align: center;
+              
             }
 
             .title {
@@ -81,7 +82,9 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    FT-Inv
+                    Faculty of Technology <br>
+                    Sabaragamuwa University of Srilanka<br>
+                    Inventory Managment System
                 </div>
 
 

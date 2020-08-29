@@ -1,18 +1,14 @@
-
-
-
 @extends('layouts.PageLayout')
 @section('content')
 
 <div class="container-fluid pt-2 ">
-    <button class="btn fa fa-trash mr-3 " data-toggle="tooltip" data-placement="top" title="Delete" alt="Delete"></button>
-    <button class="btn fa fa-history mr-3" data-toggle="tooltip" data-placement="top" title="logs" alt="log"></button>
+    
     <a class="btn btn-dark text-light"  href="/home">Back</a>
 </div>
 <hr>
 
     <div class="card w-75  item-create">
-          <h1 class="card-header form-card-header-custom"><strong class="text-light"> Add Item Form</strong></h1>
+          <h5 class="card-header form-card-header-custom"><strong class="text-light"> Add Item Form</strong></h5>
     <div class="card-body">
     <form action="{{ route('item.store') }}" method="POST">
     @csrf
@@ -51,6 +47,9 @@
                 <div class="col-sm-9 mb-1">
                     <select class="form-control " id="subLocation" name="subLocation">
                        <option value = "000">Select Sub Location</option>
+                       @foreach($subloc as $subLocation)
+                    <option value="{{$subLocation->subLocation_code}}">{{$subLocation->subLocation_name}}</option>
+                    @endforeach
                     </select>
                 </div>
             </div>
@@ -65,7 +64,7 @@
                 </div>
                 <div class="col-sm-9 mb-1">
                     <select class="form-control " id="category" name="category">
-
+                    <option value="">Select Category</option>
                     @foreach($cate as $category)
                     <option value="{{$category->category_code}}">{{$category->category_name}}</option>
                     @endforeach
@@ -93,8 +92,10 @@
              <div class="col-sm-9">
                 <select class="form-control " id="subcategory" name="subCategory">
                 <option value = "000">Select Sub Category</option>
-
-                    </select>
+                @foreach($subcate as $subcategory)
+                    <option value="{{$subcategory->subCategory_code}}">{{$subcategory->subCategory_name}}</option>
+                    @endforeach
+                </select>
              </div>
            </div>
            <div class="col-3">
@@ -112,10 +113,13 @@
                         </span>
 
                  @enderror
+                <span class="" role="alert">
+                    <small style="color:red" id="quantityError"></small>
+                </span>
             </div>
             <div class="form-group col-sm-6 ">
                 <label for="quantiy">No. Of Sub Items </label>
-                <input type="number" class="form-control" id="NoSub" placeholder="" name="sub_item">
+                <input type="number" class="form-control" value="0" id="NoSub" placeholder="" name="sub_item">
             </div>
         </div>
         <div class=" col-sm-9 row pl-0">
@@ -152,7 +156,9 @@
             </div>
             <div class="col-3">
 
-                <a class="btn btn-warning text-danger form-control" href="{{route('grn.index')}}" >Add New GRN</a>
+                
+
+                <a class="btn btn-warning text-danger form-control" href="{{route('grn.index')}}" class="button">Add New GRN</a>
 
             </div>
         </div>
@@ -163,13 +169,16 @@
                    <label for="item-name " >Vat/Item (Percentage)</label>
                 </div>
                 <div class="col-sm-9 mb-1">
-                   <input type="text" name="Vat" id="item-name " class="form-control">
+                   <input type="text" name="Vat" id="Vat" class="form-control">
                    @error('Vat')
                         <span class="" role="alert">
-                            <small style="color:red"><strong>{{ $message }}</strong></small>
+                            <small style="color:red" ><strong>{{ $message }}</strong></small>
                         </span>
 
                  @enderror
+                 <span class="" role="alert">
+                        <small style="color:red" id="vatError"></small>
+                </span>
                 </div>
             </div>
 
@@ -181,13 +190,16 @@
                    <label for="pro">Procurement ID (Optional)</label>
                 </div>
                 <div class="col-sm-9 mb-1">
-                   <input type="text" name="procument_id" id="pro" class="form-control">
+                   <input type="text" name="procument_id" id="procument_id" class="form-control">
                    @error('procument_id')
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
                         </span>
 
                     @enderror
+                    <span class="" role="alert">
+                        <small style="color:red" id="procumentIdError"></small>
+                    </span>
                 </div>
             </div>
 
@@ -199,19 +211,21 @@
                    <label for="rate" >Rate(Price/Item)</label>
                 </div>
                 <div class="col-sm-9 mb-1">
-                   <input type="text" name="Rate" id="rate" class="form-control">
+                   <input type="text" name="Rate" id="Rate" class="form-control">
                    @error('Rate')
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
                         </span>
 
                     @enderror
+                    <span class="" role="alert">
+                        <small style="color:red" id="rateError"></small>
+                    </span>
                 </div>
             </div>
 
         </div>
-<<<<<<< HEAD
-=======
+
         @if(session('success'))
         <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
         <strong class="text-center">{{ session('success') }}</strong>
@@ -220,15 +234,20 @@
         </button>
     </div>
     @endif
->>>>>>> ba99f21bd903c00185bf0ffc2d99e81d3e02aad8
+    
         <div class="text-center">
-        <button  class="btn form-card-header-custom text-light" id="preview" data-toggle="modal" data-target="#itemCodes" type="button">Display List of Item Codes Created</button>
-        <button type="submit" class="btn form-card-header-custom text-light" type="button">Save Item Details</button>
+    
+    
+    {{ csrf_field() }}
+        
+        <button type="submit" class="btn form-card-header-custom text-light" type="button" name="action" value="save">Save Item Details</button>
+        <button class="btn form-card-header-custom text-light" id="preview" data-target="#itemCodes" type="button">show Item Details</button>
         </div>
     </form>
-    {{ csrf_field() }}
+ 
     </div>
     </div>
+    
     <div class="container-fluid pt-2 pl-4">
             <div class="modal fade  ml-5" style="top:10%" id="itemCodes" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                     <div class="modal-dialog ">
@@ -238,23 +257,22 @@
                        </div>
                         <div class="modal-body">
                            <table class="w-100">
+                                
+       
+                           <tboday id="itemCode" class="w-100 p-3">
 
-<<<<<<< HEAD
-                               <tboday id="itemCode" class="w-100 p-3">
+                            </tboday>
 
-                               </tboday>
-=======
-                               <ul id="itemCode" class="w-100 p-3">
+                            <ul id="itemCode" class="w-100 p-3">    
+                            </ul>
 
-                               </ul>
->>>>>>> ba99f21bd903c00185bf0ffc2d99e81d3e02aad8
                            </table>
                         </div>
                         </div>
                     </div>
                 </div>
     </div>
-
+    
 
 
 @endsection
