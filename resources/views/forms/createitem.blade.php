@@ -10,6 +10,7 @@
     <div class="card w-75  item-create">
           <h5 class="card-header form-card-header-custom"><strong class="text-light"> Add Item Form</strong></h5>
     <div class="card-body">
+    
     <form action="{{ route('item.store') }}" method="POST">
     @csrf
 
@@ -241,7 +242,7 @@
     {{ csrf_field() }}
         
         <button type="submit" class="btn form-card-header-custom text-light" type="button" name="action" value="save">Save Item Details</button>
-        <button class="btn form-card-header-custom text-light" id="preview" data-target="#itemCodes" type="button">show Item Details</button>
+        <button class="btn form-card-header-custom text-light" id="preview" data-target="#itemCodes" type="button">show Item codes</button>
         </div>
     </form>
  

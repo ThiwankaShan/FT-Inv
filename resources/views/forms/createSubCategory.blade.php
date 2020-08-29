@@ -5,8 +5,9 @@
     <a class="btn btn-dark text-white" href="/item/create">Back</a>
 </div>
 
-<div class='container'>
+<div class="card w-75  item-create">
 <h5 class="form-card-header-custom text-white p-3"><strong class="text-light">Add New Sub Category</strong></h5>
+<div class="card-body">
 <form action="{{ route('subcategory.store') }}" class=" form-align-custom" method="POST">
 @csrf
 @if (session('success'))
@@ -52,6 +53,7 @@
   <button type="submit" class="btn form-card-header-custom text-light ">Create</button>
 </div>
 </form>
+</div>
 </div>
 
 

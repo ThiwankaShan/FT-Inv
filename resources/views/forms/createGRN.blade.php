@@ -5,8 +5,11 @@
 <div class="container-fluid ">
     <a class="btn btn-dark text-white" href="/item/create">Back</a>
 </div>
-<div class='container'>
+
+<div class='card w-75  item-create'>
 <h5 class="form-card-header-custom text-white p-3">Add New GRN</h5>
+
+<div class="card-body">
 <form action="{{ route('grn.store') }}" method="POST" class="form-align-custom">
 @csrf
 @if (session('success'))
@@ -63,7 +66,9 @@
 <div class="text-center">
   <button type="submit" class="btn form-card-header-custom text-light">Create</button>
 </div>
+
 </form>
+</div>
 </div>
 
 

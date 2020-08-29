@@ -86,8 +86,9 @@ class ItemController extends Controller
          $scname=$request->subCategory;
          $vat = $request->Vat;
          $rate = $request->Rate;
-         $sub = $request->sub_item;   
-         
+         $sub = $request->sub_item;  
+
+         error_log($sub);
 
          //get the quantity
          $count=$request->Quantity;
@@ -110,6 +111,7 @@ class ItemController extends Controller
                     for($j=0;$j<=$sub;$j++){
                         $filter = new IntToRoman();
                         $subNum = $filter->filter($j);
+                        error_log($subNum);
                         $fnumber=sprintf('%03d',$num);
                         $itemCode='FT'.'/'.$lname.'/'.$slname.'/'.$cname.'/'.$scname.'/'.$fnumber.'/'.$subNum;
                         array_push($itemCodes,$itemCode);
@@ -123,7 +125,7 @@ class ItemController extends Controller
                 
                
             for($num=$i+1;$num<$count+$i+1;$num++){
-                for($j=0;$j<=$sub;$j++){
+                for($j=1;$j<=$sub;$j++){
            $item=new Items();
 
             $filter = new IntToRoman();

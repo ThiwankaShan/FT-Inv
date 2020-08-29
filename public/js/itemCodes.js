@@ -5,6 +5,7 @@ $(document).on("click","#preview",function(){
     var category = $('#category').val();
     var subcategory = $('#subcategory').val();
     var no_of_items = $('#noItems').val();
+    var no_sub_items=$('#NoSub').val();
     var Vat=$('#Vat').val();
     var rate= $('#Rate').val();
     var procument_id=$('#procument_id').val();
@@ -21,6 +22,7 @@ $(document).on("click","#preview",function(){
             category: category,
             subCategory: subcategory,
             Quantity: no_of_items,
+            sub_item:no_sub_items,
             action: action,
             Vat:Vat,
             Rate:rate,
