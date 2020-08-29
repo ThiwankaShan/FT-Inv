@@ -108,7 +108,7 @@ class ItemController extends Controller
                
                 for($num=$i+1;$num<$count+$i+1;$num++){
 
-                    for($j=1;$j<=$sub;$j++){
+                    for($j=0;$j<=$sub;$j++){
                         $filter = new IntToRoman();
                         $subNum = $filter->filter($j);
                         error_log($subNum);
@@ -125,7 +125,7 @@ class ItemController extends Controller
                 
                
             for($num=$i+1;$num<$count+$i+1;$num++){
-                for($j=0;$j<=$sub;$j++){
+                for($j=1;$j<=$sub;$j++){
            $item=new Items();
 
             $filter = new IntToRoman();
