@@ -6,13 +6,9 @@
 </div>
 <hr>
 <div class='container'>
-<<<<<<< HEAD
-<h5 class="form-card-header-custom text-white p-3"><strong class="text-light">Add New Sub Category</strong></h5>
-=======
 
 <h5 class="form-card-header-custom text-white p-3">Add New Category</h5>
 
->>>>>>> development
 <form action="{{ route('category.store') }} " class="form-align-custom" method="POST">
 @csrf
 @if (session('success'))
