@@ -4,7 +4,7 @@
 <div class="container-fluid ">
     <a class="btn btn-dark text-white" href="/item/create">Back</a>
 </div>
-<div class="container">
+<div class="card w-75  item-create">
 
 
 @if (session('status'))
@@ -18,7 +18,7 @@
                     </span>
                     @endif
   <h5 class="form-card-header-custom text-white p-3"><strong class="text-light">Add New Location</strong></h5>
-  <div>
+  <div class="card-body">
     <form method="post" action="{{route('location.store')}}" class="form-align-custom">
     @csrf
 <label for="location_code">Location Code</label>
@@ -35,6 +35,7 @@
 <button type="submit" class="btn btn-primary form-card-header-custom text-light mt-4">Create</button>
                                 </div>
     </form>
+    </div>
 
   </div>
 </div>

@@ -7,13 +7,14 @@
 </div>
 <hr>
 
-<div class="card container">
+<div class="card w-75  item-create">
   <div class="card-header form-card-header-custom">
     <h5 class="text-center form-card-header-custom"><strong class="text-light">Add New Supplier</strong></h5>
   </div>
+  <div class="card-body">
   <form action="{{route('supplier.store')}}" method="post">
       @csrf
-  <div class="card-body">
+ 
     <div class="form-group row">
         <label for="SupplierCode" class="col-sm-2 col-form-label">Supplier Code</label>
         <div class="col-sm-10">
@@ -97,8 +98,9 @@
     <div class="text-center">
     <button href="" class="btn form-tab-custom bg-color-custom text-light form-card-header-custom "  type="submit">Save Supplier Details</button>
     </div>
-  </div>
+ 
   </form>
+  </div>
 </div>
 
 @endsection
