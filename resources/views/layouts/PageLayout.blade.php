@@ -97,7 +97,7 @@
                 <div class="sideBar">
                     <img src="/images/default.jpg" alt="profile image" class="pimage ml-5 mt-4 mb-2" style="width:100px; height:100px; border-radius:50%; transition: linear .5s;">
                    
-                    <h3 class="text-center text-white  mb-2 userName">{{Auth::user()->name}}</h3>
+                    <h3 class="ml-5 text-white  mb-2 userName">{{Auth::user()->name}}</h3>
                   <hr>
                     <ul class="navbar-nav">
                         <li class="nav-item"><a href="/" class="nav-link sideBarLink "><i class="fa fa-home mx-2 sideBar-icon" aria-hidden="true"></i><span class="textLink ml-1">Home</span></a></li>
