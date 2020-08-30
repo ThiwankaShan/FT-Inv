@@ -88,7 +88,7 @@ class ItemController extends Controller
          $rate = $request->Rate;
          $sub = $request->sub_item;  
 
-         error_log($sub);
+         
 
          //get the quantity
          $count=$request->Quantity;
@@ -104,26 +104,32 @@ class ItemController extends Controller
 
             $itemCodes=[];
             if($request->action=='show'){
-        
-               
+         
+           
                 for($num=$i+1;$num<$count+$i+1;$num++){
-
-                    for($j=0;$j<=$sub;$j++){
+                    if($sub != 0){
+                    for($j=1;$j<=$sub;$j++){
                         $filter = new IntToRoman();
                         $subNum = $filter->filter($j);
-                        error_log($subNum);
+                       
                         $fnumber=sprintf('%03d',$num);
                         $itemCode='FT'.'/'.$lname.'/'.$slname.'/'.$cname.'/'.$scname.'/'.$fnumber.'/'.$subNum;
                         array_push($itemCodes,$itemCode);
                     
                 }
+            }else{
+                $fnumber=sprintf('%03d',$num);
+                $itemCode='FT'.'/'.$lname.'/'.$slname.'/'.$cname.'/'.$scname.'/'.$fnumber;
+                array_push($itemCodes,$itemCode);
+
+            }
             }
             
                 return json_encode($itemCodes);
 
             }else{
                 
-             error_log($sub);  
+           
            if($sub != 0){
             for($num=$i+1;$num<$count+$i+1;$num++){
                 for($j=1;$j<=$sub;$j++){
@@ -151,7 +157,7 @@ class ItemController extends Controller
           }
         }
            }else if($sub == 0){
-               error_log("came inside else");
+               
             for($num=$i+1;$num<$count+$i+1;$num++){
                 $item=new Items();
                $fnumber=sprintf('%03d',$num);
