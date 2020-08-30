@@ -1,0 +1,73 @@
+.bg-color-custom{
+    background-color:#C21E56 !important;
+}
+
+
+.form-card-header-custom
+{
+    background-color:#691330 !important;
+}
+.card-border-custom{
+    border:1px #691330 solid !important;
+}
+.form-tab-custom:hover
+{
+    border-color: #691330 !important;
+
+}
+.form-tab-custom:focus
+{
+    transition: #691330 0.15s ease-in-out, box-shadow 0.15s ease-in-out !important;
+
+}
+.form-tab-custom:active
+{
+    transition: #691330 0.15s ease-in-out, box-shadow 0.15s ease-in-out !important;
+
+}
+
+.btn{
+    color:black !important;
+}
+
+.list-group-item{
+    cursor: pointer;
+}
+.margin-custom{
+    margin-left: 0px !important;
+}
+
+.form-custom{
+
+    width:54% !important;
+
+
+}
+
+.form-align-custom{
+margin-left: 30%;
+
+}
+
+.textLink{
+    color:white !important;
+}
+
+.sideBar-icon{
+    color:white !important;
+}
+
+.sideMenu{
+    background-color: #691330 !important;
+}
+
+.navbar{
+    background-color: #691330 !important;
+}
+
+.button-style{
+    background-color: #691330 !important;
+    color: aliceblue !important;
+    font-weight: 700 !important;
+}
+

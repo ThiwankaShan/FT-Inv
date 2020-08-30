@@ -1,0 +1,84 @@
+.navbar{
+    z-index: 5000;
+}
+.wrapper{
+    margin-top:50px;
+}
+.sideMenu{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    margin: 50px  0 0 0 ;
+    width: 250px;
+   transition: linear .5s;
+    transform: translateX(-100%);
+    z-index: 2000;
+    background-color: #333333;
+}
+.content{
+    width: 100%;
+    margin-left: 0;
+    transition: linear .5s;
+}
+
+@media(min-width: 992px){
+    .sideMenu{
+        transform: translateX(0);
+    }
+    .content{
+        margin-left: 300px;
+    }
+    .sideMenu_1{
+        width: 80px;
+    }
+    .content_1{
+        margin-left:80px;
+    }
+    .text1{
+        display: none;
+    }
+    .navLink{
+        text-align: center;
+    }
+}
+.nav-link{
+    text-decoration: none;
+    display: block;
+    color: #808080;
+    font-weight: bold;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.fa{
+    font-size: 30px;  
+    vertical-align: middle;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    color: #4d4d4d;
+    width: 25px;
+}
+.nav-link:hover{
+    background-color:#262626;
+}
+.nav-link:hover .fa,
+.nav-link:hover .textLink{
+   color: #cc0066;
+}
+.sideMenu_2{
+    transform: translateX(0);
+}
+.profile_img{
+    
+  display:none;
+}
+.uname{
+    display: none;
+}
+.item-create{
+    left: 50%;
+    transform: translate( -50%);
+}
+.active{
+    background-color:#262626;
+}
