@@ -20,7 +20,6 @@ class CreateItemQuantitiesTable extends Migration
             $table->string('subLocation_code');
             $table->string('category_code');
             $table->string('subCategory_code');
-            $table->string('num_of_sub_items');
             $table->string('type');
             $table->string('GRN_no');
             $table->float('vat');

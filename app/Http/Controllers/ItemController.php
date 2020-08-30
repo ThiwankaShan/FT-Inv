@@ -70,7 +70,7 @@ class ItemController extends Controller
         $this->validate($request, [
             'Location'=>'required|string',
             'subLocation'=>'required|string',
-            'sub_item' => 'integer|nullable',
+            'sub_item' => 'integer',
             'procument_id' => 'string|nullable',
             'Quantity' => 'required|integer',
             'Vat' => 'required',
@@ -86,7 +86,8 @@ class ItemController extends Controller
          $scname=$request->subCategory;
          $vat = $request->Vat;
          $rate = $request->Rate;
-         $sub = $request->sub_item;   
+         $sub = $request->sub_item;  
+
          
 
          //get the quantity
@@ -103,27 +104,35 @@ class ItemController extends Controller
 
             $itemCodes=[];
             if($request->action=='show'){
-        
-               
+         
+           
                 for($num=$i+1;$num<$count+$i+1;$num++){
-
-                    for($j=0;$j<=$sub;$j++){
+                    if($sub != 0){
+                    for($j=1;$j<=$sub;$j++){
                         $filter = new IntToRoman();
                         $subNum = $filter->filter($j);
+                       
                         $fnumber=sprintf('%03d',$num);
                         $itemCode='FT'.'/'.$lname.'/'.$slname.'/'.$cname.'/'.$scname.'/'.$fnumber.'/'.$subNum;
                         array_push($itemCodes,$itemCode);
                     
                 }
+            }else{
+                $fnumber=sprintf('%03d',$num);
+                $itemCode='FT'.'/'.$lname.'/'.$slname.'/'.$cname.'/'.$scname.'/'.$fnumber;
+                array_push($itemCodes,$itemCode);
+
+            }
             }
             
                 return json_encode($itemCodes);
 
             }else{
                 
-               
+           
+           if($sub != 0){
             for($num=$i+1;$num<$count+$i+1;$num++){
-                for($j=0;$j<=$sub;$j++){
+                for($j=1;$j<=$sub;$j++){
            $item=new Items();
 
             $filter = new IntToRoman();
@@ -138,7 +147,7 @@ class ItemController extends Controller
            $item->category_code=$cname;
            $item->subCategory_code=$scname;
            $item->type=$request->types;
-           $item->num_of_sub_items=$request->sub_item;
+           
            $item->GRN_no=$request->grn_no;
            $item->vat = $vat;
            $item->procurement_id = $request->procument_id;
@@ -147,6 +156,27 @@ class ItemController extends Controller
            $item->save();
           }
         }
+           }else if($sub == 0){
+               
+            for($num=$i+1;$num<$count+$i+1;$num++){
+                $item=new Items();
+               $fnumber=sprintf('%03d',$num);
+               
+               $item->item_code='FT'.'/'.$lname.'/'.$slname.'/'.$cname.'/'.$scname.'/'.$fnumber;
+               $item->Location_code=$lname;
+               $item->subLocation_code=$slname;
+               $item->category_code=$cname;
+               $item->subCategory_code=$scname;
+               $item->type=$request->types;
+              
+               $item->GRN_no=$request->grn_no;
+               $item->vat = $vat;
+               $item->procurement_id = $request->procument_id;
+               $item->rate = $request->Rate;
+               $item->vat_rate_vat = ($vat*$rate);
+               $item->save();
+            }
+           }
           return back()->with('success','Items Saved Successfuly!');
         }
     }

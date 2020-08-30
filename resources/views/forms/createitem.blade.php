@@ -10,6 +10,7 @@
     <div class="card w-75  item-create">
           <h5 class="card-header form-card-header-custom"><strong class="text-light"> Add Item Form</strong></h5>
     <div class="card-body">
+    
     <form action="{{ route('item.store') }}" method="POST">
     @csrf
 
@@ -35,7 +36,7 @@
                 </div>
             </div>
             <div class="col-3">
-                <a class="btn btn-warning text-danger form-control"  href="{{route('location.insert')}}" class="button">Add New Location</a>
+                <a class="btn form-control button-style"  href="{{route('location.insert')}}" class="button">Add New Location</a>
             </div>
         </div>
 
@@ -54,7 +55,7 @@
                 </div>
             </div>
             <div class="col-3">
-                <a class="btn btn-warning text-danger form-control"  href="{{route('sublocation.index')}}" class="button">Add New Sub Location</a>
+                <a class="btn button-style form-control"  href="{{route('sublocation.index')}}" class="button">Add New Sub Location</a>
             </div>
         </div>
         <div class="form-group row">
@@ -79,7 +80,7 @@
                 </div>
             </div>
             <div class="col-3">
-                <a class="btn btn-warning text-danger form-control"  href="{{route('category.index')}}" class="button">Add New Category</a>
+                <a class="btn button-style form-control"  href="{{route('category.index')}}" class="button">Add New Category</a>
             </div>
         </div>
 
@@ -99,7 +100,7 @@
              </div>
            </div>
            <div class="col-3">
-                <a class="btn btn-warning text-danger form-control"  href="{{route('subcategory.index')}}" class="button">Add New Sub Category</a>
+                <a class="btn button-style form-control"  href="{{route('subcategory.index')}}" class="button">Add New Sub Category</a>
             </div>
         </div>
 
@@ -158,7 +159,7 @@
 
                 
 
-                <a class="btn btn-warning text-danger form-control" href="{{route('grn.index')}}" class="button">Add New GRN</a>
+                <a class="btn button-style form-control" href="{{route('grn.index')}}" class="button">Add New GRN</a>
 
             </div>
         </div>
@@ -241,7 +242,7 @@
     {{ csrf_field() }}
         
         <button type="submit" class="btn form-card-header-custom text-light" type="button" name="action" value="save">Save Item Details</button>
-        <button class="btn form-card-header-custom text-light" id="preview" data-target="#itemCodes" type="button">show Item Details</button>
+        <button class="btn form-card-header-custom text-light" id="preview" data-target="#itemCodes" type="button">show Item codes</button>
         </div>
     </form>
  
