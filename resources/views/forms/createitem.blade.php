@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div class="col-3">
-                <a class="btn btn-warning text-danger form-control"  href="{{route('location.insert')}}" class="button">Add New Location</a>
+                <a class="btn form-control button-style"  href="{{route('location.insert')}}" class="button">Add New Location</a>
             </div>
         </div>
 
@@ -55,7 +55,7 @@
                 </div>
             </div>
             <div class="col-3">
-                <a class="btn btn-warning text-danger form-control"  href="{{route('sublocation.index')}}" class="button">Add New Sub Location</a>
+                <a class="btn button-style form-control"  href="{{route('sublocation.index')}}" class="button">Add New Sub Location</a>
             </div>
         </div>
         <div class="form-group row">
@@ -80,7 +80,7 @@
                 </div>
             </div>
             <div class="col-3">
-                <a class="btn btn-warning text-danger form-control"  href="{{route('category.index')}}" class="button">Add New Category</a>
+                <a class="btn button-style form-control"  href="{{route('category.index')}}" class="button">Add New Category</a>
             </div>
         </div>
 
@@ -100,7 +100,7 @@
              </div>
            </div>
            <div class="col-3">
-                <a class="btn btn-warning text-danger form-control"  href="{{route('subcategory.index')}}" class="button">Add New Sub Category</a>
+                <a class="btn button-style form-control"  href="{{route('subcategory.index')}}" class="button">Add New Sub Category</a>
             </div>
         </div>
 
@@ -159,7 +159,7 @@
 
                 
 
-                <a class="btn btn-warning text-danger form-control" href="{{route('grn.index')}}" class="button">Add New GRN</a>
+                <a class="btn button-style form-control" href="{{route('grn.index')}}" class="button">Add New GRN</a>
 
             </div>
         </div>
