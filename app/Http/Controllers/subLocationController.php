@@ -20,8 +20,8 @@ class subLocationController extends Controller
     public function index()
     {
         $Locations = Location::all();
-       
-        return view('forms.createSubLocation',compact('Locations'));
+
+        return view('forms.createSubLocation', compact('Locations'));
     }
 
     /**
@@ -31,7 +31,7 @@ class subLocationController extends Controller
      */
     public function create()
     {
-       //
+        //
     }
 
     /**
@@ -42,18 +42,18 @@ class subLocationController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $validatedData = $request->validate([
             'subLocation_name' => 'required|unique:sub_locations',
             'subLocation_code' => 'required|unique:sub_locations',
         ]);
-        
-        $subLocation=new SubLocation;
-        $subLocation->Location_code=$request->Location_code;
-        $subLocation->subLocation_name=$request->subLocation_name;
-        $subLocation->subLocation_code=$request->subLocation_code;
+
+        $subLocation = new SubLocation;
+        $subLocation->Location_code = $request->Location_code;
+        $subLocation->subLocation_name = $request->subLocation_name;
+        $subLocation->subLocation_code = $request->subLocation_code;
         $subLocation->save();
-        return redirect('/sublocation')->with('success',"Created successfully");
+        return redirect('/sublocation')->with('success', "Created successfully");
     }
 
     /**
