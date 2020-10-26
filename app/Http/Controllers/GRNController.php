@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Supplier;
 use App\Grn;
+
 class GRNController extends Controller
 {
     /**
@@ -14,18 +15,17 @@ class GRNController extends Controller
      */
     public function index()
     {
-        $last_grnNo=Grn::latest('GRN_no')->first();
+        $last_grnNo = Grn::latest('GRN_no')->first();
         error_log($last_grnNo);
-        if($last_grnNo==''){
-            $suggest_grnNo='01';
+        if ($last_grnNo == '') {
+            $suggest_grnNo = '01';
+        } else {
+            $suggest_grnNo = sprintf('%02d', $last_grnNo->GRN_no + 1);
         }
-        else{
-            $suggest_grnNo=sprintf('%02d',$last_grnNo->GRN_no+1);
-        }
-        
-        
-        $Suppliers=Supplier::all();
-        return view('forms.createGRN',compact('Suppliers','suggest_grnNo'));
+
+
+        $Suppliers = Supplier::all();
+        return view('forms.createGRN', compact('Suppliers', 'suggest_grnNo'));
     }
 
     /**
@@ -46,7 +46,7 @@ class GRNController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedata=$request->validate([
+        $validatedata = $request->validate([
             'GRN_no' => 'required|numeric|unique:grns',
             'GRN_date' => 'required',
             'invoice_no' => 'required|unique:grns',
@@ -54,16 +54,16 @@ class GRNController extends Controller
             'supplier_code' => 'required',
         ]);
 
-        $grn=new Grn();
-        $grn->GRN_no=$request->GRN_no;
-        $grn->GRN_date=$request->GRN_date;
-        $grn->invoice_no=$request->invoice_no;
-        $grn->invoice_date=$request->invoice_date;
-        $grn->supplier_code=$request->supplier_code;
-        
+        $grn = new Grn();
+        $grn->GRN_no = $request->GRN_no;
+        $grn->GRN_date = $request->GRN_date;
+        $grn->invoice_no = $request->invoice_no;
+        $grn->invoice_date = $request->invoice_date;
+        $grn->supplier_code = $request->supplier_code;
+
         $grn->save();
 
-        return redirect('/grn')->with('success','Created successfully');
+        return redirect('/grn')->with('success', 'Created successfully');
     }
 
     /**

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Category;
 
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-         
+
         return view('forms.createCategory');
     }
 
@@ -30,7 +31,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-       //
+        //
     }
 
     /**
@@ -41,18 +42,17 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-            
+
         $validatedData = $request->validate([
             'category_name' => 'required|unique:categories',
             'category_code' => 'required|unique:categories',
         ]);
-    
-        $category=new Category;
-        $category->category_name=$request->category_name;
-        $category->category_code=$request->category_code;
+
+        $category = new Category;
+        $category->category_name = $request->category_name;
+        $category->category_code = $request->category_code;
         $category->save();
-        return redirect('/category')->with('success',"Created successfully");
- 
+        return redirect('/category')->with('success', "Created successfully");
     }
 
     /**
