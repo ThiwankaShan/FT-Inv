@@ -15,8 +15,8 @@ class SubLocation extends Model
     ];
 
     protected $primaryKey = 'subLocation_code';
-    public $incrementing=false;
-    protected $keyType="string";
+    public $incrementing = false;
+    protected $keyType = "string";
 
     ///creating the relation between Division And subLocation
     public function division()
