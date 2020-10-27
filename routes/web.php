@@ -21,13 +21,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('/user', 'UserController');
 
+Route::resource('/user', 'UserController');
 Route::resource('/item', 'ItemController');
+Route::get('/item/edit/{item?}', 'ItemController@edit')->where('item','(.*)');
 
 
 Route::post('/home', 'LiveSearchController@autofill')->name('liveSearch');
 Route::post('/search', 'SearchController@search')->name('search');
+
 Route::post('/ajax/division', 'AjaxController@getSubLocation')->name('ajax.getSubdivision');
 Route::post('/ajax/category', 'AjaxController@getSubCategory')->name('ajax.getSubcategory');
 Route::post('/ajax/division', 'AjaxController@getSubLocation')->name('ajax.getSubLocation');
@@ -42,7 +44,6 @@ Route::post('location/store', 'locationController@storeLocation')->name('locatio
 Route::resource('/category', 'CategoryController');
 Route::resource('sublocation', 'subLocationController');
 Route::resource('/subcategory', 'SubCategoryController');
-
 Route::resource('grn', 'GRNController');
 
 

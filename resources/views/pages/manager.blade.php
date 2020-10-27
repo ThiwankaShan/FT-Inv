@@ -18,6 +18,7 @@
                 <th scope="col">Vat Rate</th>
                 <th scope="col">Procurement Id</th>
                 <th scope="col">Rate</th>
+                <th scope="col">Edit</th>
 
             </tr>
         </thead>
@@ -35,6 +36,7 @@
                 <td>{{$item->vat_rate_vat}}</td>
                 <td>{{$item->procurement_id}}</td>
                 <td>{{$item->rate}}</td>
+                <td><a class="btn btn-primary" href="/item/edit/{{$item->item_code}}">edit</a> </td>
             </tr>
             @endforeach
 
