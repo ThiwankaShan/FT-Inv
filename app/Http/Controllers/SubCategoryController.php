@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\SubCategory;
+
 class SubCategoryController extends Controller
 {
     public function __construct()
@@ -18,8 +19,8 @@ class SubCategoryController extends Controller
      */
     public function index()
     {
-        $Categories=Category::all();
-        return view('forms.createSubCategory',compact('Categories'));
+        $Categories = Category::all();
+        return view('forms.createSubCategory', compact('Categories'));
     }
 
     /**
@@ -40,18 +41,18 @@ class SubCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedata=$request->validate([
+        $validatedata = $request->validate([
             'subCategory_name' => 'required|unique:sub_categories',
             'subCategory_code' => 'required|unique:sub_categories',
         ]);
 
-        $subCategory=new SubCategory();
-        $subCategory->category_code=$request->Category_code;
-        $subCategory->subCategory_name=$request->subCategory_name;
-        $subCategory->subCategory_code=$request->subCategory_code;
+        $subCategory = new SubCategory();
+        $subCategory->category_code = $request->Category_code;
+        $subCategory->subCategory_name = $request->subCategory_name;
+        $subCategory->subCategory_code = $request->subCategory_code;
 
         $subCategory->save();
-        return redirect('/subcategory')->with('success','created sucessfully');
+        return redirect('/subcategory')->with('success', 'created sucessfully');
     }
 
     /**

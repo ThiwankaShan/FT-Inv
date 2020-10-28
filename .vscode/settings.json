@@ -1,0 +1,15 @@
+{
+    "phpcs.trace.server": "messages",
+    "launch": {
+
+        "configurations": [],
+        "compounds": []
+    },
+    "[json]": {
+    
+        "editor.quickSuggestions": {
+            "strings": true
+        },
+        "editor.suggest.insertMode": "replace"
+    }
+}
