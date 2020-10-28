@@ -194,9 +194,16 @@ class ItemController extends Controller
      * @param  \App\Items  $itemQuantity
      * @return \Illuminate\Http\Response
      */
-    public function edit(Items $itemQuantity)
+    public function edit(Items $item)
     {
-        //
+        error_log($item);
+        $div = Location::all();
+        $subloc = SubLocation::all();
+        $cate = Category::all();
+        $subcate = SubCategory::all();
+        $grn = Grn::all();
+        
+        return view('forms.editItem',compact('div', 'subloc', 'cate', 'subcate', 'grn', 'item'));
     }
 
     /**
@@ -206,9 +213,56 @@ class ItemController extends Controller
      * @param  \App\Items  $itemQuantity
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Items $itemQuantity)
+    public function update(Request $request)
     {
-        //
+        $item=$request->item;
+        $new_location = $request->Location;
+        $new_subLocation = $request->subLocation;
+        $new_category = $request->category;
+        $new_subCategory = $request->subCategory;
+        $new_vat_rate = $request->Vat;
+        $new_rate = $request->Rate;
+        $new_vat=(($new_vat_rate * $new_rate) / 100);
+        $new_grn=$request->grn_no;
+        $new_sub=$request->sub_item;
+
+        $item_num = Items::where('location_code', $request->Location)
+            ->where('subLocation_code', $request->subLocation)
+            ->where('category_code', $request->category)
+            ->where('subCategory_code', $request->subCategory)
+            ->count();
+
+        $i = (int)$item_num;
+
+        if ($new_sub != 0) {
+            $filter = new IntToRoman();
+            $subNum = $filter->filter($j);
+
+            $fnumber = sprintf('%03d', $num);
+            $itemCode = 'FT' . '/' . $new_location . '/' . $new_subLocation . '/' . $new_category . '/' . $new_subCategory . '/' . $fnumber . '/' . $subNum;
+                    
+               
+        } else {
+            $fnumber = sprintf('%03d', $i+1);
+            $item_code = 'FT' . '/' . $new_location . '/' . $new_subLocation . '/' . $new_category . '/' . $new_subCategory . '/' . $fnumber;
+                
+        }
+        
+
+        DB::table('items')
+            ->where('item_code', $request->item)
+            ->update([
+                'item_code'=>$item_code,
+                'rate' =>$new_rate,
+                'location_code'=>$new_location,
+                'subLocation_code'=>$new_subLocation,
+                "category_code"=>$new_category,
+                "subCategory_code"=>$new_subCategory,
+                "vat_rate_vat"=>$new_vat_rate,
+                'vat'=>$new_vat,
+                ]);
+        return redirect()->route('item.editForm',['item'=>$item_code])->with('success', 'Items updated Successfuly!');
+        
     }
 
     /**
