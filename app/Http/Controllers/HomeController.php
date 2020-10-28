@@ -42,9 +42,11 @@ class HomeController extends Controller
             return view('pages.admin');
         } elseif (Auth::user()->role == "manager") {
 
+            $div = Location::all();
+            $cate = Category::all();
             $items = Items::orderBy('created_at', 'DESC')->paginate(20);
 
-            return view('pages.manager', compact('items'));
+            return view('pages.manager', compact('items','div','cate'));
         } elseif (Auth::user()->role == "user") {
 
             // $div = Location::all();
