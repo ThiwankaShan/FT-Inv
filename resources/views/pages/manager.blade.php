@@ -51,7 +51,9 @@
                 <th scope="col">Vat Rate</th>
                 <th scope="col">Procurement Id</th>
                 <th scope="col">Rate</th>
+                <th scope="col">Edit</th>
                 <th scope="col">Action</th>
+
 
             </tr>
         </thead>
@@ -69,10 +71,8 @@
                 <td>{{$item->vat_rate_vat}}</td>
                 <td>{{$item->procurement_id}}</td>
                 <td>{{$item->rate}}</td>
-                <td class="d-flex flex-row"><a href="" class="btn btn-primary mr-1">View</a>
-                <a href="" class="btn btn-success">Edit</a>
-
-                </td>
+                <td><a class="btn btn-primary" href="/item/edit/{{$item->item_code}}">edit</a> </td>
+                <td class="d-flex flex-row"><a href="" class="btn btn-primary mr-1">View</a></td>
 
             </tr>
             @endforeach
