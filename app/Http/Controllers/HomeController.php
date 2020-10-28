@@ -33,28 +33,25 @@ class HomeController extends Controller
 
         $data = Session::get('key');
 
-        if (Auth::user()->role=="admin") {
+        if (Auth::user()->role == "admin") {
 
             //  $div = Location::all();
             //  $cate = Category::all();
             //  $items=Items::paginate(10);
 
             return view('pages.admin');
+        } elseif (Auth::user()->role == "manager") {
 
-        } elseif (Auth::user()->role=="manager") {
+            $items = Items::orderBy('created_at', 'DESC')->paginate(20);
 
-            $items = Items::orderBy('created_at','DESC')->paginate(20);
-
-      return view('pages.manager',compact('items'));
-      
-        } elseif (Auth::user()->role=="user") {
+            return view('pages.manager', compact('items'));
+        } elseif (Auth::user()->role == "user") {
 
             // $div = Location::all();
             // $cate = Category::all();
             // $items=Items::paginate(10);
 
             return view('pages.user');
-
         } else {
             return view('home');
         }

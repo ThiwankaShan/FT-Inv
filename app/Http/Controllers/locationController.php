@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use DB;
 
 use App\Location;
@@ -23,32 +25,32 @@ class locationController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(){
+    public function index()
+    {
 
         return view('forms.createLocation');
     }
     //validation
-    public function storeLocation(Request $request){
+    public function storeLocation(Request $request)
+    {
         $validatedata = $request->validate([
-			'location_code' => 'required|string|unique:locations',
-			'location_name' => 'required|string|unique:locations',
+            'location_code' => 'required|string|unique:locations',
+            'location_name' => 'required|string|unique:locations',
 
-		]);
+        ]);
 
 
         $data = $request->input();
 
-		try{
-			$location = new Location;
+        try {
+            $location = new Location;
             $location->location_code = $data['location_code'];
             $location->location_name = $data['location_name'];
 
-			$location->save();
-			return redirect('location')->with('status',"Insert successfully");
-		}
-		catch(Exception $e){
-			return redirect('location')->with('failed',"operation failed");
-		}
-
+            $location->save();
+            return redirect('location')->with('status', "Insert successfully");
+        } catch (Exception $e) {
+            return redirect('location')->with('failed', "operation failed");
+        }
     }
 }
