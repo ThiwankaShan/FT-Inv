@@ -28,8 +28,8 @@ Route::resource('/item', 'ItemController');
 
 Route::post('/home', 'LiveSearchController@autofill')->name('liveSearch');
 Route::post('/search', 'SearchController@search')->name('search');
-Route::post('/ajax/division', 'AjaxController@getSubLocation')->name('ajax.getSubdivision');
-Route::post('/ajax/category', 'AjaxController@getSubCategory')->name('ajax.getSubcategory');
+// Route::post('/ajax/division', 'AjaxController@getSubLocation')->name('ajax.getSubdivision');
+// Route::post('/ajax/category', 'AjaxController@getSubCategory')->name('ajax.getSubcategory');
 Route::post('/ajax/division', 'AjaxController@getSubLocation')->name('ajax.getSubLocation');
 Route::post('/ajax/category', 'AjaxController@getSubCategory')->name('ajax.getSubCategory');
 Route::post('/ajax/roman', 'AjaxController@getRomanNumber');
