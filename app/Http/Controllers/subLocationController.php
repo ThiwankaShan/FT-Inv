@@ -1,103 +1,50 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\subLocation;
 use Illuminate\Http\Request;
-use App\SubLocation;
-use App\Location;
+use Illuminate\Support\Facades\Validator;
 
-class subLocationController extends Controller
+class SubLocationController extends Controller
 {
+	
     public function __construct()
     {
         $this->middleware('auth');
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $Locations = Location::all();
 
-        return view('forms.createSubLocation', compact('Locations'));
+    public function insert(){
+
+        return view('pages.user');
     }
+    //validation
+    public function storeSubLocation(Request $request){
+        $rules = [
+			// 'location_code' => 'required|string|unique:locations',
+			// 'location_name' => 'required|string',
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+		];
+		$validator = Validator::make($request->all(),$rules);
+		if ($validator->fails()) {
+			return redirect('insert')
+			->withInput()
+			->withErrors($validator);
+		}
+		else{
+            $data = $request->input();
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
+			try{
+                $sublocation = new subLocation;
+                $sublocation->Location_code = $data['Location_code'];
+                $sublocation->subLocation_code = $data['sub_location_code'];
+                $sublocation->subLocation_name = $data['sub_location_name'];
 
-        $validatedData = $request->validate([
-            'subLocation_name' => 'required|unique:sub_locations',
-            'subLocation_code' => 'required|unique:sub_locations',
-        ]);
-
-        $subLocation = new SubLocation;
-        $subLocation->Location_code = $request->Location_code;
-        $subLocation->subLocation_name = $request->subLocation_name;
-        $subLocation->subLocation_code = $request->subLocation_code;
-        $subLocation->save();
-        return redirect('/sublocation')->with('success', "Created successfully");
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+				$location->save();
+				return redirect('insert')->with('status',"Insert successfully");
+			}
+			catch(Exception $e){
+				return redirect('insert')->with('failed',"operation failed");
+			}
+		}
     }
 }
