@@ -196,6 +196,7 @@ class ItemController extends Controller
      */
     public function edit(Items $item)
     {
+        error_log($item);
         $div = Location::all();
         $subloc = SubLocation::all();
         $cate = Category::all();
@@ -212,9 +213,31 @@ class ItemController extends Controller
      * @param  \App\Items  $itemQuantity
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Items $itemQuantity)
+    public function update(Request $request)
     {
-        //
+        $item=$request->item;
+        $new_location = $request->Location;
+        $new_subLocation = $request->subLocation;
+        $new_category = $request->category;
+        $new_subCategory = $request->subCategory;
+        $new_vat_rate = $request->Vat;
+        $new_rate = $request->Rate;
+        $new_vat=(($vat_rate * $new_rate) / 100);
+        $new_grn=$request->grn_no;
+
+        DB::table('items')
+            ->where('item_code', $request->item)
+            ->update([
+                'rate' =>$new_rate,
+                'location_code'=>$new_location,
+                'subLocation_code'=>$new_subLocation,
+                "category_code"=>$new_category,
+                "subCategory_code"=>$new_subCategory,
+                "vat_rate_vat"=>$new_vat_rate,
+                'vat'=>$new_vat,
+                ]);
+        return back()->with('success', 'Items Updated Successfuly!');
+        
     }
 
     /**

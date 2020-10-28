@@ -25,6 +25,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/user', 'UserController');
 Route::resource('/item', 'ItemController');
 Route::get('/item/edit/{item?}', 'ItemController@edit')->where('item','(.*)');
+Route::post('/item/update/{item?}', 'ItemController@update')->where('item','(.*)');
 
 
 Route::post('/home', 'LiveSearchController@autofill')->name('liveSearch');

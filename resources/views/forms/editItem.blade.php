@@ -11,7 +11,7 @@
     <h5 class="card-header form-card-header-custom"><strong class="text-light"> Update Item Form</strong></h5>
     <div class="card-body">
 
-        <form action="{{ route('item.store') }}" method="POST">
+        <form action="/item/update/{{$item->item_code}}" method="POST">
             @csrf
 
             <div class="form-group row">
