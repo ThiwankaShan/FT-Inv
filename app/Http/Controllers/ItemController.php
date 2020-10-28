@@ -222,12 +222,37 @@ class ItemController extends Controller
         $new_subCategory = $request->subCategory;
         $new_vat_rate = $request->Vat;
         $new_rate = $request->Rate;
-        $new_vat=(($vat_rate * $new_rate) / 100);
+        $new_vat=(($new_vat_rate * $new_rate) / 100);
         $new_grn=$request->grn_no;
+        $new_sub=$request->sub_item;
+
+        $item_num = Items::where('location_code', $request->Location)
+            ->where('subLocation_code', $request->subLocation)
+            ->where('category_code', $request->category)
+            ->where('subCategory_code', $request->subCategory)
+            ->count();
+
+        $i = (int)$item_num;
+
+        if ($new_sub != 0) {
+            $filter = new IntToRoman();
+            $subNum = $filter->filter($j);
+
+            $fnumber = sprintf('%03d', $num);
+            $itemCode = 'FT' . '/' . $new_location . '/' . $new_subLocation . '/' . $new_category . '/' . $new_subCategory . '/' . $fnumber . '/' . $subNum;
+                    
+               
+        } else {
+            $fnumber = sprintf('%03d', $i+1);
+            $item_code = 'FT' . '/' . $new_location . '/' . $new_subLocation . '/' . $new_category . '/' . $new_subCategory . '/' . $fnumber;
+                
+        }
+        
 
         DB::table('items')
             ->where('item_code', $request->item)
             ->update([
+                'item_code'=>$item_code,
                 'rate' =>$new_rate,
                 'location_code'=>$new_location,
                 'subLocation_code'=>$new_subLocation,
@@ -236,7 +261,7 @@ class ItemController extends Controller
                 "vat_rate_vat"=>$new_vat_rate,
                 'vat'=>$new_vat,
                 ]);
-        return back()->with('success', 'Items Updated Successfuly!');
+        return redirect()->route('item.editForm',['item'=>$item_code])->with('success', 'Items updated Successfuly!');
         
     }
 

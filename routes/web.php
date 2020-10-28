@@ -24,7 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/user', 'UserController');
 Route::resource('/item', 'ItemController');
-Route::get('/item/edit/{item?}', 'ItemController@edit')->where('item','(.*)');
+Route::get('/item/edit/{item?}', 'ItemController@edit')->where('item','(.*)')->name('item.editForm');
 Route::post('/item/update/{item?}', 'ItemController@update')->where('item','(.*)');
 
 
