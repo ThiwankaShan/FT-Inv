@@ -271,8 +271,10 @@ class ItemController extends Controller
      * @param  \App\Items  $itemQuantity
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Items $itemQuantity)
+    public function destroy(Items $item)
     {
-        //
+        $item->delete();
+        return redirect()->route('home')
+            ->with('success', 'item deleted successfully');
     }
 }
