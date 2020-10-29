@@ -26,7 +26,7 @@ Route::resource('/user', 'UserController');
 Route::resource('/item', 'ItemController');
 Route::get('/item/edit/{item?}', 'ItemController@edit')->where('item','(.*)')->name('item.editForm');
 Route::post('/item/update/{item?}', 'ItemController@update')->where('item','(.*)');
-
+Route::delete('/item/delete/{item?}', 'ItemController@destroy')->where('item', '(.*)')->name('item.destroy');
 
 Route::post('/home', 'LiveSearchController@autofill')->name('liveSearch');
 Route::post('/search', 'SearchController@search')->name('search');

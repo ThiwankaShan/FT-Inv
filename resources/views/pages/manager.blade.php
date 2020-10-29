@@ -53,6 +53,7 @@
                 <th scope="col">Rate</th>
                 <th scope="col">Edit</th>
                 <th scope="col">Action</th>
+                <th scope="col">Delete</th>
 
 
             </tr>
@@ -73,6 +74,15 @@
                 <td>{{$item->rate}}</td>
                 <td><a class="btn btn-primary" href="/item/edit/{{$item->item_code}}">edit</a> </td>
                 <td class="d-flex flex-row"><a href="" class="btn btn-primary mr-1">View</a></td>
+                <td>
+                    <form action="{{ route('item.destroy',$item->item_code) }}" class=" form-align-custom" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class=" btn btn-danger text-light">Delete</button>
+
+                    </form>
+
+                </td>
 
             </tr>
             @endforeach
