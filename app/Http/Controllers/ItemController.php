@@ -98,9 +98,16 @@ class ItemController extends Controller
             ->where('subLocation_code', $request->subLocation)
             ->where('category_code', $request->category)
             ->where('subCategory_code', $scname)
-            ->count();
-
-        $i = (int)$item;
+            ->orderBy('created_at','asc')->get();
+        
+           
+         if(count($item) > 0){
+            $latestItemNum =  preg_split("#/#", $item->last()->item_code);    
+            $i = (int)$latestItemNum[5];
+           
+        }    else{
+            $i = 0;
+        }
 
         $itemCodes = [];
         if ($request->action == 'show') {
