@@ -6,31 +6,45 @@
 <div class="card">
     <div class="card-header pr-0">
     <form action="" class="ml-0 mt-4 form-inline">
-        <select class="form-control selector mr-4 mb-1" id="division" name="division" data-column="0">
+        <select class="form-control selector mr-2 mb-1" id="division" name="division" data-column="0">
             <option value="">Select Location</option>
             @foreach($div as $division)
             <option value="{{$division->location_code}}">{{$division->location_name}}</option>
             @endforeach
         </select>
 
-        <select class="form-control selector mr-4 mb-1" id="subDivision" name="subDivision" data-column="1">
+        <select class="form-control selector mr-2 mb-1" id="subDivision" name="subDivision" data-column="1">
             <option value="">Select Sub Location</option>
 
         </select>
 
-        <select class="form-control selector mr-4 mb-1" id="category" name="category" data-column="2">
+        <select class="form-control selector mr-2 mb-1" id="category" name="category" data-column="2">
             <option value="">Select Category</option>
             @foreach($cate as $category)
             <option value="{{$category->category_code}}">{{$category->category_name}}</option>
             @endforeach
         </select>
 
-        <select class="form-control selector mr-4 mb-1" id="subCategory" name="subCategory" data-column="3">
+        <select class="form-control selector mr-2 mb-1" id="subCategory" name="subCategory" data-column="3">
             <option value="000">Select Sub Category</option>
 
         </select>
 
-        <button class="btn btn-outline-success  px-5" id="filter" type='button'>Filter</button>
+        <select class="form-control selector mr-2 mb-1" id="Type" name="subCategory" data-column="4">
+            <option value="">Select Type</option>
+            <option value="Asset">Asset</option>
+            <option value="Consumable">Consumable</option>
+
+        </select>
+
+        <select class="form-control selector mr-2 mb-1" id="ProID" name="subCategory" data-column="5">
+            <option value="">Select Procurement ID</option>
+             @foreach($proId as $pId)
+             <option value="{{$pId->procurement_id}}">{{$pId->procurement_id}}</option>
+             @endforeach
+        </select>
+
+        <button class="btn btn-outline-success  px-1" id="filter" type='button'>Filter</button>
 
     </form>
 
@@ -51,9 +65,7 @@
                 <th scope="col">Vat Rate</th>
                 <th scope="col">Procurement Id</th>
                 <th scope="col">Rate</th>
-                <th scope="col">Edit</th>
-                <th scope="col">Action</th>
-                <th scope="col">Delete</th>
+                <th scope="col" class="text-center">Action</th>
 
 
             </tr>
@@ -72,16 +84,16 @@
                 <td>{{$item->vat_rate_vat}}</td>
                 <td>{{$item->procurement_id}}</td>
                 <td>{{$item->rate}}</td>
-                <td><a class="btn btn-primary" href="/item/edit/{{$item->item_code}}">edit</a> </td>
-                <td class="d-flex flex-row"><a href="" class="btn btn-primary mr-1">View</a></td>
-                <td>
+                <td class="d-flex flex-row"><a href="" class="btn btn-secondary mr-1">View</a>   
+                <a class="btn btn-primary mr-1" href="/item/edit/{{$item->item_code}}">Edit</a> 
+                
                     <!-- <form data-action="{{ route('item.destroy',$item->item_code) }}" class=" form-align-custom delete-confirm" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class=" btn btn-danger text-light">Delete</button>
 
                     </form> -->
-                    <button type="submit" class=" btn btn-danger text-light delete-confirm form-align-custom" data-action="{{ route('item.destroy',$item->item_code) }}" data-id="$item->item_code"></data-id>Delete</button>
+                   
 
                 </td>
 

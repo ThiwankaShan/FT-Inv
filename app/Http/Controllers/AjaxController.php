@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Auth;
 use DB;
 use App\Category;
 use App\Location;
@@ -29,15 +29,16 @@ class AjaxController extends Controller
 
     public function getFilter(Request $request)
     {
+         $data = DB::table('items')       
+             ->orwhere('Location_code',$request->div )
+             ->orwhere('subLocation_code',$request->subdiv)
+             ->orwhere('category_code', $request->cate)
+             ->orwhere('subCategory_code',$request->subcate)
+             ->orwhere('type',$request->type)
+             ->orwhere('procurement_id',$request->pid)
+             ->get();
 
-        $data = DB::table('items')
-            ->where('Location_code', $request->div)
-            ->where('subLocation_code', $request->subdiv)
-            ->where('category_code', $request->cate)
-            ->where('subCategory_code', $request->subcate)
-            ->get();
-
-        return response()->json($data);
+        return response()->json(['authType'=>Auth::user()->role,'records'=>$data]);
     }
 
     public function getRomanNumber(Request $request)
