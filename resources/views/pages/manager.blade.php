@@ -75,12 +75,13 @@
                 <td><a class="btn btn-primary" href="/item/edit/{{$item->item_code}}">edit</a> </td>
                 <td class="d-flex flex-row"><a href="" class="btn btn-primary mr-1">View</a></td>
                 <td>
-                    <form action="{{ route('item.destroy',$item->item_code) }}" class=" form-align-custom" method="POST">
+                    <!-- <form data-action="{{ route('item.destroy',$item->item_code) }}" class=" form-align-custom delete-confirm" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class=" btn btn-danger text-light">Delete</button>
 
-                    </form>
+                    </form> -->
+                    <button type="submit" class=" btn btn-danger text-light delete-confirm form-align-custom" data-action="{{ route('item.destroy',$item->item_code) }}" data-id="$item->item_code"></data-id>Delete</button>
 
                 </td>
 
@@ -93,5 +94,7 @@
 
     </div>
  </div>
+
  </div>
 @endsection
+
