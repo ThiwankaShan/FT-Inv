@@ -6,46 +6,46 @@
 <div class="card">
     <div class="card-header pr-0">
     <form action="" class="ml-0 mt-4 form-inline">
-        <select class="form-control selector mr-2 mb-1" id="division" name="division" data-column="0">
-            <option value="">Select Location</option>
+        <select class="form-control selector mr-2 mb-1 diseble2 diseble3 diseble4" id="division" name="division" data-column="0">
+            <option value=""> Location</option>
             @foreach($div as $division)
             <option value="{{$division->location_code}}">{{$division->location_name}}</option>
             @endforeach
         </select>
 
-        <select class="form-control selector mr-2 mb-1" id="subDivision" name="subDivision" data-column="1">
-            <option value="">Select Sub Location</option>
+        <select class="form-control selector mr-2 mb-1 diseble2 diseble3 diseble4" id="subDivision" name="subDivision" data-column="1">
+            <option value=""> Sub Location</option>
 
         </select>
 
-        <select class="form-control selector mr-2 mb-1" id="category" name="category" data-column="2">
-            <option value="">Select Category</option>
+        <select class="form-control selector mr-2 mb-1 diseble1 diseble3 diseble4" id="category" name="category" data-column="2">
+            <option value=""> Category</option>
             @foreach($cate as $category)
             <option value="{{$category->category_code}}">{{$category->category_name}}</option>
             @endforeach
         </select>
 
-        <select class="form-control selector mr-2 mb-1" id="subCategory" name="subCategory" data-column="3">
-            <option value="000">Select Sub Category</option>
+        <select class="form-control selector mr-2 mb-1 diseble1 diseble3 diseble4" id="subCategory" name="subCategory" data-column="3">
+            <option value="000"> Sub Category</option>
 
         </select>
 
-        <select class="form-control selector mr-2 mb-1" id="Type" name="subCategory" data-column="4">
-            <option value="">Select Type</option>
+        <select class="form-control selector mr-2 mb-1 diseble1 diseble2 diseble4" id="Type" name="subCategory" data-column="4">
+            <option value=""> Type</option>
             <option value="Asset">Asset</option>
             <option value="Consumable">Consumable</option>
 
         </select>
 
-        <select class="form-control selector mr-2 mb-1" id="ProID" name="subCategory" data-column="5">
-            <option value="">Select Procurement ID</option>
+        <select class="form-control selector mr-2 mb-1 diseble1 diseble2 diseble3" id="ProID" name="subCategory" data-column="5">
+            <option value=""> Procurement ID</option>
              @foreach($proId as $pId)
              <option value="{{$pId->procurement_id}}">{{$pId->procurement_id}}</option>
              @endforeach
         </select>
 
-        <button class="btn btn-outline-success px-1 mb-1 " id="filter" type='button'>Filter</button>
-
+        <button class="btn btn-outline-success px-2 mb-1 mr-2" id="filter" type='button'>Filter</button>
+        <button class="btn btn-outline-primary px-2 mb-1 " id="filter1" type='submit'>Reset</button>
     </form>
 
     </div>

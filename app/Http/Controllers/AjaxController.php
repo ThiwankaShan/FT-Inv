@@ -29,14 +29,23 @@ class AjaxController extends Controller
 
     public function getFilter(Request $request)
     {
-         $data = DB::table('items')       
-             ->orwhere('Location_code',$request->div )
-             ->orwhere('subLocation_code',$request->subdiv)
-             ->orwhere('category_code', $request->cate)
-             ->orwhere('subCategory_code',$request->subcate)
-             ->orwhere('type',$request->type)
-             ->orwhere('procurement_id',$request->pid)
-             ->get();
+         $div = $request->div;
+         $subDiv = $request->subdiv;
+         $cate = $request->cate;
+         $subcate = $request ->subcate;
+         $type = $request->type;
+         $pid = $request->pid;   
+         
+      
+       
+           $data = DB::table('items')       
+               ->orwhere('location_code',$request->div )
+               ->orwhere('subLocation_code',$request->subdiv)
+               ->orwhere('category_code', $request->cate)
+               ->orwhere('subCategory_code',$request->subcate)
+               ->orwhere('type',$request->type)
+               ->orwhere('procurement_id',$request->pid)
+               ->get();
 
         return response()->json(['authType'=>Auth::user()->role,'records'=>$data]);
     }

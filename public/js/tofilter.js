@@ -1,7 +1,7 @@
 $(document).ready(function() {
     var _token = $('input[name="_token"]').val();
     $('#division').change(function() {
-
+        $('.diseble1').prop("disabled", true); 
         var div_id = $(this).val();
         var form = $(this).parent();
         var op = '';
@@ -15,7 +15,7 @@ $(document).ready(function() {
             },
             success: function(data) {
 
-                op += '<option value="" selected disabled>Select Sub Location</option>';
+                op += '<option value="" selected disabled> Sub Location</option>';
                 for (var i = 0; i < data.length; i++) {
                     op += '<option value="' + data[i].subLocation_code + '" >' + data[i].subLocation_name + '</option>';
                 }
@@ -41,7 +41,7 @@ $(document).ready(function() {
 
     //get the related subcategory
     $('#category').change(function() {
-
+        $('.diseble2').prop("disabled", true); 
         var cate_id = $(this).val();
         var a = $(this).parent();
         var op = '';
@@ -55,7 +55,7 @@ $(document).ready(function() {
             },
             success: function(data) {
 
-                op += '<option value="000" >Select Sub Category</option>';
+                op += '<option value="000" > Sub Category</option>';
                 for (var i = 0; i < data.length; i++) {
                     op += '<option value="' + data[i].subCategory_code + '" >' + data[i].subCategory_name + '</option>';
                 }
@@ -78,7 +78,15 @@ $(document).ready(function() {
         }
     }) 
 
+   $('#Type').change(function(){
+       $('.diseble3').prop('disabled',true);
 
+   })
+
+   $('#ProID').change(function(){
+    $('.diseble4').prop('disabled',true);
+
+})
 
     //FILTER DATA
 
@@ -118,11 +126,11 @@ $(document).ready(function() {
                     output += '<td>' + data['records'][i].rate + '</td>';
 
                     if(data['authType'] == "manager"){
-                        output += '<td class="d-flex flex-row"><a href="" class="btn btn-primary mr-1">View</a><a href="/item/edit/' + data['records'][i].item_code + '" class="btn btn-success">Edit</a> </td>';
+                        output += '<td class="d-flex flex-row"><a href="" class="btn btn-secondary mr-1">View</a><a href="/item/edit/' + data['records'][i].item_code + '" class="btn btn-primary">Edit</a> </td>';
                     }else if(data['authType'] == "admin"){
-                        output += '<td class="d-flex flex-row"><a href="" class="btn btn-primary mr-1">View</a><a href="/item/edit/' + data['records'][i].item_code + '" class="btn btn-success mr-1">Edit</a>  <button type="submit" class=" btn btn-danger text-light delete-confirm " data-action="/item/delete/' + data['records'][i].item_code + '" data-id="'+ data['records'][i].item_code+'"></data-id>Delete</button> </td> ';
+                        output += '<td class="d-flex flex-row"><a href="" class="btn btn-secondary mr-1">View</a><a href="/item/edit/' + data['records'][i].item_code + '" class="btn btn-primary mr-1">Edit</a>  <button type="submit" class=" btn btn-danger text-light delete-confirm1 " data-action="/item/delete/' + data['records'][i].item_code + '" data-id="'+ data['records'][i].item_code+'">Delete</button> </td> ';
                     }else if(data['authType'] == "user"){
-                        output += '<td class="d-flex flex-row"><a href="" class="btn btn-primary mr-1">View</a> </td>';
+                        output += '<td class="d-flex flex-row"><a href="" class="btn btn-secondary mr-1">View</a> </td>';
                     }
                     
                    
