@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DB;
 use App\Category;
 use App\Location;
 use App\Items;
@@ -35,25 +35,28 @@ class HomeController extends Controller
 
         if (Auth::user()->role == "admin") {
 
-            //  $div = Location::all();
-            //  $cate = Category::all();
-            //  $items=Items::paginate(10);
+              $div = Location::all();
+              $cate = Category::all();
+              $proId =DB::table('items')->select('procurement_id')->groupBy('procurement_id')->get();
+              $items = Items::orderBy('created_at', 'DESC')->paginate(20);
 
-            return view('pages.admin');
+            return view('pages.admin', compact('items','div','cate','proId'));
         } elseif (Auth::user()->role == "manager") {
 
             $div = Location::all();
             $cate = Category::all();
+            $proId =DB::table('items')->select('procurement_id')->groupBy('procurement_id')->get();
             $items = Items::orderBy('created_at', 'DESC')->paginate(20);
 
-            return view('pages.manager', compact('items','div','cate'));
+            return view('pages.manager', compact('items','div','cate','proId'));
         } elseif (Auth::user()->role == "user") {
 
-            // $div = Location::all();
-            // $cate = Category::all();
-            // $items=Items::paginate(10);
+             $div = Location::all();
+             $cate = Category::all();
+             $proId =DB::table('items')->select('procurement_id')->groupBy('procurement_id')->get();
+             $items=Items::paginate(10);
 
-            return view('pages.user');
+            return view('pages.user',compact('items','div','cate','proId'));
         } else {
             return view('home');
         }
