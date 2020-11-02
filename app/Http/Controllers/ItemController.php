@@ -203,13 +203,9 @@ class ItemController extends Controller
      */
     public function edit(Items $item)
     {
-        $div = Location::all();
-        $subloc = SubLocation::all();
-        $cate = Category::all();
-        $subcate = SubCategory::all();
         $grn = Grn::all();
         
-        return view('forms.editItem',compact('div', 'subloc', 'cate', 'subcate', 'grn', 'item'));
+        return view('forms.editItem',compact('grn', 'item'));
     }
 
     /**
