@@ -71,14 +71,14 @@ class AjaxController extends Controller
                     ->get();
            }
            
-            $data = DB::table('items')       
-                ->orwhere('location_code',$request->div )
-                ->orwhere('subLocation_code',$request->subdiv)
-                ->orwhere('category_code', $request->cate)
-                ->orwhere('subCategory_code',$request->subcate)
-                ->orwhere('type',$request->type)
-                ->orwhere('procurement_id',$request->pid)
-                ->get();
+        //    $data = DB::table('items')       
+        //        ->orwhere('location_code',$request->div )
+        //        ->orwhere('subLocation_code',$request->subdiv)
+        //        ->orwhere('category_code', $request->cate)
+        //        ->orwhere('subCategory_code',$request->subcate)
+        //        ->orwhere('type',$request->type)
+        //        ->orwhere('procurement_id',$request->pid)
+        //        ->get();
 
         return response()->json(['authType'=>Auth::user()->role,'records'=>$data]);
     }
