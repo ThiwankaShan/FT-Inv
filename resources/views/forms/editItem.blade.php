@@ -40,8 +40,9 @@
                     </div>
                     <div class="col-sm-9 mb-1">
                         <select class="form-control " id="exampleFormControlSelect1" name="grn_no">
-                            @foreach($grn as $grns)
-                            <option value="{{$grns->GRN_no}}">{{ $grns->GRN_no }}</option>
+                            <option value="{{$item->GRN_no}}">{{ $item->GRN_no }}</option>
+                            @foreach($grn_array as $grn)
+                            <option value="{{$grn}}">{{ $grn }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -61,7 +62,7 @@
                         <label for="item-name ">Vat/Item (Percentage)</label>
                     </div>
                     <div class="col-sm-9 mb-1">
-                        <input type="text" name="Vat" id="Vat" class="form-control" value="{{$item->vat}}">
+                        <input type="text" name="Vat" id="Vat" class="form-control" value="{{$item->vat_rate_vat}}">
                         @error('Vat')
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>

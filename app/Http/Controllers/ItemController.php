@@ -203,13 +203,19 @@ class ItemController extends Controller
      */
     public function edit(Items $item)
     {
-        $div = Location::all();
-        $subloc = SubLocation::all();
-        $cate = Category::all();
-        $subcate = SubCategory::all();
-        $grn = Grn::all();
+        $grns = Grn::all()->pluck('GRN_no');
+        $grn_array=[];
+        error_log('here');
+        error_log(gettype($grns[0]));
+        error_log(sizeof($grns));
+        for($i=0;$i<sizeof($grns);$i++){
+            if($grns[$i]!=$item->GRN_no){
+                array_push($grn_array,$grns[$i]);
+            }
+            
+        }
         
-        return view('forms.editItem',compact('div', 'subloc', 'cate', 'subcate', 'grn', 'item'));
+        return view('forms.editItem',compact('grn_array', 'item'));
     }
 
     /**
