@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
     var _token = $('input[name="_token"]').val();
     $('#division').change(function() {
@@ -108,40 +109,46 @@ $(document).ready(function() {
                 pid: pid
             },
             success: function(data) {
-                var output = "";
-                var items= [];
+                var output = "";              
                 console.log(data);
-                for (var i = 0; i < data['records'].length; i++) {
-                    items.push([data['records'][i].item_code])
-                    output += '<tr>';
-                    output += ' <th scope="row">' + data['records'][i].item_code + '</th>';
-                    output += '<td>' + data['records'][i].location_code + '</td>';
-                    output += '<td>' + data['records'][i].subLocation_code + '</td>';
-                    output += '<td>' + data['records'][i].category_code + '</td>';
-                    output += '<td>' + data['records'][i].subCategory_code + '</td>';
-                    output += '<td>' + data['records'][i].type + '</td>';
-                    output += '<td>' + data['records'][i].GRN_no + '</td>';
-                    output += '<td>' + data['records'][i].vat + '</td>';
-                    output += '<td>' + data['records'][i].vat_rate_vat + '</td>';
-                    output += '<td>' + data['records'][i].procurement_id + '</td>';
-                    output += '<td>' + data['records'][i].rate + '</td>';
-
-                    if(data['authType'] == "manager"){
-                        output += '<td class="d-flex flex-row"><a href="" class="btn btn-secondary mr-1">View</a><a href="/item/edit/' + data['records'][i].item_code + '" class="btn btn-primary">Edit</a> </td>';
-                    }else if(data['authType'] == "admin"){
-                        output += '<td class="d-flex flex-row"><a href="/item/edit/' + data['records'][i].item_code + '" class="btn btn-primary mr-1">Edit</a> <a href="/item/delete/'+ data['records'][i].item_code +'" data-method="post" class="btn btn-danger delete-item" token="'+ _token+'">Delete</a>  </td> ';
-                    
-                    }else if(data['authType'] == "user"){
-                        output += '<td class="d-flex flex-row"><a href="" class="btn btn-secondary mr-1">View</a> </td>';
-                    }
-                    
+                
+                if(data['records'].length < 1 ){
+                    output += '<div class="alert alert-danger text-center" role="alert"><strong>No Related Data!</strong></div>';  
+                    $('#dataTable').html("");
+                    $('#dataTable').append(output);   
+                }else{
+                    for (var i = 0; i < data['records'].length; i++) {
                    
-                    output += '</tr>';
+                        output += '<tr>';
+                        output += ' <th scope="row">' + data['records'][i].item_code + '</th>';
+                        output += '<td>' + data['records'][i].location_code + '</td>';
+                        output += '<td>' + data['records'][i].subLocation_code + '</td>';
+                        output += '<td>' + data['records'][i].category_code + '</td>';
+                        output += '<td>' + data['records'][i].subCategory_code + '</td>';
+                        output += '<td>' + data['records'][i].type + '</td>';
+                        output += '<td>' + data['records'][i].GRN_no + '</td>';
+                        output += '<td>' + data['records'][i].vat + '</td>';
+                        output += '<td>' + data['records'][i].vat_rate_vat + '</td>';
+                        output += '<td>' + data['records'][i].procurement_id + '</td>';
+                        output += '<td>' + data['records'][i].rate + '</td>';
+    
+                        if(data['authType'] == "manager"){
+                            output += '<td class="d-flex flex-row"><a href="" class="btn btn-secondary mr-1">View</a><a href="/item/edit/' + data['records'][i].item_code + '" class="btn btn-primary">Edit</a> </td>';
+                        }else if(data['authType'] == "admin"){
+                            output += '<td class="d-flex flex-row"><a href="/item/edit/' + data['records'][i].item_code + '" class="btn btn-primary mr-1">Edit</a> <a href="/item/delete/'+ data['records'][i].item_code +'" data-method="post" class="btn btn-danger delete-item" token="'+ _token+'">Delete</a>  </td> ';
+                        
+                        }else if(data['authType'] == "user"){
+                            output += '<td class="d-flex flex-row"><a href="" class="btn btn-secondary mr-1">View</a> </td>';
+                        }
+                        
+                       
+                        output += '</tr>';
+                    }
+    
+                    $('#dataBody').html("");
+                    $('#dataBody').append(output);
                 }
 
-                $('#dataBody').html("");
-                $('#dataBody').append(output);
-                return items;
             },
             error: function() {
                 console.log('error!');
@@ -164,6 +171,8 @@ $(document).ready(function() {
        
 
     });
+
+    
 
 
 
