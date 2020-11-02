@@ -233,6 +233,7 @@ class ItemController extends Controller
         $new_vat=(($new_vat_rate * $new_rate) / 100);
         $new_grn=$request->grn_no;
         $new_type=$request->types;
+        $new_procumentID=$request->procument_id;
 
         DB::table('items')
             ->where('item_code', $request->item)
@@ -241,6 +242,8 @@ class ItemController extends Controller
                 "vat_rate_vat"=>$new_vat_rate,
                 'vat'=>$new_vat,
                 'type'=>$new_type,
+                'GRN_no'=>$new_grn,
+                'procurement_id'=>$new_procumentID,
                 ]);
         return redirect()->route('item.editForm',['item'=>$item])->with('success', 'Items updated Successfuly!');
         
