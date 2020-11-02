@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container-fluid ">
-    <a class="btn btn-dark text-white" href="/item/create">Back</a>
+    <a class="btn btn-dark text-white" href="{{ URL::previous() }}">Back</a>
 </div>
 
 <div class='card w-75  item-create'>

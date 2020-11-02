@@ -40,8 +40,9 @@
                     </div>
                     <div class="col-sm-9 mb-1">
                         <select class="form-control " id="exampleFormControlSelect1" name="grn_no">
-                            @foreach($grn as $grns)
-                            <option value="{{$grns->GRN_no}}">{{ $grns->GRN_no }}</option>
+                            <option value="{{$item->GRN_no}}">{{ $item->GRN_no }}</option>
+                            @foreach($grn_array as $grn)
+                            <option value="{{$grn}}">{{ $grn }}</option>
                             @endforeach
                         </select>
                     </div>
