@@ -13,7 +13,11 @@
 
         <form action="/item/update/{{$item->item_code}}" method="POST">
             @csrf
-
+            <div class="card text-center" style="margin-bottom:30px;">
+                <div class="card-header">
+                 <h4 class="font-weight-bold">   {{$item->item_code}} </h4>
+                </div>
+            </div>
             <div class=" col-sm-9 row pl-0">
                 <div class="col-sm-3">
                     <label for="item-name ">Type</label>
