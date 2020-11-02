@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Auth;
 use DB;
 use App\Category;
 use App\Location;
@@ -29,15 +29,58 @@ class AjaxController extends Controller
 
     public function getFilter(Request $request)
     {
+           if(!empty($request->div)){
 
-        $data = DB::table('items')
-            ->where('Location_code', $request->div)
-            ->where('subLocation_code', $request->subdiv)
-            ->where('category_code', $request->cate)
-            ->where('subCategory_code', $request->subcate)
-            ->get();
+                if(!empty($request->subdiv)){
+                    $data = DB::table('items')       
+                    ->where('location_code',$request->div )
+                    ->where('subLocation_code',$request->subdiv)
+                    ->get();
 
-        return response()->json($data);
+                }else{
+
+                    $data = DB::table('items')       
+                    ->where('location_code',$request->div )->get();
+
+                }
+            }else if(!empty($request->cate)){
+
+                  if(!empty($request->subcate)){
+                    $data = DB::table('items')       
+                    ->where('category_code', $request->cate)
+                    ->orwhere('subCategory_code',$request->subcate)
+                    ->get();
+
+                  }else{
+
+                    $data = DB::table('items')       
+                    ->where('category_code', $request->cate)->get();
+
+                  }
+             
+           }else if(!empty($request->type)){
+
+                $data = DB::table('items')
+                    ->where('type',$request->type)
+                    ->get();
+
+           }else if(!empty($request->pid)){
+
+                $data = DB::table('items')
+                    ->where('procurement_id',$request->pid)
+                    ->get();
+           }
+           
+        //    $data = DB::table('items')       
+        //        ->orwhere('location_code',$request->div )
+        //        ->orwhere('subLocation_code',$request->subdiv)
+        //        ->orwhere('category_code', $request->cate)
+        //        ->orwhere('subCategory_code',$request->subcate)
+        //        ->orwhere('type',$request->type)
+        //        ->orwhere('procurement_id',$request->pid)
+        //        ->get();
+
+        return response()->json(['authType'=>Auth::user()->role,'records'=>$data]);
     }
 
     public function getRomanNumber(Request $request)

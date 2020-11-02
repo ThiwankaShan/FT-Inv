@@ -1,5 +1,5 @@
 $('.delete-confirm').on('click', function (event) {
-    // event.preventDefault();
+    console.log("done");
     var current_object = $(this);
     swal({
         title: 'Are you sure?',
