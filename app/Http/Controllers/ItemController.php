@@ -155,10 +155,10 @@ class ItemController extends Controller
                         $item->type = $request->types;
 
                         $item->GRN_no = $request->grn_no;
-                        $item->vat = $vat;
+                        $item->vat = (($vat*$rate)/100);
                         $item->procurement_id = $request->procument_id;
                         $item->rate = $request->Rate;
-                        $item->vat_rate_vat = ($vat * $rate);
+                        $item->vat_rate_vat = $vat;
                         $item->save();
                     }
                 }
