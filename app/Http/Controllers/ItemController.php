@@ -229,6 +229,7 @@ class ItemController extends Controller
             ->update([
                 'rate' =>$new_rate,
                 "vat_rate_vat"=>$new_vat_rate,
+                'vat'=>$new_vat,
                 'type'=>$new_type,
                 ]);
         return redirect()->route('item.editForm',['item'=>$item])->with('success', 'Items updated Successfuly!');
