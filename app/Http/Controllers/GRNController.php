@@ -63,7 +63,7 @@ class GRNController extends Controller
 
         $grn->save();
 
-        return redirect('/grn')->with('success', 'Created successfully');
+        return redirect('/home')->with('success', 'Created successfully');
     }
 
     /**
