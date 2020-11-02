@@ -7,6 +7,7 @@
     <div class="card-header pr-0">
     <form action="" class="ml-0 mt-4 form-inline">
         <select class="form-control selector mr-2 mb-1 diseble2 diseble3 diseble4" id="division" name="division" data-column="0">
+            
             <option value=""> Location</option>
             @foreach($div as $division)
             <option value="{{$division->location_code}}">{{$division->location_name}}</option>
@@ -71,7 +72,8 @@
         </thead>
         <tbody id="dataBody">
             @foreach($items as $item)
-            <tr>
+            
+             <tr>
                 <th scope="row">{{$item->item_code}}</th>
                 <td>{{$item->location_code}}</td>
                 <td>{{$item->subLocation_code}}</td>
@@ -83,20 +85,18 @@
                 <td>{{$item->vat_rate_vat}}</td>
                 <td>{{$item->procurement_id}}</td>
                 <td>{{$item->rate}}</td>
-                <td class="d-flex flex-row"><a href="" class="btn btn-secondary mr-1">View</a>   
+                <td class="d-flex flex-row">
                 <a class="btn btn-primary mr-1" href="/item/edit/{{$item->item_code}}">Edit</a> 
-                    <!-- <form action="{{ route('item.destroy',$item->item_code) }}" class="" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class=" btn btn-danger  mx-0">Delete</button>
-
-                    </form> -->
-                    <button type="submit" class=" btn btn-danger text-light delete-confirm " data-action="{{ route('item.destroy',$item->item_code) }}" data-id="$item->item_code"></data-id>Delete</button>
+                <a href="/item/delete/{{$item->item_code}}" data-method="post" class="btn btn-danger delete-item" token='{!! csrf_token() !!}'>Delete</a>
+                   
+                 
+                     
                 </td>
+                
 
             </tr>
             @endforeach
-
+            
         </tbody>
     </table>
     {{$items->links()}}
@@ -134,4 +134,7 @@
     </div>
   </div>
 </div>
+
+<script src="{{ asset('js/delete.js') }}"></script>
+
 @endsection
