@@ -109,9 +109,10 @@ $(document).ready(function() {
             },
             success: function(data) {
                 var output = "";
-             
+                var items= [];
                 console.log(data);
                 for (var i = 0; i < data['records'].length; i++) {
+                    items.push([data['records'][i].item_code])
                     output += '<tr>';
                     output += ' <th scope="row">' + data['records'][i].item_code + '</th>';
                     output += '<td>' + data['records'][i].location_code + '</td>';
@@ -128,7 +129,8 @@ $(document).ready(function() {
                     if(data['authType'] == "manager"){
                         output += '<td class="d-flex flex-row"><a href="" class="btn btn-secondary mr-1">View</a><a href="/item/edit/' + data['records'][i].item_code + '" class="btn btn-primary">Edit</a> </td>';
                     }else if(data['authType'] == "admin"){
-                        output += '<td class="d-flex flex-row"><a href="" class="btn btn-secondary mr-1">View</a><a href="/item/edit/' + data['records'][i].item_code + '" class="btn btn-primary mr-1">Edit</a>  <button type="submit" class=" btn btn-danger text-light delete-confirm1 " data-action="/item/delete/' + data['records'][i].item_code + '" data-id="'+ data['records'][i].item_code+'">Delete</button> </td> ';
+                        output += '<td class="d-flex flex-row"><a href="/item/edit/' + data['records'][i].item_code + '" class="btn btn-primary mr-1">Edit</a> <a href="/item/delete/'+ data['records'][i].item_code +'" data-method="post" class="btn btn-danger delete-item" token="'+ _token+'">Delete</a>  </td> ';
+                    
                     }else if(data['authType'] == "user"){
                         output += '<td class="d-flex flex-row"><a href="" class="btn btn-secondary mr-1">View</a> </td>';
                     }
@@ -139,7 +141,7 @@ $(document).ready(function() {
 
                 $('#dataBody').html("");
                 $('#dataBody').append(output);
-               
+                return items;
             },
             error: function() {
                 console.log('error!');
