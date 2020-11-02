@@ -52,6 +52,8 @@ class ItemController extends Controller
         $subcate = SubCategory::all();
         $grn = Grn::all();
         $itemCodes = Session::get('itemCodes');
+        session()->flash('grnMsg', 'hello');
+        session()->flash('backUrl', "item/create");
 
         return view('forms.createitem', compact('div', 'subloc', 'cate', 'subcate', 'grn', 'itemCodes'));
     }
@@ -214,7 +216,9 @@ class ItemController extends Controller
             }
             
         }
-        
+        session()->flash('egrnMsg', 'edit');
+        session()->flash('editId', $item->item_code);
+
         return view('forms.editItem',compact('grn_array', 'item'));
     }
 
