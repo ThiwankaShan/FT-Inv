@@ -203,13 +203,9 @@ class ItemController extends Controller
      */
     public function edit(Items $item)
     {
-        $div = Location::all();
-        $subloc = SubLocation::all();
-        $cate = Category::all();
-        $subcate = SubCategory::all();
         $grn = Grn::all();
         
-        return view('forms.editItem',compact('div', 'subloc', 'cate', 'subcate', 'grn', 'item'));
+        return view('forms.editItem',compact('grn', 'item'));
     }
 
     /**
@@ -233,7 +229,6 @@ class ItemController extends Controller
             ->update([
                 'rate' =>$new_rate,
                 "vat_rate_vat"=>$new_vat_rate,
-                'vat'=>$new_vat,
                 'type'=>$new_type,
                 ]);
         return redirect()->route('item.editForm',['item'=>$item])->with('success', 'Items updated Successfuly!');
