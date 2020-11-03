@@ -148,7 +148,7 @@ class ItemController extends Controller
                         $fnumber = sprintf('%03d', $num);
 
                         $item->item_code = 'FT' . '/' . $lname . '/' . $slname . '/' . $cname . '/' . $scname . '/' . $fnumber . '/' . $subNum;
-                        $item->Location_code = $lname;
+                        $item->location_code = $lname;
                         $item->subLocation_code = $slname;
                         $item->category_code = $cname;
                         $item->subCategory_code = $scname;
@@ -169,7 +169,7 @@ class ItemController extends Controller
                     $fnumber = sprintf('%03d', $num);
 
                     $item->item_code = 'FT' . '/' . $lname . '/' . $slname . '/' . $cname . '/' . $scname . '/' . $fnumber;
-                    $item->Location_code = $lname;
+                    $item->location_code = $lname;
                     $item->subLocation_code = $slname;
                     $item->category_code = $cname;
                     $item->subCategory_code = $scname;
