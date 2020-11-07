@@ -1,9 +1,14 @@
 
 $(document).ready(function() {
+
+    //Send ajax request to Filter Controller to get subLocations 
     var _token = $('input[name="_token"]').val();
-    $('#division').change(function() {
+    $('#location').change(function() {
+
+        // disabled with out Location and Sub Location
         $('.diseble1').prop("disabled", true); 
-        var div_id = $(this).val();
+
+        var locationCode = $(this).val();
         var form = $(this).parent();
         var op = '';
         $.ajax({
@@ -11,7 +16,7 @@ $(document).ready(function() {
             url: "/ajax/division",
             method: "POST",
             data: {
-                locationId: div_id,
+                locationCode: locationCode,
                 _token: _token,
             },
             success: function(data) {
@@ -20,8 +25,9 @@ $(document).ready(function() {
                 for (var i = 0; i < data.length; i++) {
                     op += '<option value="' + data[i].subLocation_code + '" >' + data[i].subLocation_name + '</option>';
                 }
-                $('#subDivision').html('');
-                $('#subDivision').append(op);
+
+                $('#sublocation').html('');
+                $('#sublocation').append(op);
             },
             error: function() {
 
@@ -30,20 +36,24 @@ $(document).ready(function() {
 
     })
 
-    //Popup the error because laction not selected
-    $('#subDivision').click(function(){
-        console.log($('#division').val());
-        if(!$('#division').val()){
+
+
+    //Popup the error because loction not selected
+    $('#sublocation').click(function(){
+        console.log($('#location').val());
+        if(!$('#location').val()){
               $('#alertLocation').click();  
         }
     }) 
 
 
 
-    //get the related subcategory
+   //Send ajax request to Filter Controller to get subCategories 
     $('#category').change(function() {
+
+        // disabled with out Category and Sub Category
         $('.diseble2').prop("disabled", true); 
-        var cate_id = $(this).val();
+        var categoryCode = $(this).val();
         var a = $(this).parent();
         var op = '';
         $.ajax({
@@ -51,7 +61,7 @@ $(document).ready(function() {
             url: "/ajax/category",
             type: "POST",
             data: {
-                categoryid: cate_id,
+                categoryCode: categoryCode,
                 _token: _token
             },
             success: function(data) {
@@ -71,7 +81,7 @@ $(document).ready(function() {
     })
 
      
-     //Popup the error because laction not selected
+     //Popup the error because category not selected
      $('#subCategory').click(function(){
         console.log($('#category').val());
         if(!$('#category').val()){
@@ -79,19 +89,21 @@ $(document).ready(function() {
         }
     }) 
 
+    // disabled with out Type 
    $('#Type').change(function(){
        $('.diseble3').prop('disabled',true);
 
    })
 
+    // disabled with out ProcurementId
    $('#ProID').change(function(){
     $('.diseble4').prop('disabled',true);
 
 })
 
-    //FILTER DATA
+    //This a Function that Send a ajax Request to FILTER DATA
 
-    function fetchData(division = "", subdivision = "", category = "", subcategory = "",type = "", pid = "") {
+    function fetchData(loactionCode = "", subLoactionCode = "", categoryCode = "", subCategoryCode = "",type = "", pid = "") {
 
         var _token = $('input[name="_token"]').val();
         $.ajax({
@@ -101,10 +113,10 @@ $(document).ready(function() {
 
             data: {
                 _token: _token,
-                div: division,
-                subdiv: subdivision,
-                cate: category,
-                subcate: subcategory,
+                loactionCode: loactionCode,
+                subLoactionCode: subLoactionCode,
+                categoryCode: categoryCode,
+                subCategoryCode: subCategoryCode,
                 type: type,
                 pid: pid
             },
@@ -137,8 +149,6 @@ $(document).ready(function() {
                         }else if(data['authType'] == "admin"){
                             output += '<td class="d-flex flex-row"><a href="/item/edit/' + data['records'][i].item_code + '" class="btn btn-primary mr-1">Edit</a> <a href="/item/delete/'+ data['records'][i].item_code +'" data-method="post" class="btn btn-danger delete-item" token="'+ _token+'">Delete</a>  </td> ';
                         
-                        }else if(data['authType'] == "user"){
-                            output += '<td class="d-flex flex-row"><a href="" class="btn btn-secondary mr-1">View</a> </td>';
                         }
                         
                        
@@ -158,16 +168,16 @@ $(document).ready(function() {
 
     }
 
-    //function call
+    //Here is the above Function call
     $('#filter').click(function() {
-        var div_id = $('#division').val();
-        var subdiv_id = $('#subDivision').val();
-        var cate_id = $('#category').val();
-        var subcate_id = $('#subCategory').val();
+        var location = $('#location').val();
+        var subLocation = $('#sublocation').val();
+        var category = $('#category').val();
+        var subCategory = $('#subCategory').val();
         var type = $('#Type').val();
         var pID = $('#ProID').val();
         console.log(pID);
-            fetchData(div_id, subdiv_id, cate_id, subcate_id, type, pID);
+            fetchData(location, subLocation, category, subCategory, type, pID);
        
 
     });
