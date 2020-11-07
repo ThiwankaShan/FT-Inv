@@ -2,7 +2,6 @@
 @section('content')
 
 <div class="container-fluid pt-2 ">
-
     <a class="btn btn-dark text-light" href="/home">Back</a>
 </div>
 <hr>
@@ -153,13 +152,14 @@
                             <option value="{{$grns->GRN_no}}">{{ $grns->GRN_no }}</option>
                             @endforeach
                         </select>
+
                     </div>
                 </div>
                 <div class="col-3">
 
 
 
-                    <a class="btn button-style form-control" href="{{route('grn.index')}}" class="button">Add New GRN</a>
+                    <a class="btn button-style form-control" href="{{route('grn.index')}}"  class="button">Add New GRN</a>
 
                 </div>
             </div>
@@ -236,6 +236,7 @@
             </div>
             @endif
 
+          
             <div class="text-center">
 
 

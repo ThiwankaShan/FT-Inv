@@ -3,7 +3,10 @@
 @section('content')
 
 <div class="container-fluid ">
-    <a class="btn btn-dark text-white" href="{{ URL::previous() }}">Back</a>
+    @if(session('backUrl'))
+    <a class="btn btn-dark text-white" href="{{ session('backUrl') }}">Back</a>
+    @endif
+   
 </div>
 
 <div class='card w-75  item-create'>
@@ -13,7 +16,7 @@
         <form action="{{ route('grn.store') }}" method="POST" class="form-align-custom">
             @csrf
             @if (session('success'))
-            <div class="alert alert-success" role="alert">
+            <div class="alert alert-success " role="alert">
                 {{ session('success') }}
             </div>
             @endif
@@ -61,8 +64,15 @@
                     </select>
 
                 </div>
+                @if(session('grnMsg') ) 
+                   <input type="hidden" name="grnType" value="Complete">
 
-
+                @endif
+                @if(session('egrnMsg') && session('editId')) 
+                   <input type="hidden" name="grnType2" value="Complete2">
+                   <input type="hidden" name="idShouldEdit" value="{{session('editId')}}">
+                @endif
+ 
                 <div class="text-center">
                     <button type="submit" class="btn form-card-header-custom text-light">Create</button>
                 </div>
