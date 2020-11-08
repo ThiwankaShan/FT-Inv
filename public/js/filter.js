@@ -1,9 +1,12 @@
 
 $(document).ready(function() {
 
-    //Send ajax request to Filter Controller to get subLocations 
+    
     var _token = $('input[name="_token"]').val();
     $('#location').change(function() {
+
+           //Send ajax request to Filter Controller to get subLocations 
+
 
         // disabled with out Location and Sub Location
         $('.diseble1').prop("disabled", true); 
@@ -38,8 +41,11 @@ $(document).ready(function() {
 
 
 
-    //Popup the error because loction not selected
+    
     $('#sublocation').click(function(){
+       
+        //Popup the error because loction not selected
+
         console.log($('#location').val());
         if(!$('#location').val()){
               $('#alertLocation').click();  
@@ -48,8 +54,10 @@ $(document).ready(function() {
 
 
 
-   //Send ajax request to Filter Controller to get subCategories 
+   
     $('#category').change(function() {
+
+        //Send ajax request to Filter Controller to get subCategories 
 
         // disabled with out Category and Sub Category
         $('.diseble2').prop("disabled", true); 
@@ -81,30 +89,39 @@ $(document).ready(function() {
     })
 
      
-     //Popup the error because category not selected
+     
      $('#subCategory').click(function(){
+
+        //Popup the error because category not selected
         console.log($('#category').val());
         if(!$('#category').val()){
               $('#alertCategory').click();  
         }
     }) 
 
-    // disabled with out Type 
+  
    $('#Type').change(function(){
+
+      // disabled with out Type 
        $('.diseble3').prop('disabled',true);
 
    })
 
-    // disabled with out ProcurementId
+    
    $('#ProID').change(function(){
+  
+    // disabled with out ProcurementId
+
     $('.diseble4').prop('disabled',true);
 
 })
 
-    //This a Function that Send a ajax Request to FILTER DATA
+    
 
     function fetchData(loactionCode = "", subLoactionCode = "", categoryCode = "", subCategoryCode = "",type = "", pid = "") {
-
+        
+        //This a Function that Send a ajax Request to FILTER DATA
+        
         var _token = $('input[name="_token"]').val();
         $.ajax({
 
@@ -168,8 +185,11 @@ $(document).ready(function() {
 
     }
 
-    //Here is the above Function call
+    
     $('#filter').click(function() {
+
+         //Here is the above Function call
+
         var location = $('#location').val();
         var subLocation = $('#sublocation').val();
         var category = $('#category').val();
