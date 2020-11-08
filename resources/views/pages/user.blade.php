@@ -2,7 +2,7 @@
 @section('content')
 
 <!-- include the  filter part and search part from codeRepeats/searchVew -->
-@include('pages.codeRepeats.searchView');
+@include('pages.searchView');
 
 <script src="{{ asset('js/filter.js') }}"> </script>
 

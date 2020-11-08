@@ -2,7 +2,7 @@
 @section('content')
 
 
-@include('pages.codeRepeats.searchView');
+@include('pages.searchView');
 
   
 

@@ -15,7 +15,7 @@ class FilterController extends Controller
 {
 
   
-    //getting subLocations as the loaction_code
+    //getting subLocations as the loaction_code 
     public function getSubLocation(Request $request)
     {
         $data = SubLocation::where('location_code', $request->locationCode)->get();
@@ -31,7 +31,8 @@ class FilterController extends Controller
         return response()->json($data);
     }
 
-    //here is the filter data function
+    //here is the filter data function taken location_code,sunLocation_code OR category, subCategory_code OR Type OR ProcurementID
+    // and Return filtered  Items
     public function getFilter(Request $request)
     {
            if(!empty($request->loactionCode)){
