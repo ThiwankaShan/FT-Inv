@@ -158,7 +158,7 @@
     </script>
     <script src="{{ asset('js/itemCodes.js') }}"> </script>
     <script src="{{ asset('js/todelete.js') }}"> </script>
-    <script src="{{ asset('js/tofilter.js') }}"> </script>
+    
     <!--item code end -->
 
 

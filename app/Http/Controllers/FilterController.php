@@ -11,50 +11,59 @@ use App\SubLocation;
 use Romans\Filter\IntToRoman;
 use Illuminate\Http\Request;
 
-class AjaxController extends Controller
+class FilterController extends Controller
 {
+
+  
+    //requesting loaction_code and returning  subLocations  object 
     public function getSubLocation(Request $request)
     {
-        $data = SubLocation::where('Location_code', $request->locationId)->get();
+        
+        $data = SubLocation::where('location_code', $request->locationCode)->get();
 
         return response()->json($data);
     }
 
+     //requesting category_code and returning subCategories object  
     public function getSubCategory(Request $request)
     {
-        $data = SubCategory::where('category_code', $request->categoryid)->get();
+        $data = SubCategory::where('category_code', $request->categoryCode)->get();
 
         return response()->json($data);
     }
+
+     // taken location_code,sunLocation_code OR category, subCategory_code OR Type OR ProcurementID
+    // and Return filtered  Items Object And UserType
 
     public function getFilter(Request $request)
     {
-           if(!empty($request->div)){
+        
+           if(!empty($request->loactionCode)){
 
-                if(!empty($request->subdiv)){
+                if(!empty($request->subLoactionCode)){
                     $data = DB::table('items')       
-                    ->where('location_code',$request->div )
-                    ->where('subLocation_code',$request->subdiv)
+                    ->where('location_code',$request->loactionCode )
+                    ->where('subLocation_code',$request->subLoactionCode)
                     ->get();
 
                 }else{
 
                     $data = DB::table('items')       
-                    ->where('location_code',$request->div )->get();
+                    ->where('location_code',$request->loactionCode )->get();
 
                 }
-            }else if(!empty($request->cate)){
+            }else if(!empty($request->categoryCode)){
 
-                  if(!empty($request->subcate)){
+                  if(!empty($request->subCategoryCode)){
                     $data = DB::table('items')       
-                    ->where('category_code', $request->cate)
-                    ->orwhere('subCategory_code',$request->subcate)
+                    ->where('category_code', $request->categoryCode)
+                    ->orwhere('subCategory_code',$request->subCategoryCode)
                     ->get();
 
                   }else{
 
                     $data = DB::table('items')       
-                    ->where('category_code', $request->cate)->get();
+                    ->where('category_code', $request->categoryCode)->get();
 
                   }
              
@@ -71,21 +80,17 @@ class AjaxController extends Controller
                     ->get();
            }
            
-        //    $data = DB::table('items')       
-        //        ->orwhere('location_code',$request->div )
-        //        ->orwhere('subLocation_code',$request->subdiv)
-        //        ->orwhere('category_code', $request->cate)
-        //        ->orwhere('subCategory_code',$request->subcate)
-        //        ->orwhere('type',$request->type)
-        //        ->orwhere('procurement_id',$request->pid)
-        //        ->get();
+      
 
         return response()->json(['authType'=>Auth::user()->role,'records'=>$data]);
     }
 
+
+    //here is the function that convert the integer to roman numbers
+    // returning converted numbers object
     public function getRomanNumber(Request $request)
     {
-
+       
         $sub = $request->no_of_sub;
         $data = array();
         for ($i = 1; $i <= $sub; $i++) {
