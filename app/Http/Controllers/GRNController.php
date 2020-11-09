@@ -62,8 +62,16 @@ class GRNController extends Controller
         $grn->supplier_code = $request->supplier_code;
 
         $grn->save();
+         
+       
 
-        return redirect('/grn')->with('success', 'Created successfully');
+        if($request->grnType == "Complete"){
+            return redirect()->route('item.create')->with('success', 'Created successfully');
+          
+        }else if($request->grnType2 == "Complete2"){
+            return redirect()->route('item.editForm',$request->idShouldEdit);
+        }
+       
     }
 
     /**

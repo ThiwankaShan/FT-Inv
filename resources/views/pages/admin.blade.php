@@ -50,9 +50,9 @@
     </form>
 
     </div>
-<div class="card-body">
-<div class="container-fluid">
-    <table class="table" id="dataTable">
+<div class="card-body"> 
+<div class="container-fluid" id="dataTable">
+    <table class="table" >
         <thead class="thead-dark">
             <tr>
                 <th scope="col">Item Code</th>

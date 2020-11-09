@@ -52,6 +52,8 @@ class ItemController extends Controller
         $subcate = SubCategory::all();
         $grn = Grn::all();
         $itemCodes = Session::get('itemCodes');
+        session()->flash('grnMsg', 'hello');
+        session()->flash('backUrl', "item/create");
 
         return view('forms.createitem', compact('div', 'subloc', 'cate', 'subcate', 'grn', 'itemCodes'));
     }
@@ -146,17 +148,17 @@ class ItemController extends Controller
                         $fnumber = sprintf('%03d', $num);
 
                         $item->item_code = 'FT' . '/' . $lname . '/' . $slname . '/' . $cname . '/' . $scname . '/' . $fnumber . '/' . $subNum;
-                        $item->Location_code = $lname;
+                        $item->location_code = $lname;
                         $item->subLocation_code = $slname;
                         $item->category_code = $cname;
                         $item->subCategory_code = $scname;
                         $item->type = $request->types;
 
                         $item->GRN_no = $request->grn_no;
-                        $item->vat = $vat;
+                        $item->vat = (($vat*$rate)/100);
                         $item->procurement_id = $request->procument_id;
                         $item->rate = $request->Rate;
-                        $item->vat_rate_vat = ($vat * $rate);
+                        $item->vat_rate_vat = $vat;
                         $item->save();
                     }
                 }
@@ -167,7 +169,7 @@ class ItemController extends Controller
                     $fnumber = sprintf('%03d', $num);
 
                     $item->item_code = 'FT' . '/' . $lname . '/' . $slname . '/' . $cname . '/' . $scname . '/' . $fnumber;
-                    $item->Location_code = $lname;
+                    $item->location_code = $lname;
                     $item->subLocation_code = $slname;
                     $item->category_code = $cname;
                     $item->subCategory_code = $scname;
@@ -214,7 +216,9 @@ class ItemController extends Controller
             }
             
         }
-        
+        session()->flash('egrnMsg', 'edit');
+        session()->flash('editId', $item->item_code);
+
         return view('forms.editItem',compact('grn_array', 'item'));
     }
 
@@ -233,6 +237,7 @@ class ItemController extends Controller
         $new_vat=(($new_vat_rate * $new_rate) / 100);
         $new_grn=$request->grn_no;
         $new_type=$request->types;
+        $new_procumentID=$request->procument_id;
 
         DB::table('items')
             ->where('item_code', $request->item)
@@ -241,6 +246,8 @@ class ItemController extends Controller
                 "vat_rate_vat"=>$new_vat_rate,
                 'vat'=>$new_vat,
                 'type'=>$new_type,
+                'GRN_no'=>$new_grn,
+                'procurement_id'=>$new_procumentID,
                 ]);
         return redirect()->route('item.editForm',['item'=>$item])->with('success', 'Items updated Successfuly!');
         
