@@ -1,7 +1,7 @@
 
 $(document).ready(function() {
 
-    //Send ajax request to Filter Controller and got get subLocations 
+    //Send ajax request to Filter Controller and retreving subLocations Object
     var _token = $('input[name="_token"]').val();
     $('#location').change(function() {
 
@@ -49,7 +49,7 @@ $(document).ready(function() {
 
 
 
-   //Send ajax request to Filter Controller and got  subCategories 
+   //Send ajax request to Filter Controller and retrive  subCategories as a Object
     $('#category').change(function() {
 
         // disabled with out Category and Sub Category
@@ -85,7 +85,6 @@ $(document).ready(function() {
      //Popup the error because category not selected
      $('#subCategory').click(function(){
 
-        
         console.log($('#category').val());
         if(!$('#category').val()){
               $('#alertCategory').click();  
@@ -107,7 +106,7 @@ $(document).ready(function() {
 })
 
     
-//This a Function that Send a ajax Request with selected Location code Sub location code like that and get FILTERED DATA
+//This a Function that Send a ajax Request with selected Location code Sub location code like that and get FILTERED DATA as A Object
     function fetchData(loactionCode = "", subLoactionCode = "", categoryCode = "", subCategoryCode = "",type = "", pid = "") {
         
         

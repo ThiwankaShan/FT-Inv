@@ -15,7 +15,7 @@ class FilterController extends Controller
 {
 
   
-    //requesting loaction_code and send  subLocations   
+    //requesting loaction_code and returning  subLocations  object 
     public function getSubLocation(Request $request)
     {
         
@@ -24,7 +24,7 @@ class FilterController extends Controller
         return response()->json($data);
     }
 
-     //requesting category_code and send subCategories   
+     //requesting category_code and returning subCategories object  
     public function getSubCategory(Request $request)
     {
         $data = SubCategory::where('category_code', $request->categoryCode)->get();
@@ -33,7 +33,7 @@ class FilterController extends Controller
     }
 
      // taken location_code,sunLocation_code OR category, subCategory_code OR Type OR ProcurementID
-    // and Return filtered  Items
+    // and Return filtered  Items Object And UserType
 
     public function getFilter(Request $request)
     {
@@ -87,6 +87,7 @@ class FilterController extends Controller
 
 
     //here is the function that convert the integer to roman numbers
+    // returning converted numbers object
     public function getRomanNumber(Request $request)
     {
        
