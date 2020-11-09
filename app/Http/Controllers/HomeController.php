@@ -29,36 +29,30 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
+    {   // return user to different views base on their role
 
         $data = Session::get('key');
+        $locations = Location::all();
+        $categories = Category::all();
+        $proId =DB::table('items')->select('procurement_id')->groupBy('procurement_id')->get();
+        $items = Items::orderBy('created_at', 'DESC')->paginate(20);
 
         if (Auth::user()->role == "admin") {
 
-              $locations = Location::all();
-              $categories = Category::all();
-              $proId =DB::table('items')->select('procurement_id')->groupBy('procurement_id')->get();
-              $items = Items::orderBy('created_at', 'DESC')->paginate(20);
-
             return view('pages.admin', compact('items','locations','categories','proId'));
+
         } elseif (Auth::user()->role == "manager") {
 
-            $locations = Location::all();
-            $categories = Category::all();
-            $proId =DB::table('items')->select('procurement_id')->groupBy('procurement_id')->get();
-            $items = Items::orderBy('created_at', 'DESC')->paginate(20);
-
             return view('pages.manager', compact('items','locations','categories','proId'));
+
         } elseif (Auth::user()->role == "user") {
-
-             $locations = Location::all();
-             $categories = Category::all();
-             $proId =DB::table('items')->select('procurement_id')->groupBy('procurement_id')->get();
-             $items=Items::paginate(10);
-
+           
             return view('pages.user',compact('items','locations','categories','proId'));
+
         } else {
+
             return view('home');
+
         }
     }
 }
