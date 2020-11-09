@@ -15,32 +15,29 @@ class FilterController extends Controller
 {
 
   
-    
+    //requesting loaction_code and send  subLocations   
     public function getSubLocation(Request $request)
     {
-        //getting subLocations as the loaction_code   
-
+        
         $data = SubLocation::where('location_code', $request->locationCode)->get();
 
         return response()->json($data);
     }
 
-    
+     //requesting category_code and send subCategories   
     public function getSubCategory(Request $request)
     {
-         //getting subCategories as the category_code   
-
         $data = SubCategory::where('category_code', $request->categoryCode)->get();
 
         return response()->json($data);
     }
 
-    
-    public function getFilter(Request $request)
-    {
-          //here is the filter data function taken location_code,sunLocation_code OR category, subCategory_code OR Type OR ProcurementID
+     // taken location_code,sunLocation_code OR category, subCategory_code OR Type OR ProcurementID
     // and Return filtered  Items
 
+    public function getFilter(Request $request)
+    {
+        
            if(!empty($request->loactionCode)){
 
                 if(!empty($request->subLoactionCode)){
@@ -89,10 +86,10 @@ class FilterController extends Controller
     }
 
 
-   
+    //here is the function that convert the integer to roman numbers
     public function getRomanNumber(Request $request)
     {
-        //here is the function that convert the integer to roman number
+       
         $sub = $request->no_of_sub;
         $data = array();
         for ($i = 1; $i <= $sub; $i++) {
