@@ -5,7 +5,6 @@ $(document).ready(function() {
     var _token = $('input[name="_token"]').val();
     $('#location').change(function() {
 
-
         var locationCode = $(this).val();
         var form = $(this).parent();
         var op = '';
@@ -49,7 +48,7 @@ $(document).ready(function() {
 
    //Send ajax request to Filter Controller and retrive  subCategories as a Object
     $('#category').change(function() {
-
+      
         var categoryCode = $(this).val();
         var a = $(this).parent();
         var op = '';
@@ -64,7 +63,8 @@ $(document).ready(function() {
             success: function(data) {
 
                 op += '<option value="" > Sub Category</option>';
-                op += '<option value="000" >NO Sub Category</option>';
+                op += '<option value="000" >No Sub Category</option>';
+
                 for (var i = 0; i < data.length; i++) {
                     op += '<option value="' + data[i].subCategory_code + '" >' + data[i].subCategory_name + '</option>';
                 }

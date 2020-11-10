@@ -37,7 +37,6 @@ class FilterController extends Controller
 
     public function getFilter(Request $request)
     {
-        
        
            
         $searchmap = array(
@@ -64,6 +63,7 @@ class FilterController extends Controller
 
 
         return response()->json(['authType'=>Auth::user()->role,'records'=>$gadgets]);
+          
     }
 
 
