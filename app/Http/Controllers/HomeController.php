@@ -30,6 +30,7 @@ class HomeController extends Controller
      */
     public function index()
     {   // return user to different views base on their role
+        // return items,location,categories,proID arrays
 
         $data = Session::get('key');
         $locations = Location::all();
