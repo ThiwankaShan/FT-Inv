@@ -31,8 +31,7 @@ class HomeController extends Controller
     public function index()
     {   // return user to different views base on their role
         // return items,location,categories,proID arrays
-
-        $data = Session::get('key');
+        
         $locations = Location::all();
         $categories = Category::all();
         $proId =DB::table('items')->select('procurement_id')->groupBy('procurement_id')->get();
