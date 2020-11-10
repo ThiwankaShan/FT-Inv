@@ -5,8 +5,6 @@ $(document).ready(function() {
     var _token = $('input[name="_token"]').val();
     $('#location').change(function() {
 
-        // disabled with out Location and Sub Location
-        $('.diseble1').prop("disabled", true); 
 
         var locationCode = $(this).val();
         var form = $(this).parent();
@@ -52,8 +50,6 @@ $(document).ready(function() {
    //Send ajax request to Filter Controller and retrive  subCategories as a Object
     $('#category').change(function() {
 
-        // disabled with out Category and Sub Category
-        $('.diseble2').prop("disabled", true); 
         var categoryCode = $(this).val();
         var a = $(this).parent();
         var op = '';
@@ -67,7 +63,8 @@ $(document).ready(function() {
             },
             success: function(data) {
 
-                op += '<option value="000" > Sub Category</option>';
+                op += '<option value="" > Sub Category</option>';
+                op += '<option value="000" >NO Sub Category</option>';
                 for (var i = 0; i < data.length; i++) {
                     op += '<option value="' + data[i].subCategory_code + '" >' + data[i].subCategory_name + '</option>';
                 }
@@ -90,20 +87,6 @@ $(document).ready(function() {
               $('#alertCategory').click();  
         }
     }) 
-
-   // disabled with out Type dropdown
-   $('#Type').change(function(){
-
-       $('.diseble3').prop('disabled',true);
-
-   })
-
-    // disabled with out ProcurementId dropdown
-   $('#ProID').change(function(){
-  
-    $('.diseble4').prop('disabled',true);
-
-})
 
     
 //This a Function that Send a ajax Request with selected Location code Sub location code like that and get FILTERED DATA as A Object
