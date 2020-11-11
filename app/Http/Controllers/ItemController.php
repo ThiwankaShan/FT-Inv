@@ -30,11 +30,11 @@ class ItemController extends Controller
 
     public function index()
     {
-        $div = Location::all();
-        $cate = Category::all();
+        $locations = Location::all();
+        $categories = Category::all();
         $items = Items::paginate(10);
 
-        return view('layouts.view', compact('div', 'items', 'cate'));
+        return view('layouts.view', compact('locations', 'items', 'cate'));
     }
 
 
@@ -45,17 +45,17 @@ class ItemController extends Controller
      */
     public function create()
     {
-        //data
-        $div = Location::all();
-        $subloc = SubLocation::all();
-        $cate = Category::all();
-        $subcate = SubCategory::all();
+        //data get from models
+        $locations = Location::all();
+        $subLocations = SubLocation::all();
+        $categories = Category::all();
+        $subCategories = SubCategory::all();
         $grn = Grn::all();
         $itemCodes = Session::get('itemCodes');
         session()->flash('grnMsg', 'hello');
         session()->flash('backUrl', "item/create");
 
-        return view('forms.createitem', compact('div', 'subloc', 'cate', 'subcate', 'grn', 'itemCodes'));
+        return view('forms.createitem', compact('locations', 'subLocations', 'categories', 'subCategories', 'grn', 'itemCodes'));
     }
 
     /**
@@ -67,7 +67,7 @@ class ItemController extends Controller
 
     public function store(Request $request)
     {
-
+        //Store values validate in here
 
         $this->validate($request, [
             'Location' => 'required|string',
@@ -77,18 +77,17 @@ class ItemController extends Controller
             'Quantity' => 'required|integer',
             'Vat' => 'required',
             'Rate' => 'required',
-            'Location' => 'required|string',
             'category' => 'required|string'
         ]);
 
-
-        $lname = $request->Location;
-        $slname = $request->subLocation;
-        $cname = $request->category;
-        $scname = $request->subCategory;
+            //This variables are use for create item code
+        $locationCode = $request->Location;
+        $subLocationCode = $request->subLocation;
+        $categoryCode = $request->category;
+        $subCategoryCode = $request->subCategory;
         $vat = $request->Vat;
         $rate = $request->Rate;
-        $sub = $request->sub_item;
+        $subItem = $request->sub_item;
 
 
 
@@ -97,16 +96,16 @@ class ItemController extends Controller
         //  $i= ItemQuantity::count();
 
         $item = Items::where('location_code', $request->Location)
-            ->where('subLocation_code', $request->subLocation)
-            ->where('category_code', $request->category)
-            ->where('subCategory_code', $scname)
+            ->where('subLocation_code', $request->SubLocation)
+            ->where('category_code', $request->Category)
+            ->where('subCategory_code',$request->SubCategory)
             ->orderBy('created_at','asc')->get();
-        
-           
+
+            //Item code creation start
          if(count($item) > 0){
-            $latestItemNum =  preg_split("#/#", $item->last()->item_code);    
+            $latestItemNum =  preg_split("#/#", $item->last()->item_code);
             $i = (int)$latestItemNum[5];
-           
+
         }    else{
             $i = 0;
         }
@@ -116,18 +115,18 @@ class ItemController extends Controller
 
 
             for ($num = $i + 1; $num < $count + $i + 1; $num++) {
-                if ($sub != 0) {
-                    for ($j = 1; $j <= $sub; $j++) {
+                if ($subItem != 0) {
+                    for ($j = 1; $j <= $subItem; $j++) {
                         $filter = new IntToRoman();
-                        $subNum = $filter->filter($j);
+                        $subItemCode = $filter->filter($j);
 
-                        $fnumber = sprintf('%03d', $num);
-                        $itemCode = 'FT' . '/' . $lname . '/' . $slname . '/' . $cname . '/' . $scname . '/' . $fnumber . '/' . $subNum;
+                        $mainItemCode = sprintf('%03d', $num);
+                        $itemCode = 'FT' . '/' . $locationCode . '/' . $subLocationCode . '/' . $categoryCode . '/' . $subCategoryCode . '/' . $mainItemCode . '/' . $subItemCode;
                         array_push($itemCodes, $itemCode);
                     }
                 } else {
-                    $fnumber = sprintf('%03d', $num);
-                    $itemCode = 'FT' . '/' . $lname . '/' . $slname . '/' . $cname . '/' . $scname . '/' . $fnumber;
+                    $mainItemCode = sprintf('%03d', $num);
+                    $itemCode = 'FT' . '/' . $locationCode . '/' . $subLocationCode . '/' . $categoryCode . '/' . $subCategoryCode . '/' . $mainItemCode;
                     array_push($itemCodes, $itemCode);
                 }
             }
@@ -136,22 +135,22 @@ class ItemController extends Controller
         } else {
 
 
-            if ($sub != 0) {
+            if ($subItem != 0) {
                 for ($num = $i + 1; $num < $count + $i + 1; $num++) {
-                    for ($j = 1; $j <= $sub; $j++) {
+                    for ($j = 1; $j <= $subItem; $j++) {
                         $item = new Items();
 
                         $filter = new IntToRoman();
-                        $subNum = $filter->filter($j);
+                        $subItemCode = $filter->filter($j);
 
 
-                        $fnumber = sprintf('%03d', $num);
+                        $mainItemCode = sprintf('%03d', $num);//main item->sub items
 
-                        $item->item_code = 'FT' . '/' . $lname . '/' . $slname . '/' . $cname . '/' . $scname . '/' . $fnumber . '/' . $subNum;
-                        $item->location_code = $lname;
-                        $item->subLocation_code = $slname;
-                        $item->category_code = $cname;
-                        $item->subCategory_code = $scname;
+                        $item->item_code = 'FT' . '/' . $locationCode . '/' . $subLocationCode . '/' . $categoryCode . '/' . $subCategoryCode . '/' . $mainItemCode . '/' . $subItemCode;
+                        $item->location_code = $locationCode;
+                        $item->subLocation_code = $subLocationCode;
+                        $item->category_code = $categoryCode;
+                        $item->subCategory_code = $subCategoryCode;
                         $item->type = $request->types;
 
                         $item->GRN_no = $request->grn_no;
@@ -162,17 +161,17 @@ class ItemController extends Controller
                         $item->save();
                     }
                 }
-            } else if ($sub == 0) {
+            } else if ($subItem == 0) {
 
                 for ($num = $i + 1; $num < $count + $i + 1; $num++) {
                     $item = new Items();
-                    $fnumber = sprintf('%03d', $num);
+                    $mainItemCode = sprintf('%03d', $num);
 
-                    $item->item_code = 'FT' . '/' . $lname . '/' . $slname . '/' . $cname . '/' . $scname . '/' . $fnumber;
-                    $item->location_code = $lname;
-                    $item->subLocation_code = $slname;
-                    $item->category_code = $cname;
-                    $item->subCategory_code = $scname;
+                    $item->item_code = 'FT' . '/' . $locationCode . '/' . $subLocationCode . '/' . $categoryCode . '/' . $subCategoryCode . '/' . $mainItemCode;
+                    $item->location_code = $locationCode;
+                    $item->subLocation_code = $subLocationCode;
+                    $item->category_code = $categoryCode;
+                    $item->subCategory_code = $subCategoryCode;
                     $item->type = $request->types;
 
                     $item->GRN_no = $request->grn_no;
@@ -211,11 +210,11 @@ class ItemController extends Controller
         error_log(gettype($grns[0]));
         error_log(sizeof($grns));
         for($i=0;$i<sizeof($grns);$i++){
-            
+
             if($grns[$i]!=$item->GRN_no){
                 array_push($grn_array,$grns[$i]);
             }
-            
+
         }
         session()->flash('egrnMsg', 'edit');
         session()->flash('editId', $item->item_code);
@@ -251,7 +250,7 @@ class ItemController extends Controller
                 'procurement_id'=>$new_procumentID,
                 ]);
         return redirect()->route('item.editForm',['item'=>$item])->with('success', 'Items updated Successfuly!');
-        
+
     }
 
     /**
