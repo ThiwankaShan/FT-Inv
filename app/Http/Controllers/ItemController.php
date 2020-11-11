@@ -211,6 +211,7 @@ class ItemController extends Controller
         error_log(gettype($grns[0]));
         error_log(sizeof($grns));
         for($i=0;$i<sizeof($grns);$i++){
+            
             if($grns[$i]!=$item->GRN_no){
                 array_push($grn_array,$grns[$i]);
             }
