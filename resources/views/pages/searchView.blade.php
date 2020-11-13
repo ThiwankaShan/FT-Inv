@@ -26,7 +26,8 @@
         </select>
 
         <select class="form-control selector mr-2 mb-1 diseble1 diseble3 diseble4" id="subCategory"  data-column="3">
-            <option value="000"> Sub Category</option>
+
+            <option value=""> Sub Category</option>
 
         </select>
 

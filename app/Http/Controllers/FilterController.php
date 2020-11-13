@@ -37,52 +37,33 @@ class FilterController extends Controller
 
     public function getFilter(Request $request)
     {
-        
-           if(!empty($request->loactionCode)){
-
-                if(!empty($request->subLoactionCode)){
-                    $data = DB::table('items')       
-                    ->where('location_code',$request->loactionCode )
-                    ->where('subLocation_code',$request->subLoactionCode)
-                    ->get();
-
-                }else{
-
-                    $data = DB::table('items')       
-                    ->where('location_code',$request->loactionCode )->get();
-
-                }
-            }else if(!empty($request->categoryCode)){
-
-                  if(!empty($request->subCategoryCode)){
-                    $data = DB::table('items')       
-                    ->where('category_code', $request->categoryCode)
-                    ->orwhere('subCategory_code',$request->subCategoryCode)
-                    ->get();
-
-                  }else{
-
-                    $data = DB::table('items')       
-                    ->where('category_code', $request->categoryCode)->get();
-
-                  }
-             
-           }else if(!empty($request->type)){
-
-                $data = DB::table('items')
-                    ->where('type',$request->type)
-                    ->get();
-
-           }else if(!empty($request->pid)){
-
-                $data = DB::table('items')
-                    ->where('procurement_id',$request->pid)
-                    ->get();
-           }
+       
            
-      
+        $searchmap = array(
+            'location_code'=>$request->loactionCode,
+            'subLocation_code'=>$request->subLoactionCode,
+            'category_code'=>$request->category_code,
+            'subCategory_code'=>$request->subCategory_code,
+            'type'=>$request->type,
+            'procurement_id'=>$request->pid
+        );
 
-        return response()->json(['authType'=>Auth::user()->role,'records'=>$data]);
+    
+       //checking the conditions and get the filtered  item object
+        $gadgets = Items::whereNested(function($query) use ($searchmap) {
+            foreach ($searchmap as $key => $value)
+                {
+                    if($value != ''){
+                        $query->where($key, '=', $value);
+                    }
+                }
+        }, 'and');
+        $gadgets = $gadgets->get();
+
+
+
+        return response()->json(['authType'=>Auth::user()->role,'records'=>$gadgets]);
+          
     }
 
 
