@@ -8,7 +8,7 @@ use App\Location;
 
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\Validator;
+// use Illuminate\Support\Facades\Validator;
 use App\Category;
 use App\Items;
 use App\SubCategory;
@@ -16,7 +16,7 @@ use App\SubLocation;
 
 use Illuminate\Validation\Rule;
 use \Illuminate\Http\Response;
-
+use Validator;
 
 class locationController extends Controller
 {
@@ -33,24 +33,28 @@ class locationController extends Controller
     //validation
     public function storeLocation(Request $request)
     {
-        $validatedata = $request->validate([
-            'location_code' => 'required|string|unique:locations',
-            'location_name' => 'required|string|unique:locations',
+    
+            $validatedata = Validator::make($request->all(),[
+                'location_code' => 'required|string|unique:locations',
+                'location_name' => 'required|string|unique:locations',
+    
+            ]);
+        
+      if($validatedata -> fails()){
+      
+        return response()->json(['errors'=>$validatedata->errors()->all()]);
+      }
 
-        ]);
-
-
-        $data = $request->input();
-
-        try {
             $location = new Location;
-            $location->location_code = $data['location_code'];
-            $location->location_name = $data['location_name'];
-
+            $location->location_code = $request->location_code;
+            $location->location_name = $request->location_name;
+             
             $location->save();
-            return redirect('location')->with('status', "Insert successfully");
-        } catch (Exception $e) {
-            return redirect('location')->with('failed', "operation failed");
-        }
+
+            //get updated Location list
+            $locations = Location::all();
+          
+            return response()->json(['status'=>'success','records'=>$locations]);
+      
     }
 }

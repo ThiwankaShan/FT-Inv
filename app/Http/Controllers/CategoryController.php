@@ -43,16 +43,23 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
 
-        $validatedData = $request->validate([
+        $validatedData = Validator::make($request->all(),[
             'category_name' => 'required|unique:categories',
             'category_code' => 'required|unique:categories',
         ]);
+ 
+        if($validatedData->fails()){
+            return response()->json(['errors'=>$validatedData->errors()->all()]);
+        }
 
         $category = new Category;
         $category->category_name = $request->category_name;
         $category->category_code = $request->category_code;
         $category->save();
-        return redirect('/category')->with('success', "Created successfully");
+ 
+        $categories = Category::all();
+
+        return response()->json(['status'=>'success','records'=>$categories]);
     }
 
     /**

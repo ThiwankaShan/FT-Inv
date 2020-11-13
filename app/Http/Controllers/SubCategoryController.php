@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\SubCategory;
-
+use Validator;
 class SubCategoryController extends Controller
 {
     public function __construct()
@@ -41,10 +41,15 @@ class SubCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedata = $request->validate([
+        $validatedata = Validator::make($request->all(),[
             'subCategory_name' => 'required|unique:sub_categories',
             'subCategory_code' => 'required|unique:sub_categories',
         ]);
+
+        if($validatedata->fails()){
+             
+            return response()->json(['errors'=>$validatedata->errors()->all()]);
+        }
 
         $subCategory = new SubCategory();
         $subCategory->category_code = $request->Category_code;
@@ -52,7 +57,9 @@ class SubCategoryController extends Controller
         $subCategory->subCategory_code = $request->subCategory_code;
 
         $subCategory->save();
-        return redirect('/subcategory')->with('success', 'created sucessfully');
+
+        $subCategories = SubCategory::where('category_code',$request->category_code_form)->get();
+        return response()->json(['status'=>'success','records'=>$subCategories]);
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Supplier;
 use App\Grn;
+use Validator;
 
 class GRNController extends Controller
 {
@@ -46,13 +47,17 @@ class GRNController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedata = $request->validate([
+        $validatedata = Validator::make($request->all(),[
             'GRN_no' => 'required|numeric|unique:grns',
             'GRN_date' => 'required',
             'invoice_no' => 'required|unique:grns',
             'invoice_date' => 'required',
             'supplier_code' => 'required',
         ]);
+
+         if($validatedata->fails()){
+            return response()->json(['errors'=>$validatedata->errors()->all()]);
+         }
 
         $grn = new Grn();
         $grn->GRN_no = $request->GRN_no;
@@ -62,15 +67,10 @@ class GRNController extends Controller
         $grn->supplier_code = $request->supplier_code;
 
         $grn->save();
-         
-       
+        $grn_numbers = Grn::all();  
+        $Suppliers = Supplier::all();
+        return response()->json(['status'=>"Success", 'records'=>$grn_numbers , 'supplier'=>$Suppliers]);
 
-        if($request->grnType == "Complete"){
-            return redirect()->route('item.create')->with('success', 'Created successfully');
-          
-        }else if($request->grnType2 == "Complete2"){
-            return redirect()->route('item.editForm',$request->idShouldEdit);
-        }
        
     }
 

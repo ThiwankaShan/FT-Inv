@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\SubLocation;
 use App\Location;
-
+use Validator;
 class subLocationController extends Controller
 {
     public function __construct()
@@ -43,17 +43,24 @@ class subLocationController extends Controller
     public function store(Request $request)
     {
 
-        $validatedData = $request->validate([
+        $validatedData = Validator::make($request->all(),[
             'subLocation_name' => 'required|unique:sub_locations',
             'subLocation_code' => 'required|unique:sub_locations',
         ]);
+
+        if($validatedData->fails()){
+            return response()->json(['errors'=>$validatedData->errors()->all()]);   
+        }
 
         $subLocation = new SubLocation;
         $subLocation->Location_code = $request->Location_code;
         $subLocation->subLocation_name = $request->subLocation_name;
         $subLocation->subLocation_code = $request->subLocation_code;
         $subLocation->save();
-        return redirect('/sublocation')->with('success', "Created successfully");
+
+        $sublocations = SubLocation::where('Location_code', $request->location_code_form)->get();
+
+        return response()->json(['status'=>'success','records'=>$sublocations]);
     }
 
     /**

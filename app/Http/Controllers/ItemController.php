@@ -10,6 +10,7 @@ use App\Location;
 use App\Items;
 use App\SubCategory;
 use App\SubLocation;
+use App\Supplier;
 use Session;
 
 use Romans\Filter\IntToRoman;
@@ -55,7 +56,19 @@ class ItemController extends Controller
         session()->flash('grnMsg', 'hello');
         session()->flash('backUrl', "item/create");
 
-        return view('forms.createitem', compact('div', 'subloc', 'cate', 'subcate', 'grn', 'itemCodes'));
+        //For The Auto Incrementing Grn Number
+        $last_grnNo = Grn::latest('GRN_no')->first();
+        error_log($last_grnNo);
+        if ($last_grnNo == '') {
+            $suggest_grnNo = '01';
+        } else {
+            $suggest_grnNo = sprintf('%02d', $last_grnNo->GRN_no + 1);
+        }
+        $Suppliers = Supplier::all();
+
+        
+
+        return view('forms.createitem', compact('div', 'subloc', 'cate', 'subcate', 'grn', 'itemCodes','Suppliers', 'suggest_grnNo'));
     }
 
     /**

@@ -6,6 +6,7 @@ $(document).ready(function() {
     $('#location').change(function() {
 
         var locationCode = $(this).val();
+        console.log(locationCode);
         var form = $(this).parent();
         var op = '';
         $.ajax({
