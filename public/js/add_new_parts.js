@@ -107,9 +107,21 @@ $(document).ready(function(){
 
                     //updaing the create itemform dropdown
                     $('#sublocation').html('');
-                    $.each(data.records , function(key, value){
-                        $("#sublocation").append('<option value="'+value.subLocation_code+'">'+value.subLocation_name+'</option>');
-                    })
+                    if(data['records'].length > 0){
+                        
+                        op = '';
+                        op += '<option value="" > Sub Location</option>';
+        
+                        for (var i = 0; i < data['records'].length; i++) {
+                            op += '<option value="' + data['records'][i].subLocation_code + '" >' + data['records'][i].subLocation_name + '</option>';
+                        }
+                    }else if(data['records'].length == 0){
+                        op = '';
+                        op += '<option value="" > Sub Location</option>';
+                    }   
+
+                    $('#sublocation').html('');
+                    $('#sublocation').append(op);
                     
 
                 }else{
@@ -239,9 +251,22 @@ $(document).ready(function(){
 
                     //updaing the create itemform dropdown
                     $('#subCategory').html('');
-                    $.each(data.records , function(key, value){
-                        $("#subCategory").append('<option value="'+value.subCategory_code+'">'+value.subCategory_name+'</option>');
-                    })
+                    if(data['records'].length > 0){
+                        
+                        op = '';
+                        op += '<option value="" > Sub Category</option>';
+                        op += '<option value="000" >No Sub Category</option>';
+                        for (var i = 0; i < data['records'].length; i++) {
+                            op += '<option value="' + data['records'][i].subCategory_code + '" >' + data['records'][i].subCategory_name + '</option>';
+                        }
+                    }else if(data['records'].length == 0){
+                        op = '';
+                        op += '<option value="" > Sub Category</option>';
+                        op += '<option value="000" >No Sub Category</option>';
+                    }   
+
+                    $('#subCategory').html('');
+                    $('#subCategory').append(op);
                     
 
                 }else{
