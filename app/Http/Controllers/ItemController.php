@@ -18,11 +18,7 @@ use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -30,44 +26,38 @@ class ItemController extends Controller
 
     public function index()
     {
-        $div = Location::all();
-        $cate = Category::all();
-        $items = Items::paginate(10);
+        // $locations = Location::all();
+        // $categories = Category::all();
+        // $items = Items::paginate(10);
 
-        return view('layouts.view', compact('div', 'items', 'cate'));
+        // return view('layouts.view', compact('locations', 'items', 'categories'));
     }
 
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        //data
-        $div = Location::all();
-        $subloc = SubLocation::all();
-        $cate = Category::all();
-        $subcate = SubCategory::all();
+        //data get from Location, SubLocation, Category, SubCategory
+        //and return those to createitem form
+        $locations = Location::all();
+        $subLocations = SubLocation::all();
+        $categories = Category::all();
+        $subCategories = SubCategory::all();
         $grn = Grn::all();
         $itemCodes = Session::get('itemCodes');
         session()->flash('grnMsg', 'hello');
         session()->flash('backUrl', "item/create");
 
-        return view('forms.createitem', compact('div', 'subloc', 'cate', 'subcate', 'grn', 'itemCodes'));
+        return view('forms.createitem', compact('locations', 'subLocations', 'categories', 'subCategories', 'grn', 'itemCodes'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
 
     public function store(Request $request)
     {
-
+        //Request data -> Location, SubLocation, Sub_item, procument_id, Quantity, Vat, Rate, Category
+        //store data in items table
+        //return to create item form
 
         $this->validate($request, [
             'Location' => 'required|string',
@@ -77,18 +67,17 @@ class ItemController extends Controller
             'Quantity' => 'required|integer',
             'Vat' => 'required',
             'Rate' => 'required',
-            'Location' => 'required|string',
             'category' => 'required|string'
         ]);
 
-
-        $lname = $request->Location;
-        $slname = $request->subLocation;
-        $cname = $request->category;
-        $scname = $request->subCategory;
+        //This variables are use for create item code
+        $locationCode = $request->Location;
+        $subLocationCode = $request->subLocation;
+        $categoryCode = $request->category;
+        $subCategoryCode = $request->subCategory;
         $vat = $request->Vat;
         $rate = $request->Rate;
-        $sub = $request->sub_item;
+        $subItem = $request->sub_item;
 
 
 
@@ -96,83 +85,88 @@ class ItemController extends Controller
         $count = $request->Quantity;
         //  $i= ItemQuantity::count();
 
+        //items information request from the item model
         $item = Items::where('location_code', $request->Location)
-            ->where('subLocation_code', $request->subLocation)
-            ->where('category_code', $request->category)
-            ->where('subCategory_code', $scname)
-            ->orderBy('created_at','asc')->get();
-        
-           
-         if(count($item) > 0){
-            $latestItemNum =  preg_split("#/#", $item->last()->item_code);    
+            ->where('subLocation_code', $request->SubLocation)
+            ->where('category_code', $request->Category)
+            ->where('subCategory_code', $request->SubCategory)
+            ->orderBy('created_at', 'asc')->get();
+
+        //Item code creation start
+        if (count($item) > 0) {
+            $latestItemNum =  preg_split("#/#", $item->last()->item_code);
             $i = (int)$latestItemNum[5];
-           
-        }    else{
+        } else {
             $i = 0;
         }
 
         $itemCodes = [];
+        //If action=show this part is processing
         if ($request->action == 'show') {
 
 
             for ($num = $i + 1; $num < $count + $i + 1; $num++) {
-                if ($sub != 0) {
-                    for ($j = 1; $j <= $sub; $j++) {
+                if ($subItem != 0) {
+                    for ($j = 1; $j <= $subItem; $j++) {
                         $filter = new IntToRoman();
-                        $subNum = $filter->filter($j);
+                        $subItemCode = $filter->filter($j);
 
-                        $fnumber = sprintf('%03d', $num);
-                        $itemCode = 'FT' . '/' . $lname . '/' . $slname . '/' . $cname . '/' . $scname . '/' . $fnumber . '/' . $subNum;
+                        $mainItemCode = sprintf('%03d', $num);
+                        $itemCode = 'FT' . '/' . $locationCode . '/' . $subLocationCode . '/' . $categoryCode . '/' . $subCategoryCode . '/' . $mainItemCode . '/' . $subItemCode;
                         array_push($itemCodes, $itemCode);
                     }
                 } else {
-                    $fnumber = sprintf('%03d', $num);
-                    $itemCode = 'FT' . '/' . $lname . '/' . $slname . '/' . $cname . '/' . $scname . '/' . $fnumber;
+                    $mainItemCode = sprintf('%03d', $num);
+                    $itemCode = 'FT' . '/' . $locationCode . '/' . $subLocationCode . '/' . $categoryCode . '/' . $subCategoryCode . '/' . $mainItemCode;
                     array_push($itemCodes, $itemCode);
                 }
             }
 
             return json_encode($itemCodes);
-        } else {
+        }
+        //Input data store in the database.
+        else {
 
-
-            if ($sub != 0) {
+            //If item has sub items this part work
+            if ($subItem != 0) {
                 for ($num = $i + 1; $num < $count + $i + 1; $num++) {
-                    for ($j = 1; $j <= $sub; $j++) {
+                    for ($j = 1; $j <= $subItem; $j++) {
                         $item = new Items();
 
                         $filter = new IntToRoman();
-                        $subNum = $filter->filter($j);
+                        $subItemCode = $filter->filter($j);
 
 
-                        $fnumber = sprintf('%03d', $num);
+                        $mainItemCode = sprintf('%03d', $num); //main item->sub items
 
-                        $item->item_code = 'FT' . '/' . $lname . '/' . $slname . '/' . $cname . '/' . $scname . '/' . $fnumber . '/' . $subNum;
-                        $item->location_code = $lname;
-                        $item->subLocation_code = $slname;
-                        $item->category_code = $cname;
-                        $item->subCategory_code = $scname;
+                        $item->item_code = 'FT' . '/' . $locationCode . '/' . $subLocationCode . '/' . $categoryCode . '/' . $subCategoryCode . '/' . $mainItemCode . '/' . $subItemCode;
+                        $item->location_code = $locationCode;
+                        $item->subLocation_code = $subLocationCode;
+                        $item->category_code = $categoryCode;
+                        $item->subCategory_code = $subCategoryCode;
                         $item->type = $request->types;
 
                         $item->GRN_no = $request->grn_no;
-                        $item->vat = (($vat*$rate)/100);
+                        $item->vat = (($vat * $rate) / 100);
                         $item->procurement_id = $request->procument_id;
                         $item->rate = $request->Rate;
                         $item->vat_rate_vat = $vat;
                         $item->save();
                     }
                 }
-            } else if ($sub == 0) {
+            }
+            //If sub item hasn't sub item this part work
+            else if ($subItem == 0) {
 
                 for ($num = $i + 1; $num < $count + $i + 1; $num++) {
                     $item = new Items();
-                    $fnumber = sprintf('%03d', $num);
+                    $mainItemCode = sprintf('%03d', $num);
 
-                    $item->item_code = 'FT' . '/' . $lname . '/' . $slname . '/' . $cname . '/' . $scname . '/' . $fnumber;
-                    $item->location_code = $lname;
-                    $item->subLocation_code = $slname;
-                    $item->category_code = $cname;
-                    $item->subCategory_code = $scname;
+                    $item->item_code = 'FT' . '/' . $locationCode . '/' . $subLocationCode . '/' . $categoryCode . '/' . $subCategoryCode . '/' . $mainItemCode;
+                    $item->location_code = $locationCode;
+                    $item->subLocation_code = $subLocationCode;
+                    $item->category_code = $categoryCode;
+                    $item->subCategory_code = $subCategoryCode;
                     $item->type = $request->types;
 
                     $item->GRN_no = $request->grn_no;
@@ -187,81 +181,66 @@ class ItemController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Items  $itemQuantity
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Items $itemQuantity)
     {
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Items  $itemQuantity
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Items $item)
     {
+        //get the input from grn
+        //auto increment functionality
+        //return to edit item form
         $grns = Grn::all()->pluck('GRN_no');
-        $grn_array=[];
+        $grn_array = [];
         error_log('here');
         error_log(gettype($grns[0]));
         error_log(sizeof($grns));
-        for($i=0;$i<sizeof($grns);$i++){
-            
-            if($grns[$i]!=$item->GRN_no){
-                array_push($grn_array,$grns[$i]);
+        for ($i = 0; $i < sizeof($grns); $i++) {
+
+            if ($grns[$i] != $item->GRN_no) {
+                array_push($grn_array, $grns[$i]);
             }
-            
         }
         session()->flash('egrnMsg', 'edit');
         session()->flash('editId', $item->item_code);
 
-        return view('forms.editItem',compact('grn_array', 'item'));
+        return view('forms.editItem', compact('grn_array', 'item'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Items  $itemQuantity
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request)
     {
-        $item=$request->item;
+        //request items->item, Vat, rate, grn_no, types, procument_id
+        //store the updates in items table
+        //return to item edit form
+        $item = $request->item;
         $new_vat_rate = $request->Vat;
         $new_rate = $request->Rate;
-        $new_vat=(($new_vat_rate * $new_rate) / 100);
-        $new_grn=$request->grn_no;
-        $new_type=$request->types;
-        $new_procumentID=$request->procument_id;
+        $new_vat = (($new_vat_rate * $new_rate) / 100);
+        $new_grn = $request->grn_no;
+        $new_type = $request->types;
+        $new_procumentID = $request->procument_id;
 
         DB::table('items')
             ->where('item_code', $request->item)
             ->update([
-                'rate' =>$new_rate,
-                "vat_rate_vat"=>$new_vat_rate,
-                'vat'=>$new_vat,
-                'type'=>$new_type,
-                'GRN_no'=>$new_grn,
-                'procurement_id'=>$new_procumentID,
-                ]);
-        return redirect()->route('item.editForm',['item'=>$item])->with('success', 'Items updated Successfuly!');
-        
+                'rate' => $new_rate,
+                "vat_rate_vat" => $new_vat_rate,
+                'vat' => $new_vat,
+                'type' => $new_type,
+                'GRN_no' => $new_grn,
+                'procurement_id' => $new_procumentID,
+            ]);
+        return redirect()->route('item.editForm', ['item' => $item])->with('success', 'Items updated Successfuly!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Items  $itemQuantity
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Items $item)
     {
+        //delete item permanently
+        //return to home
         $item->delete();
         return redirect()->route('home')
             ->with('success', 'item deleted successfully');

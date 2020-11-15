@@ -19,7 +19,7 @@ class SubLocation extends Model
     protected $keyType = "string";
 
     ///creating the relation between Division And subLocation
-    public function division()
+    public function location()
     {
         return $this->belongsTo('App\Location');
     }
