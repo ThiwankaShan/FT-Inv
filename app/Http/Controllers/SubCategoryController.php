@@ -40,10 +40,10 @@ class SubCategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     //Got sub category code , Name and The category code that new sub category Belongs.
-     //save New Sub category and Send Updated sub categories of Selected category OF Item Form 
-    public function store(Request $request)
+     
+    public function store(Request $request)// sub category code , Name and The category code that new sub category Belongs.
     {
+        //Validation
         $validatedata = Validator::make($request->all(),[
             'subCategory_name' => 'required|unique:sub_categories',
             'subCategory_code' => 'required|unique:sub_categories',
@@ -60,10 +60,11 @@ class SubCategoryController extends Controller
         $subCategory->subCategory_name = $request->subCategory_name;
         $subCategory->subCategory_code = $request->subCategory_code;
 
+         //save New Sub category  
         $subCategory->save();
 
         $subCategories = SubCategory::where('category_code',$request->category_code_form)->get();
-        return response()->json(['status'=>'success','records'=>$subCategories]);
+        return response()->json(['status'=>'success','records'=>$subCategories]);   //Send Updated sub categories of Selected category OF Item Form 
     }
 
     /**

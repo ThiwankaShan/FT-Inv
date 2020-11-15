@@ -114,7 +114,7 @@ $(document).ready(function() {
                 var output = "";              
                 console.log(data);
                 
-                if(data['records'].length < 1 ){
+                if(data['records'].length < 1 ){  //If empty the Filtered data will be appeared "no data" warning
                    
                     output += '<tr>'
                     output += '<td colspan="12"><div class="alert alert-danger text-center" role="alert"><strong>No Related Data!</strong></div></td>';     

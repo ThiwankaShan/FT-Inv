@@ -46,9 +46,9 @@ class GRNController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    //New Grn no,date,invoice no,invoice date,and supplier code got from ajax request
-    //send updated grn numbers to item create form and send suppliers to grn create modal  
-    public function store(Request $request)
+    
+    
+    public function store(Request $request)//New Grn no,date,invoice no,invoice date,and supplier code 
     {
 
         //validation 
@@ -72,9 +72,10 @@ class GRNController extends Controller
         $grn->invoice_date = $request->invoice_date;
         $grn->supplier_code = $request->supplier_code;
 
+        //saving new grn number
         $grn->save();
         $grn_numbers = Grn::all();  
-        $Suppliers = Supplier::all();
+        $Suppliers = Supplier::all();  //send updated grn numbers to item create form and send suppliers to grn create modal  
         return response()->json(['status'=>"Success", 'records'=>$grn_numbers , 'supplier'=>$Suppliers]);
 
        

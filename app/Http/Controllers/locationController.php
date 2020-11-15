@@ -31,8 +31,8 @@ class locationController extends Controller
         
     }
     
-    //Got location_code and location_name of new Loaction,Save New Loaction and Sending the Updated Locations
-    public function storeLocation(Request $request)
+   
+    public function storeLocation(Request $request) // location_code and location_name of new Loaction,
     {
         
         //validation of the Inputs
@@ -52,6 +52,7 @@ class locationController extends Controller
             $location->location_code = $request->location_code;
             $location->location_name = $request->location_name;
              
+           // Save New Loaction and Sending the Updated Locations
             $location->save();
 
             //get updated Location list

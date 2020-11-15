@@ -41,8 +41,8 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     //Got category code and name of new Category,Save New Category and Sending the Updated Categories
-    public function store(Request $request)
+    
+    public function store(Request $request) // category code and name of new Category 
     {
 
         //validation of the Inputs
@@ -61,9 +61,10 @@ class CategoryController extends Controller
         $category->category_code = $request->category_code;
         $category->save();
  
+        //Save New Category  
         $categories = Category::all();
 
-        return response()->json(['status'=>'success','records'=>$categories]);
+        return response()->json(['status'=>'success','records'=>$categories]);//Sending the Updated Categories
     }
 
     /**
