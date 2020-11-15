@@ -45,8 +45,13 @@ class GRNController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    //New Grn no,date,invoice no,invoice date,and supplier code got from ajax request
+    //send updated grn numbers to item create form and send suppliers to grn create modal  
     public function store(Request $request)
     {
+
+        //validation 
         $validatedata = Validator::make($request->all(),[
             'GRN_no' => 'required|numeric|unique:grns',
             'GRN_date' => 'required',
@@ -55,6 +60,7 @@ class GRNController extends Controller
             'supplier_code' => 'required',
         ]);
 
+        //if validation fails sending all errors to modal
          if($validatedata->fails()){
             return response()->json(['errors'=>$validatedata->errors()->all()]);
          }

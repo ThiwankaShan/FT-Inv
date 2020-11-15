@@ -39,6 +39,9 @@ class SubCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+     //Got sub category code , Name and The category code that new sub category Belongs.
+     //save New Sub category and Send Updated sub categories of Selected category OF Item Form 
     public function store(Request $request)
     {
         $validatedata = Validator::make($request->all(),[
@@ -46,6 +49,7 @@ class SubCategoryController extends Controller
             'subCategory_code' => 'required|unique:sub_categories',
         ]);
 
+        //if fails that send all errors
         if($validatedata->fails()){
              
             return response()->json(['errors'=>$validatedata->errors()->all()]);

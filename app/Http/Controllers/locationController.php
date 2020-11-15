@@ -28,18 +28,21 @@ class locationController extends Controller
     public function index()
     {
 
-        return view('forms.createLocation');
+        
     }
-    //validation
+    
+    //Got location_code and location_name of new Loaction,Save New Loaction and Sending the Updated Locations
     public function storeLocation(Request $request)
     {
-    
+        
+        //validation of the Inputs
             $validatedata = Validator::make($request->all(),[
                 'location_code' => 'required|string|unique:locations',
                 'location_name' => 'required|string|unique:locations',
     
             ]);
         
+       //if validation fails send all errors to the modal      
       if($validatedata -> fails()){
       
         return response()->json(['errors'=>$validatedata->errors()->all()]);

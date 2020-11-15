@@ -115,9 +115,13 @@ $(document).ready(function() {
                 console.log(data);
                 
                 if(data['records'].length < 1 ){
-                    output += '<div class="alert alert-danger text-center" role="alert"><strong>No Related Data!</strong></div>';  
-                    $('#dataTable').html("");
-                    $('#dataTable').append(output);   
+                   
+                    output += '<tr>'
+                    output += '<td colspan="12"><div class="alert alert-danger text-center" role="alert"><strong>No Related Data!</strong></div></td>';     
+                    output += '</tr>'
+                    
+                    $('#dataBody').html("");
+                    $('#dataBody').append(output);   
                 }else{
                     for (var i = 0; i < data['records'].length; i++) {
                    
@@ -135,9 +139,9 @@ $(document).ready(function() {
                         output += '<td>' + data['records'][i].rate + '</td>';
     
                         if(data['authType'] == "manager"){
-                            output += '<td class="d-flex flex-row"><a href="" class="btn btn-secondary mr-1">View</a><a href="/item/edit/' + data['records'][i].item_code + '" class="btn btn-primary">Edit</a> </td>';
+                            output += '<td class="d-flex flex-row"><a href="" class="btn btn-secondary mr-1 text-light">View</a><a href="/item/edit/' + data['records'][i].item_code + '" class="btn btn-primary">Edit</a> </td>';
                         }else if(data['authType'] == "admin"){
-                            output += '<td class="d-flex flex-row"><a href="/item/edit/' + data['records'][i].item_code + '" class="btn btn-primary mr-1">Edit</a> <a href="/item/delete/'+ data['records'][i].item_code +'" data-method="post" class="btn btn-danger delete-item" token="'+ _token+'">Delete</a>  </td> ';
+                            output += '<td class="d-flex flex-row"><a href="/item/edit/' + data['records'][i].item_code + '" class="btn btn-primary mr-1 text-light">Edit</a> <a href="/item/delete/'+ data['records'][i].item_code +'" data-method="post" class="btn btn-danger delete-item text-light" token="'+ _token+'">Delete</a>  </td> ';
                         
                         }
                         
@@ -169,8 +173,7 @@ $(document).ready(function() {
         var pID = $('#ProID').val();
         console.log(pID);
             fetchData(location, subLocation, category, subCategory, type, pID);
-       
-
+            
     });
 
     
