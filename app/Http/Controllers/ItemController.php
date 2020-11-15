@@ -18,11 +18,7 @@ use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -38,14 +34,11 @@ class ItemController extends Controller
     }
 
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        //data get from models and return those to createitem form
+        //data get from Location, SubLocation, Category, SubCategory
+        //and return those to createitem form
         $locations = Location::all();
         $subLocations = SubLocation::all();
         $categories = Category::all();
@@ -58,16 +51,13 @@ class ItemController extends Controller
         return view('forms.createitem', compact('locations', 'subLocations', 'categories', 'subCategories', 'grn', 'itemCodes'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
 
     public function store(Request $request)
     {
-        //Store values validate in here
+        //Request data -> Location, SubLocation, Sub_item, procument_id, Quantity, Vat, Rate, Category
+        //store data in items table
+        //return to create item form
 
         $this->validate($request, [
             'Location' => 'required|string',
@@ -191,25 +181,17 @@ class ItemController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Items  $itemQuantity
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Items $itemQuantity)
     {
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Items  $itemQuantity
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Items $item)
     {
-        //get the input from grn and create auto increment functionality
+        //get the input from grn
+        //auto increment functionality
+        //return to edit item form
         $grns = Grn::all()->pluck('GRN_no');
         $grn_array = [];
         error_log('here');
@@ -227,16 +209,12 @@ class ItemController extends Controller
         return view('forms.editItem', compact('grn_array', 'item'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Items  $itemQuantity
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request)
     {
-        //Get the exist items and store the updates in items table then return to item edit form
+        //request items->item, Vat, rate, grn_no, types, procument_id
+        //store the updates in items table
+        //return to item edit form
         $item = $request->item;
         $new_vat_rate = $request->Vat;
         $new_rate = $request->Rate;
@@ -258,14 +236,11 @@ class ItemController extends Controller
         return redirect()->route('item.editForm', ['item' => $item])->with('success', 'Items updated Successfuly!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Items  $itemQuantity
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Items $item)
     {
+        //delete item permanently
+        //return to home
         $item->delete();
         return redirect()->route('home')
             ->with('success', 'item deleted successfully');
