@@ -30,11 +30,11 @@ class ItemController extends Controller
 
     public function index()
     {
-        $locations = Location::all();
-        $categories = Category::all();
-        $items = Items::paginate(10);
+        // $locations = Location::all();
+        // $categories = Category::all();
+        // $items = Items::paginate(10);
 
-        return view('layouts.view', compact('locations', 'items', 'cate'));
+        // return view('layouts.view', compact('locations', 'items', 'categories'));
     }
 
 
@@ -45,7 +45,7 @@ class ItemController extends Controller
      */
     public function create()
     {
-        //data get from models
+        //data get from models and return those to createitem form
         $locations = Location::all();
         $subLocations = SubLocation::all();
         $categories = Category::all();
@@ -80,7 +80,7 @@ class ItemController extends Controller
             'category' => 'required|string'
         ]);
 
-            //This variables are use for create item code
+        //This variables are use for create item code
         $locationCode = $request->Location;
         $subLocationCode = $request->subLocation;
         $categoryCode = $request->category;
@@ -95,22 +95,23 @@ class ItemController extends Controller
         $count = $request->Quantity;
         //  $i= ItemQuantity::count();
 
+        //items information request from the item model
         $item = Items::where('location_code', $request->Location)
             ->where('subLocation_code', $request->SubLocation)
             ->where('category_code', $request->Category)
-            ->where('subCategory_code',$request->SubCategory)
-            ->orderBy('created_at','asc')->get();
+            ->where('subCategory_code', $request->SubCategory)
+            ->orderBy('created_at', 'asc')->get();
 
-            //Item code creation start
-         if(count($item) > 0){
+        //Item code creation start
+        if (count($item) > 0) {
             $latestItemNum =  preg_split("#/#", $item->last()->item_code);
             $i = (int)$latestItemNum[5];
-
-        }    else{
+        } else {
             $i = 0;
         }
 
         $itemCodes = [];
+        //If action=show this part is processing
         if ($request->action == 'show') {
 
 
@@ -132,9 +133,11 @@ class ItemController extends Controller
             }
 
             return json_encode($itemCodes);
-        } else {
+        }
+        //Input data store in the database.
+        else {
 
-
+            //If item has sub items this part work
             if ($subItem != 0) {
                 for ($num = $i + 1; $num < $count + $i + 1; $num++) {
                     for ($j = 1; $j <= $subItem; $j++) {
@@ -144,7 +147,7 @@ class ItemController extends Controller
                         $subItemCode = $filter->filter($j);
 
 
-                        $mainItemCode = sprintf('%03d', $num);//main item->sub items
+                        $mainItemCode = sprintf('%03d', $num); //main item->sub items
 
                         $item->item_code = 'FT' . '/' . $locationCode . '/' . $subLocationCode . '/' . $categoryCode . '/' . $subCategoryCode . '/' . $mainItemCode . '/' . $subItemCode;
                         $item->location_code = $locationCode;
@@ -154,14 +157,16 @@ class ItemController extends Controller
                         $item->type = $request->types;
 
                         $item->GRN_no = $request->grn_no;
-                        $item->vat = (($vat*$rate)/100);
+                        $item->vat = (($vat * $rate) / 100);
                         $item->procurement_id = $request->procument_id;
                         $item->rate = $request->Rate;
                         $item->vat_rate_vat = $vat;
                         $item->save();
                     }
                 }
-            } else if ($subItem == 0) {
+            }
+            //If sub item hasn't sub item this part work
+            else if ($subItem == 0) {
 
                 for ($num = $i + 1; $num < $count + $i + 1; $num++) {
                     $item = new Items();
@@ -204,22 +209,22 @@ class ItemController extends Controller
      */
     public function edit(Items $item)
     {
+        //get the input from grn and create auto increment functionality
         $grns = Grn::all()->pluck('GRN_no');
-        $grn_array=[];
+        $grn_array = [];
         error_log('here');
         error_log(gettype($grns[0]));
         error_log(sizeof($grns));
-        for($i=0;$i<sizeof($grns);$i++){
+        for ($i = 0; $i < sizeof($grns); $i++) {
 
-            if($grns[$i]!=$item->GRN_no){
-                array_push($grn_array,$grns[$i]);
+            if ($grns[$i] != $item->GRN_no) {
+                array_push($grn_array, $grns[$i]);
             }
-
         }
         session()->flash('egrnMsg', 'edit');
         session()->flash('editId', $item->item_code);
 
-        return view('forms.editItem',compact('grn_array', 'item'));
+        return view('forms.editItem', compact('grn_array', 'item'));
     }
 
     /**
@@ -231,26 +236,26 @@ class ItemController extends Controller
      */
     public function update(Request $request)
     {
-        $item=$request->item;
+        //Get the exist items and store the updates in items table then return to item edit form
+        $item = $request->item;
         $new_vat_rate = $request->Vat;
         $new_rate = $request->Rate;
-        $new_vat=(($new_vat_rate * $new_rate) / 100);
-        $new_grn=$request->grn_no;
-        $new_type=$request->types;
-        $new_procumentID=$request->procument_id;
+        $new_vat = (($new_vat_rate * $new_rate) / 100);
+        $new_grn = $request->grn_no;
+        $new_type = $request->types;
+        $new_procumentID = $request->procument_id;
 
         DB::table('items')
             ->where('item_code', $request->item)
             ->update([
-                'rate' =>$new_rate,
-                "vat_rate_vat"=>$new_vat_rate,
-                'vat'=>$new_vat,
-                'type'=>$new_type,
-                'GRN_no'=>$new_grn,
-                'procurement_id'=>$new_procumentID,
-                ]);
-        return redirect()->route('item.editForm',['item'=>$item])->with('success', 'Items updated Successfuly!');
-
+                'rate' => $new_rate,
+                "vat_rate_vat" => $new_vat_rate,
+                'vat' => $new_vat,
+                'type' => $new_type,
+                'GRN_no' => $new_grn,
+                'procurement_id' => $new_procumentID,
+            ]);
+        return redirect()->route('item.editForm', ['item' => $item])->with('success', 'Items updated Successfuly!');
     }
 
     /**
