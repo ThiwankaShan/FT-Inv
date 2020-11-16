@@ -21,7 +21,7 @@
                     <div class="col-sm-9 mb-1">
                         <select class="form-control " id="location" name="Location">
                             <option value="">Select Location</option>
-                            @foreach($div as $location)
+                            @foreach($locations as $location)
                             <option value="{{$location->location_code}}">{{$location->location_name}}</option>
                             @endforeach
                         </select>
@@ -47,7 +47,7 @@
                     <div class="col-sm-9 mb-1">
                         <select class="form-control " id="sublocation" name="subLocation">
                             <option value="000">Select Sub Location</option>
-                            @foreach($subloc as $subLocation)
+                            @foreach($subLocations as $subLocation)
                             <option value="{{$subLocation->subLocation_code}}">{{$subLocation->subLocation_name}}</option>
                             @endforeach
                         </select>
@@ -64,7 +64,7 @@
                     <div class="col-sm-9 mb-1">
                         <select class="form-control " id="category" name="category">
                             <option value="">Select Category</option>
-                            @foreach($cate as $category)
+                            @foreach($categories as $category)
                             <option value="{{$category->category_code}}">{{$category->category_name}}</option>
                             @endforeach
                         </select>
@@ -91,7 +91,7 @@
                     <div class="col-sm-9">
                         <select class="form-control " id="subCategory" name="subCategory">
                             <option value="000">Select Sub Category</option>
-                            @foreach($subcate as $subcategory)
+                            @foreach($subCategories as $subcategory)
                             <option value="{{$subcategory->subCategory_code}}">{{$subcategory->subCategory_name}}</option>
                             @endforeach
                         </select>
@@ -233,7 +233,7 @@
             </div>
             @endif
 
-          
+
             <div class="text-center">
 
 
