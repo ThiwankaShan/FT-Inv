@@ -32,15 +32,19 @@ class locationController extends Controller
     }
     
    
-    public function storeLocation(Request $request) // location_code and location_name of new Loaction,
+    public function storeLocation(Request $request)
     {
+         //Getting location_code and location_name of new Loaction,Save New Loaction and Sending the Updated Locations
+         //send the  updated Location list array
+
         
-        //validation of the Inputs
+        
             $validatedata = Validator::make($request->all(),[
                 'location_code' => 'required|string|unique:locations',
                 'location_name' => 'required|string|unique:locations',
     
             ]);
+            
         
        //if validation fails send all errors to the modal      
       if($validatedata -> fails()){
@@ -52,10 +56,10 @@ class locationController extends Controller
             $location->location_code = $request->location_code;
             $location->location_name = $request->location_name;
              
-           // Save New Loaction and Sending the Updated Locations
+           
             $location->save();
 
-            //get updated Location list
+        
             $locations = Location::all();
           
             return response()->json(['status'=>'success','records'=>$locations]);

@@ -48,10 +48,13 @@ class GRNController extends Controller
 
     
     
-    public function store(Request $request)//New Grn no,date,invoice no,invoice date,and supplier code 
+    public function store(Request $request)
     {
 
-        //validation 
+        //New Grn no,date,invoice no,invoice date,and supplier code 
+        //send updated grn numbers array to item create form and send suppliers array to grn create modal  
+
+
         $validatedata = Validator::make($request->all(),[
             'GRN_no' => 'required|numeric|unique:grns',
             'GRN_date' => 'required',
@@ -72,10 +75,10 @@ class GRNController extends Controller
         $grn->invoice_date = $request->invoice_date;
         $grn->supplier_code = $request->supplier_code;
 
-        //saving new grn number
+    
         $grn->save();
         $grn_numbers = Grn::all();  
-        $Suppliers = Supplier::all();  //send updated grn numbers to item create form and send suppliers to grn create modal  
+        $Suppliers = Supplier::all();  
         return response()->json(['status'=>"Success", 'records'=>$grn_numbers , 'supplier'=>$Suppliers]);
 
        

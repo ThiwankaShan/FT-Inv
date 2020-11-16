@@ -42,10 +42,12 @@ class CategoryController extends Controller
      */
 
     
-    public function store(Request $request) // category code and name of new Category 
+    public function store(Request $request)
     {
 
-        //validation of the Inputs
+       // category code and name of new Category Sending the Updated Categories array
+
+
         $validatedData = Validator::make($request->all(),[
             'category_name' => 'required|unique:categories',
             'category_code' => 'required|unique:categories',
@@ -61,10 +63,10 @@ class CategoryController extends Controller
         $category->category_code = $request->category_code;
         $category->save();
  
-        //Save New Category  
+        
         $categories = Category::all();
 
-        return response()->json(['status'=>'success','records'=>$categories]);//Sending the Updated Categories
+        return response()->json(['status'=>'success','records'=>$categories]);
     }
 
     /**
