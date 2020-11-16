@@ -1,4 +1,4 @@
-$(document).on("click","#preview",function(){
+$(document).on("click","#preview",function(){//get input from create item blade and check the data
    console.log('came to js function');
     var location = $('#location').val();
     var sublocation = $('#subLocation').val();
@@ -40,16 +40,16 @@ $(document).on("click","#preview",function(){
             $('#itemCodes').modal("show");
             var tabledata="";
             $.each(res, function (index, object) {
-                
+
                 tabledata+='<tr> <td>'+object+'</td></tr><hr>';
-            
+
             });
             $('#itemCode').html("");
             $('#itemCode').append(tabledata);
         },
 
         error: function(request, status, error){
-           
+
             var error="";
             $.each(request.responseJSON.errors, function (index, object) {
                 if(index=='Vat'){
@@ -76,9 +76,9 @@ $(document).on("click","#preview",function(){
                     $('#rateError').html("");
                     $('#rateError').append(error);
                 }
-               
+
             });
-            
+
         },
-    }) 
+    })
 })
