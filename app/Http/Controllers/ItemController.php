@@ -58,7 +58,7 @@ class ItemController extends Controller
         } else {
             $suggest_grnNo = sprintf('%02d', $last_grnNo->GRN_no + 1);
         }
-        
+
         return view('forms.createitem', compact('locations', 'subLocations', 'categories', 'subCategories', 'grn', 'itemCodes','suggest_grnNo','Suppliers'));
 
     }
@@ -215,7 +215,7 @@ class ItemController extends Controller
                 array_push($grn_array, $grns[$i]);
             }
         }
-        
+
         //For The Auto Incrementing Grn Number in the add new GRN modal
         $last_grnNo = Grn::latest('GRN_no')->first();
         error_log($last_grnNo);
