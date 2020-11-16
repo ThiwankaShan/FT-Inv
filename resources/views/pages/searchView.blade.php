@@ -91,10 +91,10 @@
                 <td>{{$item->rate}}</td>
                 <td class="d-flex flex-row">
                     @if(auth()->user()->role == 'admin')
-                        <a class="btn btn-primary mr-1" href="/item/edit/{{$item->item_code}}">Edit</a> 
-                        <a href="/item/delete/{{$item->item_code}}" data-method="post" class="btn btn-danger delete-item" token='{!! csrf_token() !!}'>Delete</a>
+                        <a class="btn btn-primary mr-1 text-light" href="/item/edit/{{$item->item_code}}">Edit</a> 
+                        <a href="/item/delete/{{$item->item_code}}" data-method="post" class="btn btn-danger delete-item text-light" token='{!! csrf_token() !!}'>Delete</a>
                     @elseif(auth()->user()->role == 'manager')
-                        <a class="btn btn-primary mr-1" href="/item/edit/{{$item->item_code}}">Edit</a> 
+                        <a class="btn btn-primary mr-1 text-light" href="/item/edit/{{$item->item_code}}">Edit</a> 
                     @endif
                 </td>
                 
