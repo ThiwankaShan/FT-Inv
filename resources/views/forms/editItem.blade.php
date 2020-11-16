@@ -43,7 +43,7 @@
                         <label for="item-name ">GRN No.</label>
                     </div>
                     <div class="col-sm-9 mb-1">
-                        <select class="form-control " id="exampleFormControlSelect1" name="grn_no">
+                        <select class="form-control " id="GRN_code" name="grn_no">
                             <option value="{{$item->GRN_no}}">{{ $item->GRN_no }}</option>
                             @foreach($grn_array as $grn)
                             <option value="{{$grn}}">{{ $grn }}</option>
@@ -55,7 +55,7 @@
 
 
 
-                    <a class="btn button-style form-control" href="{{route('grn.index')}}" class="button">Add New GRN</a>
+                <a class="btn form-control button-style" href="" id="button_create_grn" data-toggle="modal"  data-target="#Add_new_GRN" class="button">Add New GRN</a>  
 
                 </div>
             </div>
@@ -145,4 +145,79 @@
     </div>
 </div>
 
+
+<!-- Here is Add new GRN Form -->
+<div class="modal fade bd-example-modal-lg" style="top:40px"  tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="Add_new_GRN" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content ">
+  
+            <div class='card w-100  item-create'>
+            <h5 class="form-card-header-custom text-white p-3">Add New GRN</h5>
+
+            <div class="card-body">
+
+                         <div class="alert alert-success text-center" role="alert" style="display:none" id="valid_grn">
+                                <strong>New GRN Created Successfully!!</strong> 
+                        </div>
+
+                        <div class="alert alert-danger  " id="invalid_grn" style="display:none">
+                            <ul ></ul>
+                        </div>
+
+                <form  class="form-align-custom" id="Grn_form">
+                    @csrf
+                   
+                    <div class="form-group form-custom">
+                        <label for="GRN_no">GRN No.</label>
+                        <input type="text" class="form-control form-custom" id="GRN_no" name="GRN_no" value="{{$suggest_grnNo}}">
+
+                    </div>
+
+                    <div class="form-group form-custom">
+                        <label for="GRN_date">GRN Date</label>
+                        <input type="date" class="form-control" name="GRN_date" id="GRN_date">
+                      
+                    </div>
+
+                    <div class="form-group form-custom">
+                        <label for="invoice_no">Invoice No.</label>
+                        <input type="text" class="form-control" id="invoice_no" name="invoice_no">
+
+                       
+                    </div>
+
+                    <div class="form-group form-custom">
+                        <label for="invoice_date">Invoice Date.</label>
+                        <input type="date" class="form-control" id="invoice_date" name="invoice_date">
+
+                       
+
+                        <div class="form-group form-custom">
+                            <label for="supplier_code">Supplier</label>
+                            <select class="form-control" id="supplier_name" name="supplier_code">
+                                @foreach($Suppliers as $Supplier)
+
+                                <option value="{{$Supplier->supplier_code}}" class="form-custom">{{$Supplier->supplier_name}}</option>
+                                @endforeach
+                            </select>
+
+                        </div>
+                       
+        
+                        <div class="text-center">
+                            <button type="button" class="btn form-card-header-custom text-light" id="save_GRN">Create</button>
+                            <button class="btn btn-secondary cancel_modal text-light  " type="button" >Cancel</button>
+                        </div>
+
+                </form>
+            </div>
+        </div>
+
+   
+    </div>
+  </div>
+</div>
+
+<!-- Here is the js file that including ajax functions for add new GRN -->
+<script src="{{ asset('js/add_new_parts.js') }}"> </script>
 @endsection
