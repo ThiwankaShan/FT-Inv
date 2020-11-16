@@ -64,7 +64,7 @@
 
                         <label for="item-name ">Location</label>
                         <select class="form-control form-custom" id="selectedLoaction" name="Location_code">
-                                @foreach($div as $location)
+                                @foreach($locations as $location)
                                     <option value="{{$location->location_code}}">{{$location->location_name}}</option>
                                 @endforeach
                         </select>
@@ -170,7 +170,7 @@
                             <div class="form-group ">
                                 <label for="item-name ">Categories</label>
                                 <select class="form-control form-custom" id="categoryID" name="Category_code">
-                                    @foreach($cate as $category)
+                                    @foreach($categories as $category)
                                        <option value="{{$category->category_code}}">{{$category->category_name}}</option>
                                     @endforeach
                                 </select>
