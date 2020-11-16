@@ -98,7 +98,7 @@
                     </div>
                 </div>
                 <div class="col-3">
-                <a class="btn form-control button-style" href="" id="button_create_subCategory" data-toggle="modal"  data-target="#Add_new_subCategory" class="button">Add New Category</a>  
+                <a class="btn form-control button-style" href="" id="button_create_subCategory" data-toggle="modal"  data-target="#Add_new_subCategory" class="button">Add New Sub Category</a>  
                 </div>
             </div>
 
