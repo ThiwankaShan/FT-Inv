@@ -40,19 +40,33 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    
     public function store(Request $request)
     {
 
-        $validatedData = $request->validate([
+       // category code and name of new Category Sending the Updated Categories array
+
+
+        $validatedData = Validator::make($request->all(),[
             'category_name' => 'required|unique:categories',
             'category_code' => 'required|unique:categories',
         ]);
-
+ 
+        if($validatedData->fails()){
+            return response()->json(['errors'=>$validatedData->errors()->all()]);
+        }
+         
+          //if validation fails send all errors to the modal    
         $category = new Category;
         $category->category_name = $request->category_name;
         $category->category_code = $request->category_code;
         $category->save();
-        return redirect('/category')->with('success', "Created successfully");
+ 
+        
+        $categories = Category::all();
+
+        return response()->json(['status'=>'success','records'=>$categories]);
     }
 
     /**
