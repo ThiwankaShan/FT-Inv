@@ -10,6 +10,7 @@ use App\Location;
 use App\Items;
 use App\SubCategory;
 use App\SubLocation;
+use App\Supplier;
 use Session;
 
 use Romans\Filter\IntToRoman;
@@ -43,12 +44,23 @@ class ItemController extends Controller
         $subLocations = SubLocation::all();
         $categories = Category::all();
         $subCategories = SubCategory::all();
+        $Suppliers = Supplier::all();
         $grn = Grn::all();
         $itemCodes = Session::get('itemCodes');
         session()->flash('grnMsg', 'hello');
         session()->flash('backUrl', "item/create");
 
-        return view('forms.createitem', compact('locations', 'subLocations', 'categories', 'subCategories', 'grn', 'itemCodes'));
+        //For The Auto Incrementing Grn Number
+        $last_grnNo = Grn::latest('GRN_no')->first();
+        error_log($last_grnNo);
+        if ($last_grnNo == '') {
+            $suggest_grnNo = '01';
+        } else {
+            $suggest_grnNo = sprintf('%02d', $last_grnNo->GRN_no + 1);
+        }
+
+        return view('forms.createitem', compact('locations', 'subLocations', 'categories', 'subCategories', 'grn', 'itemCodes','suggest_grnNo','Suppliers'));
+
     }
 
 
@@ -203,10 +215,19 @@ class ItemController extends Controller
                 array_push($grn_array, $grns[$i]);
             }
         }
-        session()->flash('egrnMsg', 'edit');
-        session()->flash('editId', $item->item_code);
 
-        return view('forms.editItem', compact('grn_array', 'item'));
+        //For The Auto Incrementing Grn Number in the add new GRN modal
+        $last_grnNo = Grn::latest('GRN_no')->first();
+        error_log($last_grnNo);
+        if ($last_grnNo == '') {
+            $suggest_grnNo = '01';
+        } else {
+            $suggest_grnNo = sprintf('%02d', $last_grnNo->GRN_no + 1);
+        }
+        $Suppliers = Supplier::all();
+
+        return view('forms.editItem', compact('grn_array', 'item','Suppliers', 'suggest_grnNo'));
+
     }
 
 

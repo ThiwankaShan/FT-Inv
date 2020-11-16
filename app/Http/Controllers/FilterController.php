@@ -19,7 +19,7 @@ class FilterController extends Controller
     public function getSubLocation(Request $request)
     {
         
-        $data = SubLocation::where('location_code', $request->locationCode)->get();
+        $data = SubLocation::where('Location_code', $request->locationCode)->get();
 
         return response()->json($data);
     }

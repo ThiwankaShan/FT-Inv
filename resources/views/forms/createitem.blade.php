@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <a class="btn form-control button-style" href="{{route('location.insert')}}" class="button">Add New Location</a>
+                    <a class="btn form-control button-style" href="" id="buttonCreateLocation" data-toggle="modal"  data-target="#Add_new_Location" class="button">Add New Location</a>
                 </div>
             </div>
 
@@ -45,7 +45,7 @@
                         <label for="item-name ">Sub Location</label>
                     </div>
                     <div class="col-sm-9 mb-1">
-                        <select class="form-control " id="subLocation" name="subLocation">
+                        <select class="form-control " id="sublocation" name="subLocation">
                             <option value="000">Select Sub Location</option>
                             @foreach($subLocations as $subLocation)
                             <option value="{{$subLocation->subLocation_code}}">{{$subLocation->subLocation_name}}</option>
@@ -54,8 +54,7 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <a class="btn button-style form-control" href="{{route('sublocation.index')}}" class="button">Add New Sub Location</a>
-                </div>
+                <a class="btn form-control button-style" href="" id="buttonCreateSubLoaction" data-toggle="modal"  data-target="#Add_new_subLocation" class="button">Add New Sub Location</a>                </div>
             </div>
             <div class="form-group row">
                 <div class="col-9 row">
@@ -79,7 +78,7 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <a class="btn button-style form-control" href="{{route('category.index')}}" class="button">Add New Category</a>
+                <a class="btn form-control button-style" href="" id="button_create_category" data-toggle="modal"  data-target="#Add_new_category" class="button">Add New Category</a>  
                 </div>
             </div>
 
@@ -90,7 +89,7 @@
                         <label for="item-name ">Sub Category</label>
                     </div>
                     <div class="col-sm-9">
-                        <select class="form-control " id="subcategory" name="subCategory">
+                        <select class="form-control " id="subCategory" name="subCategory">
                             <option value="000">Select Sub Category</option>
                             @foreach($subCategories as $subcategory)
                             <option value="{{$subcategory->subCategory_code}}">{{$subcategory->subCategory_name}}</option>
@@ -99,7 +98,7 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <a class="btn button-style form-control" href="{{route('subcategory.index')}}" class="button">Add New Sub Category</a>
+                <a class="btn form-control button-style" href="" id="button_create_subCategory" data-toggle="modal"  data-target="#Add_new_subCategory" class="button">Add New Category</a>  
                 </div>
             </div>
 
@@ -147,7 +146,7 @@
                         <label for="item-name ">GRN No.</label>
                     </div>
                     <div class="col-sm-9 mb-1">
-                        <select class="form-control " id="exampleFormControlSelect1" name="grn_no">
+                        <select class="form-control " id="GRN_code" name="grn_no">
                             @foreach($grn as $grns)
                             <option value="{{$grns->GRN_no}}">{{ $grns->GRN_no }}</option>
                             @endforeach
@@ -157,9 +156,7 @@
                 </div>
                 <div class="col-3">
 
-
-
-                    <a class="btn button-style form-control" href="{{route('grn.index')}}"  class="button">Add New GRN</a>
+                <a class="btn form-control button-style" href="" id="button_create_grn" data-toggle="modal"  data-target="#Add_new_GRN" class="button">Add New GRN</a>  
 
                 </div>
             </div>
@@ -274,7 +271,8 @@
         </div>
     </div>
 </div>
+@include('forms.add_new');
 
-
-
+<script src="{{ asset('js/filter.js') }}"> </script>
+<script src="{{ asset('js/add_new_parts.js') }}"> </script>
 @endsection
