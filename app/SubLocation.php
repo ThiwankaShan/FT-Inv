@@ -17,11 +17,12 @@ class SubLocation extends Model
     public $incrementing = false;
     protected $keyType = "string";
 
+
+    public function location()
+    {
     //subLocation belongs to location
     //foreign key=location_code
     //local_key=location_code
-    public function location()
-    {
         return $this->belongsTo(Location::class, 'location_code', 'location_code');
     }
 

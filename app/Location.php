@@ -16,10 +16,11 @@ class Location extends Model
         'location_name',
         // add all other fields
     ];
+
+    public function subLocations()
     //creating the relation between Location And SubLocation
      //foreign key=location_code
     //local_key=subLocation_code
-    public function subLocations()
 
     {
         return $this->hasMany(SubLocation::class, 'location_code', 'subLocation_code');//select * from where location_code
