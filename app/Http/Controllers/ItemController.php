@@ -92,7 +92,7 @@ class ItemController extends Controller
         $rate = $request->Rate;
         $subItem = $request->sub_item;
         $purchased_date = $request->purchased_date;
-
+        $grn_no = $request->grn_no;    
 
 
         //get the quantity
