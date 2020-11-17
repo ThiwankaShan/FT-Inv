@@ -13,8 +13,10 @@ class Category extends Model
 
 
     //creating the relation between Category And subcategory
-    public function subcategory()
+    //foreign key=category_code
+    //local_key=category code
+    public function subcategories()
     {
-        return $this->hasMany('App\SubCategory');
+        return $this->hasMany(SubCategory::class, 'category_code', 'subCategory_code');
     }
 }

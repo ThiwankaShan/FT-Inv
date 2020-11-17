@@ -10,8 +10,11 @@ class Grn extends Model
     public $incrementing = false;
     protected $keyType = "string";
 
-    public function suppliers()
+    //GRN belongs to supplier
+    //foreign key=supplier_code
+    //local key=supplier_code
+    public function supplier()
     {
-        return $this->hasMany('App\Supplier');
+        return $this->belongsTo(Supplier::class, 'supplier_code', 'supplier_code');
     }
 }

@@ -8,7 +8,6 @@ class SubLocation extends Model
 {
     protected $fillable = [
         'location_code',
-
         'subLocation_code',
         'subLocation_name',
         // add all other fields
@@ -18,22 +17,13 @@ class SubLocation extends Model
     public $incrementing = false;
     protected $keyType = "string";
 
-    ///creating the relation between Division And subLocation
+    //subLocation belongs to location
+    //foreign key=location_code
+    //local_key=location_code
     public function location()
     {
-        return $this->belongsTo('App\Location');
+        return $this->belongsTo(Location::class, 'location_code', 'location_code');
     }
 
-    //creating the relation between subLocation And Category
-    public function category()
-    {
-        return $this->hasMany('App\Category');
-    }
-
-    //creating the relation between subLocation And subcategory
-    public function subcategory()
-    {
-        return $this->hasMany('App\SubCategory');
-    }
     protected $table = 'sub_locations';
 }
