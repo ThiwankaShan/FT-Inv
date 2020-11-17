@@ -92,7 +92,15 @@ class ItemController extends Controller
         $rate = $request->Rate;
         $subItem = $request->sub_item;
         $purchased_date = $request->purchased_date;
-        $grn_no = $request->grn_no;    
+        
+        /*
+        // this block get the supplier from grn no
+        $grn_no = $request->grn_no;
+        $grn = GRN::find(1)->where('GRN_no', $grn_no)->first();
+        error_log('below here');    
+        error_log($grn->supplier->supplier_name);
+
+        */
 
 
         //get the quantity
