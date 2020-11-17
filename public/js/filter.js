@@ -90,10 +90,13 @@ $(document).ready(function() {
     }) 
 
     
-//This a Function that Send a ajax Request with selected Location code Sub location code like that and get FILTERED DATA as A Object
-    function fetchData(loactionCode = "", subLoactionCode = "", categoryCode = "", subCategoryCode = "",type = "", pid = "") {
-        
-        
+
+    function fetchData(loactionCode = "", subLoactionCode = "", categoryCode = "", subCategoryCode = "",type = "", pid = "", column="location_code", order="ASC") {
+              
+        // input filter and sort paramters
+        // send data to ajaxcontroller get filter method
+        // output item data as item rows to dashboard (sorted and filterd)
+        // this function double as standalone sort function  
         
         var _token = $('input[name="_token"]').val();
         $.ajax({
@@ -108,7 +111,9 @@ $(document).ready(function() {
                 categoryCode: categoryCode,
                 subCategoryCode: subCategoryCode,
                 type: type,
-                pid: pid
+                pid: pid,
+                column : column,
+                order : order,
             },
             success: function(data) {
                 var output = "";              
@@ -128,10 +133,10 @@ $(document).ready(function() {
                         output += '<tr>';
                         output += ' <th scope="row">' + data['records'][i].item_code + '</th>';
                         output += '<td>' + data['records'][i].location_code + '</td>';
-                        output += '<td>' + data['records'][i].subLocation_code + '</td>';
-                        output += '<td>' + data['records'][i].category_code + '</td>';
-                        output += '<td>' + data['records'][i].subCategory_code + '</td>';
                         output += '<td>' + data['records'][i].type + '</td>';
+                        output += '<td>' + data['records'][i].purchased_date + '</td>';
+                        output += '<td>' + 'supplier name' + '</td>';
+                        output += '<td>' + 'serial number' + '</td>';
                         output += '<td>' + data['records'][i].GRN_no + '</td>';
                         output += '<td>' + data['records'][i].vat + '</td>';
                         output += '<td>' + data['records'][i].vat_rate_vat + '</td>';
@@ -162,17 +167,37 @@ $(document).ready(function() {
 
     }
 
+    // global variables to keep both sort and filter independent
+    var location = "";
+    var subLocation = "";
+    var category = "";
+    var subCategory = "";
+    var type = "";
+    var pID = "" ;
+    var column = "location_code";
+    var order = "ASC";
+
     //Here is the above Function call
     $('#filter').click(function() {
 
-        var location = $('#location').val();
-        var subLocation = $('#sublocation').val();
-        var category = $('#category').val();
-        var subCategory = $('#subCategory').val();
-        var type = $('#Type').val();
-        var pID = $('#ProID').val();
+        location = $('#location').val();
+        subLocation = $('#sublocation').val();
+        category = $('#category').val();
+        subCategory = $('#subCategory').val();
+        type = $('#Type').val();
+        pID = $('#ProID').val();
         console.log(pID);
-            fetchData(location, subLocation, category, subCategory, type, pID);
+            fetchData(location, subLocation, category, subCategory, type, pID, column, order);
+            
+    });
+
+    // sort and filter function 
+    $('#sort').click(function() {
+        
+        column = $('#column').val();
+        order = $('#order').val();
+        console.log(pID);
+            fetchData(location, subLocation, category, subCategory, type, pID, column, order);
             
     });
 

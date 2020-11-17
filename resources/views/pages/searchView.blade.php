@@ -4,9 +4,29 @@
 
 <div class="card">
     <div class="card-header pr-0">
-        
-        <!-- here is the filter form -->
+
+        <!--Sort options section -->
+
         <form action="" class="ml-0 mt-4 form-inline">
+         
+            <select class="form-control selector mr-2 mb-1 " id="column" >
+                <option value="location_code">Location</option>
+                <option value="GRN_no">GRN number</option>
+                <option value="rate">Rate</option>
+            </select>
+
+            <select class="form-control selector mr-2 mb-1 " id="order" >
+                <option value="ASC">Asending</option>
+                <option value="DESC">Decending</option>
+            </select>
+
+            <button class="btn btn-outline-success px-2 mb-1 mr-2" id="sort" type='button'>Sort</button>
+        
+
+        <!-- Sort section ends -->
+
+        <!-- filter section -->
+        
             <select class="form-control selector mr-2 mb-1 diseble2 diseble3 diseble4" id="location"  data-column="0">
             
                 <option value=""> Location</option>
@@ -52,7 +72,8 @@
         </form>
 
     </div>
-
+    <!-- filter section end -->
+    
     <!-- here is the table  -->
 
 <div class="card-body"> 
