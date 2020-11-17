@@ -67,7 +67,7 @@ class ItemController extends Controller
 
     public function store(Request $request)
     {
-        //Request data -> Location, SubLocation, Sub_item, procument_id, Quantity, Vat, Rate, Category
+        //Request data -> Location, SubLocation, Sub_item, procument_id, Quantity, Vat, Rate, Category, purchase_date
         //store data in items table
         //return to create item form
 
@@ -79,7 +79,8 @@ class ItemController extends Controller
             'Quantity' => 'required|integer',
             'Vat' => 'required',
             'Rate' => 'required',
-            'category' => 'required|string'
+            'category' => 'required|string',
+            'purchased_date' => 'required'
         ]);
 
         //This variables are use for create item code
@@ -90,6 +91,7 @@ class ItemController extends Controller
         $vat = $request->Vat;
         $rate = $request->Rate;
         $subItem = $request->sub_item;
+        $purchased_date = $request->purchased_date;
 
 
 
@@ -163,6 +165,7 @@ class ItemController extends Controller
                         $item->procurement_id = $request->procument_id;
                         $item->rate = $request->Rate;
                         $item->vat_rate_vat = $vat;
+                        $item->purchased_date = $purchased_date;
                         $item->save();
                     }
                 }
@@ -186,6 +189,7 @@ class ItemController extends Controller
                     $item->procurement_id = $request->procument_id;
                     $item->rate = $request->Rate;
                     $item->vat_rate_vat = $vat;
+                    $item->purchased_date = $purchased_date;
                     $item->save();
                 }
             }

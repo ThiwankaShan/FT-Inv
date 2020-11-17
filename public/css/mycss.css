@@ -78,6 +78,7 @@
 .item-create{
     left: 50%;
     transform: translate( -50%);
+    margin-bottom: 50px;
 }
 .active{
     background-color:#262626;

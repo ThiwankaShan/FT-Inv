@@ -60,10 +60,10 @@
             <tr>
                 <th scope="col">Item Code</th>
                 <th scope="col">Locaton Code</th>
-                <th scope="col">Sub Location Code</th>
-                <th scope="col">Category Code</th>
-                <th scope="col">Sub Category Code</th>
                 <th scope="col">Type</th>
+                <th scope="col">Purchased date</th>
+                <th scope="col">Supplier name</th>
+                <th scope="col">Serial number</th>
                 <th scope="col">GRN No</th>
                 <th scope="col">Vat</th>
                 <th scope="col">Vat Rate</th>
@@ -78,12 +78,12 @@
             @foreach($items as $item)
             
              <tr>
-                <th scope="row">{{$item->item_code}}</th>
+                <td>{{$item->item_code}}</td>
                 <td>{{$item->location_code}}</td>
-                <td>{{$item->subLocation_code}}</td>
-                <td>{{$item->category_code}}</td>
-                <td>{{$item->subCategory_code}}</td>
                 <td>{{$item->type}}</td>
+                <td>{{$item->purchased_date}}</td>
+                <td>Supplier name</td>
+                <td>Serial number</td>
                 <td>{{$item->GRN_no}}</td>
                 <td>{{$item->vat}}</td>
                 <td>{{$item->vat_rate_vat}}</td>
