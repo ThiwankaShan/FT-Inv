@@ -10,5 +10,11 @@ class Supplier extends Model
     public $incrementing = false;
     protected $keyType = "string";
 
-   
+    //Create relation between supplier and grn
+    //foreign key=supplier_code
+    //local key=GRN_no
+    public function grns()
+    {
+        return $this->hasMany(Grn::class, 'supplier_code', 'GRN_no');
+    }
 }
