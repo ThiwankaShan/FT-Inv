@@ -37,7 +37,7 @@
                 <div class="col-sm-3 d-flex flex-row">
 
                   <h6 style="font-size:16px; font-weight:bold" class="mt-2 mr-2">Pages</h6>
-                  {{$items->links()}}
+                  <div calss="ml-auto">{{$items->links()}}</div>
           </div>
      </div>
      <hr>
