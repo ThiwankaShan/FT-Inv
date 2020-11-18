@@ -37,8 +37,11 @@ class FilterController extends Controller
 
     public function getFilter(Request $request)
     {
+        // input locationCode,subLocationCode,category_code,subCategory_code,type,pid,column,order
+        // get filtered items by given sort argument
+        // output filterd and sorted value
        
-           
+        
         $searchmap = array(
             'location_code'=>$request->loactionCode,
             'subLocation_code'=>$request->subLoactionCode,
@@ -49,7 +52,7 @@ class FilterController extends Controller
         );
 
     
-       //checking the conditions and get the filtered  item object
+       //checking the conditions and get the sorted filtered  item object 
         $gadgets = Items::whereNested(function($query) use ($searchmap) {
             foreach ($searchmap as $key => $value)
                 {
@@ -57,7 +60,8 @@ class FilterController extends Controller
                         $query->where($key, '=', $value);
                     }
                 }
-        }, 'and');
+        }, 'and')->orderBy($request->column,$request->order)->orderBy('item_code', 'ASC');
+
         $gadgets = $gadgets->get();
 
 

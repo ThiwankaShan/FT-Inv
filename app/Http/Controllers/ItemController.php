@@ -52,7 +52,7 @@ class ItemController extends Controller
 
         //For The Auto Incrementing Grn Number
         $last_grnNo = Grn::latest('GRN_no')->first();
-        error_log($last_grnNo);
+        
         if ($last_grnNo == '') {
             $suggest_grnNo = '01';
         } else {
@@ -67,7 +67,7 @@ class ItemController extends Controller
 
     public function store(Request $request)
     {
-        //Request data -> Location, SubLocation, Sub_item, procument_id, Quantity, Vat, Rate, Category
+        //Request data -> Location, SubLocation, Sub_item, procument_id, Quantity, Vat, Rate, Category, purchase_date
         //store data in items table
         //return to create item form
 
@@ -79,7 +79,8 @@ class ItemController extends Controller
             'Quantity' => 'required|integer',
             'Vat' => 'required',
             'Rate' => 'required',
-            'category' => 'required|string'
+            'category' => 'required|string',
+            'purchased_date' => 'required'
         ]);
 
         //This variables are use for create item code
@@ -90,30 +91,38 @@ class ItemController extends Controller
         $vat = $request->Vat;
         $rate = $request->Rate;
         $subItem = $request->sub_item;
+        $purchased_date = $request->purchased_date;
+        $grn_no = $request->grn_no;
 
+        // supplier name fetched via grn relation
+        $grn = GRN::find(1)->where('GRN_no', $grn_no)->first();
+        $supplier_name = $grn->supplier->supplier_name;
+       
 
 
         //get the quantity
         $count = $request->Quantity;
-        //  $i= ItemQuantity::count();
+        
 
-        //items information request from the item model
+        //get the last item code to generate next codes
         $item = Items::where('location_code', $request->Location)
-            ->where('subLocation_code', $request->SubLocation)
-            ->where('category_code', $request->Category)
-            ->where('subCategory_code', $request->SubCategory)
+            ->where('subLocation_code', $request->subLocation)
+            ->where('category_code', $request->category)
+            ->where('subCategory_code', $request->subCategory)
             ->orderBy('created_at', 'asc')->get();
 
-        //Item code creation start
         if (count($item) > 0) {
             $latestItemNum =  preg_split("#/#", $item->last()->item_code);
             $i = (int)$latestItemNum[5];
+            error_log('last item item number');
+            error_log($i);
         } else {
             $i = 0;
         }
 
         $itemCodes = [];
-        //If action=show this part is processing
+
+        // show item codes in item form model
         if ($request->action == 'show') {
 
 
@@ -163,6 +172,8 @@ class ItemController extends Controller
                         $item->procurement_id = $request->procument_id;
                         $item->rate = $request->Rate;
                         $item->vat_rate_vat = $vat;
+                        $item->purchased_date = $purchased_date;
+                        $item->supplier_name = $supplier_name;
                         $item->save();
                     }
                 }
@@ -186,6 +197,8 @@ class ItemController extends Controller
                     $item->procurement_id = $request->procument_id;
                     $item->rate = $request->Rate;
                     $item->vat_rate_vat = $vat;
+                    $item->purchased_date = $purchased_date;
+                    $item->supplier_name = $supplier_name;
                     $item->save();
                 }
             }
@@ -206,9 +219,7 @@ class ItemController extends Controller
         //return to edit item form
         $grns = Grn::all()->pluck('GRN_no');
         $grn_array = [];
-        error_log('here');
-        error_log(gettype($grns[0]));
-        error_log(sizeof($grns));
+        
         for ($i = 0; $i < sizeof($grns); $i++) {
 
             if ($grns[$i] != $item->GRN_no) {
@@ -218,7 +229,6 @@ class ItemController extends Controller
 
         //For The Auto Incrementing Grn Number in the add new GRN modal
         $last_grnNo = Grn::latest('GRN_no')->first();
-        error_log($last_grnNo);
         if ($last_grnNo == '') {
             $suggest_grnNo = '01';
         } else {
@@ -243,6 +253,11 @@ class ItemController extends Controller
         $new_grn = $request->grn_no;
         $new_type = $request->types;
         $new_procumentID = $request->procument_id;
+        $new_purchased_date = $request->purchased_date;
+
+        // supplier name fetched via grn relation
+        $grn = GRN::find(1)->where('GRN_no', $new_grn)->first();
+        $new_supplier_name = $grn->supplier->supplier_name;
 
         DB::table('items')
             ->where('item_code', $request->item)
@@ -253,6 +268,8 @@ class ItemController extends Controller
                 'type' => $new_type,
                 'GRN_no' => $new_grn,
                 'procurement_id' => $new_procumentID,
+                'supplier_name' => $new_supplier_name,
+                'purchased_date' => $new_purchased_date,
             ]);
         return redirect()->route('item.editForm', ['item' => $item])->with('success', 'Items updated Successfuly!');
     }

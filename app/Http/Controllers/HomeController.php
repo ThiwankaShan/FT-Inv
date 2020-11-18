@@ -21,11 +21,11 @@ class HomeController extends Controller
     public function index()
     {   // return user to different views base on their role
         // return data - items,location,categories,proID arrays
-
+    
         $locations = Location::all();
         $categories = Category::all();
         $proId = DB::table('items')->select('procurement_id')->groupBy('procurement_id')->get();
-        $items = Items::orderBy('created_at', 'DESC')->paginate(20);
+        $items = Items::orderBy('location_code', 'ASC')->orderBy('item_code', 'ASC')->paginate(20);
         //*If you want check relation please use this code insert with related info
         //$locations=Location::with('subLocations')->get();
         //dd($locations);

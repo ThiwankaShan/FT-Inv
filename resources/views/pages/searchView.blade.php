@@ -1,56 +1,83 @@
 <hr>
 
-<!-- here is the filter form -->
+
 
 <div class="card">
     <div class="card-header pr-0">
-    <form action="" class="ml-0 mt-4 form-inline">
-        <select class="form-control selector mr-2 mb-1 diseble2 diseble3 diseble4" id="location"  data-column="0">
+
+        <!--Sort options section -->
+
+        <form action="" class="ml-0 mt-4 form-inline">
+         
+            <select class="form-control selector mr-2 mb-1 " id="column" >
+                <option value="location_code">Location</option>
+                <option value="type">Type</option>
+                <option value="purchased_date">Purchased date</option>
+                <option value="supplier_name">Supplier name</option>
+                <option value="GRN_no">GRN number</option>
+                <option value="procurement_id">Procurement ID</option>
+                <option value="created_at">Created time</option>
+            </select>
+
+            <select class="form-control selector mr-2 mb-1 " id="order" >
+                <option value="ASC">Asending</option>
+                <option value="DESC">Decending</option>
+            </select>
+
+            <button class="btn btn-outline-success px-2 mb-1 mr-2" id="sort" type='button'>Sort</button>
+        
+
+        <!-- Sort section ends -->
+
+        <!-- filter section -->
+        
+            <select class="form-control selector mr-2 mb-1 diseble2 diseble3 diseble4" id="location"  data-column="0">
             
-            <option value=""> Location</option>
-            @foreach($locations as $location)
-            <option value="{{$location->location_code}}">{{$location->location_name}}</option>
-            @endforeach
-        </select>
+                <option value=""> Location</option>
+                @foreach($locations as $location)
+                <option value="{{$location->location_code}}">{{$location->location_name}}</option>
+                @endforeach
+            </select>
 
-        <select class="form-control selector mr-2 mb-1 diseble2 diseble3 diseble4" id="sublocation"  data-column="1">
-            <option value=""> Sub Location</option>
+            <select class="form-control selector mr-2 mb-1 diseble2 diseble3 diseble4" id="sublocation"  data-column="1">
+                <option value=""> Sub Location</option>
 
-        </select>
+            </select>
 
-        <select class="form-control selector mr-2 mb-1 diseble1 diseble3 diseble4" id="category"  data-column="2">
-            <option value=""> Category</option>
-            @foreach($categories as $category)
-            <option value="{{$category->category_code}}">{{$category->category_name}}</option>
-            @endforeach
-        </select>
+            <select class="form-control selector mr-2 mb-1 diseble1 diseble3 diseble4" id="category"  data-column="2">
+                <option value=""> Category</option>
+                @foreach($categories as $category)
+                <option value="{{$category->category_code}}">{{$category->category_name}}</option>
+                @endforeach
+            </select>
 
-        <select class="form-control selector mr-2 mb-1 diseble1 diseble3 diseble4" id="subCategory"  data-column="3">
+            <select class="form-control selector mr-2 mb-1 diseble1 diseble3 diseble4" id="subCategory"  data-column="3">
 
-            <option value=""> Sub Category</option>
+                <option value=""> Sub Category</option>
 
-        </select>
+            </select>
 
-        <select class="form-control selector mr-2 mb-1 diseble1 diseble2 diseble4" id="Type"  data-column="4">
-            <option value=""> Type</option>
-            <option value="Asset">Asset</option>
-            <option value="Consumable">Consumable</option>
+            <select class="form-control selector mr-2 mb-1 diseble1 diseble2 diseble4" id="Type"  data-column="4">
+                <option value=""> Type</option>
+                <option value="Asset">Asset</option>
+                <option value="Consumable">Consumable</option>
 
-        </select>
+            </select>
 
-        <select class="form-control selector mr-2 mb-1 diseble1 diseble2 diseble3" id="ProID"  data-column="5">
-            <option value=""> Procurement ID</option>
-             @foreach($proId as $pId)
-             <option value="{{$pId->procurement_id}}">{{$pId->procurement_id}}</option>
-             @endforeach
-        </select>
+            <select class="form-control selector mr-2 mb-1 diseble1 diseble2 diseble3" id="ProID"  data-column="5">
+                <option value=""> Procurement ID</option>
+                @foreach($proId as $pId)
+                <option value="{{$pId->procurement_id}}">{{$pId->procurement_id}}</option>
+                @endforeach
+            </select>
 
-        <button class="btn btn-outline-success px-2 mb-1 mr-2" id="filter" type='button'>Filter</button>
-        <button class="btn btn-outline-primary px-2 mb-1 " id="filter1" type='submit'>Reset</button>
-    </form>
+            <button class="btn btn-outline-success px-2 mb-1 mr-2" id="filter" type='button'>Filter</button>
+            <button class="btn btn-outline-primary px-2 mb-1 " id="filter1" type='submit'>Reset</button>
+        </form>
 
     </div>
-
+    <!-- filter section end -->
+    
     <!-- here is the table  -->
 
 <div class="card-body"> 
@@ -60,10 +87,10 @@
             <tr>
                 <th scope="col">Item Code</th>
                 <th scope="col">Locaton Code</th>
-                <th scope="col">Sub Location Code</th>
-                <th scope="col">Category Code</th>
-                <th scope="col">Sub Category Code</th>
                 <th scope="col">Type</th>
+                <th scope="col">Purchased date</th>
+                <th scope="col">Supplier name</th>
+                <th scope="col">Serial number</th>
                 <th scope="col">GRN No</th>
                 <th scope="col">Vat</th>
                 <th scope="col">Vat Rate</th>
@@ -78,12 +105,12 @@
             @foreach($items as $item)
             
              <tr>
-                <th scope="row">{{$item->item_code}}</th>
+                <td>{{$item->item_code}}</td>
                 <td>{{$item->location_code}}</td>
-                <td>{{$item->subLocation_code}}</td>
-                <td>{{$item->category_code}}</td>
-                <td>{{$item->subCategory_code}}</td>
                 <td>{{$item->type}}</td>
+                <td>{{$item->purchased_date}}</td>
+                <td>{{$item->supplier_name}}</td>
+                <td>Serial number</td>
                 <td>{{$item->GRN_no}}</td>
                 <td>{{$item->vat}}</td>
                 <td>{{$item->vat_rate_vat}}</td>

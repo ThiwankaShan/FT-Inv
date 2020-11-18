@@ -164,6 +164,19 @@
             <div class="form-group row">
                 <div class="col-9 row">
                     <div class="col-sm-3">
+                        <label for="item-name ">Purchase date</label>
+                    </div>
+                    <div class="col-sm-9 mb-1">
+                        <div class="form-group form-custom">
+                            <input type="date" class="form-control" name="purchased_date" id="purchased_date"> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-9 row">
+                    <div class="col-sm-3">
                         <label for="item-name ">Vat/Item (Percentage)</label>
                     </div>
                     <div class="col-sm-9 mb-1">
