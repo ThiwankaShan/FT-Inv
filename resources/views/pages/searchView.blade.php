@@ -105,7 +105,7 @@
                 <td>{{$item->location_code}}</td>
                 <td>{{$item->type}}</td>
                 <td>{{$item->purchased_date}}</td>
-                <td>Supplier name</td>
+                <td>{{$item->supplier_name}}</td>
                 <td>Serial number</td>
                 <td>{{$item->GRN_no}}</td>
                 <td>{{$item->vat}}</td>

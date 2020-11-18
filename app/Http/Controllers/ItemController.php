@@ -92,29 +92,26 @@ class ItemController extends Controller
         $rate = $request->Rate;
         $subItem = $request->sub_item;
         $purchased_date = $request->purchased_date;
-        
-        /*
-        // this block get the supplier from grn no
         $grn_no = $request->grn_no;
-        $grn = GRN::find(1)->where('GRN_no', $grn_no)->first();
-        error_log('below here');    
-        error_log($grn->supplier->supplier_name);
 
-        */
+        // supplier name fetched via grn relation
+        $grn = GRN::find(1)->where('GRN_no', $grn_no)->first();
+        $supplier_name = $grn->supplier->supplier_name;
+       
 
 
         //get the quantity
         $count = $request->Quantity;
-        //  $i= ItemQuantity::count();
+        
 
-        //items information request from the item model
+        //get the last item code to generate next codes
         $item = Items::where('location_code', $request->Location)
             ->where('subLocation_code', $request->SubLocation)
             ->where('category_code', $request->Category)
             ->where('subCategory_code', $request->SubCategory)
             ->orderBy('created_at', 'asc')->get();
 
-        //Item code creation start
+        
         if (count($item) > 0) {
             $latestItemNum =  preg_split("#/#", $item->last()->item_code);
             $i = (int)$latestItemNum[5];
@@ -123,7 +120,8 @@ class ItemController extends Controller
         }
 
         $itemCodes = [];
-        //If action=show this part is processing
+
+        // show item codes in item form model
         if ($request->action == 'show') {
 
 
@@ -174,6 +172,7 @@ class ItemController extends Controller
                         $item->rate = $request->Rate;
                         $item->vat_rate_vat = $vat;
                         $item->purchased_date = $purchased_date;
+                        $item->supplier_name = $supplier_name;
                         $item->save();
                     }
                 }
@@ -198,6 +197,7 @@ class ItemController extends Controller
                     $item->rate = $request->Rate;
                     $item->vat_rate_vat = $vat;
                     $item->purchased_date = $purchased_date;
+                    $item->supplier_name = $supplier_name;
                     $item->save();
                 }
             }
@@ -255,6 +255,7 @@ class ItemController extends Controller
         $new_grn = $request->grn_no;
         $new_type = $request->types;
         $new_procumentID = $request->procument_id;
+        
 
         DB::table('items')
             ->where('item_code', $request->item)
@@ -265,6 +266,7 @@ class ItemController extends Controller
                 'type' => $new_type,
                 'GRN_no' => $new_grn,
                 'procurement_id' => $new_procumentID,
+                
             ]);
         return redirect()->route('item.editForm', ['item' => $item])->with('success', 'Items updated Successfuly!');
     }

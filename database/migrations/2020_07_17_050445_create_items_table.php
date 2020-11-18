@@ -21,6 +21,7 @@ class CreateItemsTable extends Migration
             $table->string('category_code');
             $table->string('subCategory_code');
             $table->string('type');
+            $table->string('supplier_name');
             $table->string('GRN_no');
             $table->date('purchased_date');
             $table->string('serialNumber')->nullable();
