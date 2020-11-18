@@ -16,6 +16,7 @@
                 <option value="supplier_name">Supplier name</option>
                 <option value="GRN_no">GRN number</option>
                 <option value="procurement_id">Procurement ID</option>
+                <option value="created_at">Created time</option>
             </select>
 
             <select class="form-control selector mr-2 mb-1 " id="order" >
