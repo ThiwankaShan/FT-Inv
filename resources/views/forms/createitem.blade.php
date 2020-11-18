@@ -6,7 +6,7 @@
 </div>
 <hr>
 
-<div class="card w-75  item-create">
+<div class="card w-75  item-create mx-auto">
     <h5 class="card-header form-card-header-custom"><strong class="text-light"> Add Item Form</strong></h5>
     <div class="card-body">
 

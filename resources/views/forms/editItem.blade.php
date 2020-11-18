@@ -7,7 +7,7 @@
 </div>
 <hr>
 
-<div class="card w-75  item-create">
+<div class="card w-75  item-create mx-auto">
     <h5 class="card-header form-card-header-custom"><strong class="text-light"> Update Item Form</strong></h5>
     <div class="card-body">
 
@@ -151,7 +151,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content ">
   
-            <div class='card w-100  item-create'>
+            <div class='card w-100  item-create mb-0'>
             <h5 class="form-card-header-custom text-white p-3">Add New GRN</h5>
 
             <div class="card-body">

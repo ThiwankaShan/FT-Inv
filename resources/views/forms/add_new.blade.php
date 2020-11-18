@@ -3,10 +3,10 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content ">
     
-        <div class="card w-100  item-create">
+        <div class="card w-100  item-create mb-0">
 
             <h5 class="form-card-header-custom text-white p-3"><strong class="text-light">Add New Location</strong></h5>
-            <div class="card-body">
+            <div class="card-body ">
 
                 <div class="alert alert-success text-center" role="alert" style="display:none" id="validLocation">
                     <strong>New Location Created Successfully!!</strong> 
@@ -47,7 +47,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content ">
     
-        <div class="card w-100  item-create">
+        <div class="card w-100  item-create mb-0">
         <h5 class="form-card-header-custom text-white p-3"><strong class="text-light">Add New Sub Location</strong></h5>
             <div class="card-body">
 
@@ -103,7 +103,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content ">
     
-    <div class='card w-100  item-create'>
+    <div class='card w-100  item-create mb-0'>
 
             <h5 class="form-card-header-custom text-white p-3">Add New Category</h5>
             <div class="card-body">
@@ -151,7 +151,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content ">
   
-                <div class="card w-100  item-create">
+                <div class="card w-100  item-create mb-0">
 
                     <h5 class="form-card-header-custom text-white p-3"><strong class="text-light">Add New Sub Category</strong></h5>
                     <div class="card-body">
@@ -216,7 +216,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content ">
   
-            <div class='card w-100  item-create'>
+            <div class='card w-100  item-create mb-0'>
             <h5 class="form-card-header-custom text-white p-3">Add New GRN</h5>
 
             <div class="card-body">
