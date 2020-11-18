@@ -255,7 +255,11 @@ class ItemController extends Controller
         $new_grn = $request->grn_no;
         $new_type = $request->types;
         $new_procumentID = $request->procument_id;
-        
+        $new_purchased_date = $request->purchased_date;
+
+        // supplier name fetched via grn relation
+        $grn = GRN::find(1)->where('GRN_no', $new_grn)->first();
+        $new_supplier_name = $grn->supplier->supplier_name;
 
         DB::table('items')
             ->where('item_code', $request->item)
@@ -266,7 +270,8 @@ class ItemController extends Controller
                 'type' => $new_type,
                 'GRN_no' => $new_grn,
                 'procurement_id' => $new_procumentID,
-                
+                'supplier_name' => $new_supplier_name,
+                'purchased_date' => $new_purchased_date,
             ]);
         return redirect()->route('item.editForm', ['item' => $item])->with('success', 'Items updated Successfuly!');
     }
