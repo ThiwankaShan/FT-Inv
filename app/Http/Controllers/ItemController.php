@@ -52,7 +52,7 @@ class ItemController extends Controller
 
         //For The Auto Incrementing Grn Number
         $last_grnNo = Grn::latest('GRN_no')->first();
-        error_log($last_grnNo);
+        
         if ($last_grnNo == '') {
             $suggest_grnNo = '01';
         } else {
@@ -106,15 +106,16 @@ class ItemController extends Controller
 
         //get the last item code to generate next codes
         $item = Items::where('location_code', $request->Location)
-            ->where('subLocation_code', $request->SubLocation)
-            ->where('category_code', $request->Category)
-            ->where('subCategory_code', $request->SubCategory)
+            ->where('subLocation_code', $request->subLocation)
+            ->where('category_code', $request->category)
+            ->where('subCategory_code', $request->subCategory)
             ->orderBy('created_at', 'asc')->get();
 
-        
         if (count($item) > 0) {
             $latestItemNum =  preg_split("#/#", $item->last()->item_code);
             $i = (int)$latestItemNum[5];
+            error_log('last item item number');
+            error_log($i);
         } else {
             $i = 0;
         }
@@ -218,9 +219,7 @@ class ItemController extends Controller
         //return to edit item form
         $grns = Grn::all()->pluck('GRN_no');
         $grn_array = [];
-        error_log('here');
-        error_log(gettype($grns[0]));
-        error_log(sizeof($grns));
+        
         for ($i = 0; $i < sizeof($grns); $i++) {
 
             if ($grns[$i] != $item->GRN_no) {
@@ -230,7 +229,6 @@ class ItemController extends Controller
 
         //For The Auto Incrementing Grn Number in the add new GRN modal
         $last_grnNo = Grn::latest('GRN_no')->first();
-        error_log($last_grnNo);
         if ($last_grnNo == '') {
             $suggest_grnNo = '01';
         } else {
