@@ -53,3 +53,6 @@ Route::resource('grn', 'GRNController');
 //suppliers
 Route::get('/supplier/create', 'SupplierController@create')->name('supplier.create');
 Route::post('/supplier/store', 'SupplierController@store')->name('supplier.store');
+
+//Dashboard Sort by,Show parts
+Route::get('/dashboard/show/{id}','FilterController@ShowItems')->name('dashBoard.show');

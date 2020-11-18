@@ -7,7 +7,7 @@
 </div>
 <hr>
 
-<div class="card w-75  item-create">
+<div class="card w-75  item-create mx-auto">
     <div class="card-header form-card-header-custom">
         <h5 class="text-center form-card-header-custom"><strong class="text-light">Add New Supplier</strong></h5>
     </div>

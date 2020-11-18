@@ -4,8 +4,6 @@
 
 @include('pages.searchView');
 
-  
-
 <script src="{{ asset('js/filter_sort.js') }}"> </script>
 @endsection
 

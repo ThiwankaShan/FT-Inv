@@ -1,91 +1,104 @@
-<hr>
+<!-- here is the filter form -->
 
+<div class="card mt-0 px-0">
+    <div class="card-header ">
+    <div class="row ">
+          <div class="col-sm-5 d-flex flex-row">
+             <h6 style="font-size:16px; font-weight:bold" class="mt-2 mr-2">Sort By</h6>
+           
 
+                 <select class="form-control selector mr-2 mb-1 text-dark" id="column" style="outline:0px; width:200px; border-color:#C21E56; border-width:1.5px"    data-column="0">
+                        <option value="location_code">Location</option>
+                        <option value="type">Type</option>
+                        <option value="purchased_date">Purchased date</option>
+                        <option value="supplier_name">Supplier name</option>
+                        <option value="GRN_no">GRN number</option>
+                        <option value="procurement_id">Procurement ID</option>
+                        <option value="created_at">Created time</option>
+                 </select>
 
-<div class="card">
-    <div class="card-header pr-0">
+                
+                <select class="form-control selector mr-2 mb-1 text-dark" id="order" style="outline:0px; width:100px; border-color:#C21E56; border-width:1.5px">
+                    <option value="ASC">Asending</option>
+                    <option value="DESC">Decending</option>
+                </select>
 
-        <!--Sort options section -->
-
-        <form action="" class="ml-0 mt-4 form-inline">
+                <button class="btn btn-outline-success ml-2" style="height:40px;" id="sort" type='button'>Sort</button>
+             
+          </div><!-- /.col -->
+          <div class="col-sm-4 d-flex flex-row">
+              <h6 style="font-size:16px; font-weight:bold" class="mt-2 mr-2">Show</h6>
+                <a href="/dashboard/show/15" class="btn  mr-2 dashboard-button text-dark  " style="border: 2px solid #C21E56; background-color:##f2f2f2;">15</a>
+                <a href="/dashboard/show/30" class="btn  mr-2 dashboard-button text-dark " style="border: 2px solid #C21E56; background-color:##f2f2f2;">30</a>
+                <a href="/dashboard/show/75" class="btn  mr-2 dashboard-button text-dark " style="border: 2px solid #C21E56; background-color:##f2f2f2;">75</a>
+                <a href="/dashboard/show/500000000" class="btn  mr-2 dashboard-button text-dark " style="border: 2px solid #C21E56; background-color:##f2f2f2;">All</a>
          
-            <select class="form-control selector mr-2 mb-1 " id="column" >
-                <option value="location_code">Location</option>
-                <option value="type">Type</option>
-                <option value="purchased_date">Purchased date</option>
-                <option value="supplier_name">Supplier name</option>
-                <option value="GRN_no">GRN number</option>
-                <option value="procurement_id">Procurement ID</option>
-                <option value="created_at">Created time</option>
-            </select>
+          </div>
+                <div class="col-sm-3 d-flex flex-row">
 
-            <select class="form-control selector mr-2 mb-1 " id="order" >
-                <option value="ASC">Asending</option>
-                <option value="DESC">Decending</option>
-            </select>
-
-            <button class="btn btn-outline-success px-2 mb-1 mr-2" id="sort" type='button'>Sort</button>
-        
-
-        <!-- Sort section ends -->
-
-        <!-- filter section -->
-        
-            <select class="form-control selector mr-2 mb-1 diseble2 diseble3 diseble4" id="location"  data-column="0">
+                  <h6 style="font-size:16px; font-weight:bold" class="mt-2 mr-2">Pages</h6>
+                  {{$items->links()}}
+          </div>
+     </div>
+     <hr>
+    <div>
+    <form action="" class="  form-inline">
+        <select class="form-control selector  mb-1 diseble2 diseble3 diseble4 bg-light mr-2"  style="outline:0px; width:200px; font-weight:bold; border:none; " id="location"  data-column="0">
             
-                <option value=""> Location</option>
-                @foreach($locations as $location)
-                <option value="{{$location->location_code}}">{{$location->location_name}}</option>
-                @endforeach
-            </select>
+            <option value=""> Location</option>
+            @foreach($locations as $location)
+            <option value="{{$location->location_code}}">{{$location->location_name}}</option>
+            @endforeach
+        </select>
 
-            <select class="form-control selector mr-2 mb-1 diseble2 diseble3 diseble4" id="sublocation"  data-column="1">
-                <option value=""> Sub Location</option>
+        <select class="form-control selector  mb-1 diseble2 diseble3 diseble4 bg-light mr-2" style=" font-weight:bold; border:none; background-color:#f2f2f2 " id="sublocation"  data-column="1">
+            <option value=""> Sub Location</option>
 
-            </select>
+        </select>
 
-            <select class="form-control selector mr-2 mb-1 diseble1 diseble3 diseble4" id="category"  data-column="2">
-                <option value=""> Category</option>
-                @foreach($categories as $category)
-                <option value="{{$category->category_code}}">{{$category->category_name}}</option>
-                @endforeach
-            </select>
+        <select class="form-control selector  mb-1 diseble1 diseble3 diseble4 bg-light mr-2" style=" font-weight:bold; border:none; background-color:#f2f2f2 " id="category"  data-column="2">
+            <option value=""> Category</option>
+            @foreach($categories as $category)
+            <option value="{{$category->category_code}}">{{$category->category_name}}</option>
+            @endforeach
+        </select>
 
-            <select class="form-control selector mr-2 mb-1 diseble1 diseble3 diseble4" id="subCategory"  data-column="3">
+        <select class="form-control selector  mb-1 diseble1 diseble3 diseble4 bg-light mr-2" style=" font-weight:bold; border:none; background-color:#f2f2f2 " id="subCategory"  data-column="3">
 
-                <option value=""> Sub Category</option>
+            <option value=""> Sub Category</option>
 
-            </select>
+        </select>
 
-            <select class="form-control selector mr-2 mb-1 diseble1 diseble2 diseble4" id="Type"  data-column="4">
-                <option value=""> Type</option>
-                <option value="Asset">Asset</option>
-                <option value="Consumable">Consumable</option>
+        <select class="form-control selector  mb-1 diseble1 diseble2 diseble4 bg-light mr-2" style=" font-weight:bold; border:none; background-color:#f2f2f2 " id="Type"  data-column="4">
+            <option value=""> Type</option>
+            <option value="Asset">Asset</option>
+            <option value="Consumable">Consumable</option>
 
-            </select>
+        </select>
 
-            <select class="form-control selector mr-2 mb-1 diseble1 diseble2 diseble3" id="ProID"  data-column="5">
-                <option value=""> Procurement ID</option>
-                @foreach($proId as $pId)
-                <option value="{{$pId->procurement_id}}">{{$pId->procurement_id}}</option>
-                @endforeach
-            </select>
+        <select class="form-control selector  mb-1 diseble1 diseble2 diseble3 bg-light mr-3" style=" font-weight:bold; border:none; background-color:#f2f2f2 " id="ProID"  data-column="5">
+            <option value=""> Procurement ID</option>
+             @foreach($proId as $pId)
+             <option value="{{$pId->procurement_id}}">{{$pId->procurement_id}}</option>
+             @endforeach
+        </select>
 
-            <button class="btn btn-outline-success px-2 mb-1 mr-2" id="filter" type='button'>Filter</button>
-            <button class="btn btn-outline-primary px-2 mb-1 " id="filter1" type='submit'>Reset</button>
-        </form>
+        
+        <button class="btn btn-outline-success ml-auto  mr-2" id="filter" type='button'>Filter</button>
+        <button class="btn btn-outline-primary   " id="filter1" type='submit'>Reset</button>
+    </form>
 
     </div>
-    <!-- filter section end -->
-    
+    </div>
+
     <!-- here is the table  -->
 
-<div class="card-body"> 
+<div class="card-body px-0"> 
 <div class="container-fluid" id="dataTable">
     <table class="table" >
-        <thead class="thead-dark">
+        <thead class="thead text-white" style="background-color:#691330">
             <tr>
-                <th scope="col">Item Code</th>
+            <th scope="col">Item Code</th>
                 <th scope="col">Locaton Code</th>
                 <th scope="col">Type</th>
                 <th scope="col">Purchased date</th>
@@ -105,7 +118,7 @@
             @foreach($items as $item)
             
              <tr>
-                <td>{{$item->item_code}}</td>
+             <th scope="row">{{$item->item_code}}</th>
                 <td>{{$item->location_code}}</td>
                 <td>{{$item->type}}</td>
                 <td>{{$item->purchased_date}}</td>
@@ -131,7 +144,7 @@
             
         </tbody>
     </table>
-    {{$items->links()}}
+    
 
     </div>
  </div>
