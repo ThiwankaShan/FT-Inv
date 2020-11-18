@@ -11,8 +11,11 @@
          
             <select class="form-control selector mr-2 mb-1 " id="column" >
                 <option value="location_code">Location</option>
+                <option value="type">Type</option>
+                <option value="purchased_date">Purchased date</option>
+                <option value="supplier_name">Supplier name</option>
                 <option value="GRN_no">GRN number</option>
-                <option value="rate">Rate</option>
+                <option value="procurement_id">Procurement ID</option>
             </select>
 
             <select class="form-control selector mr-2 mb-1 " id="order" >
