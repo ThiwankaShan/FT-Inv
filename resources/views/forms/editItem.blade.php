@@ -144,6 +144,29 @@
 
             </div>
 
+            <div class="form-group row">
+                <div class="col-9 row">
+                    <div class="col-sm-3">
+                        <label for="purchased_date">Serial Number</label>
+                    </div>
+                    <div class="col-sm-9 mb-1">
+                        <input type="text" name="serial_number" id="serial_number" class="form-control" value="{{$item->serialNumber}}">
+                        @error('serial_number')
+                        <span class="" role="alert">
+                            <small style="color:red"><strong>{{ $message }}</strong></small>
+                        </span>
+
+                        @enderror
+                        <span class="" role="alert">
+                            <small style="color:red" id="serial_numberError"></small>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+           
+
             @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
                 <strong class="text-center">{{ session('success') }}</strong>

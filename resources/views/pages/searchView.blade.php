@@ -123,7 +123,7 @@
                 <td>{{$item->type}}</td>
                 <td>{{$item->purchased_date}}</td>
                 <td>{{$item->supplier_name}}</td>
-                <td>Serial number</td>
+                <td>{{$item->serialNumber}}</td>
                 <td>{{$item->GRN_no}}</td>
                 <td>{{$item->vat}}</td>
                 <td>{{$item->vat_rate_vat}}</td>
