@@ -74,11 +74,11 @@ class ItemController extends Controller
         $this->validate($request, [
             'Location' => 'required|string',
             'subLocation' => 'required|string',
-            'sub_item' => 'integer',
+            'sub_item' => 'integer|nullable',
             'procument_id' => 'string|nullable',
             'Quantity' => 'required|integer',
-            'Vat' => 'required',
-            'Rate' => 'required',
+            'Vat' => 'regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
+            'Rate' => 'regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
             'category' => 'required|string',
             'purchased_date' => 'required'
         ]);
@@ -202,6 +202,7 @@ class ItemController extends Controller
                     $item->save();
                 }
             }
+           
             return back()->with('success', 'Items Saved Successfuly!');
         }
     }
@@ -246,6 +247,21 @@ class ItemController extends Controller
         //request items->item, Vat, rate, grn_no, types, procument_id
         //store the updates in items table
         //return to item edit form
+
+        $this->validate($request, [
+            
+            'procument_id' => 'string|nullable',
+            'Vat' => 'required',
+            'Rate' => 'required',
+            'purchased_date' => 'required',
+            'serial_number'=>'string|nullable|unique:items,serialNumber'
+        ],
+        [
+            'serial_number.unique'=>'Serial Number is Already Taken.Use Another..',
+        ]     
+    
+    );
+
         $item = $request->item;
         $new_vat_rate = $request->Vat;
         $new_rate = $request->Rate;
@@ -254,7 +270,7 @@ class ItemController extends Controller
         $new_type = $request->types;
         $new_procumentID = $request->procument_id;
         $new_purchased_date = $request->purchased_date;
-
+        $new_serial_number = $request->serial_number;
         // supplier name fetched via grn relation
         $grn = GRN::find(1)->where('GRN_no', $new_grn)->first();
         $new_supplier_name = $grn->supplier->supplier_name;
@@ -270,6 +286,7 @@ class ItemController extends Controller
                 'procurement_id' => $new_procumentID,
                 'supplier_name' => $new_supplier_name,
                 'purchased_date' => $new_purchased_date,
+                'serialNumber' => $new_serial_number,
             ]);
         return redirect()->route('item.editForm', ['item' => $item])->with('success', 'Items updated Successfuly!');
     }

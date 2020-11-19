@@ -7,47 +7,51 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    
-
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+   <!-- Scripts -->
+   <script src="{{ asset('js/app.js') }}" defer></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-     <!-- selecting  filter js file -->
-    </div>
-
+   
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <script src="https://use.fontawesome.com/6a3acfdd48.js"></script>
 
-
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/mycss.css') }}" rel="stylesheet">
 
+ 
+
 </head>
 
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-dark shadow-sm fixed-top">
+  
+
+<input type="checkbox" id="check">
+<div id="app">
+        <nav class="navbar navbar-expand-md navbar-dark shadow-sm fixed-top" style="height:70px;">
             <div class="container-fluid">
 
                 <button class="navbar-toggler ml-2" type="button" id="side_bar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
+                <label for="check" style="margin-top:-25px;">
+        <i class="fa fa-bars" id="sidebar_btn"></i>
+      </label>
+
                 <a class="navbar-brand text-center " href="{{ url('/') }}">
                     <strong class="text-light mr-5 pr-5">FT-IMS</strong>
                 </a>
 
-
+               
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -98,39 +102,35 @@
                 </div>
         </nav>
     </div>
-    <div class="wrapper d-flex">
-        <div class="sideMenu">
-            <div class="sideBar">
-                <img src="/images/default.jpg" alt="profile image" class="pimage ml-5 mt-4 mb-2" style="width:100px; height:100px; border-radius:50%; transition: linear .5s;">
+   
+    <div class="sidebar">
+      <div class="profile_info">
+        <img src="/images/default.jpg" class="profile_image" alt="">
+        <h4>{{Auth::user()->name}}</h4>
+      </div>
+      <a href="/"><i class="fa fa-home"></i><span>Home</span></a>
+      <a href="/home"><i class="fa fa-tachometer"></i><span>Dashboard</span></a>
+      <a href="{{route('item.create')}}"><i class="fa fa-sitemap"></i><span>Create Items</span></a>
+      <a href="{{ route('supplier.create') }}"><i class="fa fa-suitcase"></i><span>Suppliers</span></a>
+     
+      
+     
+    </div>
+    <!--sidebar end-->
 
-                <h3 class="ml-5 text-white  mb-2 userName">{{Auth::user()->name}}</h3>
-                <hr>
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a href="/" class="nav-link sideBarLink "><i class="fa fa-home mx-2 sideBar-icon" aria-hidden="true"></i><span class="textLink ml-1">Home</span></a></li>
-                    <li class="nav-item"><a href="/home" class="nav-link sideBarLink "><i class="fa fa-tachometer mx-2 sideBar-icon" aria-hidden="true"></i><span class="textLink ml-1">Dashbord</span></a></li>
-                    <!-- <li class="nav-item"><a href="#" class="nav-link sideBarLink "><i class="fa fa-user mx-2" aria-hidden="true"></i><span class="textLink ml-1">Profile</span></a></li> -->
-                    <li class="nav-item"><a href="{{route('item.create')}}" role="button" class="nav-link sideBarLink "><i class="fa fa-sitemap mx-2 sideBar-icon" aria-hidden="true"></i><span class="textLink ml-1">Create Items</span></a></li>
-                    <li class="nav-item"><a href="{{ route('supplier.create') }}" role="button" class="nav-link sideBarLink "><i class="fa fa-suitcase mx-2 sideBar-icon" aria-hidden="true"></i><span class="textLink ml-1">Suppliers</span></a></li>
-                    <!-- <li class="nav-item"><a href="#" class="nav-link sideBarLink "><i class="fa fa-cogs mx-2" aria-hidden="true"></i><span class="textLink ml-1">Settings</span></a></li> -->
-                    <li class="nav-item"><a class="nav-link sideBarLink  text-light" type="button" id="toggleButton"><i class="fa fa-arrows-alt mx-2 sideBar-icon" aria-hidden="true"></i><span class="textLink ml-1">Resize</span></a></li>
-                </ul>
-
-
-            </div>
-        </div>
-
-        <div class="content ">
-            <main class="bord pt-4">
+    <div class="content pr-0">
+            <main class="bord ">
                 <div class="container-fluid pl-0  main-body  ">
                     @yield('content')
                 </div>
             </main>
-        </div>
-    </div>
+      </div>
+   	
+  
 
-    <!--Live search -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script>
+<!--Live search -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script>
         var config = {
             routes: {
                 liveSearch: "{{ route('liveSearch')}}"
@@ -144,8 +144,8 @@
     <!--Live search end -->
 
 
-    <!--item code -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<!--item code -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script>
         var config = {
             routes: {
@@ -158,11 +158,15 @@
     </script>
     <script src="{{ asset('js/itemCodes.js') }}"> </script>
     <script src="{{ asset('js/todelete.js') }}"> </script>
-    
+   
     <!--item code end -->
 
 
 
-</body>
 
+
+
+
+
+</body>
 </html>

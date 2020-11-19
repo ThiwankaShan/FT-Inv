@@ -86,4 +86,27 @@ class FilterController extends Controller
 
         return response()->json([$data]);
     }
+
+    public function ShowItems($id){
+        //requesting pagination nummber from dashboard and send items array as the pagination
+  
+          $locations = Location::all();
+          $categories = Category::all();
+          $proId =DB::table('items')->select('procurement_id')->groupBy('procurement_id')->get();
+           $items = Items::orderBy('created_at', 'DESC')->paginate($id);
+          
+          if (Auth::user()->role == "admin") { 
+  
+             return view('pages.admin', compact('items','locations','categories','proId'));
+  
+          }else if(Auth::user()->role == "manager"){
+  
+              return view('pages.manager', compact('items','locations','categories','proId'));
+  
+          }else if(Auth::user()->role == "user"){
+  
+              return view('pages.user', compact('items','locations','categories','proId'));
+  
+          }
+     }
 }

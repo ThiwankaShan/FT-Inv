@@ -6,7 +6,7 @@
 </div>
 <hr>
 
-<div class="card w-75  item-create">
+<div class="card w-75  item-create mx-auto">
     <h5 class="card-header form-card-header-custom"><strong class="text-light"> Add Item Form</strong></h5>
     <div class="card-body">
 
@@ -286,6 +286,6 @@
 </div>
 @include('forms.add_new');
 
-<script src="{{ asset('js/filter.js') }}"> </script>
+<script src="{{ asset('js/filter_sort.js') }}"> </script>
 <script src="{{ asset('js/add_new_parts.js') }}"> </script>
 @endsection

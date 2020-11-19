@@ -1,7 +1,7 @@
 $(document).on("click","#preview",function(){//get input from create item blade and check the data
    console.log('came to js function');
     var location = $('#location').val();
-    var sublocation = $('#subLocation').val();
+    var sublocation = $('#sublocation').val();
     var category = $('#category').val();
     var subcategory = $('#subcategory').val();
     var no_of_items = $('#noItems').val();
@@ -10,7 +10,8 @@ $(document).on("click","#preview",function(){//get input from create item blade 
     var rate= $('#Rate').val();
     var procument_id=$('#procument_id').val();
     var action='show';
-
+    var purchased_date = $('#purchased_date').val();
+    var GRN_code = $('#GRN_code').val();
     $.ajax({
         method: "POST",
         url: config.routes.itemStore,
@@ -27,11 +28,11 @@ $(document).on("click","#preview",function(){//get input from create item blade 
             Vat:Vat,
             Rate:rate,
             procument_id:procument_id,
-
-
+            purchased_date:purchased_date,
+            grn_no:GRN_code
         },
         success: function (res) {
-            console.log('came ajax sucess');
+            console.log(res);
             $("#vatError").fadeOut();
             $("#quantityError").fadeOut();
             $("#procumentIdError").fadeOut();
