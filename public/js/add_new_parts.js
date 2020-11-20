@@ -40,7 +40,12 @@ $(document).ready(function(){
                   $('#location').html('');
                   $.each(data.records , function(key, value){
                     $("#location").append('<option value="'+value.location_code+'">'+value.location_name+'</option>');
-                })
+                  });
+
+                    $('#selectedLoaction').html('');
+                    $.each(data.records , function(key, value){
+                      $("#selectedLoaction").append('<option value="'+value.location_code+'">'+value.location_name+'</option>');
+                  });
                    
 
               }else{
@@ -188,6 +193,10 @@ $(document).ready(function(){
                         $("#category").append('<option value="'+value.category_code+'">'+value.category_name+'</option>');
                     })
                     
+                    $('#categoryID').html('');
+                    $.each(data.records , function(key, value){
+                        $("#categoryID").append('<option value="'+value.category_code+'">'+value.category_name+'</option>');
+                    })
 
                 }else{
                     //Bellow function call 
