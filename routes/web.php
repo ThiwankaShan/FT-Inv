@@ -56,3 +56,6 @@ Route::post('/supplier/store', 'SupplierController@store')->name('supplier.store
 
 //Dashboard Sort by,Show parts
 Route::get('/dashboard/show/{id}','FilterController@ShowItems')->name('dashBoard.show');
+
+//Add serial number after item saved
+Route::post('/serial_number/store','FilterController@SerialNumber');

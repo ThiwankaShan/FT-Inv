@@ -121,10 +121,9 @@ class ItemController extends Controller
         }
 
         $itemCodes = [];
-
-        // show item codes in item form model
+        $itemCodes_for_serial =[];
+        
         if ($request->action == 'show') {
-
 
             for ($num = $i + 1; $num < $count + $i + 1; $num++) {
                 if ($subItem != 0) {
@@ -134,7 +133,9 @@ class ItemController extends Controller
 
                         $mainItemCode = sprintf('%03d', $num);
                         $itemCode = 'FT' . '/' . $locationCode . '/' . $subLocationCode . '/' . $categoryCode . '/' . $subCategoryCode . '/' . $mainItemCode . '/' . $subItemCode;
+                        
                         array_push($itemCodes, $itemCode);
+
                     }
                 } else {
                     $mainItemCode = sprintf('%03d', $num);
@@ -142,7 +143,8 @@ class ItemController extends Controller
                     array_push($itemCodes, $itemCode);
                 }
             }
-
+           
+          
             return json_encode($itemCodes);
         }
         //Input data store in the database.
@@ -160,7 +162,11 @@ class ItemController extends Controller
 
                         $mainItemCode = sprintf('%03d', $num); //main item->sub items
 
-                        $item->item_code = 'FT' . '/' . $locationCode . '/' . $subLocationCode . '/' . $categoryCode . '/' . $subCategoryCode . '/' . $mainItemCode . '/' . $subItemCode;
+                        $itemCode = 'FT' . '/' . $locationCode . '/' . $subLocationCode . '/' . $categoryCode . '/' . $subCategoryCode . '/' . $mainItemCode . '/' . $subItemCode;   
+                        array_push($itemCodes_for_serial,$itemCode); 
+
+
+                        $item->item_code = $itemCode;
                         $item->location_code = $locationCode;
                         $item->subLocation_code = $subLocationCode;
                         $item->category_code = $categoryCode;
@@ -177,6 +183,7 @@ class ItemController extends Controller
                         $item->save();
                     }
                 }
+                session()->flash('items',$itemCodes_for_serial);
             }
             //If sub item hasn't sub item this part work
             else if ($subItem == 0) {
@@ -185,7 +192,11 @@ class ItemController extends Controller
                     $item = new Items();
                     $mainItemCode = sprintf('%03d', $num);
 
-                    $item->item_code = 'FT' . '/' . $locationCode . '/' . $subLocationCode . '/' . $categoryCode . '/' . $subCategoryCode . '/' . $mainItemCode;
+
+                    $itemCode = 'FT' . '/' . $locationCode . '/' . $subLocationCode . '/' . $categoryCode . '/' . $subCategoryCode . '/' . $mainItemCode;
+                    array_push($itemCodes_for_serial,$itemCode); 
+
+                    $item->item_code = $itemCode;
                     $item->location_code = $locationCode;
                     $item->subLocation_code = $subLocationCode;
                     $item->category_code = $categoryCode;
@@ -201,9 +212,10 @@ class ItemController extends Controller
                     $item->supplier_name = $supplier_name;
                     $item->save();
                 }
+                session()->flash('items',$itemCodes_for_serial);
             }
            
-            return back()->with('success', 'Items Saved Successfuly!');
+            return view('forms.add_serial_number')->with('success', 'Items Saved Successfuly!');
         }
     }
 

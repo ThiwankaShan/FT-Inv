@@ -10,7 +10,7 @@ use App\SubCategory;
 use App\SubLocation;
 use Romans\Filter\IntToRoman;
 use Illuminate\Http\Request;
-
+use Validator;
 class FilterController extends Controller
 {
 
@@ -108,5 +108,26 @@ class FilterController extends Controller
               return view('pages.user', compact('items','locations','categories','proId'));
   
           }
+     }
+
+     public function SerialNumber(Request $request){
+        
+        $validatedata = Validator::make($request->all(),[
+            'serial_number' => 'string|nullable|unique:items,serialNumber'
+        ],[
+            'serial_number.unique' => 'Serial Number is Already Taken.Use Another..'
+        ]);
+  
+        if($validatedata->fails()){
+           return response()->json(['errors'=>$validatedata->errors()->all()]);
+        }
+
+        $item = DB::table('items')
+               ->where('item_code',$request->item_code)
+              ->update([
+                'serialNumber' => $request->serial_number,
+              ]);
+
+        return response()->json(['edit'=>"complete"]);      
      }
 }
