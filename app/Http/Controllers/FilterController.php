@@ -87,47 +87,5 @@ class FilterController extends Controller
         return response()->json([$data]);
     }
 
-    public function ShowItems($id){
-        //requesting pagination nummber from dashboard and send items array as the pagination
-  
-          $locations = Location::all();
-          $categories = Category::all();
-          $proId =DB::table('items')->select('procurement_id')->groupBy('procurement_id')->get();
-           $items = Items::orderBy('created_at', 'DESC')->paginate($id);
-          
-          if (Auth::user()->role == "admin") { 
-  
-             return view('pages.admin', compact('items','locations','categories','proId'));
-  
-          }else if(Auth::user()->role == "manager"){
-  
-              return view('pages.manager', compact('items','locations','categories','proId'));
-  
-          }else if(Auth::user()->role == "user"){
-  
-              return view('pages.user', compact('items','locations','categories','proId'));
-  
-          }
-     }
-
-     public function SerialNumber(Request $request){
-        
-        $validatedata = Validator::make($request->all(),[
-            'serial_number' => 'string|nullable|unique:items,serialNumber'
-        ],[
-            'serial_number.unique' => 'Serial Number is Already Taken.Use Another..'
-        ]);
-  
-        if($validatedata->fails()){
-           return response()->json(['errors'=>$validatedata->errors()->all()]);
-        }
-
-        $item = DB::table('items')
-               ->where('item_code',$request->item_code)
-              ->update([
-                'serialNumber' => $request->serial_number,
-              ]);
-
-        return response()->json(['edit'=>"complete"]);      
-     }
+    
 }

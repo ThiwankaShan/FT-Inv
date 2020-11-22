@@ -1,5 +1,7 @@
 $(document).ready(function(){
    
+//Sending Serial Numbers of new  Created Items as a ajax request  to Item controller@SerialNumber
+
     var _token = $('input[name="_token"]').val();
 $('.submit_serial').click(function(){
     var clicked_item_code = ($(this).val()).toString();
