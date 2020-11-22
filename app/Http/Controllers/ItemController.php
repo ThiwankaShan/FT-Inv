@@ -12,6 +12,7 @@ use App\SubCategory;
 use App\SubLocation;
 use App\Supplier;
 use Session;
+use Auth;
 
 use Romans\Filter\IntToRoman;
 use Illuminate\Http\Request;
@@ -80,7 +81,9 @@ class ItemController extends Controller
             'Vat' => 'regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
             'Rate' => 'regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
             'category' => 'required|string',
-            'purchased_date' => 'required'
+            'purchased_date' => 'required',
+            'subCategory' => 'string'
+
         ]);
 
         //This variables are use for create item code
@@ -121,10 +124,9 @@ class ItemController extends Controller
         }
 
         $itemCodes = [];
-
-        // show item codes in item form model
+        $itemCodes_for_serial =[];
+        
         if ($request->action == 'show') {
-
 
             for ($num = $i + 1; $num < $count + $i + 1; $num++) {
                 if ($subItem != 0) {
@@ -134,7 +136,9 @@ class ItemController extends Controller
 
                         $mainItemCode = sprintf('%03d', $num);
                         $itemCode = 'FT' . '/' . $locationCode . '/' . $subLocationCode . '/' . $categoryCode . '/' . $subCategoryCode . '/' . $mainItemCode . '/' . $subItemCode;
+                        
                         array_push($itemCodes, $itemCode);
+
                     }
                 } else {
                     $mainItemCode = sprintf('%03d', $num);
@@ -142,7 +146,8 @@ class ItemController extends Controller
                     array_push($itemCodes, $itemCode);
                 }
             }
-
+           
+          
             return json_encode($itemCodes);
         }
         //Input data store in the database.
@@ -160,7 +165,11 @@ class ItemController extends Controller
 
                         $mainItemCode = sprintf('%03d', $num); //main item->sub items
 
-                        $item->item_code = 'FT' . '/' . $locationCode . '/' . $subLocationCode . '/' . $categoryCode . '/' . $subCategoryCode . '/' . $mainItemCode . '/' . $subItemCode;
+                        $itemCode = 'FT' . '/' . $locationCode . '/' . $subLocationCode . '/' . $categoryCode . '/' . $subCategoryCode . '/' . $mainItemCode . '/' . $subItemCode;   
+                        array_push($itemCodes_for_serial,$itemCode); 
+
+
+                        $item->item_code = $itemCode;
                         $item->location_code = $locationCode;
                         $item->subLocation_code = $subLocationCode;
                         $item->category_code = $categoryCode;
@@ -177,6 +186,7 @@ class ItemController extends Controller
                         $item->save();
                     }
                 }
+                session()->flash('items',$itemCodes_for_serial);
             }
             //If sub item hasn't sub item this part work
             else if ($subItem == 0) {
@@ -185,7 +195,11 @@ class ItemController extends Controller
                     $item = new Items();
                     $mainItemCode = sprintf('%03d', $num);
 
-                    $item->item_code = 'FT' . '/' . $locationCode . '/' . $subLocationCode . '/' . $categoryCode . '/' . $subCategoryCode . '/' . $mainItemCode;
+
+                    $itemCode = 'FT' . '/' . $locationCode . '/' . $subLocationCode . '/' . $categoryCode . '/' . $subCategoryCode . '/' . $mainItemCode;
+                    array_push($itemCodes_for_serial,$itemCode); 
+
+                    $item->item_code = $itemCode;
                     $item->location_code = $locationCode;
                     $item->subLocation_code = $subLocationCode;
                     $item->category_code = $categoryCode;
@@ -201,9 +215,10 @@ class ItemController extends Controller
                     $item->supplier_name = $supplier_name;
                     $item->save();
                 }
+                session()->flash('items',$itemCodes_for_serial);
             }
            
-            return back()->with('success', 'Items Saved Successfuly!');
+            return view('forms.add_serial_number')->with('success', 'Items Saved Successfuly!');
         }
     }
 
@@ -244,9 +259,13 @@ class ItemController extends Controller
 
     public function update(Request $request)
     {
+        //validation
+        //geting current serial number
+        //if current serial numebr  not equal to new input serial number there will be validation
         //request items->item, Vat, rate, grn_no, types, procument_id
         //store the updates in items table
         //return to item edit form
+        
 
         $this->validate($request, [
             
@@ -254,14 +273,23 @@ class ItemController extends Controller
             'Vat' => 'required',
             'Rate' => 'required',
             'purchased_date' => 'required',
-            'serial_number'=>'string|nullable|unique:items,serialNumber'
-        ],
-        [
-            'serial_number.unique'=>'Serial Number is Already Taken.Use Another..',
-        ]     
-    
-    );
+            
+        ]);
 
+        
+       $current_serial_number = Items::select('serialNumber')
+       ->where('item_code',$request->item)
+       ->get()->first(); 
+
+       if($current_serial_number['serialNumber'] != $request->serial_number){
+           $this ->validate($request,[
+              'serial_number' => 'string|nullable|unique:items,serialNumber'
+           ],[
+               'serial_number.unique' => 'Serial Number Already Taken!Plase Use Another..'
+           ]);
+       }
+
+       
         $item = $request->item;
         $new_vat_rate = $request->Vat;
         $new_rate = $request->Rate;
@@ -271,7 +299,8 @@ class ItemController extends Controller
         $new_procumentID = $request->procument_id;
         $new_purchased_date = $request->purchased_date;
         $new_serial_number = $request->serial_number;
-        // supplier name fetched via grn relation
+
+        //supplier name fetched via grn relation
         $grn = GRN::find(1)->where('GRN_no', $new_grn)->first();
         $new_supplier_name = $grn->supplier->supplier_name;
 
@@ -296,8 +325,58 @@ class ItemController extends Controller
     {
         //delete item permanently
         //return to home
+
         $item->delete();
         return redirect()->route('home')
             ->with('success', 'item deleted successfully');
     }
+
+    public function ShowItems($id){
+        //requesting pagination nummber from dashboard and send items array as the pagination
+  
+          $locations = Location::all();
+          $categories = Category::all();
+          $proId =DB::table('items')->select('procurement_id')->groupBy('procurement_id')->get();
+          $items = Items::orderBy('created_at', 'DESC')->paginate($id);
+          
+          if (Auth::user()->role == "admin") { 
+  
+             return view('pages.admin', compact('items','locations','categories','proId'));
+  
+          }else if(Auth::user()->role == "manager"){
+  
+              return view('pages.manager', compact('items','locations','categories','proId'));
+  
+          }else if(Auth::user()->role == "user"){
+  
+              return view('pages.user', compact('items','locations','categories','proId'));
+  
+          }
+     }
+
+     public function SerialNumber(Request $request){
+      
+         //validate data
+        //update the serial number
+       //return the completed msg
+
+            $validatedata = Validator::make($request->all(),[
+                'serial_number' => 'string|nullable|unique:items,serialNumber'
+            ],[
+                'serial_number.unique' => 'Serial Number is Already Taken.Use Another..'
+            ]);
+      
+            if($validatedata->fails()){
+               return response()->json(['errors'=>$validatedata->errors()->all()]);
+            }
+                               
+
+        $item = DB::table('items')
+               ->where('item_code',$request->item_code)
+              ->update([
+                'serialNumber' => $request->serial_number,
+              ]);
+
+        return response()->json(['edit'=>"complete"]);      
+     }
 }

@@ -19,7 +19,7 @@
                         <label for="item-name ">Location</label>
                     </div>
                     <div class="col-sm-9 mb-1">
-                        <select class="form-control " id="location" name="Location">
+                        <select class="form-control {{ $errors->has('Location') ? 'has_error' : ''}} " id="location" name="Location" >
                             <option value="">Select Location</option>
                             @foreach($locations as $location)
                             <option value="{{$location->location_code}}">{{$location->location_name}}</option>
@@ -30,7 +30,6 @@
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
                         </span>
-
                         @enderror
                     </div>
                 </div>
@@ -45,12 +44,19 @@
                         <label for="item-name ">Sub Location</label>
                     </div>
                     <div class="col-sm-9 mb-1">
-                        <select class="form-control " id="sublocation" name="subLocation">
+                        <select class="form-control {{ $errors->has('subLocation') ? 'has_error' : ''}}" id="sublocation" name="subLocation">
                             <option value="000">Select Sub Location</option>
                             @foreach($subLocations as $subLocation)
                             <option value="{{$subLocation->subLocation_code}}">{{$subLocation->subLocation_name}}</option>
                             @endforeach
                         </select>
+
+                        @error('subLocation')
+                        <span class="" role="alert">
+                            <small style="color:red"><strong>{{ $message }}</strong></small>
+                        </span>
+                        @enderror
+
                     </div>
                 </div>
                 <div class="col-3">
@@ -62,7 +68,7 @@
                         <label for="item-name ">Category</label>
                     </div>
                     <div class="col-sm-9 mb-1">
-                        <select class="form-control " id="category" name="category">
+                        <select class="form-control {{ $errors->has('category') ? 'has_error' : ''}}" id="category" name="category">
                             <option value="">Select Category</option>
                             @foreach($categories as $category)
                             <option value="{{$category->category_code}}">{{$category->category_name}}</option>
@@ -95,6 +101,7 @@
                             <option value="{{$subcategory->subCategory_code}}">{{$subcategory->subCategory_name}}</option>
                             @endforeach
                         </select>
+                       
                     </div>
                 </div>
                 <div class="col-3">
@@ -105,7 +112,7 @@
             <div class="form-row col-sm-9 pl-0">
                 <div class="form-group col-sm-6">
                     <label for="quantiy">No. Of Items</label>
-                    <input type="number" class="form-control" id="noItems" placeholder="" name="Quantity">
+                    <input type="number" class="form-control {{ $errors->has('Quantity') ? 'has_error' : ''}}" id="noItems" placeholder="" name="Quantity" value="{{ old('Quantity') }}">
                     @error('Quantity')
                     <span class="" role="alert">
                         <small style="color:red"><strong>{{ $message }}</strong></small>
@@ -118,7 +125,7 @@
                 </div>
                 <div class="form-group col-sm-6 ">
                     <label for="quantiy">No. Of Sub Items </label>
-                    <input type="number" class="form-control" value="0" id="NoSub" placeholder="" name="sub_item">
+                    <input type="number" class="form-control" value="0" id="NoSub" placeholder="" name="sub_item" value="{{ old('sub_item') }}">
                 </div>
             </div>
             <div class=" col-sm-9 row pl-0">
@@ -168,19 +175,25 @@
                     </div>
                     <div class="col-sm-9 mb-1">
                         <div class="form-group form-custom">
-                            <input type="date" class="form-control" name="purchased_date" id="purchased_date"> 
+                            <input type="date" class="form-control {{ $errors->has('purchased_date') ? 'has_error' : ''}}" name="purchased_date" id="purchased_date" value="{{ old('purchased_date') }}"> 
+                            @error('purchased_date')
+                                <span class="" role="alert">
+                                    <small style="color:red"><strong>{{ $message }}</strong></small>
+                                </span>
+
+                           @enderror 
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="form-group row">
+            <div class="form-group row ">
                 <div class="col-9 row">
                     <div class="col-sm-3">
                         <label for="item-name ">Vat/Item (Percentage)</label>
                     </div>
-                    <div class="col-sm-9 mb-1">
-                        <input type="text" name="Vat" id="Vat" class="form-control">
+                    <div class="col-sm-9 mb-1 ">
+                        <input type="text" name="Vat" id="Vat" class="form-control {{ $errors->has('Vat') ? 'has_error' : ''}}" value="{{ old('Vat')}}">
                         @error('Vat')
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
@@ -201,7 +214,7 @@
                         <label for="pro">Procurement ID (Optional)</label>
                     </div>
                     <div class="col-sm-9 mb-1">
-                        <input type="text" name="procument_id" id="procument_id" class="form-control">
+                        <input type="text" name="procument_id" id="procument_id" class="form-control" value="{{ old('procument_id') }}">
                         @error('procument_id')
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
@@ -221,8 +234,8 @@
                     <div class="col-sm-3">
                         <label for="rate">Rate(Price/Item)</label>
                     </div>
-                    <div class="col-sm-9 mb-1">
-                        <input type="text" name="Rate" id="Rate" class="form-control">
+                    <div class="col-sm-9 mb-1"> 
+                        <input type="text" name="Rate" id="Rate" class="form-control {{ $errors->has('Rate') ? 'has_error' : ''}}" value="{{ old('Rate') }}">
                         @error('Rate')
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
@@ -237,14 +250,7 @@
 
             </div>
 
-            @if(session('success'))
-            <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-                <strong class="text-center">{{ session('success') }}</strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            @endif
+           
 
 
             <div class="text-center">

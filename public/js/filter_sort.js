@@ -136,7 +136,7 @@ $(document).ready(function() {
                         output += '<td>' + data['records'][i].type + '</td>';
                         output += '<td>' + data['records'][i].purchased_date + '</td>';
                         output += '<td>' + data['records'][i].supplier_name + '</td>';
-                        output += '<td>' + 'serial number' + '</td>';
+                        output += '<td>' + data['records'][i].serialNumber + '</td>';
                         output += '<td>' + data['records'][i].GRN_no + '</td>';
                         output += '<td>' + data['records'][i].vat + '</td>';
                         output += '<td>' + data['records'][i].vat_rate_vat + '</td>';

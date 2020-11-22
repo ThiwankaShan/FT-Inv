@@ -23,6 +23,12 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/user', 'UserController');
+
+//Dashboard Sort by,Show parts
+Route::get('/dashboard/show/{id}','ItemController@ShowItems')->name('dashBoard.show');
+//Add serial number after item saved
+Route::post('/serial_number/store','ItemController@SerialNumber')->name('serial.show');
+
 Route::resource('/item', 'ItemController');
 Route::get('/item/edit/{item?}', 'ItemController@edit')->where('item','(.*)')->name('item.editForm');
 Route::post('/item/update/{item?}', 'ItemController@update')->where('item','(.*)');
@@ -49,10 +55,8 @@ Route::resource('/subcategory', 'SubCategoryController');
 Route::resource('grn', 'GRNController');
 
 
-
 //suppliers
 Route::get('/supplier/create', 'SupplierController@create')->name('supplier.create');
 Route::post('/supplier/store', 'SupplierController@store')->name('supplier.store');
 
-//Dashboard Sort by,Show parts
-Route::get('/dashboard/show/{id}','FilterController@ShowItems')->name('dashBoard.show');
+

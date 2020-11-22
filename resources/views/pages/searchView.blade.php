@@ -19,8 +19,8 @@
 
                 
                 <select class="form-control selector mr-2 mb-1 text-dark" id="order" style="outline:0px; width:100px; border-color:#C21E56; border-width:1.5px">
-                    <option value="ASC">Asending</option>
-                    <option value="DESC">Decending</option>
+                    <option value="ASC">Ascending</option>
+                    <option value="DESC">Descending</option>
                 </select>
 
                 <button class="btn btn-outline-success ml-2" style="height:40px;" id="sort" type='button'>Sort</button>
@@ -99,7 +99,7 @@
         <thead class="thead text-white" style="background-color:#691330">
             <tr>
             <th scope="col">Item Code</th>
-                <th scope="col">Locaton Code</th>
+                <th scope="col">Location Code</th>
                 <th scope="col">Type</th>
                 <th scope="col">Purchased date</th>
                 <th scope="col">Supplier name</th>
