@@ -46,9 +46,12 @@ class SubCategoryController extends Controller
         // sub category code , Name and The category code that new sub category Belongs. Send Updated sub categories array  of Selected category OF Item Form 
         $validatedata = Validator::make($request->all(),[
             'subCategory_name' => 'required|unique:sub_categories',
-            'subCategory_code' => 'required|unique:sub_categories',
+            'subCategory_code' => 'required|unique:sub_categories,subCategory_code,NULL,subCategory_code,category_code,',$request->Category_code,
+            
         ]);
 
+        // 'Category_code' => 'required|unique:sub_categories|NULL|subCategory_code|subCategory_code',$request->subCategory_code,
+       // |subCategory_code|NULL|subCategory_code|category_code',$request->Category_code
         //if fails that send all errors
         if($validatedata->fails()){
              

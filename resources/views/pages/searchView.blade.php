@@ -53,7 +53,7 @@
 
         <select class="form-control selector  mb-1 diseble2 diseble3 diseble4 bg-light mr-2" style=" font-weight:bold; border:none; background-color:#f2f2f2 " id="sublocation"  data-column="1">
             <option value=""> Sub Location</option>
-
+           
         </select>
 
         <select class="form-control selector  mb-1 diseble1 diseble3 diseble4 bg-light mr-2" style=" font-weight:bold; border:none; background-color:#f2f2f2 " id="category"  data-column="2">
@@ -65,8 +65,8 @@
 
         <select class="form-control selector  mb-1 diseble1 diseble3 diseble4 bg-light mr-2" style=" font-weight:bold; border:none; background-color:#f2f2f2 " id="subCategory"  data-column="3">
 
-            <option value=""> Sub Category</option>
-
+            <option value="" class="default_option"> Sub Category</option>
+            <option value="000" class="default_option"> 000</option>
         </select>
 
         <select class="form-control selector  mb-1 diseble1 diseble2 diseble4 bg-light mr-2" style=" font-weight:bold; border:none; background-color:#f2f2f2 " id="Type"  data-column="4">

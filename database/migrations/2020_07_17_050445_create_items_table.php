@@ -19,7 +19,7 @@ class CreateItemsTable extends Migration
             $table->string('location_code');
             $table->string('subLocation_code');
             $table->string('category_code');
-            $table->string('subCategory_code');
+            $table->string('subCategory_code')->nullable();
             $table->string('type');
             $table->string('supplier_name');
             $table->string('GRN_no');

@@ -22,7 +22,7 @@
                         <select class="form-control {{ $errors->has('Location') ? 'has_error' : ''}} " id="location" name="Location" >
                             <option value="">Select Location</option>
                             @foreach($locations as $location)
-                            <option value="{{$location->location_code}}">{{$location->location_name}}</option>
+                            <option value="{{$location->location_code}}" {{ $location->location_code === old('Location') ? 'selected' : ''}}>{{$location->location_name}}</option>
                             @endforeach
                         </select>
 
@@ -45,9 +45,9 @@
                     </div>
                     <div class="col-sm-9 mb-1">
                         <select class="form-control {{ $errors->has('subLocation') ? 'has_error' : ''}}" id="sublocation" name="subLocation">
-                            <option value="000">Select Sub Location</option>
+                            <option value="">Select Sub Location</option>
                             @foreach($subLocations as $subLocation)
-                            <option value="{{$subLocation->subLocation_code}}">{{$subLocation->subLocation_name}}</option>
+                            <option value="{{$subLocation->subLocation_code}}" {{ $subLocation->subLocation_code === old('subLocation') ? 'selected' : ''}}>{{$subLocation->subLocation_name}}</option>
                             @endforeach
                         </select>
 
@@ -71,7 +71,7 @@
                         <select class="form-control {{ $errors->has('category') ? 'has_error' : ''}}" id="category" name="category">
                             <option value="">Select Category</option>
                             @foreach($categories as $category)
-                            <option value="{{$category->category_code}}">{{$category->category_name}}</option>
+                            <option value="{{$category->category_code}}" {{ $category->category_code === old('category') ? 'selected' : '' }}>{{$category->category_name}}</option>
                             @endforeach
                         </select>
 
@@ -96,9 +96,9 @@
                     </div>
                     <div class="col-sm-9">
                         <select class="form-control " id="subCategory" name="subCategory">
-                            <option value="000">Select Sub Category</option>
+                            <option value="000" class="default_option">Select Sub Category</option>
                             @foreach($subCategories as $subcategory)
-                            <option value="{{$subcategory->subCategory_code}}">{{$subcategory->subCategory_name}}</option>
+                            <option value="{{$subcategory->subCategory_code}}" {{$subcategory->subCategory_code === old('subCategory') ? 'selected' : ''}}>{{$subcategory->subCategory_name}}</option>
                             @endforeach
                         </select>
                        
