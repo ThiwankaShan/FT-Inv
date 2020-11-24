@@ -18,6 +18,7 @@ class CreateSubCategoriesTable extends Migration
             $table->string('subCategory_code')->primarykey();
             $table->string('subCategory_name');
             $table->string('category_code');
+           
             $table->timestamps();
         });
     }

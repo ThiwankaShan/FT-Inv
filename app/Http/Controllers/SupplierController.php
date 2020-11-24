@@ -23,7 +23,7 @@ class SupplierController extends Controller
         $this->validate($request, [
             'SupplierCode' => 'required|string',
             'SupplierName' => 'required|string',
-            'SupplierAddress' => 'required|string',
+            'SupplierAddress' => 'string|nullable',
             'TelephoneNo' => 'nullable|numeric|min:10',
             'Email' => 'nullable|email',
             'VatRegistration' => 'required|string'

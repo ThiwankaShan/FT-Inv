@@ -82,7 +82,7 @@ class ItemController extends Controller
             'Rate' => 'regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
             'category' => 'required|string',
             'purchased_date' => 'required',
-            'subCategory' => 'string'
+            'subCategory' => 'string|nullable'
 
         ]);
 

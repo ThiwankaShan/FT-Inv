@@ -63,13 +63,10 @@ $(document).ready(function() {
             },
             success: function(data) {
 
-                op += '<option value="" > Sub Category</option>';
-                op += '<option value="000" >No Sub Category</option>';
-
                 for (var i = 0; i < data.length; i++) {
                     op += '<option value="' + data[i].subCategory_code + '" >' + data[i].subCategory_name + '</option>';
                 }
-                $('#subCategory').html('');
+                $('#subCategory').children(':not(.default_option)').remove();            
                 $('#subCategory').append(op);
             },
             error: function() {
@@ -108,8 +105,8 @@ $(document).ready(function() {
                 _token: _token,
                 loactionCode: loactionCode,
                 subLoactionCode: subLoactionCode,
-                categoryCode: categoryCode,
-                subCategoryCode: subCategoryCode,
+                category_code: categoryCode,
+                subCategory_code: subCategoryCode,
                 type: type,
                 pid: pid,
                 column : column,
