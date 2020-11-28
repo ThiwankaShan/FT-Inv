@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SubCategory extends Model
 {
-    protected $primaryKey = 'subCategory_code'; 
+    protected $primaryKey = ['subCategory_code','category_code'];
     public $incrementing = false;
     protected $keyType = "string";
 
