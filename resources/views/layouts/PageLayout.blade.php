@@ -24,8 +24,8 @@
 
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <!-- Styles -->
-    <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ secure_asset('css/mycss.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/mycss.css') }}" rel="stylesheet">
 
  
 
