@@ -337,7 +337,7 @@ class ItemController extends Controller
           $locations = Location::all();
           $categories = Category::all();
           $proId =DB::table('items')->select('procurement_id')->groupBy('procurement_id')->get();
-          $items = Items::orderBy('created_at', 'DESC')->paginate($id);
+          $items = Items::orderBy('created_at', 'DESC')->simplePaginate($id);
           
           if (Auth::user()->role == "admin") { 
   
