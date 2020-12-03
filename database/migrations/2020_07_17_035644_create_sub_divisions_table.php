@@ -31,4 +31,5 @@ class CreateSubDivisionsTable extends Migration
     {
         Schema::dropIfExists('sub_locations');
     }
-}
+    }
+

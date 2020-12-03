@@ -2,14 +2,14 @@
 <div class="modal fade bd-example-modal-lg" style="top:15%"  tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="Add_new_Location" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content ">
-    
+
         <div class="card w-100  item-create mb-0">
 
             <h5 class="form-card-header-custom text-white p-3"><strong class="text-light">Add New Location</strong></h5>
             <div class="card-body">
 
                 <div class="alert alert-success text-center" role="alert" style="display:none" id="validLocation">
-                    <strong>New Location Created Successfully!!</strong> 
+                    <strong>New Location Created Successfully!!</strong>
                 </div>
 
                 <div class="alert alert-danger print-error-msg " id="invalid_location" style="display:none">
@@ -17,15 +17,15 @@
                 </div>
 
                 <form method="" action="" class="form-align-custom" id="Location_form">
-                   
-                    <label for="location_code">Location Code</label>
-                    <input type="text" class="form-control form-custom" id="location_code">
-                    @error('location_code')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                    <label for="location_name">Location Name</label>
+
+                    <label for="location_code">Location Name</label>
                     <input type="text" class="form-control form-custom" id="location_name">
                     @error('location_name')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                    <label for="location_name">Location Code</label>
+                    <input type="text" class="form-control form-custom" id="location_code">
+                    @error('location_code')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                     <div class="text-center ">
@@ -46,13 +46,13 @@
 <div class="modal fade bd-example-modal-lg" style="top:15%"  tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="Add_new_subLocation" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content ">
-    
+
         <div class="card w-100  item-create mb-0">
         <h5 class="form-card-header-custom text-white p-3"><strong class="text-light">Add New Sub Location</strong></h5>
             <div class="card-body">
 
                 <div class="alert alert-success text-center" role="alert" style="display:none" id="validSubLocation">
-                        <strong>New Sub Location Created Successfully!!</strong> 
+                        <strong>New Sub Location Created Successfully!!</strong>
                  </div>
 
                 <div class="alert alert-danger  " id="invalidSubLocation" style="display:none">
@@ -102,14 +102,14 @@
 <div class="modal fade bd-example-modal-lg" style="top:15%"  tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="Add_new_category" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content ">
-    
+
     <div class='card w-100  item-create mb-0'>
 
             <h5 class="form-card-header-custom text-white p-3">Add New Category</h5>
             <div class="card-body">
 
                   <div class="alert alert-success text-center" role="alert" style="display:none" id="valid_category">
-                        <strong>New Category Created Successfully!!</strong> 
+                        <strong>New Category Created Successfully!!</strong>
                  </div>
 
                 <div class="alert alert-danger  " id="invalid_category" style="display:none">
@@ -150,14 +150,14 @@
 <div class="modal fade bd-example-modal-lg" style="top:15%"  tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="Add_new_subCategory" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content ">
-  
+
                 <div class="card w-100  item-create mb-0">
 
                     <h5 class="form-card-header-custom text-white p-3"><strong class="text-light">Add New Sub Category</strong></h5>
                     <div class="card-body">
 
                         <div class="alert alert-success text-center" role="alert" style="display:none" id="valid_subCategory">
-                                <strong>New Sub Category Created Successfully!!</strong> 
+                                <strong>New Sub Category Created Successfully!!</strong>
                         </div>
 
                         <div class="alert alert-danger  " id="invalid_subCategory" style="display:none">
@@ -166,7 +166,7 @@
 
                         <form  class=" form-align-custom" id="subCategory_form">
                             @csrf
-                           
+
                             <div class="form-group ">
                                 <label for="item-name ">Categories</label>
                                 <select class="form-control form-custom" id="categoryID" name="Category_code">
@@ -192,8 +192,8 @@
                             </div>
                             <div class="form-group form-custom">
                                 <label for="subLocarion_code">Sub Category Code</label>
-                                <input type="text" class="form-control" name="subCategory_code" id="subCategory_code"> 
-                                
+                                <input type="text" class="form-control" name="subCategory_code" id="subCategory_code">
+
 
                             </div>
 
@@ -206,7 +206,7 @@
                 </div>
             </div>
 
-   
+
     </div>
   </div>
 </div>
@@ -215,14 +215,14 @@
 <div class="modal fade bd-example-modal-lg" style="top:40px"  tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="Add_new_GRN" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content ">
-  
+
             <div class='card w-100  item-create mb-0'>
             <h5 class="form-card-header-custom text-white p-3">Add New GRN</h5>
 
             <div class="card-body">
 
                          <div class="alert alert-success text-center" role="alert" style="display:none" id="valid_grn">
-                                <strong>New GRN Created Successfully!!</strong> 
+                                <strong>New GRN Created Successfully!!</strong>
                         </div>
 
                         <div class="alert alert-danger  " id="invalid_grn" style="display:none">
@@ -231,7 +231,7 @@
 
                 <form  class="form-align-custom" id="Grn_form">
                     @csrf
-                   
+
                     <div class="form-group form-custom">
                         <label for="GRN_no">GRN No.</label>
                         <input type="text" class="form-control form-custom" id="GRN_no" name="GRN_no" value="{{$suggest_grnNo}}">
@@ -241,21 +241,21 @@
                     <div class="form-group form-custom">
                         <label for="GRN_date">GRN Date</label>
                         <input type="date" class="form-control" name="GRN_date" id="GRN_date">
-                      
+
                     </div>
 
                     <div class="form-group form-custom">
                         <label for="invoice_no">Invoice No.</label>
                         <input type="text" class="form-control" id="invoice_no" name="invoice_no">
 
-                       
+
                     </div>
 
                     <div class="form-group form-custom">
                         <label for="invoice_date">Invoice Date.</label>
                         <input type="date" class="form-control" id="invoice_date" name="invoice_date">
 
-                       
+
 
                         <div class="form-group form-custom">
                             <label for="supplier_code">Supplier</label>
@@ -267,8 +267,8 @@
                             </select>
 
                         </div>
-                       
-        
+
+
                         <div class="text-center">
                             <button type="button" class="btn form-card-header-custom text-light" id="save_GRN">Create</button>
                             <button class="btn btn-secondary cancel_modal text-light  " type="button" >Cancel</button>
@@ -278,7 +278,7 @@
             </div>
         </div>
 
-   
+
     </div>
   </div>
 </div>
