@@ -26,17 +26,6 @@ class ItemController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
-    {
-        // $locations = Location::all();
-        // $categories = Category::all();
-        // $items = Items::paginate(10);
-
-        // return view('layouts.view', compact('locations', 'items', 'categories'));
-    }
-
-
-
     public function create()
     {
         //data get from Location, SubLocation, Category, SubCategory
@@ -64,169 +53,115 @@ class ItemController extends Controller
 
     }
 
-
-
     public function store(Request $request)
     {
         //Request data -> Location, SubLocation, Sub_item, procument_id, Quantity, Vat, Rate, Category, purchase_date
         //store data in items table
         //return to create item form
-
         $this->validate($request, [
             'Location' => 'required|string',
             'subLocation' => 'required|string',
             'sub_item' => 'integer|nullable',
             'procument_id' => 'string|nullable',
             'Quantity' => 'required|integer',
-            'Vat' => 'regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
+            'Vat' => 'required',
             'Rate' => 'regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
             'category' => 'required|string',
             'purchased_date' => 'required',
             'subCategory' => 'string|nullable'
 
         ]);
-
-        //This variables are use for create item code
-        $locationCode = $request->Location;
-        $subLocationCode = $request->subLocation;
-        $categoryCode = $request->category;
-        $subCategoryCode = $request->subCategory;
-        $vat = $request->Vat;
-        $rate = $request->Rate;
-        $subItem = $request->sub_item;
-        $purchased_date = $request->purchased_date;
-        $grn_no = $request->grn_no;
-
-        // supplier name fetched via grn relation
-        $grn = GRN::find(1)->where('GRN_no', $grn_no)->first();
-        $supplier_name = $grn->supplier->supplier_name;
        
-
-
-        //get the quantity
-        $count = $request->Quantity;
+        // supplier name fetched via grn relation
+        $grn_no = $request->grn_no;
+        $grn = GRN::find(1)->where('GRN_no', $grn_no)->first();
         
-
-        //get the last item code to generate next codes
-        $item = Items::where('location_code', $request->Location)
-            ->where('subLocation_code', $request->subLocation)
-            ->where('category_code', $request->category)
-            ->where('subCategory_code', $request->subCategory)
-            ->orderBy('created_at', 'asc')->get();
-
-        if (count($item) > 0) {
-            $latestItemNum =  preg_split("#/#", $item->last()->item_code);
-            $i = (int)$latestItemNum[5];
-            error_log('last item item number');
-            error_log($i);
-        } else {
-            $i = 0;
-        }
-
-        $itemCodes = [];
-        $itemCodes_for_serial =[];
+        $data = [
+            'location'=>$request->Location,
+            'subLocation' => $request->subLocation,
+            'category' => $request->category,
+            'subCategory' => $request->subCategory,
+            'vat' => str_replace(',',"",$request->Vat),
+            'rate' => $request->Rate,
+            'subItem' => $request->sub_item,
+            'purchased_date' => $request->purchased_date,
+            'grn_no' => $request->grn_no,
+            'count' => $request->Quantity,
+            'type'=>$request->types,
+            'procument_id' => $request->procument_id,
+            'supplier_name' => $grn->supplier->supplier_name,
+            ];
         
         if ($request->action == 'show') {
-
-            for ($num = $i + 1; $num < $count + $i + 1; $num++) {
-                if ($subItem != 0) {
-                    for ($j = 1; $j <= $subItem; $j++) {
-                        $filter = new IntToRoman();
-                        $subItemCode = $filter->filter($j);
-
-                        $mainItemCode = sprintf('%03d', $num);
-                        $itemCode = 'FT' . '/' . $locationCode . '/' . $subLocationCode . '/' . $categoryCode . '/' . $subCategoryCode . '/' . $mainItemCode . '/' . $subItemCode;
-                        
-                        array_push($itemCodes, $itemCode);
-
-                    }
-                } else {
-                    $mainItemCode = sprintf('%03d', $num);
-                    $itemCode = 'FT' . '/' . $locationCode . '/' . $subLocationCode . '/' . $categoryCode . '/' . $subCategoryCode . '/' . $mainItemCode;
-                    array_push($itemCodes, $itemCode);
-                }
-            }
-           
-          
+            $itemCodes = $this->generateCode($data);
             return json_encode($itemCodes);
         }
         //Input data store in the database.
         else {
+            $itemCodes = $this->generateCode($data);
+            foreach($itemCodes as $itemCode) {
+                $item = new Items();
+                $item->item_code = $itemCode;
+                $item->location_code = $data['location'];
+                $item->subLocation_code = $data['subLocation'];
+                $item->category_code = $data['category'];
+                $item->subCategory_code = $data['subCategory'];
+                $item->type = $data['type'];
 
-            //If item has sub items this part work
-            if ($subItem != 0) {
-                for ($num = $i + 1; $num < $count + $i + 1; $num++) {
-                    for ($j = 1; $j <= $subItem; $j++) {
-                        $item = new Items();
-
-                        $filter = new IntToRoman();
-                        $subItemCode = $filter->filter($j);
-
-
-                        $mainItemCode = sprintf('%03d', $num); //main item->sub items
-
-                        $itemCode = 'FT' . '/' . $locationCode . '/' . $subLocationCode . '/' . $categoryCode . '/' . $subCategoryCode . '/' . $mainItemCode . '/' . $subItemCode;   
-                        array_push($itemCodes_for_serial,$itemCode); 
-
-
-                        $item->item_code = $itemCode;
-                        $item->location_code = $locationCode;
-                        $item->subLocation_code = $subLocationCode;
-                        $item->category_code = $categoryCode;
-                        $item->subCategory_code = $subCategoryCode;
-                        $item->type = $request->types;
-
-                        $item->GRN_no = $request->grn_no;
-                        $item->vat = (($vat * $rate) / 100);
-                        $item->procurement_id = $request->procument_id;
-                        $item->rate = $request->Rate;
-                        $item->vat_rate_vat = $vat;
-                        $item->purchased_date = $purchased_date;
-                        $item->supplier_name = $supplier_name;
-                        $item->save();
-                    }
-                }
-                session()->flash('items',$itemCodes_for_serial);
+                $item->GRN_no = $data['grn_no'];
+                $item->vat = (($data['vat'] * $data['rate']) / 100);
+                $item->procurement_id = $data['procument_id'];
+                $item->rate = $data['rate'];
+                $item->vat_rate_vat = $data['vat'];
+                $item->purchased_date = $data['purchased_date'];
+                $item->supplier_name = $data['supplier_name'];
+                $item->save();
             }
-            //If sub item hasn't sub item this part work
-            else if ($subItem == 0) {
-
-                for ($num = $i + 1; $num < $count + $i + 1; $num++) {
-                    $item = new Items();
-                    $mainItemCode = sprintf('%03d', $num);
-
-
-                    $itemCode = 'FT' . '/' . $locationCode . '/' . $subLocationCode . '/' . $categoryCode . '/' . $subCategoryCode . '/' . $mainItemCode;
-                    array_push($itemCodes_for_serial,$itemCode); 
-
-                    $item->item_code = $itemCode;
-                    $item->location_code = $locationCode;
-                    $item->subLocation_code = $subLocationCode;
-                    $item->category_code = $categoryCode;
-                    $item->subCategory_code = $subCategoryCode;
-                    $item->type = $request->types;
-
-                    $item->GRN_no = $request->grn_no;
-                    $item->vat = (($vat * $rate) / 100);
-                    $item->procurement_id = $request->procument_id;
-                    $item->rate = $request->Rate;
-                    $item->vat_rate_vat = $vat;
-                    $item->purchased_date = $purchased_date;
-                    $item->supplier_name = $supplier_name;
-                    $item->save();
-                }
-                session()->flash('items',$itemCodes_for_serial);
-            }
-           
+        
+            session()->flash('items',$itemCodes);
             return view('forms.add_serial_number')->with('success', 'Items Saved Successfuly!');
         }
     }
 
+    public function generateCode($data){
+        // input all item data
+        // return generated item code array
 
-    public function show(Items $itemQuantity)
-    {
+        $itemCodes = [];
+
+        //get the last item code to generate next codes
+        $item = Items::where('location_code', $data['location'])
+            ->where('subLocation_code', $data['subLocation'])
+            ->where('category_code', $data['category'])
+            ->where('subCategory_code', $data['subCategory'])
+            ->orderBy('created_at', 'asc')->get();
+        
+        if (count($item) > 0) {
+            $latestItemNum =  preg_split("#/#", $item->last()->item_code);
+            $i = (int)$latestItemNum[5];
+        } else {
+            $i = 0;
+        }
+        
+        for ($num = $i + 1; $num < $data['count'] + $i + 1; $num++) {
+            
+            $mainItemNumber = sprintf('%03d', $num);
+            $main_itemCode = 'FT' . '/' . $data['location'] . '/' . $data['subLocation'] . '/' . $data['category'] . '/' . $data['subCategory'] . '/' . $mainItemNumber;   
+            
+            for ($j = 1; $j <= $data['subItem']; $j++) {
+                
+                $filter = new IntToRoman();
+                $subItemNumber = $filter->filter($j);
+                $sub_itemCode = $main_itemCode. '/' . $subItemNumber;
+                array_push($itemCodes,$sub_itemCode);
+                
+            }  
+            array_push($itemCodes,$main_itemCode);
+        }
+
+        return $itemCodes;
+        
     }
-
 
     public function edit(Items $item)
     {
@@ -291,7 +226,7 @@ class ItemController extends Controller
 
        
         $item = $request->item;
-        $new_vat_rate = $request->Vat;
+        $new_vat_rate = str_replace(',',"",$request->Vat);
         $new_rate = $request->Rate;
         $new_vat = (($new_vat_rate * $new_rate) / 100);
         $new_grn = $request->grn_no;

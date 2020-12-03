@@ -11,7 +11,7 @@
     <h5 class="card-header form-card-header-custom"><strong class="text-light"> Update Item Form</strong></h5>
     <div class="card-body">
 
-        <form action="/item/update/{{$item->item_code}}" method="POST">
+        <form action="/item/update/{{$item->item_code}}" method="POST" id="create_item_form">
             @csrf
             <div class="card text-center" style="margin-bottom:30px;">
                 <div class="card-header">
@@ -67,6 +67,8 @@
                     </div>
                     <div class="col-sm-9 mb-1">
                         <input type="text" name="Vat" id="Vat" class="form-control" value="{{$item->vat_rate_vat}}">
+                        <span id="real_time_Vat" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
+
                         @error('Vat')
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
@@ -88,6 +90,8 @@
                     </div>
                     <div class="col-sm-9 mb-1">
                         <input type="text" name="procument_id" id="procument_id" class="form-control" value="{{$item->procurement_id}}">
+                        <span id="real_time_procument_id" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
+ 
                         @error('procument_id')
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
@@ -109,6 +113,8 @@
                     </div>
                     <div class="col-sm-9 mb-1">
                         <input type="text" name="Rate" id="Rate" class="form-control" value="{{$item->rate}}">
+                        <span id="real_time_Rate" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
+
                         @error('Rate')
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
@@ -151,6 +157,7 @@
                     </div>
                     <div class="col-sm-9 mb-1">
                         <input type="text" name="serial_number" id="serial_number" class="form-control" value="{{$item->serialNumber}}">
+                        <span id="serial_er" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                         @error('serial_number')
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
@@ -181,8 +188,8 @@
 
                 {{ csrf_field() }}
 
-                <button type="submit" class="btn form-card-header-custom text-light" type="button" name="action" value="save">Update Item Details</button>
-               
+                <button type="submit" class="btn form-card-header-custom text-light" id="btn_submit" type="button" name="action" value="save">Update Item Details</button>
+                <button class="btn form-card-header-custom text-light "  style="display:none" id="preview" data-target="#itemCodes" type="button">show Item codes</button>
             </div>
         </form>
 
@@ -264,4 +271,5 @@
 
 <!-- Here is the js file that including ajax functions for add new GRN -->
 <script src="{{ asset('js/add_new_parts.js') }}"> </script>
+<script src="{{ asset('js/real_time_validation.js') }}"> </script>
 @endsection

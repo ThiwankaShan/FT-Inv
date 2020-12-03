@@ -10,7 +10,7 @@
     <h5 class="card-header form-card-header-custom"><strong class="text-light"> Add Item Form</strong></h5>
     <div class="card-body">
 
-        <form action="{{ route('item.store') }}" method="POST">
+        <form action="{{ route('item.store') }}" method="POST" id="create_item_form">
             @csrf
 
             <div class="form-group row">
@@ -194,6 +194,7 @@
                     </div>
                     <div class="col-sm-9 mb-1 ">
                         <input type="text" name="Vat" id="Vat" class="form-control {{ $errors->has('Vat') ? 'has_error' : ''}}" value="{{ old('Vat')}}">
+                        <span id="real_time_Vat" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                         @error('Vat')
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
@@ -215,6 +216,7 @@
                     </div>
                     <div class="col-sm-9 mb-1">
                         <input type="text" name="procument_id" id="procument_id" class="form-control" value="{{ old('procument_id') }}">
+                        <span id="real_time_procument_id" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                         @error('procument_id')
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
@@ -236,6 +238,8 @@
                     </div>
                     <div class="col-sm-9 mb-1"> 
                         <input type="text" name="Rate" id="Rate" class="form-control {{ $errors->has('Rate') ? 'has_error' : ''}}" value="{{ old('Rate') }}">
+                        <span id="real_time_Rate" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
+
                         @error('Rate')
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
@@ -258,7 +262,7 @@
 
                 {{ csrf_field() }}
 
-                <button type="submit" class="btn form-card-header-custom text-light" type="button" name="action" value="save">Save Item Details</button>
+                <button type="submit" class="btn form-card-header-custom text-light" id="btn_submit" type="button" name="action" value="save">Save Item Details</button>
                 <button class="btn form-card-header-custom text-light" id="preview" data-target="#itemCodes" type="button">show Item codes</button>
             </div>
         </form>
@@ -294,4 +298,5 @@
 
 <script src="{{ asset('js/filter_sort.js') }}"> </script>
 <script src="{{ asset('js/add_new_parts.js') }}"> </script>
+<script src="{{ asset('js/real_time_validation.js') }}"> </script>
 @endsection
