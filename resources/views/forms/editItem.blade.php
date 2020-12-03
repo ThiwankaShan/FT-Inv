@@ -11,7 +11,7 @@
     <h5 class="card-header form-card-header-custom"><strong class="text-light"> Update Item Form</strong></h5>
     <div class="card-body">
 
-        <form action="/item/update/{{$item->item_code}}" method="POST">
+        <form action="/item/update/{{$item->item_code}}" method="POST" id="create_item_form">
             @csrf
             <div class="card text-center" style="margin-bottom:30px;">
                 <div class="card-header">
@@ -157,6 +157,7 @@
                     </div>
                     <div class="col-sm-9 mb-1">
                         <input type="text" name="serial_number" id="serial_number" class="form-control" value="{{$item->serialNumber}}">
+                        <span id="serial_er" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                         @error('serial_number')
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>

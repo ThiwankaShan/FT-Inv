@@ -271,4 +271,8 @@ body{
     border-width: 2px;
   }
 
-  
+  .validOne{
+    outline: none !important;
+    border-color:		rgb(255, 128, 128) !important; 
+    border-width: 3px;
+  }

@@ -10,7 +10,7 @@
     <h5 class="card-header form-card-header-custom"><strong class="text-light"> Add Item Form</strong></h5>
     <div class="card-body">
 
-        <form action="{{ route('item.store') }}" method="POST">
+        <form action="{{ route('item.store') }}" method="POST" id="create_item_form">
             @csrf
 
             <div class="form-group row">
