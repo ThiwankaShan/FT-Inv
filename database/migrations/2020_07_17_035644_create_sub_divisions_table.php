@@ -15,8 +15,7 @@ class CreateSubDivisionsTable extends Migration
     public function up()
     {
         Schema::create('sub_locations', function (Blueprint $table) {
-            $table->primary(['subLocation_code', 'Location_code'], 'subLocation_pk');
-            $table->string('subLocation_code');
+            $table->string('subLocation_code')->primarykey();
             $table->string('subLocation_name');
             $table->string('Location_code');
             $table->timestamps();
@@ -32,4 +31,5 @@ class CreateSubDivisionsTable extends Migration
     {
         Schema::dropIfExists('sub_locations');
     }
-}
+    }
+

@@ -13,7 +13,7 @@ class SubLocation extends Model
         // add all other fields
     ];
 
-    
+    protected $primaryKey = 'subLocation_code';
     public $incrementing = false;
     protected $keyType = "string";
 
