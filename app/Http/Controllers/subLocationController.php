@@ -48,7 +48,7 @@ class subLocationController extends Controller
        //Getting subLocation_code , Name and The Location code that new sub location Belongs.
       // Send Updated Sublocations array of Selected Location OF Item Form
 
-
+// sub location code , Name and The location code that new sub location Belongs. Send Updated sub locations array  of Selected location OF Item Form
         $validatedData = Validator::make($request->all(),[
             'subLocation_name' => 'required|unique:sub_locations',
             'subLocation_code' => 'required|unique:sub_locations,subLocation_code,NULL,subLocation_code,Location_code,'.$request->Location_code,
