@@ -63,8 +63,8 @@ class FilterController extends Controller
         }, 'and')->orderBy($request->column,$request->order)->orderBy('item_code', 'ASC');
 
         $gadgets = $gadgets->get();
+        session(['items_download' => $gadgets]);
         
-       
 
         return response()->json(['authType'=>Auth::user()->role,'records'=>$gadgets]);
           
