@@ -64,7 +64,7 @@ class ItemController extends Controller
             'sub_item' => 'integer|nullable',
             'procument_id' => 'string|nullable',
             'Quantity' => 'required|integer',
-            'Vat' => 'regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
+            'Vat' => 'required',
             'Rate' => 'regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
             'category' => 'required|string',
             'purchased_date' => 'required',
@@ -81,7 +81,7 @@ class ItemController extends Controller
             'subLocation' => $request->subLocation,
             'category' => $request->category,
             'subCategory' => $request->subCategory,
-            'vat' => $request->Vat,
+            'vat' => str_replace(',',"",$request->Vat),
             'rate' => $request->Rate,
             'subItem' => $request->sub_item,
             'purchased_date' => $request->purchased_date,
@@ -226,7 +226,7 @@ class ItemController extends Controller
 
        
         $item = $request->item;
-        $new_vat_rate = $request->Vat;
+        $new_vat_rate = str_replace(',',"",$request->Vat);
         $new_rate = $request->Rate;
         $new_vat = (($new_vat_rate * $new_rate) / 100);
         $new_grn = $request->grn_no;

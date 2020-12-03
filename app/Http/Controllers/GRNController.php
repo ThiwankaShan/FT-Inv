@@ -77,7 +77,11 @@ class GRNController extends Controller
 
     
         $grn->save();
-        $grn_numbers = Grn::all();  
+       
+        $grn_numbers = Grn::select('GRN_no')
+        ->orderBy('GRN_no', 'desc')
+        ->get();  
+
         $Suppliers = Supplier::all();  
         return response()->json(['status'=>"Success", 'records'=>$grn_numbers , 'supplier'=>$Suppliers]);
 
