@@ -40,12 +40,13 @@
             @foreach(Session::get('items') as $item)
             <tr>
                 <th scope="row">{{$item}}</th>
-                        <td><input type="text" class="form-control real_time_input" style="width:200px"  id="{{ str_replace('/', '', $item) }}" placeholder="" >
+                        <td> <input type="text" class="form-control real_time_input" style="width:200px"  id="{{ str_replace('/', '', $item) }}" placeholder="" >
                              <p  style="display:none; color:red; padding-top:0px; padding-left:0px; font-weight:bold; font-size:12px;"></p>   
                              <spam style="disply:none; color:red; font-size:10px; font-weight:bold" id="{{ str_replace('/', '_', $item) }}" ></spam>
                     </td>
-                        <td class="{{ str_replace('/', '', $item) }}"><button class="btn form-card-header-custom text-light submit_serial " id="{{ str_replace('/', '2', $item) }}"  value="{{$item}}"  type="button">Save</button>
-                        <span class="badge badge-success"  id="badge" style="display:none; max-width:60px">Success</span>
+                        <td class="{{ str_replace('/', '', $item) }} row"><button class="btn form-card-header-custom text-light submit_serial col-4" id="{{ str_replace('/', '2', $item) }}"  value="{{$item}}"  type="button">Save</button>
+                        <button class="btn btn-primary  text-light edit_serial col-4" id="{{ str_replace('/', '-', $item) }}"  value="{{$item}}"  type="button" style="display:none"> Edit</button>
+                        <span class=" col-4  ml-auto"  id="badge" style="display:none;  font-size:27px;  color:'#76FF03'"><i class="fa fa-check-square"></i></span>
                     </td>
 
                         
