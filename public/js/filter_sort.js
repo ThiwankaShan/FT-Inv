@@ -1,6 +1,6 @@
 
 $(document).ready(function() {
-
+    var items;
     //Send ajax request to Filter Controller and retreving subLocations Object
     var _token = $('input[name="_token"]').val();
     $('#location').change(function() {
@@ -9,6 +9,7 @@ $(document).ready(function() {
         console.log(locationCode);
         var form = $(this).parent();
         var op = '';
+
         $.ajax({
 
             url: "/ajax/division",
@@ -100,6 +101,7 @@ $(document).ready(function() {
 
             url: "/ajax/filter",
             method: "POST",
+            async : false,
 
             data: {
                 _token: _token,
@@ -114,7 +116,6 @@ $(document).ready(function() {
             },
             success: function(data) {
                 var output = "";              
-                console.log(data);
                 
                 if(data['records'].length < 1 ){  //If empty the Filtered data will be appeared "no data" warning
                    
@@ -155,13 +156,18 @@ $(document).ready(function() {
                     $('#dataBody').append(output);
                 }
 
+                items = data['records'];
+                console.log('item set');
+                
+
             },
             error: function() {
                 console.log('error!');
+               
             }
 
         })
-
+        
     }
 
     // global variables to keep both sort and filter independent
@@ -183,7 +189,6 @@ $(document).ready(function() {
         subCategory = $('#subCategory').val();
         type = $('#Type').val();
         pID = $('#ProID').val();
-        console.log(pID);
             fetchData(location, subLocation, category, subCategory, type, pID, column, order);
             
     });
@@ -193,9 +198,13 @@ $(document).ready(function() {
         
         column = $('#column').val();
         order = $('#order').val();
-        console.log(pID);
             fetchData(location, subLocation, category, subCategory, type, pID, column, order);
             
+    });
+
+    // pdf download function 
+    $('#reports').click(function() {
+        fetchData(location, subLocation, category, subCategory, type, pID, column, order);
     });
 
     

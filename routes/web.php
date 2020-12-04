@@ -59,4 +59,6 @@ Route::resource('grn', 'GRNController');
 Route::get('/supplier/create', 'SupplierController@create')->name('supplier.create');
 Route::post('/supplier/store', 'SupplierController@store')->name('supplier.store');
 
+Route::get('/reports', 'reportsController@pdfReport')->name('download');
+
 
