@@ -16,7 +16,7 @@ use Auth;
 
 use Romans\Filter\IntToRoman;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Str;
 
 class ItemController extends Controller
 {
@@ -163,11 +163,15 @@ class ItemController extends Controller
         
     }
 
-    public function edit(Items $item)
+    public function edit(Items $item,Request $request)
     {
         //get the input from grn
         //auto increment functionality
         //return to edit item form
+
+        //previous url
+        $request_url = (string)($request->server('HTTP_REFERER'));
+       
         $grns = Grn::all()->pluck('GRN_no');
         $grn_array = [];
         
@@ -187,7 +191,7 @@ class ItemController extends Controller
         }
         $Suppliers = Supplier::all();
 
-        return view('forms.editItem', compact('grn_array', 'item','Suppliers', 'suggest_grnNo'));
+        return view('forms.editItem', compact('grn_array', 'item','Suppliers', 'suggest_grnNo','request_url'));
 
     }
 
@@ -199,9 +203,10 @@ class ItemController extends Controller
         //if current serial numebr  not equal to new input serial number there will be validation
         //request items->item, Vat, rate, grn_no, types, procument_id
         //store the updates in items table
-        //return to item edit form
+        //return to the current page on dashbord
         
-
+        $url = $request->back_to; //current page url in dashbord
+      
         $this->validate($request, [
             
             'procument_id' => 'string|nullable',
@@ -252,7 +257,11 @@ class ItemController extends Controller
                 'purchased_date' => $new_purchased_date,
                 'serialNumber' => $new_serial_number,
             ]);
-        return redirect()->route('item.editForm', ['item' => $item])->with('success', 'Items updated Successfuly!');
+
+            session()->flash('updated_row',$request->item);
+            return Redirect($url);
+        // return redirect()->route('item.editForm', ['item' => $item, 'request_url'=>$request_url])->with('success', 'Items updated Successfuly!');
+        
     }
 
 

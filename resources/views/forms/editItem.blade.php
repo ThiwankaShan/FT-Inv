@@ -3,7 +3,7 @@
 
 <div class="container-fluid pt-2 ">
 
-    <a class="btn btn-dark text-light" href="/home">Back</a>
+    <a class="btn btn-dark text-light" href="{{ $request_url }}">Back</a>
 </div>
 <hr>
 
@@ -185,8 +185,9 @@
 
             <div class="text-center">
 
-
-                {{ csrf_field() }}
+               <input type="hidden" name="back_to" value="{{  $request_url }}">
+               
+               {{ csrf_field() }}
 
                 <button type="submit" class="btn form-card-header-custom text-light" id="btn_submit" type="button" name="action" value="save">Update Item Details</button>
                 <button class="btn form-card-header-custom text-light "  style="display:none" id="preview" data-target="#itemCodes" type="button">show Item codes</button>
