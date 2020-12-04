@@ -291,27 +291,35 @@ class ItemController extends Controller
 
      public function SerialNumber(Request $request){
       
-         //validate data
-        //update the serial number
-       //return the completed msg
+        //validate data
+       //update the serial number
+      //return the completed msg
 
-            $validatedata = Validator::make($request->all(),[
-                'serial_number' => 'string|nullable|unique:items,serialNumber'
-            ],[
-                'serial_number.unique' => 'Serial Number is Already Taken.Use Another..'
-            ]);
-      
-            if($validatedata->fails()){
-               return response()->json(['errors'=>$validatedata->errors()->all()]);
-            }
-                               
+           $current_serial_number = Items::select('serialNumber')
+           ->where('item_code',$request->item_code)
+           ->get()->first(); 
 
-        $item = DB::table('items')
-               ->where('item_code',$request->item_code)
-              ->update([
-                'serialNumber' => $request->serial_number,
-              ]);
+          
 
-        return response()->json(['edit'=>"complete"]);      
-     }
+          if($current_serial_number['serialNumber'] != $request->serial_number){
+               $validatedata = Validator::make($request->all(),[
+                   'serial_number' => 'string|nullable|unique:items,serialNumber'
+               ],[
+                   'serial_number.unique' => 'Serial Number is Already Taken.Use Another..'
+               ]);
+
+               if($validatedata->fails()){
+                   return response()->json(['errors'=>$validatedata->errors()->all()]);
+                }
+          }
+
+          
+       $item = DB::table('items')
+              ->where('item_code',$request->item_code)
+             ->update([
+               'serialNumber' => $request->serial_number,
+             ]);
+
+       return response()->json(['edit'=>"complete"]);      
+    }
 }

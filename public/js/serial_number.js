@@ -7,6 +7,8 @@ $('.submit_serial').click(function(){
     var clicked_item_code = ($(this).val()).toString();
     var cleared_item_code = clicked_item_code.replace(/\/+/g, '');
     var serial_number = $(`#${cleared_item_code}`).val();
+    var edit_id = clicked_item_code.replace(/\/+/g, '-');
+    
      console.log(serial_number);
     $.ajax({
         url:'/serial_number/store',
@@ -26,7 +28,7 @@ $('.submit_serial').click(function(){
                 $(`#${cleared_item_code}`).attr('disabled','disabled');
                 $(`.${cleared_item_code}`).find('button').css('display','none');
                 $(`.${cleared_item_code}`).find('span').css('display','block');
-                
+                $(`#${edit_id}`).css('display','block');
              }else{
                  $('#invalid_serial').html('');
                  $('#invalid_serial').html(data.errors[0]);
@@ -39,6 +41,23 @@ $('.submit_serial').click(function(){
 
         }
     })
+})
+
+
+//After Adding  serial numbers display a edit part
+
+$('.edit_serial').click(function(){
+    var clicked_item_code = ($(this).val()).toString();
+    var this_id = clicked_item_code.replace(/\/+/g, '-');
+    var save_id = clicked_item_code.replace(/\/+/g, '2');
+    var inputs_id = clicked_item_code.replace(/\/+/g, '');
+    
+
+    $(`#${inputs_id}`).removeAttr('disabled');
+    $(`#${save_id}`).css('display','block');
+    $(`#${this_id}`).css('display','none');
+    $(`.${inputs_id}`).find('span').css('display', 'none');
+
 })
 
 
