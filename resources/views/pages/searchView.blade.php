@@ -1,6 +1,6 @@
 <!-- here is the filter form -->
 
-<div class="card mt-0 px-0">
+<div class="card mt-0 px-0" id="con">
     <div class="card-header ">
     <div class="row ">
           <div class="col-sm-5 d-flex flex-row">
@@ -117,8 +117,8 @@
         </thead>
         <tbody id="dataBody">
             @foreach($items as $item)
-            
-             <tr>
+               
+             <tr id="{{ str_replace('/', '', $item->item_code) }}">
              <th scope="row">{{$item->item_code}}</th>
                 <td>{{$item->location_code}}</td>
                 <td>{{$item->type}}</td>
@@ -132,14 +132,16 @@
                 <td>{{$item->rate}}</td>
                 <td class="d-flex flex-row">
                     @if(auth()->user()->role == 'admin')
-                        <a class="btn btn-primary mr-1 text-light" href="/item/edit/{{$item->item_code}}">Edit</a> 
+                        
+                        <a class="btn btn-primary mr-1 text-light highlight_row" href="/item/edit/{{$item->item_code}}" >Edit</a> 
                         <a href="/item/delete/{{$item->item_code}}" data-method="post" class="btn btn-danger delete-item text-light" token='{!! csrf_token() !!}'>Delete</a>
-                    @elseif(auth()->user()->role == 'manager')
+                       
+                        @elseif(auth()->user()->role == 'manager')
                         <a class="btn btn-primary mr-1 text-light" href="/item/edit/{{$item->item_code}}">Edit</a> 
                     @endif
                 </td>
                 
-
+                
             </tr>
             @endforeach
             
@@ -180,3 +182,10 @@
     </div>
   </div>
 </div>
+
+@if(Session::has('updated_row'))
+<input type="hidden" name="" id="highlighted_row" value="{{ Session::get('updated_row') }}">
+
+@endif
+
+<script src="{{ asset('js/real_time_validation.js') }}"> </script>

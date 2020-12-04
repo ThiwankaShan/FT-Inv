@@ -138,3 +138,20 @@ $('#Vat').keyup(function(event) {
   });
 
 // **************************************Serial Number Inputs Real Time Validation  End**************************
+
+
+
+//*******************************Here is Highlights the Updated Row In Dashbord********************************************************** */
+
+if(document.getElementById('highlighted_row')){
+
+    var input_id = document.getElementById('highlighted_row');
+    var val = input_id.value;
+    var row_id = val.replace(/\/+/g, '');
+    
+    document.getElementById(row_id).style.backgroundColor = "#A5D6A7";
+
+    //scroll automatically to updated row
+    $(window).scrollTop($('#'+row_id).position().top);
+
+}
