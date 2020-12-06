@@ -13,12 +13,12 @@ class reportsController extends Controller
     }
 
     public function pdfReport(){
-        
+
         $items = session('items_download');
-        return view('reports.template',compact('items')); 
-        
+        return view('reports.template',compact('items'));
+
         $pdf = PDF::loadView('reports.template',compact('items'));
         return $pdf->download('report.pdf');
-        
+
     }
 }

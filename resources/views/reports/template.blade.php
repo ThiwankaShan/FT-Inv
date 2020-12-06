@@ -1,25 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+
 <head>
     <meta charset="utf-8">
     <!-- Styles -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
     <style>
       @media (min-width: 1500px) {
-  .Section1 {
-    max-width: 1500px;
-  }
+
+
 }
+.report-table table tr
+{
+    font-size: 15px;
+    padding: 20px;
+}
+
+.report-table table tr th{
+    padding: 20px;
+    border-bottom: 2px black solid;
+    text-align: center;
+}
+
     </style>
 </head>
-</head>
+
+
 <body>
-<div class="Section1">
-<table class="table">
+<div class="report-table container-fluid">
+<table border="1px" cellpadding="15px" cellspacing="10px">
   <thead class="thead-dark">
-    <tr>
-    <th scope="col">Item Code</th>
+    <tr class="bg-info" >
+        <th scope="col">Item Code</th>
         <th scope="col">Location Code</th>
         <th scope="col">Type</th>
         <th scope="col">Purchased date</th>
@@ -35,7 +48,7 @@
   <tbody>
   @foreach($items as $item)
     <tr>
-    <th scope="row">{{$item->item_code}}</th>
+        <td scope="row">{{$item->item_code}}</td>
         <td>{{$item->location_code}}</td>
         <td>{{$item->type}}</td>
         <td>{{$item->purchased_date}}</td>
