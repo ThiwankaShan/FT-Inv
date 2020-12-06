@@ -15,9 +15,14 @@ class reportsController extends Controller
     public function pdfReport(){
 
         $items = session('items_download');
-        return view('reports.template',compact('items'));
+        $grandTotal = 0;
+        foreach ($items as $item){
+            $grandTotal = $grandTotal + $item['rate'];
 
-        $pdf = PDF::loadView('reports.template',compact('items'));
+        }
+        //return view('reports.template',compact('items','grandTotal'));
+
+        $pdf = PDF::loadView('reports.template',compact('items','grandTotal'));
         return $pdf->download('report.pdf');
 
     }

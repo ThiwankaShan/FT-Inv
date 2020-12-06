@@ -17,8 +17,13 @@
     padding: 20px;
 }
 
+.report-table table tr td
+{
+    padding: 5px;
+}
+
 .report-table table tr th{
-    padding: 20px;
+    padding: 10px;
     border-bottom: 2px black solid;
     text-align: center;
 }
@@ -29,6 +34,9 @@
 
 <body>
 <div class="report-table container-fluid">
+
+<h4 style="text-align:center">Faculty of Technology – Sabaragamuwa University of Sri Lanka <br>Fixed Assets Register As At {{ date('Y-m-d') }}.</h4>
+
 <table border="1px" cellpadding="15px" cellspacing="10px">
   <thead class="thead-dark">
     <tr class="bg-info" >
@@ -61,6 +69,20 @@
         <td>{{$item->rate}}</td>
     </tr>
     @endforeach
+    <tr>
+        <td scope="row"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>Grand total</td>
+        <td>{{ $grandTotal}}</td>
+    </tr>
+
   </tbody>
 </table>
 </div>
