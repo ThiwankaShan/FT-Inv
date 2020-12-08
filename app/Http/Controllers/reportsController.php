@@ -12,12 +12,21 @@ class reportsController extends Controller
         $this->middleware('auth');
     }
 
-    public function pdfReport(){
+    public function pdfReport()
+    {   // genrate a pdf from filterd item details
 
+        //getting items from filter session
         $items = session('items_download');
-        return view('reports.template',compact('items'));
+        $grandTotal = 0;
+        foreach ($items as $item){
+            $grandTotal = $grandTotal + $item['rate'];
 
-        $pdf = PDF::loadView('reports.template',compact('items'));
+        }
+
+        //This is for testing purposes
+        //return view('reports.template',compact('items','grandTotal'));
+
+        $pdf = PDF::loadView('reports.template',compact('items','grandTotal'));
         return $pdf->download('report.pdf');
 
     }
