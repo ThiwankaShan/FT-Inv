@@ -66,7 +66,7 @@
                         <label for="item-name ">Vat/Item (Percentage)</label>
                     </div>
                     <div class="col-sm-9 mb-1">
-                        <input type="text" name="Vat" id="Vat" class="form-control" value="{{$item->vat_rate_vat}}">
+                        <input type="text" name="Vat" id="Vat" class="form-control" value="">
                         <span id="real_time_Vat" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
 
                         @error('Vat')

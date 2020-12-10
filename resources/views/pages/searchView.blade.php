@@ -98,17 +98,19 @@
     <table class="table" >
         <thead class="thead text-white" style="background-color:#691330">
             <tr>
-            <th scope="col">Item Code</th>
-                <th scope="col">Location Code</th>
+            <th scope="col">Asset Code</th>
+                <th scope="col">Location</th>
                 <th scope="col">Type</th>
-                <th scope="col">Purchased date</th>
-                <th scope="col">Supplier name</th>
-                <th scope="col">Serial number</th>
                 <th scope="col">GRN No</th>
-                <th scope="col">Vat</th>
-                <th scope="col">Vat Rate</th>
-                <th scope="col">Procurement Id</th>
+                <th scope="col">Purchased date</th>
+                <th scope="col">Supplier</th>
+                <th scope="col">Serial No</th>
+                <th scope="col">Model No</th>
+                <th scope="col">Brand Name</th>
                 <th scope="col">Rate</th>
+                <th scope="col">Tax</th>
+                <th scope="col">Total</th>
+               
                 @if(auth()->user()->role == 'admin' || auth()->user()->role == 'manager')
                 <th scope="col" class="text-center">Action</th>
                 @endif
@@ -121,14 +123,16 @@
              <th scope="row">{{$item->item_code}}</th>
                 <td>{{$item->location_code}}</td>
                 <td>{{$item->type}}</td>
+                <td>{{$item->GRN_no}}</td>
                 <td>{{$item->purchased_date}}</td>
                 <td>{{$item->supplier_name}}</td>
                 <td>{{$item->serialNumber}}</td>
-                <td>{{$item->GRN_no}}</td>
+                <td>Model No</td>
+                <td>Brand Name</td>
+                <td>{{$item->rate}}</td>
                 <td>{{$item->vat}}</td>
                 <td>{{$item->vat_rate_vat}}</td>
-                <td>{{$item->procurement_id}}</td>
-                <td>{{$item->rate}}</td>
+               
                 <td class="d-flex flex-row">
                     @if(auth()->user()->role == 'admin')
                         
