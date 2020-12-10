@@ -186,7 +186,7 @@
         <div class="card-body px-0">
             <div class="container-fluid" id="dataTable">
                 <table class="table">
-                <h4 style="text-align:center">Faculty of Technology – Sabaragamuwa University of Sri Lanka <br>Fixed Assets <span id = 'date'>{{ date('Y-m-d') }}</span>.</h4>
+                <h4 style="text-align:center">Faculty of Technology – Sabaragamuwa University of Sri Lanka <br>Fixed Assets <span id = 'date'>as of {{ date('Y-m-d') }}</span>.</h4>
                 <h5 id="department"></h5>    
                 <thead class="thead text-white" style="background-color:#691330">
                         <tr>
