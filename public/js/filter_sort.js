@@ -89,7 +89,7 @@ $(document).ready(function() {
 
     
 
-    function fetchData(loactionCode = "", subLoactionCode = "", categoryCode = "", subCategoryCode = "",type = "", pid = "", column="location_code", order="ASC") {
+    function fetchData(loactionCode = "", subLoactionCode = "", categoryCode = "", subCategoryCode = "",type = "", pid = "", column="location_code", order="ASC",purchased_start='',purchased_end='') {
               
         // input filter and sort paramters
         // send data to ajaxcontroller get filter method
@@ -113,10 +113,12 @@ $(document).ready(function() {
                 pid: pid,
                 column : column,
                 order : order,
+                purchased_start : purchased_start,
+                purchased_end : purchased_end,
             },
             success: function(data) {
                 var output = "";              
-                
+                var grandTotal = 0;
                 if(data['records'].length < 1 ){  //If empty the Filtered data will be appeared "no data" warning
                    
                     output += '<tr>'
@@ -140,12 +142,12 @@ $(document).ready(function() {
                         output += '<td>' + data['records'][i].vat_rate_vat + '</td>';
                         output += '<td>' + data['records'][i].procurement_id + '</td>';
                         output += '<td>' + data['records'][i].rate + '</td>';
-    
-                        if(data['authType'] == "manager"){
+                        grandTotal += data['records'][i].rate; 
+                        if (reportView){}
+                        else if(data['authType'] == "manager"){
                             output += '<td class="d-flex flex-row"><a href="" class="btn btn-secondary mr-1 text-light">View</a><a href="/item/edit/' + data['records'][i].item_code + '" class="btn btn-primary">Edit</a> </td>';
                         }else if(data['authType'] == "admin"){
-                            output += '<td class="d-flex flex-row"><a href="/item/edit/' + data['records'][i].item_code + '" class="btn btn-primary mr-1 text-light">Edit</a> <a href="/item/delete/'+ data['records'][i].item_code +'" data-method="post" class="btn btn-danger delete-item text-light" token="'+ _token+'">Delete</a>  </td> ';
-                        
+                            output += '<td class="d-flex flex-row"><a href="/item/edit/' + data['records'][i].item_code + '" class="btn btn-primary mr-1 text-light">Edit</a> <a href="/item/delete/'+ data['records'][i].item_code +'" data-method="post" class="btn btn-danger delete-item text-light" token="'+ _token+'">Delete</a>  </td> ';  
                         }
                         
                        
@@ -154,12 +156,14 @@ $(document).ready(function() {
     
                     $('#dataBody').html("");
                     $('#dataBody').append(output);
+                    if (reportView){
+                        $('#dataBody').append('<tr><td></td><td colspan="9">Grand Total </td><td>'+grandTotal+'</td></tr>');
+                    }
                 }
 
                 items = data['records'];
                 console.log('item set');
                 
-
             },
             error: function() {
                 console.log('error!');
@@ -179,6 +183,7 @@ $(document).ready(function() {
     var pID = "" ;
     var column = "location_code";
     var order = "ASC";
+    var reportView = false;
 
     //Here is the above Function call
     $('#filter').click(function() {
@@ -203,7 +208,43 @@ $(document).ready(function() {
     });
 
     // pdf download function 
-    $('#reports').click(function() {
+    $('#viewReport').click(function() {
+        reportView = true;
+        location = $('#location').val();
+        subLocation = $('#sublocation').val();
+        category = $('#category').val();
+        subCategory = $('#subCategory').val();
+        type = $('#Type').val();
+        pID = $('#ProID').val();
+        column = $('#column').val();
+        order = $('#order').val();
+        purchased_start = $('#purchased_start').val() ;
+        purchased_end = $('#purchased_end').val();
+
+        // read and display department 
+        var sel = document.getElementById('sublocation');
+        var department= sel.options[sel.selectedIndex].text;
+        department = 'Department : '+department;
+        if (department == 'Department : Sub Location') {department=''};
+        $('#department').html(department);
+
+        // read and display date
+        var start = $('#purchased_start').val(); 
+        var end = $('#purchased_end').val();
+        if (start==end){
+            $('#date').html("");
+            $('#date').html('Purchased on '+start);
+        }else{
+            $('#date').html("");
+            $('#date').html('Purchased during the Period of '+start+'-'+end);
+        } 
+
+        fetchData(location, subLocation, category, subCategory, type, pID, column, order,purchased_start,purchased_end);
+    });
+
+    // pdf download function 
+    $('#downloadReports').click(function() {
+        reportView = true;
         fetchData(location, subLocation, category, subCategory, type, pID, column, order);
     });
 

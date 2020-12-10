@@ -86,7 +86,6 @@
         
         <button class="btn btn-outline-success ml-auto  mr-2" id="filter" type='button'>Filter</button>
         <button class="btn btn-outline-primary" id="filter1" type='submit'>Reset</button>
-        <a class="btn btn-outline-success ml-auto  mr-2" href="/reports" id="reports" type='button' >Download</a>
     </form>
         
     </div>
