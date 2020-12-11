@@ -233,7 +233,7 @@ class ItemController extends Controller
         $item = $request->item;
         $new_rate = $request->Rate;
         $new_vat = ((str_replace(',',"",$request->Vat) * $new_rate) / 100);
-        $new_vat_rate = $new_rate+str_replace(',',"",$request->Vat);
+        $new_vat_rate = $new_rate+$new_vat;
         $new_grn = $request->grn_no;
         $new_type = $request->types;
         $new_procumentID = $request->procument_id;

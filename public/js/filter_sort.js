@@ -230,7 +230,7 @@ $(document).ready(function() {
     
                     $('#dataBody').html("");
                     $('#dataBody').append(output);
-                    $('#dataBody').append('<tr><td></td><td colspan="9">Grand Total </td><td>'+grandTotal+'</td></tr>');
+                    $('#dataBody').append('<tr><td></td><td colspan="10">Grand Total </td><td>'+grandTotal+'</td></tr>');
                     
                 }
                 

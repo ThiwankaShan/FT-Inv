@@ -60,7 +60,7 @@
                 @endforeach
                 <tr>
                     <td scope="row"></td>
-                    <td colspan="9">Grand total</td>
+                    <td colspan="10">Grand total</td>
                     <td>{{ $grandTotal}}</td>
                 </tr>
 
