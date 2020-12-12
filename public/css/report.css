@@ -1,0 +1,22 @@
+@media (min-width: 1500px) {}
+
+.report-table table tr {
+    font-size: 15px;
+    padding: 20px;
+}
+
+.report-table table tr td {
+    padding: 5px;
+}
+
+.report-table table tr th {
+    padding: 10px;
+    border-bottom: 2px black solid;
+    text-align: center;
+}
+
+table,th,td {
+    border: 1px solid black ;
+    border-collapse: collapse;
+
+}

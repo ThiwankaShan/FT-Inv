@@ -112,7 +112,7 @@ class ItemController extends Controller
                 $item->vat = (($data['vat'] * $data['rate']) / 100);
                 $item->procurement_id = $data['procument_id'];
                 $item->rate = $data['rate'];
-                $item->vat_rate_vat = $data['vat'];
+                $item->vat_rate_vat = $data['rate']+(($data['vat'] * $data['rate']) / 100);
                 $item->purchased_date = $data['purchased_date'];
                 $item->supplier_name = $data['supplier_name'];
                 $item->save();
@@ -231,9 +231,9 @@ class ItemController extends Controller
 
        
         $item = $request->item;
-        $new_vat_rate = str_replace(',',"",$request->Vat);
         $new_rate = $request->Rate;
-        $new_vat = (($new_vat_rate * $new_rate) / 100);
+        $new_vat = ((str_replace(',',"",$request->Vat) * $new_rate) / 100);
+        $new_vat_rate = $new_rate+$new_vat;
         $new_grn = $request->grn_no;
         $new_type = $request->types;
         $new_procumentID = $request->procument_id;
