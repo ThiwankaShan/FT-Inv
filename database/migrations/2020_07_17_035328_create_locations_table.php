@@ -5,7 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDivisionsTable extends Migration
+class CreateLocationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,8 +15,8 @@ class CreateDivisionsTable extends Migration
     public function up()
     {
         Schema::create('locations', function (Blueprint $table) {
-            $table->string('location_code')->primarykey();
-            $table->string('location_name');
+            $table->string('code_location')->primary();
+            $table->string('name_location');
             $table->timestamps();
         });
     }
@@ -31,3 +31,4 @@ class CreateDivisionsTable extends Migration
         Schema::dropIfExists('locations');
     }
 }
+    
