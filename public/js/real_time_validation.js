@@ -2,20 +2,20 @@
 if(document.querySelector('#create_item_form')){
 
     const forms = document.querySelector('#create_item_form');
-    let  vat = forms.elements.namedItem('Vat');
+    let  tax = forms.elements.namedItem('tax');
     let  procument_id = forms.elements.namedItem('procument_id');
-    let  rate = forms.elements.namedItem('Rate');
+    let  gross_price = forms.elements.namedItem('gross_price');
 
-    vat.addEventListener('input', validation);
+    tax.addEventListener('input', validation);
     procument_id.addEventListener('input', validation);
-    rate.addEventListener('input', validation);
+    gross_price.addEventListener('input', validation);
 
     //Real Time Validation Function
     function validation(e){
     let target = e.target;
-    let Vat = document.getElementById('Vat'); 
+    let tax = document.getElementById('tax'); 
     let Procument_id = document.getElementById('procument_id'); 
-    let Rate = document.getElementById('Rate'); 
+    let gross_price = document.getElementById('gross_price'); 
 
     target.value = formatNumberWithCommas(target.value);
     function formatNumberWithCommas(x) {
@@ -37,7 +37,7 @@ if(document.querySelector('#create_item_form')){
     }
     
     //disable the submit button to prevent submitting invalid length of values
-    if(Vat.value.length >= 8 || Procument_id.value.length >= 8 || Rate.value.length >= 8 ){
+    if(tax.value.length >= 8 || Procument_id.value.length >= 8 || gross_price.value.length >= 8 ){
         document.getElementById('btn_submit').disabled = true;
         document.getElementById('preview').disabled = true;
     }else{
@@ -112,7 +112,7 @@ $('#serial_number').click(function(){
        }
 
        //disebled the buttons of submit when invalid length
-       if(Vat.value.length >= 8 || Procument_id.value.length >= 8 || Rate.value.length >= 8 || target.value.length >= 8 ){
+       if(tax.value.length >= 8 || Procument_id.value.length >= 8 || gross_price.value.length >= 8 || target.value.length >= 8 ){
            document.getElementById('btn_submit').disabled = true;
        }else{
            document.getElementById('btn_submit').disabled = false;
@@ -123,7 +123,7 @@ $('#serial_number').click(function(){
 
 })
 
-$('#Vat').keyup(function(event) {
+$('#tax').keyup(function(event) {
 
     // skip for arrow keys
     if(event.which >= 37 && event.which <= 40) return ;

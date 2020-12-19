@@ -15,11 +15,11 @@ class CreateSubCategoriesTable extends Migration
     public function up()
     {
         Schema::create('sub_categories', function (Blueprint $table) {
-            $table->integer('code_subCategory');
-            $table->string('name_subCategory');
-            $table->integer('code_category');
-            $table->foreign('code_category')->references('code_category')->on('categories')->onUpdate('cascade');
-            $table->primary(['code_subCategory','code_category']);
+            $table->integer('subCategory_code');
+            $table->string('subCategory_name');
+            $table->integer('category_code');
+            $table->foreign('category_code')->references('category_code')->on('categories')->onUpdate('cascade');
+            $table->primary(['subCategory_code','category_code']);
             $table->timestamps();
             
             

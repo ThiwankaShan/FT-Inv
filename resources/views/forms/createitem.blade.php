@@ -19,10 +19,10 @@
                         <label for="item-name ">Location</label>
                     </div>
                     <div class="col-sm-9 mb-1">
-                        <select class="form-control {{ $errors->has('Location') ? 'has_error' : ''}} " id="location" name="Location" >
+                        <select class="form-control {{ $errors->has('location_code') ? 'has_error' : ''}} " id="location" name="location_code" >
                             <option value="">Select Location</option>
                             @foreach($locations as $location)
-                            <option value="{{$location->location_code}}" {{ $location->location_code === old('Location') ? 'selected' : ''}}>{{$location->location_name}}</option>
+                            <option value="{{$location->location_code}}" {{ $location->location_code === old('location_code') ? 'selected' : ''}}>{{$location->location_name}}</option>
                             @endforeach
                         </select>
 
@@ -44,10 +44,10 @@
                         <label for="item-name ">Sub Location</label>
                     </div>
                     <div class="col-sm-9 mb-1">
-                        <select class="form-control {{ $errors->has('subLocation') ? 'has_error' : ''}}" id="sublocation" name="subLocation">
+                        <select class="form-control {{ $errors->has('subLocation') ? 'has_error' : ''}}" id="sublocation" name="subLocation_code">
                             <option value="">Select Sub Location</option>
                             @foreach($subLocations as $subLocation)
-                            <option value="{{$subLocation->subLocation_code}}" {{ $subLocation->subLocation_code === old('subLocation') ? 'selected' : ''}}>{{$subLocation->subLocation_name}}</option>
+                            <option value="{{$subLocation->subLocation_code}}" {{ $subLocation->subLocation_code === old('subLocation_code') ? 'selected' : ''}}>{{$subLocation->subLocation_name}}</option>
                             @endforeach
                         </select>
 
@@ -68,10 +68,10 @@
                         <label for="item-name ">Category</label>
                     </div>
                     <div class="col-sm-9 mb-1">
-                        <select class="form-control {{ $errors->has('category') ? 'has_error' : ''}}" id="category" name="category">
+                        <select class="form-control {{ $errors->has('category_code') ? 'has_error' : ''}}" id="category" name="category_code">
                             <option value="">Select Category</option>
                             @foreach($categories as $category)
-                            <option value="{{$category->category_code}}" {{ $category->category_code === old('category') ? 'selected' : '' }}>{{$category->category_name}}</option>
+                            <option value="{{$category->category_code}}" {{ $category->category_code === old('category_code') ? 'selected' : '' }}>{{$category->category_name}}</option>
                             @endforeach
                         </select>
 
@@ -95,7 +95,7 @@
                         <label for="item-name ">Sub Category</label>
                     </div>
                     <div class="col-sm-9">
-                        <select class="form-control " id="subCategory" name="subCategory">
+                        <select class="form-control " id="subCategory" name="subCategory_code">
                             <option value="000" class="default_option">Select Sub Category</option>
                             @foreach($subCategories as $subcategory)
                             <option value="{{$subcategory->subCategory_code}}" {{$subcategory->subCategory_code === old('subCategory') ? 'selected' : ''}}>{{$subcategory->subCategory_name}}</option>
@@ -153,9 +153,9 @@
                         <label for="item-name ">GRN No.</label>
                     </div>
                     <div class="col-sm-9 mb-1">
-                        <select class="form-control " id="GRN_code" name="grn_no">
+                        <select class="form-control " id="grn_number" name="GRN_number">
                             @foreach($grn as $grns)
-                            <option value="{{$grns->GRN_no}}">{{ $grns->GRN_no }}</option>
+                            <option value="{{$grns->GRN_number}}">{{ $grns->GRN_number }}</option>
                             @endforeach
                         </select>
 
@@ -190,12 +190,56 @@
             <div class="form-group row ">
                 <div class="col-9 row">
                     <div class="col-sm-3">
-                        <label for="item-name ">Vat/Item (Percentage)</label>
+                        <label for="item-name ">Brand Name</label>
                     </div>
                     <div class="col-sm-9 mb-1 ">
-                        <input type="text" name="Vat" id="Vat" class="form-control {{ $errors->has('Vat') ? 'has_error' : ''}}" value="{{ old('Vat')}}">
+                        <input type="text" name="brandName" id="brandName" class="form-control {{ $errors->has('brandName') ? 'has_error' : ''}}" value="{{ old('brandName')}}">
+                        <span id="real_time_brandName" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
+                        @error('brandName')
+                        <span class="" role="alert">
+                            <small style="color:red"><strong>{{ $message }}</strong></small>
+                        </span>
+
+                        @enderror
+                        <span class="" role="alert">
+                            <small style="color:red" id="vatError"></small>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group row ">
+                <div class="col-9 row">
+                    <div class="col-sm-3">
+                        <label for="item-name ">Model Number</label>
+                    </div>
+                    <div class="col-sm-9 mb-1 ">
+                        <input type="text" name="model_number" id="model_number" class="form-control {{ $errors->has('Vat') ? 'has_error' : ''}}" value="{{ old('Vat')}}">
                         <span id="real_time_Vat" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
-                        @error('Vat')
+                        @error('model_number')
+                        <span class="" role="alert">
+                            <small style="color:red"><strong>{{ $message }}</strong></small>
+                        </span>
+
+                        @enderror
+                        <span class="" role="alert">
+                            <small style="color:red" id="vatError"></small>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group row ">
+                <div class="col-9 row">
+                    <div class="col-sm-3">
+                        <label for="item-name ">Tax</label>
+                    </div>
+                    <div class="col-sm-9 mb-1 ">
+                        <input type="text" name="tax" id="tax" class="form-control {{ $errors->has('Vat') ? 'has_error' : ''}}" value="{{ old('Vat')}}">
+                        <span id="real_time_tax" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
+                        @error('tax')
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
                         </span>
@@ -234,13 +278,13 @@
             <div class="form-group row">
                 <div class="col-9 row">
                     <div class="col-sm-3">
-                        <label for="rate">Rate(Price/Item)</label>
+                        <label for="rate">Price/Item</label>
                     </div>
                     <div class="col-sm-9 mb-1"> 
-                        <input type="text" name="Rate" id="Rate" class="form-control {{ $errors->has('Rate') ? 'has_error' : ''}}" value="{{ old('Rate') }}">
-                        <span id="real_time_Rate" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
+                        <input type="text" name="gross_price" id="gross_price" class="form-control {{ $errors->has('Rate') ? 'has_error' : ''}}" value="{{ old('Rate') }}">
+                        <span id="real_time_gross_price" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
 
-                        @error('Rate')
+                        @error('gross_price')
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
                         </span>
