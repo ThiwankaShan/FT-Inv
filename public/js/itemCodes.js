@@ -18,18 +18,18 @@ $(document).on("click","#preview",function(){//get input from create item blade 
         dataType: "json",
         data: {
             _token: config.tokens.token,
-            Location: location,
-            subLocation: sublocation,
-            category: category,
-            subCategory: subcategory,
+            location_code: location,
+            subLocation_code: sublocation,
+            category_code: category,
+            subCategory_code: subcategory,
             Quantity: no_of_items,
             sub_item:no_sub_items,
             action: action,
-            Vat:Vat,
-            Rate:rate,
+            tax:Vat,
+            gross_price:rate,
             procument_id:procument_id,
             purchased_date:purchased_date,
-            grn_no:GRN_code
+            GRN_number:GRN_code
         },
         success: function (res) {
             console.log(res);
@@ -49,8 +49,8 @@ $(document).on("click","#preview",function(){//get input from create item blade 
             $('#itemCode').append(tabledata);
         },
 
-        error: function(request, status, error){
-
+        error: function(request){
+            console.log(request.responseJSON.errors)
             var error="";
             $.each(request.responseJSON.errors, function (index, object) {
                 if(index=='Vat'){

@@ -237,7 +237,7 @@
                         <label for="item-name ">Tax</label>
                     </div>
                     <div class="col-sm-9 mb-1 ">
-                        <input type="text" name="tax" id="tax" class="form-control {{ $errors->has('Vat') ? 'has_error' : ''}}" value="{{ old('Vat')}}">
+                        <input type="text" name="tax" id="Vat" class="form-control {{ $errors->has('Vat') ? 'has_error' : ''}}" value="{{ old('Vat')}}">
                         <span id="real_time_tax" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                         @error('tax')
                         <span class="" role="alert">
@@ -281,7 +281,7 @@
                         <label for="rate">Price/Item</label>
                     </div>
                     <div class="col-sm-9 mb-1"> 
-                        <input type="text" name="gross_price" id="gross_price" class="form-control {{ $errors->has('Rate') ? 'has_error' : ''}}" value="{{ old('Rate') }}">
+                        <input type="text" name="gross_price" id="Rate" class="form-control {{ $errors->has('Rate') ? 'has_error' : ''}}" value="{{ old('Rate') }}">
                         <span id="real_time_gross_price" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
 
                         @error('gross_price')
@@ -338,7 +338,7 @@
         </div>
     </div>
 </div>
-@include('forms.add_new');
+@include('forms.item_forms.modals');
 
 <script src="{{ asset('js/filter_sort.js') }}"> </script>
 <script src="{{ asset('js/add_new_parts.js') }}"> </script>
