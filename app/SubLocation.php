@@ -6,25 +6,25 @@ use Illuminate\Database\Eloquent\Model;
 
 class SubLocation extends Model
 {
-    protected $fillable = [
-        'location_code',
-        'subLocation_code',
-        'subLocation_name',
-        // add all other fields
-    ];
-
+    protected $table = 'sub_locations';
     protected $primaryKey = 'subLocation_code';
     public $incrementing = false;
     protected $keyType = "string";
+    
+    protected $fillable = [
+        'subLocation_code',
+        'subLocation_name',
+        'location_code',
+    ];
 
-
-    public function location()
+    public function locations()
     {
-    //subLocation belongs to location
-    //foreign key=location_code
-    //local_key=location_code
-        return $this->belongsTo(Location::class, 'location_code', 'location_code');
+        return $this->belongsTo('App\Location','location_code');
     }
 
-    protected $table = 'sub_locations';
+    public function items()
+    {
+        return $this->hasMany('App\Items');
+    }
+    
 }

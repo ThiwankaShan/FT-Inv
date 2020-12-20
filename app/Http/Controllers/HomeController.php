@@ -6,6 +6,7 @@ use DB;
 use App\Category;
 use App\Location;
 use App\Items;
+use App\SubLocation;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\auth;
 use Illuminate\Pagination\Paginator;
@@ -26,9 +27,7 @@ class HomeController extends Controller
         $categories = Category::all();
         $proId = DB::table('items')->select('procurement_id')->groupBy('procurement_id')->get();
         $items = Items::orderBy('location_code', 'ASC')->orderBy('item_code', 'ASC')->simplePaginate(20);
-        //*If you want check relation please use this code insert with related info
-        //$locations=Location::with('subLocations')->get();
-        //dd($locations);
+        
         if (Auth::user()->role == "admin") {
 
             return view('pages.admin', compact('items', 'locations', 'categories', 'proId'));

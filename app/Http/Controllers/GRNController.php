@@ -53,8 +53,7 @@ class GRNController extends Controller
 
         //New Grn no,date,invoice no,invoice date,and supplier code 
         //send updated grn numbers array to item create form and send suppliers array to grn create modal  
-
-        error_log('ajax request captured');
+        
         $validatedata = $request->validate([
             'GRN_number' => 'required|numeric|unique:grns',
             'GRN_date' => 'required',

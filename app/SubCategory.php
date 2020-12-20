@@ -6,15 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class SubCategory extends Model
 {
+    protected $table = 'sub_categories';
     protected $primaryKey ='subCategory_code';
     public $incrementing = false;
     protected $keyType = "string";
 
+    protected $fillable = ['subCatergory_code',
+                           'subCategory_name',
+                           'category_code'
+                        ];
+
     public function category()
     {
-    //subcategory belongs to category
-    //foreign key=category_code
-    //local_key=category code
-        return $this->belongsTo(Category::class, 'category_code', 'category_code');
+        return $this->belongsTo('App\Category','category_code');
+    }
+    
+    public function items()
+    {
+        return $this->hasMany('App\Items');
     }
 }
