@@ -6,15 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Grn extends Model
 {
+    protected $table = 'grns';
     protected $primaryKey = 'GRN_number';
     public $incrementing = false;
     protected $keyType = "integer";
 
-    //GRN belongs to supplier
-    //foreign key=supplier_code
-    //local key=supplier_code
+    protected $fillable = ['GRN_number','GRN_date','invoice_number','invoice_date','supplier_code'];
+
     public function supplier()
     {
-        return $this->belongsTo(Supplier::class, 'supplier_code', 'supplier_code');
+        return $this->belongsTo('App\Supplier', 'supplier_code');
+    }
+
+    public function items()
+    {
+        return $this->hasMany('App\Items');
     }
 }

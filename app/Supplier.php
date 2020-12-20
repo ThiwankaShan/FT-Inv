@@ -6,15 +6,26 @@ use Illuminate\Database\Eloquent\Model;
 
 class Supplier extends Model
 {
+    protected $table = 'suppliers';
     protected $primaryKey = 'supplier_code';
     public $incrementing = false;
     protected $keyType = "integer";
 
-    //Create relation between supplier and grn
-    //foreign key=supplier_code
-    //local key=GRN_no
+    protected $fillable = ['supplier_code',
+                           'supplier_name',
+                           'supplier_address',
+                           'telephone_number',
+                           'email',
+                           'vat_register_no',
+                        ];
+                        
     public function grns()
     {
-        return $this->hasMany(Grn::class, 'supplier_code', 'GRN_number');
+        return $this->hasMany('App\Grn');
+    }
+
+    public function items()
+    {
+        return $this->hasMany('App\Items');
     }
 }

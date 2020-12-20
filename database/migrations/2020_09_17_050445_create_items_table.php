@@ -22,7 +22,7 @@ class CreateItemsTable extends Migration
             $table->foreign('subLocation_code')->references('subLocation_code')->on('sub_locations')->onUpdate('cascade');
             $table->integer('category_code');
             $table->foreign('category_code')->references('category_code')->on('categories')->onUpdate('cascade');
-            $table->integer('subCategory_code');
+            $table->integer('subCategory_code')->nullable();
             $table->foreign('subCategory_code')->references('subCategory_code')->on('sub_categories')->onUpdate('cascade');
             $table->string('type');
             $table->string('serial_number')->nullable()->unique();
@@ -32,7 +32,6 @@ class CreateItemsTable extends Migration
             $table->foreign('GRN_number')->references('GRN_number')->on('grns')->onUpdate('cascade');
             $table->string('procurement_id')->nullable();
             $table->date('purchased_date');
-            $table->string('supplier_name');
             $table->float('tax');
             $table->float('gross_price');
             $table->float('net_price');
