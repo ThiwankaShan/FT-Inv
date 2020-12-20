@@ -60,7 +60,7 @@ body{
   }
   
   .sidebar{
-    z-index: 1;
+    z-index: 1 !important;
     top: 0;
     background: #2f323a;
     margin-top: 70px;
@@ -72,26 +72,6 @@ body{
     transition: 0.5s;
     transition-property: left;
     overflow-y: auto;
-  }
-  
-  .profile_info{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .sidebar .profile_info .profile_image{
-    width: 100px;
-    height: 100px;
-    border-radius: 100px;
-    margin-bottom: 10px;
-  }
-  
-  .sidebar .profile_info h4{
-    color: #ccc;
-    margin-top: 0;
-    margin-bottom: 20px;
   }
   
   .sidebar a{
@@ -114,17 +94,6 @@ body{
     padding-right: 10px;
   }
   
-  label #sidebar_btn{
-    z-index: 1;
-    color: #fff;
-    position: fixed;
-    cursor: pointer;
-    left: 300px;
-    font-size: 20px;
-    margin: 5px 0;
-    transition: 0.5s;
-    transition-property: color;
-  }
   
   label #sidebar_btn:hover{
     color: #19B3D3;

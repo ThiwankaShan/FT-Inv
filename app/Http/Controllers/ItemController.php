@@ -49,7 +49,7 @@ class ItemController extends Controller
             $suggest_grnNo = sprintf('%02d', $last_grnNo->GRN_number + 1);
         }
 
-        return view('forms.createitem', compact('locations', 'subLocations', 'categories', 'subCategories', 'grn', 'itemCodes','suggest_grnNo','Suppliers'));
+        return view('forms.item_forms.createitem', compact('locations', 'subLocations', 'categories', 'subCategories', 'grn', 'itemCodes','suggest_grnNo','Suppliers'));
 
     }
 
@@ -118,7 +118,7 @@ class ItemController extends Controller
             }
         
             session()->flash('items',$itemCodes);
-            return view('forms.add_serial_number')->with('success', 'Items Saved Successfuly!');
+            return view('forms.item_forms.add_serial_number')->with('success', 'Items Saved Successfuly!');
         }
     }
 
@@ -183,7 +183,7 @@ class ItemController extends Controller
         }
         $Suppliers = Supplier::all();
 
-        return view('forms.editItem', compact('grns', 'item','Suppliers', 'suggest_grnNo','request_url'));
+        return view('forms.item_forms.editItem', compact('grns', 'item','Suppliers', 'suggest_grnNo','request_url'));
 
     }
 

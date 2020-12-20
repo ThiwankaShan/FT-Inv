@@ -133,15 +133,15 @@ $(document).ready(function() {
                         output += ' <th scope="row">' + data['records'][i].item_code + '</th>';
                         output += '<td>' + data['records'][i].location_code + '</td>';
                         output += '<td>' + data['records'][i].type + '</td>';
-                        output += '<td>' + data['records'][i].GRN_no + '</td>';
+                        output += '<td>' + data['records'][i].GRN_number + '</td>';
                         output += '<td>' + data['records'][i].purchased_date + '</td>';
                         output += '<td>' + data['records'][i].supplier_name + '</td>';
-                        output += '<td>' + data['records'][i].serialNumber + '</td>';
-                        output += '<td>' + 'model No' + '</td>';
-                        output += '<td>' + 'brand Name' + '</td>';
-                        output += '<td>' + data['records'][i].rate + '</td>';
-                        output += '<td>' + 'tax' + '</td>';
-                        output += '<td>' + 'total' + '</td>';
+                        output += '<td>' + data['records'][i].serial_number + '</td>';
+                        output += '<td>' + data['records'][i].model_number + '</td>';
+                        output += '<td>' + data['records'][i].brandName + '</td>';
+                        output += '<td>' + data['records'][i].gross_price + '</td>';
+                        output += '<td>' + data['records'][i].tax + '</td>';
+                        output += '<td>' + data['records'][i].net_price + '</td>';
                         
                         
                       
