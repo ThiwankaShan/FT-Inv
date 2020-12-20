@@ -14,12 +14,12 @@ class CreateGrnsTable extends Migration
     public function up()
     {
         Schema::create('grns', function (Blueprint $table) {
-            $table->integer('GRN_no')->primary();
+            $table->integer('GRN_number')->primary();
             $table->date('GRN_date');
-            $table->string('invoice_no');
+            $table->string('invoice_number');
             $table->date('invoice_date');
-            $table->integer('code_supplier');
-            $table->foreign('code_supplier')->references('code_supplier')->on('suppliers')->onUpdate('cascade');
+            $table->integer('supplier_code');
+            $table->foreign('supplier_code')->references('supplier_code')->on('suppliers')->onUpdate('cascade');
             $table->timestamps();
         });
     }

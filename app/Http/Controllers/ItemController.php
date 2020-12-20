@@ -41,12 +41,12 @@ class ItemController extends Controller
         session()->flash('backUrl', "item/create");
 
         //For The Auto Incrementing Grn Number
-        $last_grnNo = Grn::latest('GRN_no')->first();
+        $last_grnNo = Grn::latest('GRN_number')->first();
         
         if ($last_grnNo == '') {
             $suggest_grnNo = '01';
         } else {
-            $suggest_grnNo = sprintf('%02d', $last_grnNo->GRN_no + 1);
+            $suggest_grnNo = sprintf('%02d', $last_grnNo->GRN_number + 1);
         }
 
         return view('forms.createitem', compact('locations', 'subLocations', 'categories', 'subCategories', 'grn', 'itemCodes','suggest_grnNo','Suppliers'));
@@ -58,38 +58,37 @@ class ItemController extends Controller
         //Request data -> Location, SubLocation, Sub_item, procument_id, Quantity, Vat, Rate, Category, purchase_date
         //store data in items table
         //return to create item form
-        $this->validate($request, [
-            'Location' => 'required|string',
-            'subLocation' => 'required|string',
+        $validatedDdata = $request->validate([
+            'location_code' => 'required',
+            'subLocation_code' => 'required',
             'sub_item' => 'integer|nullable',
             'procument_id' => 'string|nullable',
             'Quantity' => 'required|integer',
-            'Vat' => 'required',
-            'Rate' => 'regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
-            'category' => 'required|string',
-            'purchased_date' => 'required',
-            'subCategory' => 'string|nullable'
+            'tax' => 'required',
+            'gross_price' => 'required|regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
+            'category_code' => 'required',
+            'purchased_date' => 'required|date',
+            'subCategory_code' => 'string|nullable',
+            'brandName' => 'nullable',
+            'model_number' => 'nullable',
 
         ]);
-       
-        // supplier name fetched via grn relation
-        $grn_no = $request->grn_no;
-        $grn = GRN::find(1)->where('GRN_no', $grn_no)->first();
         
         $data = [
-            'location'=>$request->Location,
-            'subLocation' => $request->subLocation,
-            'category' => $request->category,
-            'subCategory' => $request->subCategory,
-            'vat' => str_replace(',',"",$request->Vat),
-            'rate' => $request->Rate,
+            'location_code'=>$request->location_code,
+            'subLocation_code' => $request->subLocation_code,
+            'category_code' => $request->category_code,
+            'subCategory_code' => $request->subCategory_code,
+            'tax' => floatval(str_replace(',',"",$request->tax)),
+            'gross_price' => $request->gross_price,
             'subItem' => $request->sub_item,
             'purchased_date' => $request->purchased_date,
-            'grn_no' => $request->grn_no,
+            'GRN_number' => $request->GRN_number,
             'count' => $request->Quantity,
             'type'=>$request->types,
             'procument_id' => $request->procument_id,
-            'supplier_name' => $grn->supplier->supplier_name,
+            'brandName' => $request->brandName,
+            'model_number' => $request->model_number ,
             ];
         
         if ($request->action == 'show') {
@@ -102,19 +101,19 @@ class ItemController extends Controller
             foreach($itemCodes as $itemCode) {
                 $item = new Items();
                 $item->item_code = $itemCode;
-                $item->location_code = $data['location'];
-                $item->subLocation_code = $data['subLocation'];
-                $item->category_code = $data['category'];
-                $item->subCategory_code = $data['subCategory'];
+                $item->location_code = $data['location_code'];
+                $item->subLocation_code = $data['subLocation_code'];
+                $item->category_code = $data['category_code'];
+                $item->subCategory_code = $data['subCategory_code'];
                 $item->type = $data['type'];
-
-                $item->GRN_no = $data['grn_no'];
-                $item->vat = (($data['vat'] * $data['rate']) / 100);
+                $item->GRN_number = $data['GRN_number'];
+                $item->tax = $data['tax'];
                 $item->procurement_id = $data['procument_id'];
-                $item->rate = $data['rate'];
-                $item->vat_rate_vat = $data['rate']+(($data['vat'] * $data['rate']) / 100);
+                $item->gross_price = $data['gross_price'];
+                $item->net_price = $data['tax'] + $data['gross_price'] ;
                 $item->purchased_date = $data['purchased_date'];
-                $item->supplier_name = $data['supplier_name'];
+                $item->brandName = $data['brandName'];
+                $item->model_number = $data['model_number'];
                 $item->save();
             }
         
@@ -130,10 +129,10 @@ class ItemController extends Controller
         $itemCodes = [];
 
         //get the last item code to generate next codes
-        $item = Items::where('location_code', $data['location'])
-            ->where('subLocation_code', $data['subLocation'])
-            ->where('category_code', $data['category'])
-            ->where('subCategory_code', $data['subCategory'])
+        $item = Items::where('location_code', $data['location_code'])
+            ->where('subLocation_code', $data['subLocation_code'])
+            ->where('category_code', $data['category_code'])
+            ->where('subCategory_code', $data['subCategory_code'])
             ->orderBy('created_at', 'asc')->get();
         
         if (count($item) > 0) {
@@ -146,7 +145,7 @@ class ItemController extends Controller
         for ($num = $i + 1; $num < $data['count'] + $i + 1; $num++) {
             
             $mainItemNumber = sprintf('%03d', $num);
-            $main_itemCode = 'FT' . '/' . $data['location'] . '/' . $data['subLocation'] . '/' . $data['category'] . '/' . $data['subCategory'] . '/' . $mainItemNumber;   
+            $main_itemCode = 'FT' . '/' . $data['location_code'] . '/' . $data['subLocation_code'] . '/' . $data['category_code'] . '/' . $data['subCategory_code'] . '/' . $mainItemNumber;   
             
             for ($j = 1; $j <= $data['subItem']; $j++) {
                 
@@ -172,26 +171,19 @@ class ItemController extends Controller
         //previous url
         $request_url = (string)($request->server('HTTP_REFERER'));
        
-        $grns = Grn::all()->pluck('GRN_no');
-        $grn_array = [];
+        $grns = Grn::all()->except($item->GRN_number)->pluck('GRN_number');
         
-        for ($i = 0; $i < sizeof($grns); $i++) {
-
-            if ($grns[$i] != $item->GRN_no) {
-                array_push($grn_array, $grns[$i]);
-            }
-        }
 
         //For The Auto Incrementing Grn Number in the add new GRN modal
-        $last_grnNo = Grn::latest('GRN_no')->first();
+        $last_grnNo = Grn::latest('GRN_number')->first();
         if ($last_grnNo == '') {
             $suggest_grnNo = '01';
         } else {
-            $suggest_grnNo = sprintf('%02d', $last_grnNo->GRN_no + 1);
+            $suggest_grnNo = sprintf('%02d', $last_grnNo->GRN_number + 1);
         }
         $Suppliers = Supplier::all();
 
-        return view('forms.editItem', compact('grn_array', 'item','Suppliers', 'suggest_grnNo','request_url'));
+        return view('forms.editItem', compact('grns', 'item','Suppliers', 'suggest_grnNo','request_url'));
 
     }
 
@@ -247,15 +239,15 @@ class ItemController extends Controller
         DB::table('items')
             ->where('item_code', $request->item)
             ->update([
-                'rate' => $new_rate,
-                "vat_rate_vat" => $new_vat_rate,
-                'vat' => $new_vat,
+                'gross_price' => $new_rate,
+                "net_price" => $new_vat_rate,
+                'tax' => $new_vat,
                 'type' => $new_type,
-                'GRN_no' => $new_grn,
+                'GRN_number' => $new_grn,
                 'procurement_id' => $new_procumentID,
                 'supplier_name' => $new_supplier_name,
                 'purchased_date' => $new_purchased_date,
-                'serialNumber' => $new_serial_number,
+                'serial_number' => $new_serial_number,
             ]);
 
             session()->flash('updated_row',$request->item);
@@ -304,15 +296,15 @@ class ItemController extends Controller
        //update the serial number
       //return the completed msg
 
-           $current_serial_number = Items::select('serialNumber')
+           $current_serial_number = Items::select('serial_number')
            ->where('item_code',$request->item_code)
            ->get()->first(); 
 
           
 
-          if($current_serial_number['serialNumber'] != $request->serial_number){
+          if($current_serial_number['serial_number'] != $request->serial_number){
                $validatedata = Validator::make($request->all(),[
-                   'serial_number' => 'string|nullable|unique:items,serialNumber'
+                   'serial_number' => 'string|nullable|unique:items,serial_number'
                ],[
                    'serial_number.unique' => 'Serial Number is Already Taken.Use Another..'
                ]);
@@ -326,7 +318,7 @@ class ItemController extends Controller
        $item = DB::table('items')
               ->where('item_code',$request->item_code)
              ->update([
-               'serialNumber' => $request->serial_number,
+               'serial_number' => $request->serial_number,
              ]);
 
        return response()->json(['edit'=>"complete"]);      

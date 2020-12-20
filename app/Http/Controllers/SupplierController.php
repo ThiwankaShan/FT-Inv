@@ -19,24 +19,25 @@ class SupplierController extends Controller
 
     public function store(Request $request)
     {
-
-        $this->validate($request, [
-            'SupplierCode' => 'required|string',
-            'SupplierName' => 'required|string',
-            'SupplierAddress' => 'string|nullable',
-            'TelephoneNo' => 'nullable|numeric|min:10',
-            'Email' => 'nullable|email',
-            'VatRegistration' => 'required|string'
+        error_log('came to controller');
+        $validateData = $request->validate([
+            'supplier_code' => 'required|unique:suppliers',
+            'supplier_name' => 'required',
+            'supplier_address' => 'nullable',
+            'telephone_number' => 'nullable|numeric|unique:suppliers',
+            'email' => 'nullable|email',
+            'vat_register_no' => 'required|unique:suppliers'
         ]);
 
+        error_log("passed the validation");
+        
         $supplier = new Supplier();
-
-        $supplier->supplier_code = $request->SupplierCode;
-        $supplier->supplier_name = $request->SupplierName;
-        $supplier->supplier_address = $request->SupplierAddress;
-        $supplier->telephone_number = $request->TelephoneNo;
-        $supplier->email_address = $request->Email;
-        $supplier->vat_register_no = $request->VatRegistration;
+        $supplier->supplier_code = $request->supplier_code;
+        $supplier->supplier_name = $request->supplier_name;
+        $supplier->supplier_address = $request->supplier_address;
+        $supplier->telephone_number = $request->telephone_number;
+        $supplier->email = $request->email;
+        $supplier->vat_register_no = $request->vat_register_no;
 
         $supplier->save();
 

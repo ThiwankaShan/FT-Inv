@@ -320,24 +320,24 @@ $(document).ready(function(){
             $("#valid_grn").css('display','none');
             $('#invalid_grn').css('display',"none");
 
-            var GRN_no = $('#GRN_no').val();
+            var GRN_number = $('#GRN_number').val();
             var GRN_date = $('#GRN_date').val();
-            var invoice_no = $('#invoice_no').val();
+            var invoice_number = $('#invoice_number').val();
             var invoice_date = $('#invoice_date').val();   //this value also send to the controller because of we dont know coreectly what is the category in the create Item Form
-            var supplier_name = $('#supplier_name').val();
+            var supplier_code = $('#supplier_code').val();
             $.ajax({
                 url:"/grn",
                 method:"POST",
                 data:{
-                    GRN_no:GRN_no,
+                    GRN_number:GRN_number,
                     GRN_date:GRN_date,
-                    invoice_no:invoice_no,
+                    invoice_number:invoice_number,
                     invoice_date:invoice_date,
-                    supplier_code:supplier_name,
+                    supplier_code:supplier_code,
                     _token:_token
                 },
                 success:function(data){
-                    console.log(data);
+                    console.log('got a response');
                 if(data['status']){
                     $('#valid_grn').css('display',"block");
 
@@ -349,12 +349,12 @@ $(document).ready(function(){
                          $.each(data.supplier , function(key, value){
                             $("#supplier_name").append('<option value="'+value.supplier_code+'">'+value.supplier_name+'</option>');
                         })
-                        $("#GRN_no").val(parseInt(GRN_no)+1);
+                        $("#GRN_number").val(parseInt(GRN_number)+1);
 
                     //updaing the create itemform dropdown
                     $('#GRN_code').html('');
                     $.each(data.records , function(key, value){
-                        $("#GRN_code").append('<option value="'+value.GRN_no+'">'+value.GRN_no+'</option>');
+                        $("#GRN_code").append('<option value="'+value.GRN_number+'">'+value.GRN_number+'</option>');
                     })
                     
 

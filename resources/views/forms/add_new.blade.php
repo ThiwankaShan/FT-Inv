@@ -234,7 +234,7 @@
 
                     <div class="form-group form-custom">
                         <label for="GRN_no">GRN No.</label>
-                        <input type="text" class="form-control form-custom" id="GRN_no" name="GRN_no" value="{{$suggest_grnNo}}">
+                        <input type="text" class="form-control form-custom" id="GRN_number" name="GRN_number" value="{{$suggest_grnNo}}">
 
                     </div>
 
@@ -246,8 +246,7 @@
 
                     <div class="form-group form-custom">
                         <label for="invoice_no">Invoice No.</label>
-                        <input type="text" class="form-control" id="invoice_no" name="invoice_no">
-
+                        <input type="text" class="form-control" id="invoice_number" name="invoice_number">
 
                     </div>
 
@@ -255,13 +254,10 @@
                         <label for="invoice_date">Invoice Date.</label>
                         <input type="date" class="form-control" id="invoice_date" name="invoice_date">
 
-
-
                         <div class="form-group form-custom">
                             <label for="supplier_code">Supplier</label>
-                            <select class="form-control" id="supplier_name" name="supplier_code">
+                            <select class="form-control" id="supplier_code" name="supplier_code">
                                 @foreach($Suppliers as $Supplier)
-
                                 <option value="{{$Supplier->supplier_code}}" class="form-custom">{{$Supplier->supplier_name}}</option>
                                 @endforeach
                             </select>

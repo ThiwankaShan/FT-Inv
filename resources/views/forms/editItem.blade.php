@@ -43,9 +43,9 @@
                         <label for="item-name ">GRN No.</label>
                     </div>
                     <div class="col-sm-9 mb-1">
-                        <select class="form-control " id="GRN_code" name="grn_no">
-                            <option value="{{$item->GRN_no}}">{{ $item->GRN_no }}</option>
-                            @foreach($grn_array as $grn)
+                        <select class="form-control " id="GRN_number" name="GRN_number">
+                            <option value="{{$item->GRN_number}}">{{ $item->GRN_number }}</option>
+                            @foreach($grns as $grn)
                             <option value="{{$grn}}">{{ $grn }}</option>
                             @endforeach
                         </select>
@@ -66,7 +66,7 @@
                         <label for="item-name ">Vat/Item (Percentage)</label>
                     </div>
                     <div class="col-sm-9 mb-1">
-                        <input type="text" name="Vat" id="Vat" class="form-control" value="{{$item->vat*100/$item->rate}}">
+                        <input type="text" name="tax" id="tax" class="form-control" value="{{$item->tax}}">
                         <span id="real_time_Vat" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
 
                         @error('Vat')
@@ -112,7 +112,7 @@
                         <label for="rate">Rate(Price/Item)</label>
                     </div>
                     <div class="col-sm-9 mb-1">
-                        <input type="text" name="Rate" id="Rate" class="form-control" value="{{$item->rate}}">
+                        <input type="text" name="gross_price" id="gross_price" class="form-control" value="{{$item->gross_price}}">
                         <span id="real_time_Rate" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
 
                         @error('Rate')
@@ -156,7 +156,7 @@
                         <label for="purchased_date">Serial Number</label>
                     </div>
                     <div class="col-sm-9 mb-1">
-                        <input type="text" name="serial_number" id="serial_number" class="form-control" value="{{$item->serialNumber}}">
+                        <input type="text" name="serial_number" id="serial_number" class="form-control" value="{{$item->serial_number}}">
                         <span id="serial_er" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                         @error('serial_number')
                         <span class="" role="alert">
@@ -221,7 +221,7 @@
                    
                     <div class="form-group form-custom">
                         <label for="GRN_no">GRN No.</label>
-                        <input type="text" class="form-control form-custom" id="GRN_no" name="GRN_no" value="{{$suggest_grnNo}}">
+                        <input type="text" class="form-control form-custom" id="grn_number" name="GRN_number" value="{{$suggest_grnNo}}">
 
                     </div>
 
@@ -233,7 +233,7 @@
 
                     <div class="form-group form-custom">
                         <label for="invoice_no">Invoice No.</label>
-                        <input type="text" class="form-control" id="invoice_no" name="invoice_no">
+                        <input type="text" class="form-control" id="invoice_number" name="invoice_number">
 
                        
                     </div>

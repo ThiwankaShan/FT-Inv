@@ -15,11 +15,11 @@ class CreateSubLocationsTable extends Migration
     public function up()
     {
         Schema::create('sub_locations', function (Blueprint $table) {
-            $table->integer('code_subLocation');
-            $table->string('name_subLocation');
-            $table->string('code_Location');
-            $table->foreign('code_Location')->references('code_Location')->on('locations')->onUpdate('cascade');
-            $table->primary(['code_subLocation','code_Location']);
+            $table->integer('subLocation_code');
+            $table->string('subLocation_name');
+            $table->string('location_code');
+            $table->foreign('location_code')->references('location_code')->on('locations')->onUpdate('cascade');
+            $table->primary(['subLocation_code','location_code']);
             $table->timestamps();
         });
     }

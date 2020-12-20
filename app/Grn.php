@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Grn extends Model
 {
-    protected $primaryKey = 'GRN_no';
+    protected $primaryKey = 'GRN_number';
     public $incrementing = false;
-    protected $keyType = "string";
+    protected $keyType = "integer";
 
     //GRN belongs to supplier
     //foreign key=supplier_code

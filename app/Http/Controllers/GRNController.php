@@ -16,12 +16,12 @@ class GRNController extends Controller
      */
     public function index()
     {
-        $last_grnNo = Grn::latest('GRN_no')->first();
+        $last_grnNo = Grn::latest('GRN_number')->first();
         error_log($last_grnNo);
         if ($last_grnNo == '') {
             $suggest_grnNo = '01';
         } else {
-            $suggest_grnNo = sprintf('%02d', $last_grnNo->GRN_no + 1);
+            $suggest_grnNo = sprintf('%02d', $last_grnNo->GRN_number + 1);
         }
 
 
@@ -54,32 +54,27 @@ class GRNController extends Controller
         //New Grn no,date,invoice no,invoice date,and supplier code 
         //send updated grn numbers array to item create form and send suppliers array to grn create modal  
 
-
-        $validatedata = Validator::make($request->all(),[
-            'GRN_no' => 'required|numeric|unique:grns',
+        error_log('ajax request captured');
+        $validatedata = $request->validate([
+            'GRN_number' => 'required|numeric|unique:grns',
             'GRN_date' => 'required',
-            'invoice_no' => 'required|unique:grns',
+            'invoice_number' => 'required|unique:grns',
             'invoice_date' => 'required',
             'supplier_code' => 'required',
         ]);
-
-        //if validation fails sending all errors to modal
-         if($validatedata->fails()){
-            return response()->json(['errors'=>$validatedata->errors()->all()]);
-         }
-
+        
         $grn = new Grn();
-        $grn->GRN_no = $request->GRN_no;
+        $grn->GRN_number = $request->GRN_number;
         $grn->GRN_date = $request->GRN_date;
-        $grn->invoice_no = $request->invoice_no;
+        $grn->invoice_number = $request->invoice_number;
         $grn->invoice_date = $request->invoice_date;
         $grn->supplier_code = $request->supplier_code;
 
     
         $grn->save();
        
-        $grn_numbers = Grn::select('GRN_no')
-        ->orderBy('GRN_no', 'desc')
+        $grn_numbers = Grn::select('GRN_number')
+        ->orderBy('GRN_number', 'desc')
         ->get();  
 
         $Suppliers = Supplier::all();  

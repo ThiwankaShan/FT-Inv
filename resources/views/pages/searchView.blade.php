@@ -123,15 +123,15 @@
              <th scope="row">{{$item->item_code}}</th>
                 <td>{{$item->location_code}}</td>
                 <td>{{$item->type}}</td>
-                <td>{{$item->GRN_no}}</td>
+                <td>{{$item->GRN_number}}</td>
                 <td>{{$item->purchased_date}}</td>
                 <td>{{$item->supplier_name}}</td>
-                <td>{{$item->serialNumber}}</td>
-                <td>Model No</td>
-                <td>Brand Name</td>
-                <td>{{$item->rate}}</td>
-                <td>{{$item->vat}}</td>
-                <td>{{$item->vat_rate_vat}}</td>
+                <td>{{$item->serial_number}}</td>
+                <td>{{$item->model_number}}</td>
+                <td>{{$item->brandName}}</td>
+                <td>{{$item->gross_price}}</td>
+                <td>{{$item->tax}}</td>
+                <td>{{$item->net_price}}</td>
                
                 <td class="d-flex flex-row">
                     @if(auth()->user()->role == 'admin')
