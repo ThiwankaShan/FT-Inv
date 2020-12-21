@@ -29,7 +29,8 @@ $(document).ready(function(){
                 _token:_token
             },
             success:function(data){
-                console.log(data);
+                console.log(data.html);
+                $('#location_container').replaceWith(data.html);
               if(data['status']){
                   $('#validLocation').css('display',"block");
 

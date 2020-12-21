@@ -27,7 +27,14 @@ class locationController extends Controller
 
     public function index()
     {
+        $locations = Location::all() ;
+        return view('pages.location', compact('locations'));
+        
+    }
 
+    public function create()
+    {
+        return view('forms.location_forms.createLocation');
         
     }
     
@@ -61,8 +68,8 @@ class locationController extends Controller
 
         
             $locations = Location::all();
-          
-            return response()->json(['status'=>'success','records'=>$locations]);
+            $html = view('tables.location_table',compact('locations'))->render();
+            return response()->json(['status'=>'success','records'=>$locations,'html'=>$html]);
       
     }
 }

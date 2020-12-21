@@ -47,6 +47,8 @@ Route::post('/ajax/filter', 'FilterController@getFilter')->name('ajax.filter');
 
 
 Route::get('location', 'locationController@index')->name('location.insert');
+Route::get('location/index', 'locationController@index')->name('location.index');
+Route::get('location/create', 'locationController@create')->name('location.create');
 Route::post('location/store', 'locationController@storeLocation')->name('location.store');
 
 Route::resource('/category', 'CategoryController');

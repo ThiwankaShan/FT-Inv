@@ -338,9 +338,11 @@
         </div>
     </div>
 </div>
-@include('forms.item_forms.modals');
 
-<script src="{{ asset('js/filter_sort.js') }}"> </script>
-<script src="{{ asset('js/add_new_parts.js') }}"> </script>
-<script src="{{ asset('js/real_time_validation.js') }}"> </script>
+@include('forms.location_forms.createLocation_modal')
+@include('forms.subLocation_forms.createSubLocation_modal')
+@include('forms.category_forms.createCategory_modal')
+@include('forms.subCategory_forms.createSubCategory_modal')
+@include('forms.grn_forms.createGRN_modal')
+
 @endsection
