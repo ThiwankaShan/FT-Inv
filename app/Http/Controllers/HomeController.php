@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use DB;
 use App\Category;
 use App\Location;
 use App\Items;
@@ -25,20 +24,12 @@ class HomeController extends Controller
     
         $locations = Location::all();
         $categories = Category::all();
-        $proId = DB::table('items')->select('procurement_id')->groupBy('procurement_id')->get();
+        $proId = Items::select('procurement_id')->groupBy('procurement_id')->get();
         $items = Items::orderBy('location_code', 'ASC')->orderBy('item_code', 'ASC')->simplePaginate(20);
         
-        if (Auth::user()->role == "admin") {
-
-            return view('pages.admin', compact('items', 'locations', 'categories', 'proId'));
-        } elseif (Auth::user()->role == "manager") {
-
-            return view('pages.manager', compact('items', 'locations', 'categories', 'proId'));
-        } elseif (Auth::user()->role == "user") {
-
-            return view('pages.user', compact('items', 'locations', 'categories', 'proId'));
+        if (Auth::check()) {
+            return view('pages.dashboard', compact('items', 'locations', 'categories', 'proId'));
         } else {
-
             return view('home');
         }
     }
