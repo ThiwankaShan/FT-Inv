@@ -20,8 +20,9 @@
           <td class="">
             @if(auth()->user()->role == 'admin')
 
-            <a class="btn btn-primary text-light highlight_row" href="">Edit</a>
-            <a class="btn btn-danger delete-item text-light" href="">Delete</a>
+            <a class="btn btn-primary text-light highlight_row" href="/location/edit/{{$location->location_code}}">Edit</a>
+            <a class="btn btn-danger delete-item text-light"  href="/location/delete/{{$location->location_code}}" data-method="POST" token='{!! csrf_token() !!}'>Delete</a>
+           
 
             @elseif(auth()->user()->role == 'manager')
             <a class="btn btn-primary text-light" href="">Edit</a>

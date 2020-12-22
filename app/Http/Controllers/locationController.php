@@ -14,6 +14,7 @@ use App\Items;
 use App\SubCategory;
 use App\SubLocation;
 
+use URL;
 use Illuminate\Validation\Rule;
 use \Illuminate\Http\Response;
 use Validator;
@@ -37,7 +38,31 @@ class locationController extends Controller
         return view('forms.location_forms.createLocation');
         
     }
-    
+
+    public function delete($location_code)
+    { 
+        Location::destroy($location_code);
+    }
+
+    public function edit($location_code)
+    { 
+        $location = Location::find($location_code);
+        return view('forms.location_forms.editLocation',compact('location'));
+    }
+
+    public function update(Request $request,$location)
+    { 
+        $validatedata = $request->validate([
+            'location_code' => 'required|string|unique:locations,location_code,'.$request->location_code.',location_code',
+            'location_name' => 'required|string|unique:locations,location_name,'.$request->location_name.',location_name',
+
+        ]);
+
+        Location::find($location)->update($validatedata);
+        $location = Location::find($validatedata['location_code']);
+
+        return view('forms.location_forms.editLocation',compact('location'))->with('status','Location edited sucessfully');
+    }
    
     public function storeLocation(Request $request)
     {
@@ -46,30 +71,25 @@ class locationController extends Controller
 
         
         
-            $validatedata = Validator::make($request->all(),[
+            $validatedata = $request->validate([
                 'location_code' => 'required|string|unique:locations',
                 'location_name' => 'required|string|unique:locations',
     
             ]);
             
-        
-       //if validation fails send all errors to the modal      
-      if($validatedata -> fails()){
-      
-        return response()->json(['errors'=>$validatedata->errors()->all()]);
-      }
-
             $location = new Location;
             $location->location_code = $request->location_code;
             $location->location_name = $request->location_name;
              
-           
             $location->save();
-
-        
             $locations = Location::all();
-            $html = view('tables.location_table',compact('locations'))->render();
-            return response()->json(['status'=>'success','records'=>$locations,'html'=>$html]);
+
+
+            if(URL::previous()==URL::route('location.create')){
+                return back()->with('status','Location created sucessfully');
+            }
+            
+            return response()->json(['status'=>'success','records'=>$locations]);
       
     }
 }

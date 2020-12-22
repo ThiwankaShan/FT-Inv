@@ -50,6 +50,9 @@ Route::get('location', 'locationController@index')->name('location.insert');
 Route::get('location/index', 'locationController@index')->name('location.index');
 Route::get('location/create', 'locationController@create')->name('location.create');
 Route::post('location/store', 'locationController@storeLocation')->name('location.store');
+Route::post('location/delete/{location?}', 'locationController@delete')->name('location.delete');
+Route::get('location/edit/{location?}', 'locationController@edit')->name('location.edit');
+Route::post('location/update/{location?}', 'locationController@update')->name('location.update');
 
 Route::resource('/category', 'CategoryController');
 Route::resource('sublocation', 'subLocationController');

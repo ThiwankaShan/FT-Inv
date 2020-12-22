@@ -7,24 +7,25 @@
 </div>
 <hr>
 
-@if (session('status'))
+@if (!empty($status))
     <div class="alert alert-success">
-        {{ session('status') }}
+        {{ $status }}
     </div>
 @endif
 
 <div class="card w-75  item-create mx-auto">
     <div class="card-header form-card-header-custom">
-        <h5 class="text-center form-card-header-custom"><strong class="text-light">Add New Location</strong></h5>
+        <h5 class="text-center form-card-header-custom"><strong class="text-light">Edit Location</strong></h5>
+        <h6 class="text-center form-card-header-custom"><strong class="text-light">{{$location->location_name}}</strong></h6>
     </div>
     <div class="card-body">
-        <form action="{{route('location.store')}}" method="post">
+        <form action="/location/update/{{$location->location_code}}" method="post">
             @csrf
 
             <div class="form-group row">
                 <label for="LocationName" class="col-sm-2 col-form-label">Location Name</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control {{ $errors->has('location_name') ? 'has_error' : '' }}" id="location_name" placeholder="Enter Supplier Code" name="location_name" value="{{ old('location_name') }}">
+                    <input type="text" class="form-control {{ $errors->has('location_name') ? 'has_error' : '' }}" id="location_name" placeholder="Enter Supplier Code" name="location_name" value="{{ old('location_name') ?? $location->location_name }} ">
                     @error('location_name')
                     <span class="" role="alert">
                         <small style="color:red"><strong>{{ $message }}</strong></small>
@@ -37,7 +38,7 @@
             <div class="form-group row">
                 <label for="LocationCode" class="col-sm-2 col-form-label">Location Code</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control {{ $errors->has('location_code') ? 'has_error' : '' }}" id="location_code" placeholder="Enter Supplier Code" name="location_code" value="{{ old('location_code') }}">
+                    <input type="text" class="form-control {{ $errors->has('location_code') ? 'has_error' : '' }}" id="location_code" placeholder="Enter Supplier Code" name="location_code" value="{{ old('location_code') ?? $location->location_code}}">
                     @error('location_code')
                     <span class="" role="alert">
                         <small style="color:red"><strong>{{ $message }}</strong></small>
@@ -48,7 +49,7 @@
             </div>
 
             <div class="text-center">
-                <button class="btn form-tab-custom bg-color-custom text-light form-card-header-custom " type="submit">Save Location</button>
+                <button class="btn form-tab-custom bg-color-custom text-light form-card-header-custom " type="submit">Update Location</button>
             </div>
           
         </form>
