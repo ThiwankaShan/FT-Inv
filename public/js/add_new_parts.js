@@ -4,8 +4,10 @@ $(document).ready(function(){
 
     //if alertboxes display because last Location inserting, they will not appear from tis function
    $('#buttonCreateLocation').click(function(){
-       $("#invalid_location").css('display','none');
-       $('#validLocation').css('display',"none");
+       $("#location_name_error").css('display','none');
+       $('#location_code_error').css('display',"none");
+       $('#location_name').removeClass("has_error");
+       $('#location_code').removeClass("has_error");
    })
 
 
@@ -14,57 +16,65 @@ $(document).ready(function(){
     $('#saveLocation').click(function(){
 
             //if alert boxes appear because of inserting data before it will remove
-            $("#invalid_location").css('display','none');
-            $('#validLocation').css('display',"none");
+            $("#location_name_error").css('display','none');
+            $('#location_code_error').css('display',"none");
+            $('#location_name').removeClass("has_error");
+            $('#location_code').removeClass("has_error");
 
-        var locationId = $('#location_code').val();
-        var locationName = $('#location_name').val();
+            var locationId = $('#location_code').val();
+            var locationName = $('#location_name').val();
 
-        $.ajax({
-            url:"/location/store",
-            method:"POST",
-            data:{
-                location_code:locationId,
-                location_name:locationName,
-                _token:_token
-            },
-            success:function(data){
-                console.log(data.html);
-                $('#location_container').replaceWith(data.html);
-              if(data['status']){
-                  $('#validLocation').css('display',"block");
+            $.ajax({
+                url:"/location/store",
+                method:"POST",
+                data:{
+                    location_code:locationId,
+                    location_name:locationName,
+                    _token:_token
+                },
+                success:function(data){
+                    console.log(data.html);
+                    console.log(data.error);
+                    $('#location_container').replaceWith(data.html);
+                if(data['status']){
 
-                    //here reset the form when submit it
-                    $("#Location_form").trigger('reset');
+                         $('#validLocation').css('display',"block");
+                        //here reset the form when submit it
+                         $("#Location_form").trigger('reset');
 
-                   //updaing the create itemform dropdown
-                  $('#location').html('');
-                  $.each(data.records , function(key, value){
-                    $("#location").append('<option value="'+value.location_code+'">'+value.location_name+'</option>');
-                  });
+                        //updaing the create itemform dropdown
+                        $('#location').html('');
+                            $.each(data.records , function(key, value){
+                                $("#location").append('<option value="'+value.location_code+'">'+value.location_name+'</option>');
+                            });
 
-                    $('#selectedLoaction').html('');
-                    $.each(data.records , function(key, value){
-                      $("#selectedLoaction").append('<option value="'+value.location_code+'">'+value.location_name+'</option>');
-                  });
-                   
+                        $('#selectedLoaction').html('');
+                            $.each(data.records , function(key, value){
+                                 $("#selectedLoaction").append('<option value="'+value.location_code+'">'+value.location_name+'</option>');
+                            });
+                        
+                }
+                },
 
-              }else{
-                  //Bellow function call 
-                    printError(data.errors);
-              }
-            },
-         
+                error:function(error){
 
-        })
- 
-        function printError(msg){
-            $(".print-error-msg").find("ul").html('');
-			$(".print-error-msg").css('display','block');
-            $.each(msg , function(key, value){
-                $(".print-error-msg").find("ul").append('<li><strong>'+value+'</strong></li>');
+                    var error_type = error.responseJSON.errors;
+                
+                    if(error_type.location_name){
+                        $('#location_name_error').css('display','block');
+                        $('#location_name').addClass("has_error");
+                        $('#location_name_msg').html(error_type.location_name[0]);
+                    }
+                    if(error_type.location_code){
+                        $('#location_code_error').css('display','block');
+                        $('#location_code').addClass("has_error");
+                        $('#location_code_msg').html(error_type.location_code[0]);
+                    }
+                    
+                }
+            
+
             })
-        }
 
     })
 
@@ -75,18 +85,22 @@ $(document).ready(function(){
 //    *******************ADD NEW SUB LOCATION PART STRAT**********************************************************************************
 
 
-        //if alertboxes display because last sub Location inserting, they will not appear from tis function
-        $('#buttonCreateSubLoaction').click(function(){
-            $("#validSubLocation").css('display','none');
-            $('#invalidSubLocation').css('display',"none");
-        })
+    //if alertboxes display because last sub Location inserting, they will not appear from tis function
+    $('#buttonCreateSubLoaction').click(function(){
+        $('#subLocation_name_error').css('display','none');
+        $('#subLocation_name').removeClass("has_error");
+        $('#subLocation_code_error').css('display','none');
+        $('#subLocation_code').removeClass("has_error");
+    })
 
 
         $('#saveSubLocation').click(function(){
 
             //if alert boxes appear because of inserting data before it will remove
-            $("#validSubLocation").css('display','none');
-            $('#invalidSubLocation').css('display',"none");
+            $('#subLocation_name_error').css('display','none');
+            $('#subLocation_name').removeClass("has_error");
+            $('#subLocation_code_error').css('display','none');
+            $('#subLocation_code').removeClass("has_error");
 
             var subLocationId = $('#subLocation_code').val();
             var subLocationName = $('#subLocation_name').val();
@@ -104,49 +118,59 @@ $(document).ready(function(){
                     _token:_token
                 },
                 success:function(data){
-                    console.log(data);
-                if(data['status']){
-                    $('#validSubLocation').css('display',"block");
-
-                        //here reset the form when submit it
-                        $("#subLocation_form").trigger('reset');
-
-                    //updaing the create itemform dropdown
-                    $('#sublocation').html('');
-                    if(data['records'].length > 0){
-                        
-                        op = '';
-                        op += '<option value="" > Sub Location</option>';
-        
-                        for (var i = 0; i < data['records'].length; i++) {
-                            op += '<option value="' + data['records'][i].subLocation_code + '" >' + data['records'][i].subLocation_name + '</option>';
-                        }
-                    }else if(data['records'].length == 0){
-                        op = '';
-                        op += '<option value="" > Sub Location</option>';
-                    }   
-
-                    $('#sublocation').html('');
-                    $('#sublocation').append(op);
                     
+                    if(data['status']){
+                        $('#validSubLocation').css('display',"block");
 
-                }else{
-                    //Bellow function call 
-                        printError1(data.errors);
-                }
+                            //here reset the form when submit it
+                            $("#subLocation_form").trigger('reset');
+                            //updaing the create itemform dropdown
+                            $('#sublocation').html('');
+
+
+                                if(data['records'].length > 0){
+                                    
+                                    op = '';
+                                    op += '<option value="" > Sub Location</option>';
+                    
+                                            for (var i = 0; i < data['records'].length; i++) {
+                                                op += '<option value="' + data['records'][i].subLocation_code + '" >' + data['records'][i].subLocation_name + '</option>';
+                                            }
+
+
+                                    }else if(data['records'].length == 0){
+                                        op = '';
+                                        op += '<option value="" > Sub Location</option>';
+                                    }   
+
+                        $('#sublocation').html('');
+                        $('#sublocation').append(op);
+                        
+
+                    }
+
                 },
+                error:function(error){
+
+                    var error_type = error.responseJSON.errors;
+                
+                    if(error_type.subLocation_name){
+                        $('#subLocation_name_error').css('display','block');
+                        $('#subLocation_name').addClass("has_error");
+                        $('#subLocation_name_msg').html(error_type.subLocation_name[0]);
+                    }
+                    if(error_type.subLocation_code){
+                        $('#subLocation_code_error').css('display','block');
+                        $('#subLocation_code').addClass("has_error");
+                        $('#subLocation_code_msg').html(error_type.subLocation_code[0]);
+                    }
+
+                }
             
 
             })
 
-            function printError1(msg){
-                $("#invalidSubLocation").find("ul").html('');
-                $("#invalidSubLocation").css('display','block');
-                $.each(msg , function(key, value){
-                    $("#invalidSubLocation").find("ul").append('<li><strong>'+value+'</strong></li>');
-                })
-            }
-
+            
         })
  // ********************ADD NEW SUB LOCATION PART IS ENDED!********************************************************************************
 
@@ -157,16 +181,20 @@ $(document).ready(function(){
 
         //if alertboxes display because last category inserting, they will not appear from tis function
         $('#button_create_category').click(function(){
-            $("#valid_category").css('display','none');
-            $('#invalid_category').css('display',"none");
+            $('#category_name_error').css('display','none');
+            $('#category_name').removeClass("has_error");
+            $('#category_code_error').css('display','none');
+            $('#category_id').removeClass("has_error");
         })
 
 
         $('#saveCategory').click(function(){
 
             //if alert boxes appear because of inserting data before it will remove
-            $("#valid_category").css('display','none');
-            $('#invalid_category').css('display',"none");
+            $('#category_name_error').css('display','none');
+            $('#category_name').removeClass("has_error");
+            $('#category_code_error').css('display','none');
+            $('#category_id').removeClass("has_error");
 
             var category_code = $('#category_id').val();
             var category_name = $('#category_name').val();
@@ -185,8 +213,8 @@ $(document).ready(function(){
                 if(data['status']){
                     $('#valid_category').css('display',"block");
 
-                        //here reset the form when submit it
-                        $("#category_form").trigger('reset');
+                    //here reset the form when submit it
+                    $("#category_form").trigger('reset');
 
                     //updaing the create itemform dropdown
                     $('#category').html('');
@@ -199,22 +227,28 @@ $(document).ready(function(){
                         $("#categoryID").append('<option value="'+value.category_code+'">'+value.category_name+'</option>');
                     })
 
-                }else{
-                    //Bellow function call 
-                        printError1(data.errors);
-                }
+                   }
+
                 },
+                error:function(error){
+
+                    var error_type = error.responseJSON.errors;
+                   
+                    if(error_type.category_name){
+                        $('#category_name_error').css('display','block');
+                        $('#category_name').addClass("has_error");
+                        $('#category_name_msg').html(error_type.category_name[0]);
+                    }
+                    if(error_type.category_code){
+                        $('#category_code_error').css('display','block');
+                        $('#category_id').addClass("has_error");
+                        $('#category_code_msg').html(error_type.category_code[0]);
+                    }
+                    
+                }
             
 
             })
-
-            function printError1(msg){
-                $("#invalid_category").find("ul").html('');
-                $("#invalid_category").css('display','block');
-                $.each(msg , function(key, value){
-                    $("#invalid_category").find("ul").append('<li><strong>'+value+'</strong></li>');
-                })
-            }
 
         })
  // ********************ADD NEW CATEGORY PART IS ENDED!********************************************************************************
@@ -226,8 +260,10 @@ $(document).ready(function(){
 
         //if alertboxes display because last sub category inserting, they will not appear from tis function
         $('#button_create_subCategory').click(function(){
-            $("#valid_subCategory").css('display','none');
-            $('#invalid_subCategory').css('display',"none");
+            $('#subCategory_name_error').css('display','none');
+            $('#subCategory_name').removeClass("has_error");
+            $('#subCategory_code_error').css('display','none');
+            $('#subCategory_code').removeClass("has_error");
         })
 
 
@@ -241,6 +277,9 @@ $(document).ready(function(){
             var subCategory_name = $('#subCategory_name').val();
             var Category_code = $('#categoryID').val();
             var category_code_form = $('#category').val();   //this value also send to the controller because of we dont know coreectly what is the category in the create Item Form
+          
+             console.log(subCategory_code,subCategory_name,);
+          
             $.ajax({
                 url:"/subcategory",
                 method:"POST",
@@ -279,22 +318,33 @@ $(document).ready(function(){
                     $('#subCategory').append(op);
                     
 
-                }else{
-                    //Bellow function call 
-                        printError(data.errors);
                 }
                 },
+                error:function(error){
+                    
+                    var error_type = error.responseJSON.errors;
+           
+                    if(error_type.subCategory_name){
+
+                        $('#subCategory_name_error').css('display','block');
+                        $('#subCategory_name').addClass("has_error");
+                        $('#subCategory_name_msg').html(error_type.subCategory_name[0]);
+
+                    }
+
+                    if(error_type.subCategory_code){
+
+                        $('#subCategory_code_error').css('display','block');
+                        $('#subCategory_code').addClass("has_error");
+                        $('#subCategory_code_msg').html(error_type.subCategory_code[0]);
+
+                    }
+
+
+                }
             
 
             })
-
-            function printError(msg){
-                $("#invalid_subCategory").find("ul").html('');
-                $("#invalid_subCategory").css('display','block');
-                $.each(msg , function(key, value){
-                    $("#invalid_subCategory").find("ul").append('<li><strong>'+value+'</strong></li>');
-                })
-            }
 
         })
  // ********************ADD NEW SUB CATEGORY PART IS ENDED!********************************************************************************
@@ -310,22 +360,32 @@ $(document).ready(function(){
 
         //if alertboxes display because last GRn inserting, they will not appear from this function
         $('#button_create_grn').click(function(){
-            $("#valid_grn").css('display','none');
-            $('#invalid_grn').css('display',"none");
+            $('#GRN_date_error').css('display','none');
+            $('#GRN_date').removeClass("has_error");
+            $('#invoice_error').css('display','none');
+            $('#invoice_number').removeClass("has_error");
+            $('#invoice_date_error').css('display','none');
+            $('#invoice_date').removeClass("has_error");
         })
 
 
         $('#save_GRN').click(function(){
 
             //if alert boxes appear because of inserting data before it will remove
-            $("#valid_grn").css('display','none');
-            $('#invalid_grn').css('display',"none");
+            $('#GRN_date_error').css('display','none');
+            $('#GRN_date').removeClass("has_error");
+            $('#invoice_error').css('display','none');
+            $('#invoice_number').removeClass("has_error");
+            $('#invoice_date_error').css('display','none');
+            $('#invoice_date').removeClass("has_error");
+
 
             var GRN_number = $('#GRN_number').val();
             var GRN_date = $('#GRN_date').val();
             var invoice_number = $('#invoice_number').val();
             var invoice_date = $('#invoice_date').val();   //this value also send to the controller because of we dont know coreectly what is the category in the create Item Form
             var supplier_code = $('#supplier_code').val();
+
             $.ajax({
                 url:"/grn",
                 method:"POST",
@@ -338,13 +398,13 @@ $(document).ready(function(){
                     _token:_token
                 },
                 success:function(data){
-                    console.log('got a response');
-                if(data['status']){
+                
+                 if(data['status']){
                     $('#valid_grn').css('display',"block");
 
                         //here reset the form when submit it
                          $("#GRN_date").val('mm/dd/yy');
-                         $("#invoice_no").val('mm/dd/yy');
+                         $("#invoice_number").val("");
                          $("#invoice_date").val('mm/dd/yy');
                          $("#supplier_name").html("");
                          $.each(data.supplier , function(key, value){
@@ -352,30 +412,48 @@ $(document).ready(function(){
                         })
                         $("#GRN_number").val(parseInt(GRN_number)+1);
 
-                    //updaing the create itemform dropdown
-                    $('#GRN_code').html('');
-                    $.each(data.records , function(key, value){
-                        $("#GRN_code").append('<option value="'+value.GRN_number+'">'+value.GRN_number+'</option>');
-                    })
-                    
+                        //updaing the create itemform dropdown
+                        $('#grn_number').html('');
+                        $.each(data.records , function(key, value){
+                            $("#grn_number").append('<option value="'+value.GRN_number+'">'+value.GRN_number+'</option>');
+                        })
+                        
 
-                }else{
-                    //Bellow function call 
-                        printError(data.errors);
-                }
+                    }
                 },
+                error:function(error){
+                    var error_type = error.responseJSON.errors;
+           
+                    if(error_type.GRN_date){
+
+                        $('#GRN_date_error').css('display','block');
+                        $('#GRN_date').addClass("has_error");
+                        $('#GRN_date_msg').html(error_type.GRN_date[0]);
+
+                    }
+
+                    if(error_type.invoice_number){
+
+                        $('#invoice_error').css('display','block');
+                        $('#invoice_number').addClass("has_error");
+                        $('#invoice_msg').html(error_type.invoice_number[0]);
+
+                    }
+
+                    if(error_type.invoice_date){
+
+                        $('#invoice_date_error').css('display','block');
+                        $('#invoice_date').addClass("has_error");
+                        $('#invoice_date_msg').html(error_type.invoice_date[0]);
+
+                    }
+
+                }
             
 
             })
 
-            function printError(msg){
-                $("#invalid_grn").find("ul").html('');
-                $("#invalid_grn").css('display','block');
-                $.each(msg , function(key, value){
-                    $("#invalid_grn").find("ul").append('<li><strong>'+value+'</strong></li>');
-                })
-            }
-
+          
         })
  // ********************ADD NEW SUB CATEGORY PART IS ENDED!********************************************************************************
 

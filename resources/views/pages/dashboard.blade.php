@@ -7,7 +7,7 @@
     @include('tables.filter_sort')
   </div>
 
-  <div class="card-body px-0">
+  <div class="card-body px-0" id="items_table">
     @include('tables.item_table')
   </div>
   

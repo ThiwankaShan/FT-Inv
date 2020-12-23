@@ -69,8 +69,6 @@ class locationController extends Controller
          //Getting location_code and location_name of new Loaction,Save New Loaction and Sending the Updated Locations
          //send the  updated Location list array
 
-        
-        
             $validatedata = $request->validate([
                 'location_code' => 'required|string|unique:locations',
                 'location_name' => 'required|string|unique:locations',

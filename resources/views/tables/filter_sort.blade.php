@@ -135,5 +135,3 @@
 <input type="hidden" name="" id="highlighted_row" value="{{ Session::get('updated_row') }}">
 
 @endif
-
-<script src="{{ asset('js/real_time_validation.js') }}"> </script>

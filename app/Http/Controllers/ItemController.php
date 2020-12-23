@@ -202,20 +202,20 @@ class ItemController extends Controller
         $this->validate($request, [
             
             'procument_id' => 'string|nullable',
-            'Vat' => 'required',
-            'Rate' => 'required',
+            'tax' => 'required',
+            'gross_price' => 'required',
             'purchased_date' => 'required',
             
         ]);
 
         
-       $current_serial_number = Items::select('serialNumber')
+       $current_serial_number = Items::select('serial_number')
        ->where('item_code',$request->item)
        ->get()->first(); 
 
-       if($current_serial_number['serialNumber'] != $request->serial_number){
+       if($current_serial_number['serial_number'] != $request->serial_number){
            $this ->validate($request,[
-              'serial_number' => 'string|nullable|unique:items,serialNumber'
+              'serial_number' => 'string|nullable|unique:items,serial_number'
            ],[
                'serial_number.unique' => 'Serial Number Already Taken!Plase Use Another..'
            ]);
@@ -223,18 +223,17 @@ class ItemController extends Controller
 
        
         $item = $request->item;
-        $new_rate = $request->Rate;
-        $new_vat = ((str_replace(',',"",$request->Vat) * $new_rate) / 100);
+        $new_rate = $request->gross_price;
+        $new_vat = ((str_replace(',',"",$request->tax) * $new_rate) / 100);
         $new_vat_rate = $new_rate+$new_vat;
-        $new_grn = $request->grn_no;
+        $new_grn = $request->GRN_number;
         $new_type = $request->types;
         $new_procumentID = $request->procument_id;
         $new_purchased_date = $request->purchased_date;
         $new_serial_number = $request->serial_number;
 
         //supplier name fetched via grn relation
-        $grn = GRN::find(1)->where('GRN_no', $new_grn)->first();
-        $new_supplier_name = $grn->supplier->supplier_name;
+       
 
         DB::table('items')
             ->where('item_code', $request->item)
@@ -245,7 +244,6 @@ class ItemController extends Controller
                 'type' => $new_type,
                 'GRN_number' => $new_grn,
                 'procurement_id' => $new_procumentID,
-                'supplier_name' => $new_supplier_name,
                 'purchased_date' => $new_purchased_date,
                 'serial_number' => $new_serial_number,
             ]);
@@ -275,33 +273,21 @@ class ItemController extends Controller
           $proId =DB::table('items')->select('procurement_id')->groupBy('procurement_id')->get();
           $items = Items::orderBy('created_at', 'DESC')->simplePaginate($id);
           
-          if (Auth::user()->role == "admin") { 
+          return view('pages.dashboard', compact('items','locations','categories','proId'));
   
-             return view('pages.admin', compact('items','locations','categories','proId'));
-  
-          }else if(Auth::user()->role == "manager"){
-  
-              return view('pages.manager', compact('items','locations','categories','proId'));
-  
-          }else if(Auth::user()->role == "user"){
-  
-              return view('pages.user', compact('items','locations','categories','proId'));
-  
-          }
      }
 
      public function SerialNumber(Request $request){
       
-        //validate data
-       //update the serial number
-      //return the completed msg
+             //validate data
+            //update the serial number
+            //return the completed msg
 
            $current_serial_number = Items::select('serial_number')
            ->where('item_code',$request->item_code)
            ->get()->first(); 
 
           
-
           if($current_serial_number['serial_number'] != $request->serial_number){
                $validatedata = Validator::make($request->all(),[
                    'serial_number' => 'string|nullable|unique:items,serial_number'

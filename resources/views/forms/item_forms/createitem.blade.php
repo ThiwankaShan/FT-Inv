@@ -26,7 +26,7 @@
                             @endforeach
                         </select>
 
-                        @error('Location')
+                        @error('location_code')
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
                         </span>
@@ -75,7 +75,7 @@
                             @endforeach
                         </select>
 
-                        @error('category')
+                        @error('category_code')
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
                         </span>
@@ -216,7 +216,7 @@
                     </div>
                     <div class="col-sm-9 mb-1 ">
                         <input type="text" name="model_number" id="model_number" class="form-control {{ $errors->has('Vat') ? 'has_error' : ''}}" value="{{ old('Vat')}}">
-                        <span id="real_time_Vat" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
+                        <span id="real_time_model_number" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                         @error('model_number')
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
@@ -237,7 +237,7 @@
                         <label for="item-name ">Tax</label>
                     </div>
                     <div class="col-sm-9 mb-1 ">
-                        <input type="text" name="tax" id="Vat" class="form-control {{ $errors->has('Vat') ? 'has_error' : ''}}" value="{{ old('Vat')}}">
+                        <input type="text" name="tax" id="tax" class="form-control {{ $errors->has('tax') ? 'has_error' : ''}}" value="{{ old('Vat')}}">
                         <span id="real_time_tax" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                         @error('tax')
                         <span class="" role="alert">
@@ -281,7 +281,7 @@
                         <label for="rate">Price/Item</label>
                     </div>
                     <div class="col-sm-9 mb-1"> 
-                        <input type="text" name="gross_price" id="Rate" class="form-control {{ $errors->has('Rate') ? 'has_error' : ''}}" value="{{ old('Rate') }}">
+                        <input type="text" name="gross_price" id="gross_price" class="form-control {{ $errors->has('gross_price') ? 'has_error' : ''}}" value="{{ old('Rate') }}">
                         <span id="real_time_gross_price" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
 
                         @error('gross_price')
@@ -338,6 +338,8 @@
         </div>
     </div>
 </div>
+
+<script src="{{ asset('js/real_time_validation.js') }}"> </script>
 
 @include('forms.location_forms.createLocation_modal')
 @include('forms.subLocation_forms.createSubLocation_modal')
