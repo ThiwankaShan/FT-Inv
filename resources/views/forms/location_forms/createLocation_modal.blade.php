@@ -18,16 +18,20 @@
 
                 <form method="" action="" class="form-align-custom" id="Location_form">
 
-                    <label for="location_code">Location Name</label>
+                    <label for="location_name">Location Name</label>
                     <input type="text" class="form-control form-custom" id="location_name">
-                    @error('location_name')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
+                    
+                    <span class="" role="alert" style="display:none; margin-bottom:5px" id="location_name_error">
+                        <small style="color:red"><strong id="location_name_msg"></strong></small>
+                    </span>
+                   
                     <label for="location_name">Location Code</label>
                     <input type="text" class="form-control form-custom" id="location_code">
-                    @error('location_code')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
+
+                    <span class="" role="alert" style="display:none; margin-bottom:5px" id="location_code_error">
+                            <small style="color:red"><strong id="location_code_msg"></strong></small>
+                    </span>
+
                     <div class="text-center ">
                         <button type="button" class="btn btn-primary form-card-header-custom text-light mt-4 " id="saveLocation">Create</button>
                         <button class="btn btn-secondary cancel_modal text-light  mt-4 mr-5" type="button" >Cancel</button>

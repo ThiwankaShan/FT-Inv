@@ -29,17 +29,30 @@
                         <label for="GRN_date">GRN Date</label>
                         <input type="date" class="form-control" name="GRN_date" id="GRN_date">
 
+                        <span class="" role="alert" style="display:none; margin-bottom:5px" id="GRN_date_error">
+                            <small style="color:red"><strong id="GRN_date_msg"></strong></small>
+                        </span>
+                   
+
                     </div>
 
                     <div class="form-group form-custom">
                         <label for="invoice_no">Invoice No.</label>
                         <input type="text" class="form-control" id="invoice_number" name="invoice_number">
 
+                        <span class="" role="alert" style="display:none; margin-bottom:5px" id="invoice_error">
+                            <small style="color:red"><strong id="invoice_msg"></strong></small>
+                        </span>
+
                     </div>
 
                     <div class="form-group form-custom">
                         <label for="invoice_date">Invoice Date.</label>
                         <input type="date" class="form-control" id="invoice_date" name="invoice_date">
+
+                        <span class="" role="alert" style="display:none; margin-bottom:5px" id="invoice_date_error">
+                            <small style="color:red"><strong id="invoice_date_msg"></strong></small>
+                        </span>
 
                         <div class="form-group form-custom">
                             <label for="supplier_code">Supplier</label>

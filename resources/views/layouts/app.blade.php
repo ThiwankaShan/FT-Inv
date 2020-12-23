@@ -29,7 +29,7 @@
     <!-- Custom js scripts -->
     <script src="{{ asset('js/filter_sort.js') }}"> </script>
     <script src="{{ asset('js/add_new_parts.js') }}"> </script>
-    <script src="{{ asset('js/real_time_validation.js') }}"> </script>
+    
 
     <!--Live search -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

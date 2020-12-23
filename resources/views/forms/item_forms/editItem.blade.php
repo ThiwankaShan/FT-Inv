@@ -63,7 +63,7 @@
             <div class="form-group row">
                 <div class="col-9 row">
                     <div class="col-sm-3">
-                        <label for="item-name ">Vat/Item (Percentage)</label>
+                        <label for="item-name ">Tax</label>
                     </div>
                     <div class="col-sm-9 mb-1">
                         <input type="text" name="tax" id="tax" class="form-control" value="{{$item->tax}}">
@@ -109,7 +109,7 @@
             <div class="form-group row">
                 <div class="col-9 row">
                     <div class="col-sm-3">
-                        <label for="rate">Rate(Price/Item)</label>
+                        <label for="rate">Price/Item</label>
                     </div>
                     <div class="col-sm-9 mb-1">
                         <input type="text" name="gross_price" id="gross_price" class="form-control" value="{{$item->gross_price}}">
@@ -228,12 +228,20 @@
                     <div class="form-group form-custom">
                         <label for="GRN_date">GRN Date</label>
                         <input type="date" class="form-control" name="GRN_date" id="GRN_date">
+
+                        <span class="" role="alert" style="display:none; margin-bottom:5px" id="GRN_date_error">
+                            <small style="color:red"><strong id="GRN_date_msg"></strong></small>
+                        </span>
                       
                     </div>
 
                     <div class="form-group form-custom">
                         <label for="invoice_no">Invoice No.</label>
                         <input type="text" class="form-control" id="invoice_number" name="invoice_number">
+
+                        <span class="" role="alert" style="display:none; margin-bottom:5px" id="invoice_error">
+                            <small style="color:red"><strong id="invoice_msg"></strong></small>
+                        </span>
 
                        
                     </div>
@@ -242,6 +250,9 @@
                         <label for="invoice_date">Invoice Date.</label>
                         <input type="date" class="form-control" id="invoice_date" name="invoice_date">
 
+                        <span class="" role="alert" style="display:none; margin-bottom:5px" id="invoice_date_error">
+                            <small style="color:red"><strong id="invoice_date_msg"></strong></small>
+                        </span>
                        
 
                         <div class="form-group form-custom">

@@ -14,7 +14,7 @@ class SupplierController extends Controller
     }
     public function create()
     {
-        return view('forms.supplier');
+        return view('forms.supplier_forms.supplier');
     }
 
     public function store(Request $request)

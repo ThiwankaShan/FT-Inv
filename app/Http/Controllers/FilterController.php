@@ -72,18 +72,17 @@ class FilterController extends Controller
                         $query->where($key, '=', $value);
                     }
 
-                    
-                    
+                 
                 }
         }, 'and')->orderBy($request->column,$request->order)->orderBy('item_code', 'ASC');
 
-        $gadgets = $gadgets->get();
+        $items = $gadgets->get();
 
         // for report generation
-        session(['items_download' => $gadgets,'sub_location'=>$request->subLoactionCode,'start'=>$start,'end'=>$end]);
+        // session(['items_download' => $gadgets,'sub_location'=>$request->subLoactionCode,'start'=>$start,'end'=>$end]);
         
-
-        return response()->json(['authType'=>Auth::user()->role,'records'=>$gadgets]);
+        $html = view('tables.item_table')->with(compact('items'))->render();
+        return response()->json(['authType'=>Auth::user()->role,'html'=>$html, 'success'=>true]);
           
     }
 

@@ -5,17 +5,22 @@ if(document.querySelector('#create_item_form')){
     let  tax = forms.elements.namedItem('tax');
     let  procument_id = forms.elements.namedItem('procument_id');
     let  gross_price = forms.elements.namedItem('gross_price');
+    let  modal_number = forms.elements.namedItem('model_number');
+    let  brand_name = forms.elements.namedItem('brandName');
 
     tax.addEventListener('input', validation);
     procument_id.addEventListener('input', validation);
     gross_price.addEventListener('input', validation);
-
+    modal_number.addEventListener('input', validation);
+    brand_name.addEventListener('input',validation);
     //Real Time Validation Function
     function validation(e){
     let target = e.target;
     let tax = document.getElementById('tax'); 
     let Procument_id = document.getElementById('procument_id'); 
     let gross_price = document.getElementById('gross_price'); 
+    let modal_number = document.getElementById('model_number');
+    let brand_name = document.getElementById('brandName');
 
     target.value = formatNumberWithCommas(target.value);
     function formatNumberWithCommas(x) {
@@ -37,7 +42,7 @@ if(document.querySelector('#create_item_form')){
     }
     
     //disable the submit button to prevent submitting invalid length of values
-    if(tax.value.length >= 8 || Procument_id.value.length >= 8 || gross_price.value.length >= 8 ){
+    if(tax.value.length >= 8 || Procument_id.value.length >= 8 || gross_price.value.length >= 8 || modal_number.value.length >= 8 || brand_name.value.length >=8 ){
         document.getElementById('btn_submit').disabled = true;
         document.getElementById('preview').disabled = true;
     }else{
@@ -144,6 +149,8 @@ $('#tax').keyup(function(event) {
 //*******************************Here is Highlights the Updated Row In Dashbord********************************************************** */
 
 if(document.getElementById('highlighted_row')){
+
+    console.log("OK");
 
     var input_id = document.getElementById('highlighted_row');
     var val = input_id.value;

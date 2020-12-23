@@ -48,14 +48,12 @@ class CategoryController extends Controller
        // category code and name of new Category Sending the Updated Categories array
 
 
-        $validatedData = Validator::make($request->all(),[
+        $validatedData = $request->validate([
             'category_name' => 'required|unique:categories',
             'category_code' => 'required|unique:categories',
         ]);
  
-        if($validatedData->fails()){
-            return response()->json(['errors'=>$validatedData->errors()->all()]);
-        }
+       
          
           //if validation fails send all errors to the modal    
         $category = new Category;

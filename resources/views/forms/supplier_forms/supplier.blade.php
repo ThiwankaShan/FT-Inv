@@ -78,7 +78,7 @@
             <div class="form-group row">
                 <label for="vat" class="col-sm-2 col-form-label">VAT Registration No.</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control {{ $errors->has('vat_registration_no') ? 'has_error' : '' }}" id="vat_register_no" placeholder="Enter Supplier Address" name="vat_register_no" value="{{ old('vat_registration_no') }}"> 
+                    <input type="text" class="form-control {{ $errors->has('vat_register_no') ? 'has_error' : '' }}" id="vat_register_no" placeholder="Enter Supplier Address" name="vat_register_no" value="{{ old('vat_registration_no') }}"> 
                     @error('vat_register_no')
                     <span class="" role="alert">
                         <small style="color:red"><strong>{{ $message }}</strong></small>

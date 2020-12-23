@@ -22,13 +22,19 @@
                         <label for="category_name">Category Name</label>
                         <input type="text" class="form-control" id="category_name" name="category_name">
 
+                        <span class="" role="alert" style="display:none; margin-bottom:5px" id="category_name_error">
+                           <small style="color:red"><strong id="category_name_msg"></strong></small>
+                        </span>
+
                     </div>
                     <div class="form-group form-custom">
                         <label for="exampleInputEmail1">Category Code</label>
                         <input type="text" class="form-control" id="category_id" name="category_code" aria-describedby="emailHelp">
-                        @error('category_code')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+
+                        <span class="" role="alert" style="display:none; margin-bottom:5px" id="category_code_error">
+                           <small style="color:red"><strong id="category_code_msg"></strong></small>
+                        </span>
+
 
                     </div>
 

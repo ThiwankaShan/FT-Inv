@@ -37,15 +37,18 @@
                                 <input type="text" class="form-control form-custom" id="subCategory_name" name="subCategory_name">
 
 
-                                @error('subCategory_name')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
+                                <span class="" role="alert" style="display:none; margin-bottom:5px" id="subCategory_name_error">
+                                    <small style="color:red"><strong id="subCategory_name_msg"></strong></small>
+                                </span>
 
                             </div>
                             <div class="form-group form-custom">
                                 <label for="subLocarion_code">Sub Category Code</label>
                                 <input type="text" class="form-control" name="subCategory_code" id="subCategory_code">
 
+                                <span class="" role="alert" style="display:none; margin-bottom:5px" id="subCategory_code_error">
+                                    <small style="color:red"><strong id="subCategory_code_msg"></strong></small>
+                                </span>
 
                             </div>
 
