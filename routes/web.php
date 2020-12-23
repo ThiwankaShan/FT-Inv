@@ -14,38 +14,33 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', function () { return view('welcome'); });
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/home', 'LiveSearchController@autofill')->name('liveSearch');
+Route::post('/search', 'SearchController@search')->name('search');
+Route::get('/dashboard/show/{id}','ItemController@ShowItems')->name('dashBoard.show');
 
 Route::resource('/user', 'UserController');
+Route::resource('/category', 'CategoryController');
+Route::resource('/subcategory', 'SubCategoryController');
+Route::resource('grn', 'GRNController');
 
-//Dashboard Sort by,Show parts
-Route::get('/dashboard/show/{id}','ItemController@ShowItems')->name('dashBoard.show');
-//Add serial number after item saved
-Route::post('/serial_number/store','ItemController@SerialNumber')->name('serial.show');
-
+//======================= ITEM ==============================================================================================================
 Route::resource('/item', 'ItemController');
 Route::get('/item/edit/{item?}', 'ItemController@edit')->where('item','(.*)')->name('item.editForm');
 Route::post('/item/update/{item?}', 'ItemController@update')->where('item','(.*)');
 Route::post('/item/delete/{item?}', 'ItemController@destroy')->where('item', '(.*)')->name('item.destroy');
+Route::post('/serial_number/store','ItemController@SerialNumber')->name('serial.show');
 
-Route::post('/home', 'LiveSearchController@autofill')->name('liveSearch');
-Route::post('/search', 'SearchController@search')->name('search');
 
-// Route::post('/ajax/division', 'AjaxController@getSubLocation')->name('ajax.getSubdivision');
-// Route::post('/ajax/category', 'AjaxController@getSubCategory')->name('ajax.getSubcategory');
-
+//======================= FILTER ==============================================================================================================
 Route::post('/ajax/division', 'FilterController@getSubLocation')->name('ajax.getSubLocation');
 Route::post('/ajax/category', 'FilterController@getSubCategory')->name('ajax.getSubCategory');
 Route::post('/ajax/roman', 'FilterController@getRomanNumber');
 Route::post('/ajax/filter', 'FilterController@getFilter')->name('ajax.filter');
 
-
+//======================= LOCATION ==============================================================================================================
 Route::get('location', 'locationController@index')->name('location.insert');
 Route::get('location/index', 'locationController@index')->name('location.index');
 Route::get('location/create', 'locationController@create')->name('location.create');
@@ -54,22 +49,20 @@ Route::post('location/delete/{location?}', 'locationController@delete')->name('l
 Route::get('location/edit/{location?}', 'locationController@edit')->name('location.edit');
 Route::post('location/update/{location?}', 'locationController@update')->name('location.update');
 
-Route::resource('/category', 'CategoryController');
-
+//======================= SUB LOCATION ==============================================================================================================
 Route::resource('/subLocation', 'subLocationController');
 Route::get('/subLocation/edit/{subLocation?}/{location?}','subLocationController@edit')->name('subLocation.edit');
 Route::post('/subLocation/update','subLocationController@update')->name('subLocation.update');
 Route::post('/subLocation/delete/{subLocation?}/{location?}','subLocationController@delete')->name('subLocation.delete');
 
-Route::resource('/subcategory', 'SubCategoryController');
-Route::resource('grn', 'GRNController');
-
-
-//suppliers
+//======================= SUPPLIER ==============================================================================================================
 Route::get('/supplier/create', 'SupplierController@create')->name('supplier.create');
 Route::post('/supplier/store', 'SupplierController@store')->name('supplier.store');
 
+//======================= REPORT ==============================================================================================================
 Route::get('/reports/download', 'reportsController@pdfDownload')->name('reports.download');
-Route::get('/reports', 'reportsController@create')->name('reports.create');
+Route::get('/reports/create', 'reportsController@create')->name('reports.create');
+
+
 
 
