@@ -19,7 +19,7 @@ $(document).ready(function() {
             },
             success: function(data) {
 
-                op += '<option value="" selected disabled> Sub Location</option>';
+                op += '<option value="" > Sub Location</option>';
                 for (var i = 0; i < data.length; i++) {
                     op += '<option value="' + data[i].subLocation_code + '" >' + data[i].subLocation_name + '</option>';
                 }
