@@ -55,7 +55,12 @@ Route::get('location/edit/{location?}', 'locationController@edit')->name('locati
 Route::post('location/update/{location?}', 'locationController@update')->name('location.update');
 
 Route::resource('/category', 'CategoryController');
-Route::resource('sublocation', 'subLocationController');
+
+Route::resource('/subLocation', 'subLocationController');
+Route::get('/subLocation/edit/{subLocation?}/{location?}','subLocationController@edit')->name('subLocation.edit');
+Route::post('/subLocation/update','subLocationController@update')->name('subLocation.update');
+Route::post('/subLocation/delete/{subLocation?}/{location?}','subLocationController@delete')->name('subLocation.delete');
+
 Route::resource('/subcategory', 'SubCategoryController');
 Route::resource('grn', 'GRNController');
 

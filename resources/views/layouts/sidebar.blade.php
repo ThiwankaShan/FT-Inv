@@ -6,5 +6,6 @@
     <a href="{{ route('supplier.create') }}"><i class="fa fa-suitcase"></i><span>Suppliers</span></a>
     <a href="{{ route('reports.create') }}"><i class="fa fa-suitcase"></i><span>Reports</span></a>
     <a href="{{ route('location.index') }}"><i class="fa fa-suitcase"></i><span>Locations</span></a>
+    <a href="{{ route('subLocation.index') }}"><i class="fa fa-suitcase"></i><span>Sub Locations</span></a>
 
 </div>
