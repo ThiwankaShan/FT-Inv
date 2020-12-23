@@ -70,13 +70,27 @@ margin-left: 30%;
     font-weight: 700 !important;
 }
 
-#locationTable{
+#Table{
     align-self: center !important;
     max-width: 60% !important;
     margin: 0 auto !important;
     float: none;
 }
-#locationTable th{
+
+#subLocationTable{
+    align-self: center !important;
+    max-width: 90% !important;
+    margin: 0 auto !important;
+    float: none;
+}
+
+#subLocationTable th{
+    
+    background-color:  #691330 !important;
+    color: white !important;
+}
+
+#Table th{
     
     background-color:  #691330 !important;
     color: white !important;

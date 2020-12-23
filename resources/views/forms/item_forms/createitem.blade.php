@@ -26,7 +26,7 @@
                             @endforeach
                         </select>
 
-                        @error('Location')
+                        @error('location_code')
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
                         </span>
