@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use PDF;
 use DB;
-use App\Category;
 use App\Location;
-use App\Items;
 use App\SubLocation;
+use App\Category;
+use App\SubCategory;
+use App\Supplier;
+use App\Items;
+
 use Illuminate\Pagination\Paginator;
 
 class reportsController extends Controller
@@ -20,9 +23,11 @@ class reportsController extends Controller
 
     public function create(){
         $locations = Location::all();
+        $subLocations = SubLocation::all();
         $categories = Category::all();
-        $proId = DB::table('items')->select('procurement_id')->groupBy('procurement_id')->get();
-        return view('pages.reports', compact('locations', 'categories', 'proId'));
+        $subCategories = SubCategory::all();
+        $suppliers = Supplier::all();
+        return view('pages.reports', compact('locations', 'categories','subCategories','subLocations','suppliers'));
     }
 
     public function pdfDownload()

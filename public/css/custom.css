@@ -95,3 +95,14 @@ margin-left: 30%;
     background-color:  #691330 !important;
     color: white !important;
 }
+
+#reportForm {
+    align-self: center !important;
+    max-width: 50% !important;
+    margin: 0 auto !important;
+    float: none;
+}
+
+#reportForm #seperator{
+    border:1px solid  #691330 !important ;
+}
