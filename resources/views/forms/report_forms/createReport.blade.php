@@ -1,5 +1,5 @@
-<form id="reportForm">
-
+<form action="/reports/preview" id="reportForm" method="POST">
+@csrf
 <div class="custom-control custom-radio custom-control-inline">
   <input type="radio" id="disposed" name="option" class="custom-control-input">
   <label class="custom-control-label" for="disposed">Disposed</label>
@@ -8,6 +8,11 @@
 <div class="custom-control custom-radio custom-control-inline">
   <input type="radio" id="transfered" name="option" class="custom-control-input">
   <label class="custom-control-label" for="transfered">Transfered</label>
+</div>
+
+<div class="custom-control custom-radio custom-control-inline">
+  <input type="radio" id="available" name="option" class="custom-control-input">
+  <label class="custom-control-label" for="available">Available</label>
 </div>
 
 <hr>
@@ -32,7 +37,7 @@
 
     <div class="form-group col-md-4">
       <label for="inputState">Location</label>
-      <select id="location" class="form-control" name="location_id">
+      <select id="location" class="form-control" name="location_code">
           <option value="">Location</option>
           @foreach($locations as $location)
           <option value="{{ $location->location_code }}">{{$location->location_name}}</option>
@@ -42,8 +47,8 @@
 
     <div class="form-group col-md-4">
       <label for="inputState">Sub Location</label>
-      <select id="sublocation" class="form-control" name="subLocation_id">
-          <option value="">Sub Location</option>
+      <select id="sublocation" class="form-control" name="subLocation_code" value="">
+          <option value="" >Sub Location</option>
       </select>
     </div>
 
@@ -73,7 +78,8 @@
 
     <div class="form-group col-md-4">
       <label for="inputState">Supplier</label>
-      <select id="inputState" class="form-control" name="supplier">
+      <select class="form-control" name="supplier">
+      <option value="">Select Supplier</option>
         @foreach($suppliers as $supplier)
         <option value="{{ $supplier->supplier_code}}">{{ $supplier->supplier_name }}</option>
         @endforeach

@@ -41,14 +41,6 @@ class FilterController extends Controller
         // input locationCode,subLocationCode,category_code,subCategory_code,type,pid,column,order
         // get filtered items by given sort argument
         // output filterd and sorted value
-        $start = $request->purchased_start;
-        $end = $request->purchased_end;
-        
-        if ($start =='' or $end == ''){
-            $date = '';
-        }else{
-            $date = [$start,$end];
-        }
        
         $searchmap = array(
             'location_code'=>$request->loactionCode,
@@ -57,7 +49,6 @@ class FilterController extends Controller
             'subCategory_code'=>$request->subCategory_code,
             'type'=>$request->type,
             'procurement_id'=>$request->pid,
-            'purchased_date'=>$date,
         );
 
     
@@ -65,23 +56,14 @@ class FilterController extends Controller
         $gadgets = Items::whereNested(function($query) use ($searchmap) {
             foreach ($searchmap as $key => $value)
                 {
-                    if($key == 'purchased_date' and $value != ''){
-                        $query->whereBetween($key, $value);
-                    }
-
-                    else if($value != ''){
+                   if($value != ''){
                         $query->where($key, '=', $value);
                     }
-
-                 
                 }
         }, 'and')->orderBy($request->column,$request->order)->orderBy('item_code', 'ASC');
 
         $items = $gadgets->get();
 
-        // for report generation
-        // session(['items_download' => $gadgets,'sub_location'=>$request->subLoactionCode,'start'=>$start,'end'=>$end]);
-        
         $html = view('tables.item_table')->with(compact('items'))->render();
         return response()->json(['authType'=>Auth::user()->role,'html'=>$html, 'success'=>true]);
           

@@ -2,71 +2,129 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <!-- Styles -->
-    <link rel="stylesheet" href="{{public_path('css/report.css')}}">
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="{{public_path('css/report.css')}}">
 </head>
 
 <body>
-    <div class="report-table container-fluid">
 
-        @if ($start =='' and $end =='')
-        <h4 style="text-align:center">Faculty of Technology – Sabaragamuwa University of Sri Lanka <br>Fixed Assets
-            Register As At {{ date('Y-m-d') }}.</h4>
+  <h4 id="title">Faculty of Technology – Sabaragamuwa University of Sri Lanka</h4>
 
-        @elseif($start==$end)
-        <h4 style="text-align:center">Faculty of Technology – Sabaragamuwa University of Sri Lanka <br>Fixed Assets
-            Purchased on {{$start}}.</h4>
-        
-        @else
-        <h4 style="text-align:center">Faculty of Technology – Sabaragamuwa University of Sri Lanka <br>Fixed Assets
-        Purchased during the Period of {{$start}} - {{$end}}.</h4>
-        @endif
+  @if(isset($data['purchased_date']))
+  <h5 id="subTitle">Purchases during the Period of : {{ $data['purchased_date'][0] }} - {{ $data['purchased_date'][1] }}
+  </h5>
+  @endif
 
-        <h6>{{$department}}</h6>
-        <table class='table'>
-            <thead class="thead ">
-                <tr class="bg-info">
-                    <th scope="col">Item Code</th>
-                    <th scope="col">Asset Name</th>
-                    <th scope="col">Location Code</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Purchased date</th>
-                    <th scope="col">Supplier</th>
-                    <th scope="col">Serial number</th>
-                    <th scope="col">Model No</th>
-                    <th scope="col">Brand Name</th>
-                    <th scope="col">Rate</th>
-                    <th scope="col">Tax</th>
-                    <th scope="col">Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($items as $item)
-                <tr>
-                    <td scope="row">{{$item->item_code}}</td>
-                    <td>asset name</td>
-                    <td>{{$item->location_code}}</td>
-                    <td>{{$item->type}}</td>
-                    <td>{{$item->purchased_date}}</td>
-                    <td>{{$item->supplier_name}}</td>
-                    <td>{{$item->serialNumber}}</td>
-                    <td>model no</td>
-                    <td>brand name</td>
-                    <td>{{$item->rate}}</td>
-                    <td>tax</td>
-                    <td>Total</td>
-                </tr>
-                @endforeach
-                <tr>
-                    <td scope="row"></td>
-                    <td colspan="10">Grand total</td>
-                    <td>{{ $grandTotal}}</td>
-                </tr>
+  @if(isset($data['created_at_specific']))
+  <h5 id="subTitle">Fixed Assets Register As At : {{ $data['created_at_specific'] }}</h5>
+  @endif
 
-            </tbody>
-        </table>
-    </div>
+  @if(isset($data['created_at']))
+  <h5 id="subTitle">Fixed Assets during the Period of : {{ $data['created_at'][0] }} - {{ $data['created_at'][1] }}</h5>
+  @endif
+
+  @if(isset($data['supplier']))
+  <h6 id="heading">Supplier Name : {{ $data['supplier'] }}</h6>
+  @endif
+
+  @if(isset($data['department']))
+  <h6 id="heading">Department : {{ $data['department'] }}</h6>
+  @endif
+
+  @if(isset($data['unit']))
+  <h6 id="heading">Unit : {{ $data['unit'] }}</h6>
+  @endif
+
+  @if(isset($data['supplier']))
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Asset Code</th>
+        <th scope="col">Asset Name</th>
+        <th scope="col">GRN No</th>
+        <th scope="col">Purchase Order No</th>
+        <th scope="col">Purchased date</th>
+        <th scope="col">Serial No</th>
+        <th scope="col">Model No</th>
+        <th scope="col">Brand Name</th>
+        <th scope="col">Unit Price</th>
+        <th scope="col">Tax</th>
+        <th scope="col">Total</th>
+      </tr>
+    </thead>
+    <tbody id="dataBody">
+      @foreach($items as $item)
+      <tr>
+      <th scope="row">{{$item->item_code}}</th>
+      <td>{{$item->subCategory->subCategory_name}}</td>
+      <td>{{$item->GRN_number}}</td>
+      <td>{{$item->procurement_id}}</td>
+      <td>{{$item->purchased_date}}</td>
+      <td>{{$item->serial_number}}</td>
+      <td>{{$item->model_number}}</td>
+      <td>{{$item->brandName}}</td>
+      <td id="price" >{{ number_format($item->gross_price,2)}}</td>
+      <td id="price" >{{ number_format($item->tax,2) }}</td>
+      <td id="price" >{{ number_format($item->net_price,2) }}</td>
+      </tr>
+      @endforeach
+      <tr>
+        <td colspan="8">Grand Total</td>
+        <td id="price">{{ number_format($gross_total,2)}}</td>
+        <td id="price">{{ number_format($tax_total,2)}}</td>
+        <td id="price">{{ number_format($grand_total,2)}}</td>
+      </tr>
+
+    </tbody>
+  </table>
+  @else
+
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Asset Code</th>
+        <th scope="col">Location</th>
+        <th scope="col">Type</th>
+        <th scope="col">GRN No</th>
+        <th scope="col">Purchased date</th>
+        <th scope="col">Supplier</th>
+        <th scope="col">Serial No</th>
+        <th scope="col">Model No</th>
+        <th scope="col">Brand Name</th>
+        <th scope="col">Rate</th>
+        <th scope="col">Tax</th>
+        <th scope="col">Total</th>
+      </tr>
+    </thead>
+    <tbody id="dataBody">
+      
+      @foreach($items as $item)
+      <tr>
+      <th scope="row">{{$item->item_code}}</th>
+      <td>{{$item->location_code}}</td>
+      <td>{{$item->type}}</td>
+      <td>{{$item->GRN_number}}</td>
+      <td>{{$item->purchased_date}}</td>
+      <td>{{$item->GRN->supplier->supplier_name}}</td>
+      <td>{{$item->serial_number}}</td>
+      <td>{{$item->model_number}}</td>
+      <td>{{$item->brandName}}</td>
+      <td id="price">{{ number_format($item->gross_price,2) }}</td>
+      <td id="price">{{ number_format($item->tax,2) }}</td>
+      <td id="price">{{ number_format($item->net_price,2) }}</td>
+      </tr>
+      @endforeach
+      <tr>
+        <td colspan="9">Grand Total</td>
+        <td id="price">{{ number_format($gross_total,2) }}</td>
+        <td id="price">{{ number_format($tax_total,2) }}</td>
+        <td id="price">{{ number_format($grand_total,2) }}</td>
+      </tr>
+
+    </tbody>
+  </table>
+  @endif
+
 </body>
 
 </html>

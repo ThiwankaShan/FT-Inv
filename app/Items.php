@@ -31,7 +31,7 @@ class Items extends Model
 
     public function GRN()
     {
-        return $this->belongsTo('App\GRN', 'GRN_number');
+        return $this->belongsTo('App\Grn', 'GRN_number');
     }
 
     public function locations()

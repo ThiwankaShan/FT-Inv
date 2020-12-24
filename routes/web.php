@@ -71,7 +71,7 @@ Route::post('/supplier/store', 'SupplierController@store')->name('supplier.store
 //======================= REPORT ==============================================================================================================
 Route::get('/reports/download', 'reportsController@pdfDownload')->name('reports.download');
 Route::get('/reports/create', 'reportsController@create')->name('reports.create');
-
+Route::post('/reports/preview', 'reportsController@preview')->name('reports.preview');
 
 
 
