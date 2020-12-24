@@ -7,10 +7,21 @@
   </p>
 
   <div class="card mt-0 px-0 " id="locationCard">
-  <h4 class="mt-5 text-center">Faculty of Technology – Sabaragamuwa University of Sri Lanka</h4>
-  
+
+  <a class="btn mt-2 mr-5 btn-primary align-self-end" href="download">Download</a>
+
+  <h4 class="text-center">Faculty of Technology – Sabaragamuwa University of Sri Lanka</h4>
+
   @if(isset($data['purchased_date']))
   <h5 class="text-center">Purchases during the Period of : {{ $data['purchased_date'][0] }} - {{ $data['purchased_date'][1] }}</h5>
+  @endif
+
+  @if(isset($data['created_at']))
+  <h5 class="text-center">Fixed Assets during the Period of : {{ $data['created_at'][0] }} - {{ $data['created_at'][1] }}</h5>
+  @endif
+
+  @if(isset($data['created_at_specific']))
+  <h5 class="text-center">Fixed Assets Register As At : {{ $data['created_at_specific'] }}</h5>
   @endif
 
   @if(isset($data['supplier']))

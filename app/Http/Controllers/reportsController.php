@@ -43,6 +43,14 @@ class reportsController extends Controller
             $data += ['created_at'=>[$data['period_start'],$data['period_end']]] ;
         }
 
+        else if ($data['period_start']!=NULL ){
+            $data += ['created_at_specific'=>$data['period_start']] ;
+        }
+
+        else if ($data['period_end']!=NULL ){
+            $data += ['created_at_specific'=>$data['period_end']] ;
+        }
+
         if ($data['supplier']!=NULL ){
             $supplier = $data['supplier'];
             $data += ['GRN_number'=> Grn::where('supplier_code','=',$data['supplier'])->get('GRN_number') ] ;
@@ -60,6 +68,10 @@ class reportsController extends Controller
 
                     else if($key == 'created_at'){
                         $query->whereBetween($key, $value);
+                    }
+
+                    else if($key == 'created_at_specific'){
+                        $query->whereDate('created_at','=', $value);
                     }
 
                     else if($key == 'GRN_number'){
@@ -84,34 +96,29 @@ class reportsController extends Controller
             $data += ['supplier' =>Supplier::find($supplier)->supplier_name];
         }
         
+        session(['data' => $data, 'items'=>$items]);
+
         return view('tables.report_table',compact('items','data'));
 
     }
 
-    public function pdfDownload()
-    {   // genrate a pdf from filterd item details
-        //getting items from filter session
-
-        $items = session('items_download');
-        $subLocation_code = session('sub_location');
-        $start = session('start');
-        $end = session('end');
-        if ($subLocation_code!=null){
-            $department = SubLocation::where('subLocation_code', $subLocation_code)->get('subLocation_name')[0]['subLocation_name'];
-            $department = 'Department : '.$department;
-        }else{
-            $department = '';
+    public function pdfDownload(Request $request)
+    {  
+        $data = session('data');
+        $items = session('items');
+        $gross_total=0;
+        $tax_total=0;
+        $grand_total=0;
+        //This is for testing purposes
+        //return view('reports.template',compact('items','data'));
+        foreach($items as $item){
+            $grand_total += $item->net_price;
+            $gross_total += $item->gross_price;
+            $tax_total += $item->tax; 
         }
         
-        $grandTotal = 0;
-        foreach ($items as $item){
-            $grandTotal = $grandTotal + $item['rate'];
-        }
 
-        //This is for testing purposes
-        //return view('reports.template',compact('items','grandTotal'));
-
-        $pdf = PDF::loadView('reports.template',compact('items','grandTotal','department','start','end'));
+        $pdf = PDF::loadView('reports.template',compact('items','data','grand_total','gross_total','tax_total'));
         return $pdf->download('report.pdf');
 
     }
