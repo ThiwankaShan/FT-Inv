@@ -19,7 +19,6 @@ class SupplierController extends Controller
 
     public function store(Request $request)
     {
-        error_log('came to controller');
         $validateData = $request->validate([
             'supplier_code' => 'required|unique:suppliers',
             'supplier_name' => 'required',
@@ -28,8 +27,6 @@ class SupplierController extends Controller
             'email' => 'nullable|email',
             'vat_register_no' => 'required|unique:suppliers'
         ]);
-
-        error_log("passed the validation");
         
         $supplier = new Supplier();
         $supplier->supplier_code = $request->supplier_code;
