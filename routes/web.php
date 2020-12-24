@@ -23,7 +23,7 @@ Route::get('/dashboard/show/{id}','ItemController@ShowItems')->name('dashBoard.s
 
 Route::resource('/user', 'UserController');
 Route::resource('grn', 'GRNController');
-
+Route::post('/grn/delete/{grn_number?}','GRNController@destroy')->name('grn.delete');
 
 //=======================SUB CATEGORY ==============================================================================================================
 Route::resource('/subcategory', 'SubCategoryController');
