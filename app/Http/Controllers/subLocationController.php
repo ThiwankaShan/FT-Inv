@@ -109,15 +109,15 @@ class subLocationController extends Controller
     public function update(Request $request)
     {
         $validatedata = $request->validate([
-            'location_code' =>'required|string|unique:sub_locations,location_code,NULL,location_code,subLocation_code,'.$request->subLocation_code,
+            'location_code' =>'required|string|unique:sub_locations,location_code,'.$request->location_code.',location_code,subLocation_code,'.$request->subLocation_code,
             'subLocation_name' => 'required|unique:sub_locations,subLocation_name,'.$request->subLocation_name.',subLocation_name',
-            'subLocation_code' => 'required|unique:sub_locations,subLocation_code,NULL,subLocation_code,location_code,'.$request->location_code,
+            'subLocation_code' => 'required|unique:sub_locations,subLocation_code,'.$request->subLocation_code.',subLocation_code,location_code,'.$request->location_code,
         ]);
         
         
         $subLocation = SubLocation::where('subLocation_code','=',$request->subLocation)->where('location_code','=',$request->location)->first();
+      
         $subLocation->update($validatedata);
-
         $subLocation = SubLocation::find($validatedata['subLocation_code']);
         $locations = Location::all();
         

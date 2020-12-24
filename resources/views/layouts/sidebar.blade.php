@@ -7,5 +7,9 @@
     <a href="{{ route('reports.create') }}"><i class="fa fa-suitcase"></i><span>Reports</span></a>
     <a href="{{ route('location.index') }}"><i class="fa fa-suitcase"></i><span>Locations</span></a>
     <a href="{{ route('subLocation.index') }}"><i class="fa fa-suitcase"></i><span>Sub Locations</span></a>
+    <a href="{{ route('category.index') }}"><i class="fa fa-suitcase"></i><span>Category</span></a>
+    <a href="{{ route('subcategory.index') }}"><i class="fa fa-suitcase"></i><span>Sub Category</span></a>
+
+
 
 </div>

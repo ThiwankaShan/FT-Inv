@@ -11,7 +11,7 @@ class SubCategory extends Model
     public $incrementing = false;
     protected $keyType = "string";
 
-    protected $fillable = ['subCatergory_code',
+    protected $fillable = ['subCategory_code',
                            'subCategory_name',
                            'category_code'
                         ];

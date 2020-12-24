@@ -22,9 +22,18 @@ Route::post('/search', 'SearchController@search')->name('search');
 Route::get('/dashboard/show/{id}','ItemController@ShowItems')->name('dashBoard.show');
 
 Route::resource('/user', 'UserController');
-Route::resource('/category', 'CategoryController');
-Route::resource('/subcategory', 'SubCategoryController');
 Route::resource('grn', 'GRNController');
+
+
+//=======================SUB CATEGORY ==============================================================================================================
+Route::resource('/subcategory', 'SubCategoryController');
+Route::get('/subCategory/edit/{subCategory?}/{category?}','subCategoryController@edit')->name('subCategory.edit');
+Route::post('/subCategory/update','subCategoryController@update')->name('subCategory.update');
+Route::post('/subCategory/delete/{subCategory?}/{category?}','subCategoryController@destroy')->name('subCategory.delete');
+
+//======================= CATEGORY ==============================================================================================================
+Route::resource('/category', 'CategoryController');
+Route::post('category/delete/{category?}', 'CategoryController@destroy')->name('category.delete');
 
 //======================= ITEM ==============================================================================================================
 Route::resource('/item', 'ItemController');
