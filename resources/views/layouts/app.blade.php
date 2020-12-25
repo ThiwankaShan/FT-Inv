@@ -28,7 +28,7 @@
 
     <!-- Custom js scripts -->
     <script src="{{ asset('js/filter_sort.js') }}"> </script>
-    <script src="{{ asset('js/add_new_parts.js') }}"> </script>
+    <!-- <script src="{{ asset('js/add_new_parts.js') }}"> </script> -->
     
 
     <!--Live search -->

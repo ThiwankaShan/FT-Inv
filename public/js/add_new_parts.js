@@ -189,7 +189,7 @@ $(document).ready(function(){
             $('#category_name_error').css('display','none');
             $('#category_name').removeClass("has_error");
             $('#category_code_error').css('display','none');
-            $('#category_id').removeClass("has_error");
+            $('#category_code').removeClass("has_error");
             $('#valid_category').css('display','none');
         })
 
@@ -200,9 +200,9 @@ $(document).ready(function(){
             $('#category_name_error').css('display','none');
             $('#category_name').removeClass("has_error");
             $('#category_code_error').css('display','none');
-            $('#category_id').removeClass("has_error");
+            $('#category_code').removeClass("has_error");
 
-            var category_code = $('#category_id').val();
+            var category_code = $('#category_code').val();
             var category_name = $('#category_name').val();
            
               
@@ -247,7 +247,7 @@ $(document).ready(function(){
                     }
                     if(error_type.category_code){
                         $('#category_code_error').css('display','block');
-                        $('#category_id').addClass("has_error");
+                        $('#category_code').addClass("has_error");
                         $('#category_code_msg').html(error_type.category_code[0]);
                     }
                     
