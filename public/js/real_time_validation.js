@@ -140,6 +140,22 @@ $('#tax').keyup(function(event) {
     });
   });
 
+
+  $('#gross_price').keyup(function(event) {
+
+    // skip for arrow keys
+    if(event.which >= 37 && event.which <= 40) return ;
+  
+    // format number
+    $(this).val(function(index, value) {
+      return value
+      .replace(/[^\d.]/g, "")
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+      ;
+    });
+  });
+
+
 // **************************************Serial Number Inputs Real Time Validation  End**************************
 
 

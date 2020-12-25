@@ -213,7 +213,7 @@
                         <label for="item-name ">Model Number</label>
                     </div>
                     <div class="col-sm-9 mb-1 ">
-                        <input type="text" name="model_number" id="model_number" class="form-control {{ $errors->has('Vat') ? 'has_error' : ''}}" value="{{ old('Vat')}}">
+                        <input type="text" name="model_number" id="model_number" class="form-control {{ $errors->has('Vat') ? 'has_error' : ''}}" value="{{ old('model_number')}}">
                         <span id="real_time_model_number" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                         @error('model_number')
                         <span class="" role="alert">
@@ -273,7 +273,7 @@
                         <label for="rate">Price/Item</label>
                     </div>
                     <div class="col-sm-9 mb-1"> 
-                        <input type="text" name="gross_price" id="gross_price" class="form-control {{ $errors->has('gross_price') ? 'has_error' : ''}}" value="{{ old('Rate') }}">
+                        <input type="text" name="gross_price" id="gross_price" class="form-control {{ $errors->has('gross_price') ? 'has_error' : ''}}" value="{{ old('gross_price') }}">
                         <span id="real_time_gross_price" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
 
                         @error('gross_price')

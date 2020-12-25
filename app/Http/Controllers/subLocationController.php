@@ -110,11 +110,27 @@ class subLocationController extends Controller
      */
     public function update(Request $request)
     {
-        $validatedata = $request->validate([
-            'location_code' =>'required|string|unique:sub_locations,location_code,'.$request->location_code.',location_code,subLocation_code,'.$request->subLocation_code,
-            'subLocation_name' => 'required|unique:sub_locations,subLocation_name,'.$request->subLocation_name.',subLocation_name',
-            'subLocation_code' => 'required|unique:sub_locations,subLocation_code,'.$request->subLocation_code.',subLocation_code,location_code,'.$request->location_code,
-        ]);
+           
+        if($request->subLocation != $request->subLocation_code || $request->location != $request->location_code){
+
+            $validatedata = $request->validate([
+                'location_code' =>'required|string|unique:sub_locations,location_code,NULL,location_code,subLocation_code,'.$request->subLocation_code,
+                'subLocation_name' => 'required|unique:sub_locations,subLocation_name,'.$request->subLocation_name.',subLocation_name',
+                'subLocation_code' => 'required|unique:sub_locations,subLocation_code,NULL,subLocation_code,location_code,'.$request->location_code,
+            ],[
+                'location_code.unique' => 'This location Allready have this Sub location code',
+                'subLocation_code.unique' => 'This Sub location Allready have taken for selected location'
+            ]);
+
+        }else{
+            $validatedata = $request->validate([
+                'location_code' =>'required|string',
+                'subLocation_name' => 'required|unique:sub_locations,subLocation_name,'.$request->subLocation_name.',subLocation_name',
+                'subLocation_code' => 'required',
+            ]);
+        }
+
+        
         
         
         $subLocation = SubLocation::where('subLocation_code','=',$request->subLocation)->where('location_code','=',$request->location)->first();

@@ -8,7 +8,7 @@
 <hr>
 
 @if (!empty($status))
-    <div class="alert alert-success justify-content-center align-items-center">
+    <div class="alert alert-success text-center ">
         <strong>{{ $status }}</strong> 
     </div>
 @endif
