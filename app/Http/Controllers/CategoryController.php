@@ -123,8 +123,13 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($category)
+    public function destroy($category,Request $request)
     {
-        Category::destroy($category);
+        if ($request->force=="True"){
+            Category::find($category)->forceDelete();
+        }else{
+            Category::find($category)->delete();
+        }
+        
     }
 }

@@ -41,13 +41,17 @@ class SupplierController extends Controller
         return view('forms.supplier_forms.editSupplier',compact('supplier'))->with('status','supplier details updated sucessfully');
     }
 
-    public function delete($supplier)
+    public function delete($supplier,Request $request)
     {
         $supplier = Supplier::find($supplier);
-        $supplier->delete();
+        if($request->force=="True"){
+            $supplier->forceDelete();
+        }else{
+            $supplier->delete();
+        }
         
-        $suppliers = Supplier::all();
-        return view('pages.supplier',compact('suppliers'));
+        
+        
     }
 
     public function create()

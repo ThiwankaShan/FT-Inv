@@ -135,9 +135,14 @@ class SubCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($subCategory, $category)
+    public function destroy($subCategory, $category,Request $request)
     {
         $subcategory = SubCategory::where('subCategory_code','=',$subCategory)->where('category_code','=',$category)->first();
-        $subcategory->delete();
+        if ($request->force=="True"){
+            $subcategory->froceDelete();
+        }else{
+            $subcategory->delete();
+        }
+        
     }
 }

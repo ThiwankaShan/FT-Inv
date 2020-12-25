@@ -255,14 +255,13 @@ class ItemController extends Controller
     }
 
 
-    public function destroy(Items $item)
+    public function destroy($item, Request $request)
     {
-        //delete item permanently
-        //return to home
-
-        $item->delete();
-        return redirect()->route('home')
-            ->with('success', 'item deleted successfully');
+        if ($request->force=="True"){
+            Items::find($item)->forceDelete();
+        }else{
+            Items::find($item)->delete();
+        } 
     }
 
     public function ShowItems($id){

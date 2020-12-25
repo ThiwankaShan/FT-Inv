@@ -18,11 +18,10 @@ class CreateSubCategoriesTable extends Migration
             $table->integer('subCategory_code');
             $table->string('subCategory_name');
             $table->integer('category_code');
-            $table->foreign('category_code')->references('category_code')->on('categories')->onUpdate('cascade');
+            $table->foreign('category_code')->references('category_code')->on('categories')->onUpdate('cascade')->onDelete('cascade');
             $table->primary(['subCategory_code','category_code']);
-            $table->timestamps();
-            
-            
+            $table->softDeletes();
+            $table->timestamps();     
         });
     }
 

@@ -150,9 +150,13 @@ class GRNController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($grn_number)
+    public function destroy($grn_number, Request $request)
     {
-       
-        Grn::destroy($grn_number);
+        if ($reuest->force){
+            Grn::find($grn_number)->forceDelete();
+        }else{
+            Grn::find($grn_number)->delete();
+        }
+        
     }
 }

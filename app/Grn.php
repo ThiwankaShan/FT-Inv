@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Grn extends Model
 {
+    use SoftDeletes;
     protected $table = 'grns';
     protected $primaryKey = 'GRN_number';
     public $incrementing = false;
