@@ -125,7 +125,7 @@ class CategoryController extends Controller
      */
     public function destroy($category,Request $request)
     {
-        if ($request->force=="True"){
+        if ($request->force){
             Category::find($category)->forceDelete();
         }else{
             Category::find($category)->delete();
