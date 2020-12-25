@@ -24,12 +24,12 @@ if(document.querySelector('#create_item_form')){
 
     target.value = formatNumberWithCommas(target.value);
     function formatNumberWithCommas(x) {
-        return x.toString().replace(/B(?=(d{3})+(?!d))/g, ",");
+        return x.toLocaleString();
     }
    
-    if(target.value.length >= 8){
+    if(target.value.length >= 13){
         target.classList.add('validOne');
-        document.getElementById('real_time_'+target.name).innerHTML = "Input is too long.Must be less than 8 characters";
+        document.getElementById('real_time_'+target.name).innerHTML = "Input is too long.Must be less than 10 characters";
         document.getElementById('real_time_'+target.name).style.display = 'block';
         
     }else{
@@ -40,7 +40,7 @@ if(document.querySelector('#create_item_form')){
     }
     
     //disable the submit button to prevent submitting invalid length of values
-    if(tax.value.length >= 8 || Procument_id.value.length >= 8 || gross_price.value.length >= 8 || modal_number.value.length >= 8 || brand_name.value.length >=8 ){
+    if(tax.value.length >= 13 || Procument_id.value.length >= 13 || gross_price.value.length >= 13 || modal_number.value.length >= 13 || brand_name.value.length >=13 ){
         document.getElementById('btn_submit').disabled = true;
         document.getElementById('preview').disabled = true;
     }else{
@@ -74,9 +74,9 @@ if(document.querySelector('#create_item_form')){
     function validation_serial_number(e){
        var serial_target = e.target;
        console.log(serial_target.value);
-       if(serial_target.value.length >= 8){
+       if(serial_target.value.length >= 20){
         serial_target.classList.add('validOne');
-        document.getElementById(error).innerHTML = "Input is too long.Must be less than 8 characters";
+        document.getElementById(error).innerHTML = "Input is too long.Must be less than 20 characters";
         document.getElementById(error).style.display = 'block';
         document.getElementById(save_serial).style.display = 'none';
        }else{
@@ -101,10 +101,10 @@ $('#serial_number').click(function(){
     function validation(e){
        var target = e.target;
       
-       if(target.value.length >= 8){
+       if(target.value.length >= 20){
         
           target.classList.add('validOne');
-          document.getElementById('real_time_serial_number').innerHTML = "Input is too long.Must be less than 8 characters";
+          document.getElementById('real_time_serial_number').innerHTML = "Input is too long.Must be less than 20 characters";
           document.getElementById('real_time_serial_number').style.display = 'block';
          
        }else{
@@ -115,7 +115,7 @@ $('#serial_number').click(function(){
        }
 
        //disebled the buttons of submit when invalid length
-       if(tax.value.length >= 8 || Procument_id.value.length >= 8 || gross_price.value.length >= 8 || target.value.length >= 8 ){
+       if(tax.value.length >= 13 || Procument_id.value.length >= 13 || gross_price.value.length >= 13 || target.value.length >= 13 ){
            document.getElementById('btn_submit').disabled = true;
        }else{
            document.getElementById('btn_submit').disabled = false;
