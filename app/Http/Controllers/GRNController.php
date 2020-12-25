@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Supplier;
 use App\Grn;
 use Validator;
-
+use URL;
 class GRNController extends Controller
 {
     /**
@@ -87,6 +87,11 @@ class GRNController extends Controller
         ->get();  
 
         $Suppliers = Supplier::all();  
+
+        if(URL::previous() == URL::route('grn.create')){
+            return back()->with('status',"GRN Created Succesfully!");
+        }
+
         return response()->json(['status'=>"Success", 'records'=>$grn_numbers , 'supplier'=>$Suppliers]);
 
        
@@ -152,7 +157,7 @@ class GRNController extends Controller
      */
     public function destroy($grn_number, Request $request)
     {
-        if ($reuest->force){
+        if ($request->force){
             Grn::find($grn_number)->forceDelete();
         }else{
             Grn::find($grn_number)->delete();

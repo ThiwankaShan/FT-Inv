@@ -8,8 +8,8 @@
 <hr>
 
 @if (session('status'))
-    <div class="alert alert-success">
-        {{ session('status') }}
+    <div class="alert alert-success text-center">
+      <strong>  {{ session('status') }}</strong>
     </div>
 @endif
 

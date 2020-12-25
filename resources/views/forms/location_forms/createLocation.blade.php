@@ -8,8 +8,8 @@
 <hr>
 
 @if (session('status'))
-    <div class="alert alert-success">
-        {{ session('status') }}
+    <div class="alert alert-success text-center">
+       <strong> {{ session('status') }}</strong>
     </div>
 @endif
 
@@ -24,7 +24,7 @@
             <div class="form-group row">
                 <label for="LocationName" class="col-sm-2 col-form-label">Location Name</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control {{ $errors->has('location_name') ? 'has_error' : '' }}" id="location_name" placeholder="Enter Supplier Code" name="location_name" value="{{ old('location_name') }}">
+                    <input type="text" class="form-control {{ $errors->has('location_name') ? 'has_error' : '' }}" id="location_name" placeholder="Enter Location Name" name="location_name" value="{{ old('location_name') }}">
                     @error('location_name')
                     <span class="" role="alert">
                         <small style="color:red"><strong>{{ $message }}</strong></small>
@@ -37,7 +37,7 @@
             <div class="form-group row">
                 <label for="LocationCode" class="col-sm-2 col-form-label">Location Code</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control {{ $errors->has('location_code') ? 'has_error' : '' }}" id="location_code" placeholder="Enter Supplier Code" name="location_code" value="{{ old('location_code') }}">
+                    <input type="text" class="form-control {{ $errors->has('location_code') ? 'has_error' : '' }}" id="location_code" placeholder="Enter Location Code" name="location_code" value="{{ old('location_code') }}">
                     <span id="live_location_code" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                     @error('location_code')
                     <span class="" role="alert">

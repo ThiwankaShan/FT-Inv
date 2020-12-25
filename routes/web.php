@@ -19,11 +19,13 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/home', 'LiveSearchController@autofill')->name('liveSearch');
 Route::post('/search', 'SearchController@search')->name('search');
-Route::get('/dashboard/show/{id}','ItemController@ShowItems')->name('dashBoard.show');
+Route::post('/dashboard/show/{id}','ItemController@ShowItems')->name('dashBoard.show');
 
 Route::resource('/user', 'UserController');
+
 Route::resource('grn', 'GRNController');
 Route::post('/grn/delete/{grn_number?}','GRNController@destroy')->name('grn.delete');
+
 
 //=======================SUB CATEGORY ==============================================================================================================
 Route::resource('/subcategory', 'SubCategoryController');
