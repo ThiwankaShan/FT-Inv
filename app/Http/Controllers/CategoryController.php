@@ -21,7 +21,8 @@ class CategoryController extends Controller
     public function index()
     {
 
-        return view('forms.createCategory');
+        $categories = Category::all();
+        return view('pages.category', compact('categories'));
     }
 
     /**
@@ -31,7 +32,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('forms.category_forms.createCategory');
     }
 
     /**
@@ -64,6 +65,10 @@ class CategoryController extends Controller
         
         $categories = Category::all();
 
+        if(URL::previous() == URL::route('category.create')){
+            return back()->with('status',"Category Created Successfully!");
+        }
+
         return response()->json(['status'=>'success','records'=>$categories]);
     }
 
@@ -86,7 +91,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::find($id);
+        return view('forms.category_forms.editCategory',compact('category'));
     }
 
     /**
@@ -96,9 +102,18 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $category)
     {
-        //
+        $validateData = $request->validate([
+            'category_code' => 'required|string|unique:categories,category_code,'.$request->category_code.',category_code',
+            'category_name' => 'required|string|unique:categories,category_name,'.$request->category_name.',category_name',
+
+        ]);
+
+        Category::find($category)->update($validateData);
+        $category = Category::find($validateData['category_code']);
+
+        return view('forms.category_forms.editCategory',compact('category'))->with('status','Category edited sucessfully');
     }
 
     /**
@@ -107,8 +122,8 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($category)
     {
-        //
+        Category::destroy($category);
     }
 }

@@ -36,7 +36,17 @@ class GRNController extends Controller
      */
     public function create()
     {
-        //
+        $last_grnNo = Grn::latest('GRN_number')->first();
+        error_log($last_grnNo);
+        if ($last_grnNo == '') {
+            $suggest_grnNo = '01';
+        } else {
+            $suggest_grnNo = sprintf('%02d', $last_grnNo->GRN_number + 1);
+        }
+
+
+        $Suppliers = Supplier::all();
+        return view('forms.grn_forms.createGRN',compact('Suppliers','suggest_grnNo'));
     }
 
     /**
@@ -90,7 +100,8 @@ class GRNController extends Controller
      */
     public function show($id)
     {
-        //
+         $grns=Grn::all();
+         return view('pages.GRN',compact('grns'));
     }
 
     /**
@@ -99,9 +110,12 @@ class GRNController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($grn_number)
     {
-        //
+        $Suppliers = Supplier::all();
+        $grn = Grn::find($grn_number);
+        return view('forms.grn_forms.editGRN',compact('grn','Suppliers'));
+         
     }
 
     /**
@@ -113,7 +127,21 @@ class GRNController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedata = $request->validate([
+            'GRN_number' => 'required|numeric|unique:grns,GRN_number,'.$id.',GRN_number',
+            'GRN_date' => 'required',
+            'invoice_number' => 'required|unique:grns,invoice_number,'.$request->invoice_number.',invoice_number',
+            'invoice_date' => 'required',
+            'supplier_code' => 'required',
+        ]);
+
+         $grn_details = Grn::find($id);
+         $grn_details -> update($validatedata);
+
+         $grn = Grn::find($validatedata['GRN_number']);
+         $Suppliers = Supplier::all();
+
+         return view('forms.grn_forms.editGRN',compact('grn','Suppliers'))->with('status',"Grn Details Updated!");
     }
 
     /**
@@ -122,8 +150,9 @@ class GRNController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($grn_number)
     {
-        //
+       
+        Grn::destroy($grn_number);
     }
 }
