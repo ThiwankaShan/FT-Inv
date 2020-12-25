@@ -130,3 +130,11 @@ margin-left: 30%;
 #itemsCard{
     min-width: 720px !important;
 }
+
+.window{
+    margin-top:150px !important;
+}
+
+.nounderline {
+    text-decoration: none !important
+  }
