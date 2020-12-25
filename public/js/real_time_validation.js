@@ -164,8 +164,6 @@ $('#tax').keyup(function(event) {
 
 if(document.getElementById('highlighted_row')){
 
-    console.log("OK");
-
     var input_id = document.getElementById('highlighted_row');
     var val = input_id.value;
     var row_id = val.replace(/\/+/g, '');
@@ -176,3 +174,131 @@ if(document.getElementById('highlighted_row')){
     $(window).scrollTop($('#'+row_id).position().top);
 
 }
+
+//========================================================Live Validation Functions for Location,Sub Location,Category,Sub Category,GRN  ============================================
+function live_validate_fail (input_id, error_span, button_save){
+    document.getElementById(input_id).classList.add('validOne');
+    document.getElementById(error_span).innerHTML="Input is too Long.Must be less than 5 characters"; 
+    document.getElementById(error_span).style.display="block";
+    document.getElementById(button_save).style.display="none";
+}
+
+function live_validate_pass(input_id, error_span, button_save){
+    document.getElementById(input_id).classList.remove('validOne');
+    document.getElementById(error_span).innerHTML=""; 
+    document.getElementById(error_span).style.display="none";
+    document.getElementById(button_save).style.display="block";
+}
+
+function remove_all_live_validation_functions(form_type,input_id, error_span, button_save){
+    $("#"+form_type).trigger('reset');
+    document.getElementById(input_id).classList.remove('validOne');
+    document.getElementById(error_span).innerHTML=""; 
+    document.getElementById(error_span).style.display="none";
+    document.getElementById(button_save).style.display="block";
+}
+
+//========================================================Location Create Modal Live Validation  ============================================
+
+
+$('#location_code').click(function(){
+
+    let input_id = document.getElementById('location_code');
+    input_id.addEventListener('input',validation);
+
+    function validation(e){
+
+        var target = e.target;
+        if(target.value.length >= 5){
+            live_validate_fail('location_code', 'live_location_code','saveLocation');        
+        }else{
+            live_validate_pass('location_code', 'live_location_code','saveLocation');
+        }
+
+    }
+
+    // Hide errors when the modal open back
+    $('#buttonCreateLocation').click(function(){     
+        remove_all_live_validation_functions('Location_form','location_code', 'live_location_code','saveLocation');      
+    })
+  
+})
+
+//========================================================Sub Location Create Modal Live Validation  ============================================
+
+
+$('#subLocation_code').click(function(){
+
+    let input_id = document.getElementById('subLocation_code');
+    input_id.addEventListener('input',validation);
+
+    function validation(e){
+
+        var target = e.target;
+        if(target.value.length >= 5){
+            live_validate_fail('subLocation_code', 'live_subLocation_code','saveSubLocation');        
+        }else{
+            live_validate_pass('subLocation_code', 'live_subLocation_code','saveSubLocation');
+        }
+
+    }
+
+    //Hide errors when the modal open back
+    $('#buttonCreateSubLoaction').click(function(){     
+        remove_all_live_validation_functions('subLocation_form','subLocation_code', 'live_subLocation_code','saveSubLocation');      
+    })
+  
+})
+
+//========================================================Category Create Modal Live Validation  ============================================
+
+
+$('#category_code').click(function(){
+
+    let input_id = document.getElementById('category_code');
+    input_id.addEventListener('input',validation);
+
+    function validation(e){
+
+        var target = e.target;
+        if(target.value.length >= 5){
+            live_validate_fail('category_code', 'live_category_code','saveCategory');        
+        }else{
+            live_validate_pass('category_code', 'live_category_code','saveCategory');
+        }
+
+    }
+
+    //Hide errors when the modal open back
+    $('#button_create_category').click(function(){     
+        remove_all_live_validation_functions('category_form','category_code', 'live_category_code','saveCategory');      
+    })
+  
+})
+
+
+//========================================================Sub Category Create Modal Live Validation  ============================================
+
+
+$('#subCategory_code').click(function(){
+
+    let input_id = document.getElementById('subCategory_code');
+    input_id.addEventListener('input',validation);
+
+    function validation(e){
+
+        var target = e.target;
+        if(target.value.length >= 5){
+            live_validate_fail('subCategory_code', 'live_subCategory_code','save_subCategory');        
+        }else{
+            live_validate_pass('subCategory_code', 'live_subCategory_code','save_subCategory');
+        }
+
+    }
+
+    //Hide errors when the modal open back
+    $('#button_create_subCategory').click(function(){     
+        remove_all_live_validation_functions('category_form','subCategory_code', 'live_subCategory_code','save_subCategory');      
+    })
+  
+})

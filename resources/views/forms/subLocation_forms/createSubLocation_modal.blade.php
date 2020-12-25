@@ -40,7 +40,7 @@
                     <div class="form-group ">
                         <label for="subLocarion_code ">Sub Location Code</label>
                         <input type="text" class="form-control form-custom" name="subLocation_code"  id ="subLocation_code" aria-describedby="emailHelp">
-                       
+                        <span id="live_subLocation_code" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                         <span class="" role="alert" style="display:none; margin-bottom:5px" id="subLocation_code_error">
                             <small style="color:red"><strong id="subLocation_code_msg"></strong></small>
                         </span>
@@ -48,8 +48,8 @@
                     </div>
 
 
-                    <div class=" text-center">
-                        <button type="button" class="btn form-card-header-custom text-light" id="saveSubLocation">Create</button>
+                    <div class=" text-center row justify-content-center">
+                        <button type="button" class="btn form-card-header-custom text-light mr-2 " id="saveSubLocation">Create</button>
                         <button class="btn btn-secondary cancel_modal text-light  " type="button" >Cancel</button>
                     </div>
                 </form>

@@ -29,8 +29,8 @@
                     </div>
                     <div class="form-group form-custom">
                         <label for="exampleInputEmail1">Category Code</label>
-                        <input type="text" class="form-control" id="category_id" name="category_code" aria-describedby="emailHelp">
-
+                        <input type="text" class="form-control" id="category_code" name="category_code" aria-describedby="emailHelp">
+                        <span id="live_category_code" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                         <span class="" role="alert" style="display:none; margin-bottom:5px" id="category_code_error">
                            <small style="color:red"><strong id="category_code_msg"></strong></small>
                         </span>
@@ -39,8 +39,8 @@
                     </div>
 
 
-                    <div class="text-center">
-                        <button type="button" class="btn form-card-header-custom text-light" id="saveCategory">Create</button>
+                    <div class="text-center row justify-content-center ">
+                        <button type="button" class="btn form-card-header-custom text-light mr-2" id="saveCategory">Create</button>
                         <button class="btn btn-secondary cancel_modal text-light  " type="button" >Cancel</button>
                     </div>
                 </form>
