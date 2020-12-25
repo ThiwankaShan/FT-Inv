@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 
+use URL;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -25,7 +26,7 @@ class CategoryController extends Controller
         return view('pages.category', compact('categories'));
     }
 
-    /**
+    /** 
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

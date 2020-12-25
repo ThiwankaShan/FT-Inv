@@ -1,10 +1,8 @@
 <div class="row ">
   <div class="col-sm-5 d-flex flex-row">
-    <h6 style="font-size:16px; font-weight:bold" class="mt-2 mr-2">Sort By</h6>
-
 
     <select class="form-control selector mr-2 mb-1 text-dark" id="column"
-      style="outline:0px; width:200px; border-color:#C21E56; border-width:1.5px" data-column="0">
+      style="outline:0px; width:150px; border-color:#C21E56; border-width:1.5px" data-column="0">
       <option value="location_code">Location</option>
       <option value="type">Type</option>
       <option value="purchased_date">Purchased date</option>
@@ -16,7 +14,7 @@
 
 
     <select class="form-control selector mr-2 mb-1 text-dark" id="order"
-      style="outline:0px; width:100px; border-color:#C21E56; border-width:1.5px">
+      style="outline:0px; width:150px; border-color:#C21E56; border-width:1.5px">
       <option value="ASC">Ascending</option>
       <option value="DESC">Descending</option>
     </select>

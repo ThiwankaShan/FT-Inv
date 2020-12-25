@@ -95,7 +95,7 @@ $(document).ready(function(){
 
 
         $('#saveSubLocation').click(function(){
-
+ 
             //if alert boxes appear because of inserting data before it will remove
             $('#subLocation_name_error').css('display','none');
             $('#subLocation_name').removeClass("has_error");
@@ -106,12 +106,12 @@ $(document).ready(function(){
             var subLocationName = $('#subLocation_name').val();
             var loactionCode =  $('#selectedLoaction').val();
             var location_code_form = $('#location').val();  //this value also send to the controller because of we dont know coreectly what is the category in the create Item Form
-                 console.log(loactionCode); 
+                 
             $.ajax({
-                url:"/sublocation",
+                url:"/subLocation/store",
                 method:"POST",
                 data:{
-                    Location_code:loactionCode,
+                    location_code:loactionCode,
                     subLocation_name:subLocationName,
                     subLocation_code:subLocationId,
                     location_code_form:location_code_form,

@@ -2,9 +2,9 @@
 
 
 <div class="container-fluid" id="dataTable">
-  <table class="table">
+  <table class="table table-striped table-bordered table-hover">
     <thead class="thead text-white" style="background-color:#691330">
-      <tr>
+      <tr class="text-center">
         <th scope="col">Asset Code</th>
         <th scope="col">Location</th>
         <th scope="col">Type</th>
@@ -32,23 +32,23 @@
         <td>{{$item->type}}</td>
         <td>{{$item->GRN_number}}</td>
         <td>{{$item->purchased_date}}</td>
-        <td>{{$item->supplier_name}}</td>
+        <td>{{$item->GRN->supplier->supplier_name}}</td>
         <td>{{$item->serial_number}}</td>
         <td>{{$item->model_number}}</td>
         <td>{{$item->brandName}}</td>
-        <td>{{$item->gross_price}}</td>
-        <td>{{$item->tax}}</td>
-        <td>{{$item->net_price}}</td>
+        <td class="text-right">{{number_format($item->gross_price,2)}}</td>
+        <td class="text-right">{{number_format($item->tax,2)}}</td>
+        <td class="text-right">{{number_format($item->net_price,2)}}</td>
 
-        <td class="d-flex flex-row">
+        <td class="d-flex flex-row justify-content-end">
           @if(auth()->user()->role == 'admin')
 
-          <a class="btn btn-primary mr-1 text-light highlight_row" href="/item/edit/{{$item->item_code}}">Edit</a>
-          <a href="/item/delete/{{$item->item_code}}" data-method="post" class="btn btn-danger delete-item text-light"
+          <a id="actionButton" class="btn btn-primary mr-1 text-light highlight_row" href="/item/edit/{{$item->item_code}}">Edit</a>
+          <a id="actionButton"  href="/item/delete/{{$item->item_code}}" data-method="post" class="btn btn-danger delete-item text-light"
             token='{!! csrf_token() !!}'>Delete</a>
 
           @elseif(auth()->user()->role == 'manager')
-          <a class="btn btn-primary mr-1 text-light" href="/item/edit/{{$item->item_code}}">Edit</a>
+          <a id="actionButton"  class="btn btn-primary mr-1 text-light" href="/item/edit/{{$item->item_code}}">Edit</a>
           @endif
         </td>
 
