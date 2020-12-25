@@ -7,7 +7,7 @@
     @include('tables.filter_sort')
   </div>
 
-  <div class="card-body p-1" style="min-width: 1250px;">
+  <div class="card-body p-1" style="min-width: 1250px;" id="items_table">
     @include('tables.item_table')
   </div>
   

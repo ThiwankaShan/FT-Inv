@@ -18,7 +18,7 @@
 
                         <form  class=" form-align-custom" id="subCategory_form">
                             @csrf
-
+ 
                             <div class="form-group ">
                                 <label for="item-name ">Categories</label>
                                 <select class="form-control form-custom" id="categoryID" name="Category_code">

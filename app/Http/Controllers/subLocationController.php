@@ -49,21 +49,24 @@ class subLocationController extends Controller
 
     public function store(Request $request)
     {
-       //Getting subLocation_code , Name and The Location code that new sub location Belongs.
-      // Send Updated Sublocations array of Selected Location OF Item Form
-
-// sub location code , Name and The location code that new sub location Belongs. Send Updated sub locations array  of Selected location OF Item Form
+        //Getting subLocation_code , Name and The Location code that new sub location Belongs.
+        // Send Updated Sublocations array of Selected Location OF Item Form
+        // sub location code , Name and The location code that new sub location Belongs. Send Updated sub locations array  of Selected location OF Item Form
+        
+        Log::info($request);
         $validatedData = $request->validate([
+            'location_code' => 'required',
             'subLocation_name' => 'required|unique:sub_locations',
             'subLocation_code' => 'required|unique:sub_locations,subLocation_code,NULL,subLocation_code,location_code,'.$request->location_code,
         ]);
 
+        
         $subLocation = new SubLocation;
         $subLocation->Location_code = $request->location_code;
         $subLocation->subLocation_name = $request->subLocation_name;
         $subLocation->subLocation_code = $request->subLocation_code;
 
-
+        
         $subLocation->save();
 
         if(URL::previous()==URL::route('subLocation.create')){

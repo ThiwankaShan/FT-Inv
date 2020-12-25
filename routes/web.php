@@ -62,6 +62,7 @@ Route::post('location/update/{location?}', 'locationController@update')->name('l
 Route::resource('/subLocation', 'subLocationController');
 Route::get('/subLocation/edit/{subLocation?}/{location?}','subLocationController@edit')->name('subLocation.edit');
 Route::post('/subLocation/update','subLocationController@update')->name('subLocation.update');
+Route::post('/subLocation/store','subLocationController@store')->name('subLocation.store');
 Route::post('/subLocation/delete/{subLocation?}/{location?}','subLocationController@delete')->name('subLocation.delete');
 
 //======================= SUPPLIER ==============================================================================================================

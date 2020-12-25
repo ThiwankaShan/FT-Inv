@@ -11,7 +11,7 @@
                 <div class="alert alert-success text-center" role="alert" style="display:none" id="validSubLocation">
                         <strong>New Sub Location Created Successfully!!</strong>
                  </div>
-
+ 
                 <div class="alert alert-danger  " id="invalidSubLocation" style="display:none">
                     <ul ></ul>
                 </div>

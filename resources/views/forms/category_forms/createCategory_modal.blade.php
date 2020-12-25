@@ -25,7 +25,7 @@
                         <span class="" role="alert" style="display:none; margin-bottom:5px" id="category_name_error">
                            <small style="color:red"><strong id="category_name_msg"></strong></small>
                         </span>
-
+ 
                     </div>
                     <div class="form-group form-custom">
                         <label for="exampleInputEmail1">Category Code</label>

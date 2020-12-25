@@ -91,16 +91,12 @@ $(document).ready(function() {
                 purchased_start : purchased_start,
                 purchased_end : purchased_end,
             },
-            success: function(data) {
-              
+            success: function(data) {  
                 $('#items_table').html(data.html);
             }
-
-        })
-        
+        })  
     }
 
-   
     // global variables to keep both sort and filter independent
     var location = "";
     var subLocation = "";
@@ -110,11 +106,10 @@ $(document).ready(function() {
     var pID = "" ;
     var column = "location_code";
     var order = "ASC";
-    var reportView = false;
 
     //Here is the above Function call
     $('#filter').click(function() {
-
+        console.log('Filter js function');
         location = $('#location').val();
         subLocation = $('#sublocation').val();
         category = $('#category').val();
@@ -127,60 +122,11 @@ $(document).ready(function() {
 
     // sort and filter function 
     $('#sort').click(function() {
-        
+        console.log('Sort js function');
         column = $('#column').val();
         order = $('#order').val();
             fetchData(location, subLocation, category, subCategory, type, pID, column, order);
             
     });
-
-    // pdf download function 
-    $('#viewReport').click(function() {
-        reportView = true;
-        location = $('#location').val();
-        subLocation = $('#sublocation').val();
-        category = $('#category').val();
-        subCategory = $('#subCategory').val();
-        type = $('#Type').val();
-        pID = $('#ProID').val();
-        column = $('#column').val();
-        order = $('#order').val();
-        purchased_start = $('#purchased_start').val() ;
-        purchased_end = $('#purchased_end').val();
-
-        // read and display department 
-        var sel = document.getElementById('sublocation');
-        var department= sel.options[sel.selectedIndex].text;
-        department = 'Department : '+department;
-        if (department == 'Department : Sub Location') {department=''};
-        $('#department').html(department);
-
-        // read and display date
-        var start = $('#purchased_start').val(); 
-        var end = $('#purchased_end').val();
-        console.log(start);
-        if (start == '' & end =='' ){
-
-        }
-        else if (start==end){
-            $('#date').html("");
-            $('#date').html('Purchased on '+start);
-        }else{
-            $('#date').html("");
-            $('#date').html('Purchased during the Period of '+start+'-'+end);
-        } 
-
-        reportPreview(location, subLocation, category, subCategory, type, pID, column, order,purchased_start,purchased_end);
-    });
-
-    // pdf download function 
-    $('#downloadReports').click(function() {
-        reportView = true;
-        reportPreview(location, subLocation, category, subCategory, type, pID, column, order);
-    });
-
-    
-
-
-
+   
 })
