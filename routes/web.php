@@ -65,6 +65,10 @@ Route::post('/subLocation/update','subLocationController@update')->name('subLoca
 Route::post('/subLocation/delete/{subLocation?}/{location?}','subLocationController@delete')->name('subLocation.delete');
 
 //======================= SUPPLIER ==============================================================================================================
+Route::get('/supplier', 'SupplierController@index')->name('supplier.index');
+Route::get('/supplier/edit/{supplier?}', 'SupplierController@edit')->name('supplier.edit');
+Route::post('/supplier/update', 'SupplierController@update')->name('supplier.update');
+Route::post('/supplier/delete/{supplier?}', 'SupplierController@delete')->name('supplier.delete');
 Route::get('/supplier/create', 'SupplierController@create')->name('supplier.create');
 Route::post('/supplier/store', 'SupplierController@store')->name('supplier.store');
 

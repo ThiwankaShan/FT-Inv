@@ -106,3 +106,19 @@ margin-left: 30%;
 #reportForm #seperator{
     border:1px solid  #691330 !important ;
 }
+
+#supplierTable{
+    align-self: center !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    float: none;
+}
+
+#supplierTable th{
+    background-color:  #691330 !important;
+    color: white !important;
+}
+
+#supplier_container{
+    max-width: 95% !important;
+}
