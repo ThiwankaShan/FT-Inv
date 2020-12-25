@@ -18,11 +18,11 @@
         <tr>
           <td scope="row">{{$subCategory->subCategory_code}}</td>
           <td>{{$subCategory->subCategory_name}}</td>
-          <td>{{$subCategory->category->category_name}}</td>
+          <td>{{$subCategory->category->category_name ?? 'Deleted'}}</td>
           <td class="">
             @if(auth()->user()->role == 'admin')
 
-            <a class="btn btn-primary text-light highlight_row" href="/subCategory/edit/{{ $subCategory->subCategory_code }}/{{$subCategory->category->category_code }}">Edit</a>
+            <a class="btn btn-primary text-light highlight_row" href="/subCategory/edit/{{ $subCategory->subCategory_code }}/{{$subCategory->category_code }}">Edit</a>
             <a class="btn btn-danger delete-item text-light"  href="/subCategory/delete/{{ $subCategory->subCategory_code }}/{{ $subCategory->category_code }}" data-method="POST" token='{!! csrf_token() !!}'>Delete</a>
            
 

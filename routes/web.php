@@ -27,9 +27,9 @@ Route::post('/grn/delete/{grn_number?}','GRNController@destroy')->name('grn.dele
 
 //=======================SUB CATEGORY ==============================================================================================================
 Route::resource('/subcategory', 'SubCategoryController');
-Route::get('/subCategory/edit/{subCategory?}/{category?}','subCategoryController@edit')->name('subCategory.edit');
-Route::post('/subCategory/update','subCategoryController@update')->name('subCategory.update');
-Route::post('/subCategory/delete/{subCategory?}/{category?}','subCategoryController@destroy')->name('subCategory.delete');
+Route::get('/subCategory/edit/{subCategory?}/{category?}','SubCategoryController@edit')->name('subCategory.edit');
+Route::post('/subCategory/update','SubCategoryController@update')->name('subCategory.update');
+Route::post('/subCategory/delete/{subCategory?}/{category?}','SubCategoryController@destroy')->name('subCategory.delete');
 
 //======================= CATEGORY ==============================================================================================================
 Route::resource('/category', 'CategoryController');

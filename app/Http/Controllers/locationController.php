@@ -39,9 +39,14 @@ class locationController extends Controller
         
     }
 
-    public function delete($location_code)
-    { 
-        Location::destroy($location_code);
+    public function delete($location_code,Request $request)
+    {   
+        if ($request->force=="True"){
+            Location::find($location_code)->forceDelete();
+        }else{
+            Location::find($location_code)->delete();
+        }
+        
     }
 
     public function edit($location_code)

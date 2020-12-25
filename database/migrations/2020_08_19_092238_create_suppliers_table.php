@@ -20,6 +20,7 @@ class CreateSuppliersTable extends Migration
             $table->string('telephone_number')->nullable();
             $table->string('email')->nullable();
             $table->string('vat_register_no');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

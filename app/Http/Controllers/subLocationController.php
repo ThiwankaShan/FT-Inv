@@ -23,7 +23,7 @@ class subLocationController extends Controller
     public function index()
     {
         $subLocations = SubLocation::all();
-
+        Log::info($subLocations);
         return view('pages.subLocation', compact('subLocations'));
     }
 
@@ -53,7 +53,6 @@ class subLocationController extends Controller
         // Send Updated Sublocations array of Selected Location OF Item Form
         // sub location code , Name and The location code that new sub location Belongs. Send Updated sub locations array  of Selected location OF Item Form
         
-        Log::info($request);
         $validatedData = $request->validate([
             'location_code' => 'required',
             'subLocation_name' => 'required|unique:sub_locations',
@@ -133,11 +132,16 @@ class subLocationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete($subLocation,$location)
+    public function delete($subLocation,$location,Request $request)
     {
-        $subLocation = SubLocation::where('subLocation_code','=',$subLocation)->where('location_code','=',$location);
-        Log::info(json_encode($subLocation)); 
-        $subLocation->delete();
+        $subLocation = SubLocation::where('subLocation_code','=',$subLocation)->where('location_code','=',$location); 
+        
+        if ($request->force=="True"){
+            $subLocation->forceDelete();
+        }else{
+            $subLocation->delete();
+        }
+        
        
         return 1; 
     }

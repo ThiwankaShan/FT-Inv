@@ -18,8 +18,9 @@ class CreateSubLocationsTable extends Migration
             $table->integer('subLocation_code');
             $table->string('subLocation_name');
             $table->string('location_code');
-            $table->foreign('location_code')->references('location_code')->on('locations')->onUpdate('cascade');
+            $table->foreign('location_code')->references('location_code')->on('locations')->onUpdate('cascade')->onDelete('cascade');
             $table->primary(['subLocation_code','location_code']);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

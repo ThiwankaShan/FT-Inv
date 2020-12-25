@@ -28,11 +28,11 @@
 
       <tr id="{{ str_replace('/', '', $item->item_code) }}">
         <th scope="row">{{$item->item_code}}</th>
-        <td>{{$item->location_code}}</td>
+        <td>{{$item->locations->location_code ?? 'Deleted'}}</td>
         <td>{{$item->type}}</td>
         <td>{{$item->GRN_number}}</td>
         <td>{{$item->purchased_date}}</td>
-        <td>{{$item->GRN->supplier->supplier_name}}</td>
+        <td>{{$item->GRN->supplier->supplier_name ?? 'Deleted'}}</td>
         <td>{{$item->serial_number}}</td>
         <td>{{$item->model_number}}</td>
         <td>{{$item->brandName}}</td>

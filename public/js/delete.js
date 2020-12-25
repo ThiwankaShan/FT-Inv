@@ -3,32 +3,45 @@ $(document).on('click', 'a.delete-item', function(e) {
 
     var $this = $(this);
     var token=$this.attr('token');
-    swal({
+    Swal.fire({
         title: 'Are you sure?',
         text: 'This record and it`s details will be permanantly deleted!',
         icon: 'warning',
-        buttons: {
-            cancel: true,
-            confirm: true,
-          },
-        dangerMode: true,
-        cancelButtonClass: '#DD6B55',
-        confirmButtonColor: '#dc3545',
-        confirmButtonText: 'Delete!',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: `Cancel`,
+        denyButtonText: `Delete`,
+        confirmButtonText : 'Dispose',
+ 
     }).then(function(result){
-      if(result){
-
+      var force = 'False';
+      if(result.isDenied){
+        console.log('Delete button fired');
         $.ajax({
         method: $this.data('method'),
         url: $this.attr('href'),
         data: {
             _token:token,
+            force : 'True',
         },
         success: function (res) {
           location.reload(true);
         }
       });
 
+      }else if(result.isConfirmed){
+        console.log('Disposed button fired');
+        $.ajax({
+          method: $this.data('method'),
+          url: $this.attr('href'),
+          data: {
+              _token:token,
+              force : force,
+          },
+          success: function (res) {
+            location.reload(true);
+          }
+        });
       }
     })
   

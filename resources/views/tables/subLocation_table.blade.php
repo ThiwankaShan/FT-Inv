@@ -18,7 +18,7 @@
         <tr>
           <td scope="row">{{$subLocation->subLocation_code}}</td>
           <td>{{$subLocation->subLocation_name}}</td>
-          <td>{{$subLocation->locations->location_name}}</td>
+          <td>{{$subLocation->locations->location_name ?? 'Deleted'}}</td>
           <td class="">
             @if(auth()->user()->role == 'admin')
 
