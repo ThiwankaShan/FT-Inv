@@ -34,19 +34,6 @@ $(document).ready(function() {
 
     })
 
-
-
-    //Popup the error because loction not selected
-    $('#sublocation').click(function(){
-       
-        console.log($('#location').val());
-        if(!$('#location').val()){
-              $('#alertLocation').click();  
-        }
-    }) 
-
-
-
    //Send ajax request to Filter Controller and retrive  subCategories as a Object
     $('#category').change(function() {
       
@@ -75,17 +62,6 @@ $(document).ready(function() {
         });
 
     })
-
-     
-     //Popup the error because category not selected
-     $('#subCategory').click(function(){
-
-        console.log($('#category').val());
-        if(!$('#category').val()){
-              $('#alertCategory').click();  
-        }
-    }) 
-
     
 
     function fetchData(loactionCode = "", subLoactionCode = "", categoryCode = "", subCategoryCode = "",type = "", pid = "", column="location_code", order="ASC",purchased_start='',purchased_end='') {

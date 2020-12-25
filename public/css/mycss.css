@@ -58,7 +58,7 @@ body{
   .logout_btn:hover{
     background: #0B87A6;
   }
-  
+
   .sidebar{
     z-index: 1 !important;
     top: 0;
@@ -244,3 +244,4 @@ body{
     border-color:		rgb(255, 128, 128) !important; 
     border-width: 3px;
   }
+  
