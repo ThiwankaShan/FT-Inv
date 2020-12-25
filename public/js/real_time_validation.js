@@ -27,8 +27,6 @@ if(document.querySelector('#create_item_form')){
         return x.toString().replace(/B(?=(d{3})+(?!d))/g, ",");
     }
    
-    
-
     if(target.value.length >= 8){
         target.classList.add('validOne');
         document.getElementById('real_time_'+target.name).innerHTML = "Input is too long.Must be less than 8 characters";
@@ -106,13 +104,13 @@ $('#serial_number').click(function(){
        if(target.value.length >= 8){
         
           target.classList.add('validOne');
-          document.getElementById('serial_er').innerHTML = "Input is too long.Must be less than 8 characters";
-          document.getElementById('serial_er').style.display = 'block';
+          document.getElementById('real_time_serial_number').innerHTML = "Input is too long.Must be less than 8 characters";
+          document.getElementById('real_time_serial_number').style.display = 'block';
          
        }else{
         target.classList.remove('validOne');
-        document.getElementById('serial_er').innerHTML = '';
-        document.getElementById('serial_er').style.display = 'none';
+        document.getElementById('real_time_serial_number').innerHTML = '';
+        document.getElementById('real_time_serial_number').style.display = 'none';
       
        }
 

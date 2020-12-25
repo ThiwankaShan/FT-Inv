@@ -36,9 +36,9 @@
         <td>{{$item->serial_number}}</td>
         <td>{{$item->model_number}}</td>
         <td>{{$item->brandName}}</td>
-        <td>{{$item->gross_price}}</td>
-        <td>{{$item->tax}}</td>
-        <td>{{$item->net_price}}</td>
+        <td class="text-right">{{number_format($item->gross_price,2)}}</td>
+        <td class="text-right">{{number_format($item->tax,2)}}</td>
+        <td class="text-right">{{number_format($item->net_price,2)}}</td>
 
         <td class="d-flex flex-row">
           @if(auth()->user()->role == 'admin')

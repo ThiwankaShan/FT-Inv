@@ -60,6 +60,48 @@
                 </div>
             </div>
 
+
+            <div class="form-group row ">
+                <div class="col-9 row">
+                    <div class="col-sm-3">
+                        <label for="item-name ">Brand Name</label>
+                    </div>
+                    <div class="col-sm-9 mb-1 ">
+                        <input type="text" name="brandName" id="brandName" class="form-control {{ $errors->has('brandName') ? 'has_error' : ''}}" value="{{ old('brandName') ?? $item->brandName}}">
+                        <span id="real_time_brandName" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
+                        @error('brandName')
+                        <span class="" role="alert">
+                            <small style="color:red"><strong>{{ $message }}</strong></small>
+                        </span>
+
+                        @enderror
+                        
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group row ">
+                <div class="col-9 row">
+                    <div class="col-sm-3">
+                        <label for="item-name ">Model Number</label>
+                    </div>
+                    <div class="col-sm-9 mb-1 ">
+                        <input type="text" name="model_number" id="model_number" class="form-control {{ $errors->has('model_number') ? 'has_error' : ''}}" value="{{ old('model_number') ?? $item->model_number}}">
+                        <span id="real_time_model_number" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
+                        @error('model_number')
+                        <span class="" role="alert">
+                            <small style="color:red"><strong>{{ $message }}</strong></small>
+                        </span>
+
+                        @enderror
+                       
+                    </div>
+                </div>
+
+            </div>
+
+
             <div class="form-group row">
                 <div class="col-9 row">
                     <div class="col-sm-3">
@@ -67,17 +109,15 @@
                     </div>
                     <div class="col-sm-9 mb-1">
                         <input type="text" name="tax" id="tax" class="form-control" value="{{$item->tax}}">
-                        <span id="real_time_Vat" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
+                        <span id="real_time_tax" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
 
-                        @error('Vat')
+                        @error('tax')
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
                         </span>
 
                         @enderror
-                        <span class="" role="alert">
-                            <small style="color:red" id="vatError"></small>
-                        </span>
+                       
                     </div>
                 </div>
 
@@ -98,9 +138,7 @@
                         </span>
 
                         @enderror
-                        <span class="" role="alert">
-                            <small style="color:red" id="procumentIdError"></small>
-                        </span>
+                        
                     </div>
                 </div>
 
@@ -113,17 +151,15 @@
                     </div>
                     <div class="col-sm-9 mb-1">
                         <input type="text" name="gross_price" id="gross_price" class="form-control" value="{{$item->gross_price}}">
-                        <span id="real_time_Rate" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
+                        <span id="real_time_gross_price" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
 
-                        @error('Rate')
+                        @error('gross_price')
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
                         </span>
 
                         @enderror
-                        <span class="" role="alert">
-                            <small style="color:red" id="rateError"></small>
-                        </span>
+                        
                     </div>
                 </div>
 
@@ -142,9 +178,7 @@
                         </span>
 
                         @enderror
-                        <span class="" role="alert">
-                            <small style="color:red" id="purchased_dateError"></small>
-                        </span>
+                       
                     </div>
                 </div>
 
@@ -157,16 +191,14 @@
                     </div>
                     <div class="col-sm-9 mb-1">
                         <input type="text" name="serial_number" id="serial_number" class="form-control" value="{{$item->serial_number}}">
-                        <span id="serial_er" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
+                        <span id="real_time_serial_number" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                         @error('serial_number')
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
                         </span>
 
                         @enderror
-                        <span class="" role="alert">
-                            <small style="color:red" id="serial_numberError"></small>
-                        </span>
+                        
                     </div>
                 </div>
 
