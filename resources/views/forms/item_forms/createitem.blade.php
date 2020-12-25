@@ -201,9 +201,7 @@
                         </span>
 
                         @enderror
-                        <span class="" role="alert">
-                            <small style="color:red" id="vatError"></small>
-                        </span>
+                        
                     </div>
                 </div>
 
@@ -223,9 +221,7 @@
                         </span>
 
                         @enderror
-                        <span class="" role="alert">
-                            <small style="color:red" id="vatError"></small>
-                        </span>
+                       
                     </div>
                 </div>
 
@@ -237,7 +233,7 @@
                         <label for="item-name ">Tax</label>
                     </div>
                     <div class="col-sm-9 mb-1 ">
-                        <input type="text" name="tax" id="tax" class="form-control {{ $errors->has('tax') ? 'has_error' : ''}}" value="{{ old('Vat')}}">
+                        <input type="text" name="tax" id="tax" class="form-control {{ $errors->has('tax') ? 'has_error' : ''}}" value="{{ old('tax')}}">
                         <span id="real_time_tax" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                         @error('tax')
                         <span class="" role="alert">
@@ -245,9 +241,7 @@
                         </span>
 
                         @enderror
-                        <span class="" role="alert">
-                            <small style="color:red" id="vatError"></small>
-                        </span>
+                       
                     </div>
                 </div>
 
@@ -267,9 +261,7 @@
                         </span>
 
                         @enderror
-                        <span class="" role="alert">
-                            <small style="color:red" id="procumentIdError"></small>
-                        </span>
+                        
                     </div>
                 </div>
 
@@ -290,9 +282,7 @@
                         </span>
 
                         @enderror
-                        <span class="" role="alert">
-                            <small style="color:red" id="rateError"></small>
-                        </span>
+                       
                     </div>
                 </div>
 

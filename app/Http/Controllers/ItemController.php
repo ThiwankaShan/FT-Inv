@@ -144,8 +144,8 @@ class ItemController extends Controller
         
         for ($num = $i + 1; $num < $data['count'] + $i + 1; $num++) {
             
-            $mainItemNumber = sprintf('%03d', $num);
-            $main_itemCode = 'FT' . '/' . $data['location_code'] . '/' . $data['subLocation_code'] . '/' . $data['category_code'] . '/' . $data['subCategory_code'] . '/' . $mainItemNumber;   
+            $mainItemNumber = str_pad($num,'3',0,STR_PAD_LEFT);
+            $main_itemCode = 'FT' . '/' . $data['location_code'] . '/' . str_pad( $data['subLocation_code'] ,'3',0, STR_PAD_LEFT ). '/' . str_pad($data['category_code'], '3',0, STR_PAD_LEFT) . '/' . str_pad($data['subCategory_code'], '3', 0 ,STR_PAD_LEFT)  . '/' . $mainItemNumber;   
             
             for ($j = 1; $j <= $data['subItem']; $j++) {
                 
