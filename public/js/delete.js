@@ -4,8 +4,8 @@ $(document).on('click', 'a.delete-item', function(e) {
     var $this = $(this);
     var token=$this.attr('token');
     Swal.fire({
-        title: 'Are you sure?',
-        text: 'This record and it`s details will be permanantly deleted!',
+        title: 'Delete will permanantly delete the record and every dependent record',
+        text: 'Disposed record can be restored later',
         icon: 'warning',
         showDenyButton: true,
         showCancelButton: true,
