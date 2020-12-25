@@ -104,20 +104,22 @@ class SubCategoryController extends Controller
      */
     public function update(Request $request)
     {
-        $validatedata = $request->validate([
-            'category_code' =>'required',
-                                Rule::unique('category_code','subCategory_code')->ignore($request->category_code)->where(function ($query) {
-                                    $query->where('subCategory_code', $request->subCategory_code);
-                                }),
-                    
-            'subCategory_name' => 'required|unique:sub_categories,subCategory_name,'.$request->subCategory_name.',subCategory_name',
-            'subCategory_code' => 'required',              
-                                Rule::unique('subCategory_code','category_code')->ignore($request->subCategory_code)->where(function ($query) {
-                                    $query->where('category_code', $request->category_code);
-                                }),
-         ]);
-
-   
+        if($request->SubCategory != $request->subCategory_code || $request->Category != $request->category_code){
+            $validatedata = $request->validate([
+                'category_code' =>'required|unique:sub_categories,category_code,NULL,category_code,subCategory_code,'.$request->subCategory_code,    
+                'subCategory_name' => 'required|unique:sub_categories,subCategory_name,'.$request->subCategory_name.',subCategory_name',
+                'subCategory_code' => 'required|unique:sub_categories,subCategory_code,NULL,subCategory_code,category_code,'.$request->category_code,              
+                                   
+             ]);
+        }else{
+            $validatedata = $request->validate([
+                'category_code' =>'required',    
+                'subCategory_name' => 'required|unique:sub_categories,subCategory_name,'.$request->subCategory_name.',subCategory_name',
+                'subCategory_code' => 'required',              
+                                   
+             ]);
+        }
+        
         $subcategory = SubCategory::where('subCategory_code','=',$request->SubCategory)->where('category_code','=',$request->Category)->first();
         $subcategory->update($validatedata);
        

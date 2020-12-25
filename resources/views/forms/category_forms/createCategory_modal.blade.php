@@ -10,7 +10,7 @@
 
                   <div class="alert alert-success text-center" role="alert" style="display:none" id="valid_category">
                         <strong>New Category Created Successfully!!</strong>
-                 </div>
+                   </div>
 
                 <div class="alert alert-danger  " id="invalid_category" style="display:none">
                     <ul ></ul>

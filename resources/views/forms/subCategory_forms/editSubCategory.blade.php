@@ -8,8 +8,8 @@
 <hr>
 
 @if (!empty($status))
-    <div class="alert alert-success">
-        {{ $status }}
+    <div class="alert alert-success text-center">
+        <strong>{{ $status }}</strong> 
     </div>
 @endif
 
@@ -31,11 +31,11 @@
                 <div class="col-sm-10">
                 <select class="form-control " id="category" name="category_code">
                     @foreach($categories as $category)
-                         <option 
-                           @if($subcategory->category_code == $category->category_code)
-                               selected="selected"  @endif 
-                          
-                              value="{{$category->category_code}}">{{$category->category_name}} 
+                         <option  value="{{$category->category_code}}" 
+                             
+                            {{ $subcategory->category_code == $category->category_code ? 'selected' : '' }}
+                            {{ $category->category_code == old('category_code') ? 'selected' : '' }}> {{$category->category_name}} 
+                         
                           </option>
                     @endforeach
                 </select>
