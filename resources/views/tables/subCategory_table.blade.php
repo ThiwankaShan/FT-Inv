@@ -16,7 +16,7 @@
       <tbody id="location_data">
         @foreach($subCategories as $subCategory)
         <tr id="{{$subCategory->subCategory_code}}-{{$subCategory->category_code}}">
-          <td scope="row">{{$subCategory->subCategory_code}}</td>
+          <td scope="row">{{ str_pad( $subCategory->subCategory_code,'3',0, STR_PAD_LEFT )}}</td>
           <td>{{$subCategory->subCategory_name}}</td>
           <td>{{$subCategory->category->category_name ?? 'Deleted'}}</td>
           <td class="">

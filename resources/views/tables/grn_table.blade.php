@@ -18,7 +18,7 @@
       <tbody id="location_data">
         @foreach($grns as $grn)
         <tr id="{{ $grn->GRN_number }}">
-          <td scope="row">{{$grn->GRN_number}}</td>
+          <td scope="row">{{ str_pad( $grn->GRN_number,'3',0, STR_PAD_LEFT )}}</td>
           <td>{{$grn->GRN_date}}</td>
           <td>{{$grn->invoice_number}}</td>
           <td>{{$grn->invoice_date}}</td>

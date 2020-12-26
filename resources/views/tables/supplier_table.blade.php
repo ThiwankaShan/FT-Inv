@@ -19,7 +19,7 @@
       <tbody id="location_data">
         @foreach($suppliers as $supplier)
         <tr id="{{$supplier->supplier_code}}">
-          <td scope="row">{{$supplier->supplier_code}}</td>
+          <td scope="row">{{ str_pad( $supplier->supplier_code,'3',0, STR_PAD_LEFT )}}</td>
           <td>{{$supplier->supplier_name}}</td>
           <td>{{$supplier->supplier_address}}</td>
           <td>{{$supplier->telephone_number}}</td>
