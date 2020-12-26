@@ -8,6 +8,7 @@ use App\SubCategory;
 use Validator;
 use URL;
 use Illuminate\Validation\Rule;
+use Log;
 class SubCategoryController extends Controller
 {
     public function __construct()
@@ -137,9 +138,13 @@ class SubCategoryController extends Controller
      */
     public function destroy($subCategory, $category,Request $request)
     {
+        if ($category == -1){
+            return ;
+        }
         $subcategory = SubCategory::where('subCategory_code','=',$subCategory)->where('category_code','=',$category)->first();
         if ($request->force=="True"){
-            $subcategory->froceDelete();
+            Log::info('came to force');
+            $subcategory->forceDelete();
         }else{
             $subcategory->delete();
         }
