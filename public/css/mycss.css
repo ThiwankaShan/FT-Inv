@@ -64,77 +64,68 @@ body{
     top: 0;
     background: #2f323a;
     margin-top: 60px;
-    padding-top: 30px;
+    padding-top: 20px;
     position: fixed;
     left: 0;
-    width: 220px;
-    height: calc(100% - 9%);
-    transition: 0.5s;
+    width: auto;
+    height: 100%;
     transition-property: left;
     overflow-y: auto;
   }
-  
+
   .sidebar a{
     color: #fff;
     display: block;
     width: 100%;
     line-height: 60px;
     text-decoration: none;
-    padding-left: 40px;
+    font-size: 36 !important;
+    padding-left: 15px;
+    padding-right: 15px;
     box-sizing: border-box;
-    transition: 0.5s;
-    transition-property: background;
   }
   
+  .sidebar span{
+    transition-duration: 0.9s;
+    transition: ease;
+    margin-right: 50px;
+    margin-left: 5px;
+  }
+
   .sidebar a:hover{
     background: #19B3D3;
   }
   
+  .dropdown .show{
+    width: 210px;
+    padding-left: 10px ;
+    margin: 0px;
+  }
   .sidebar i{
-    padding-right: 10px;
+    padding-right: 9px;
+    padding-left: 4px;
   }
   
+  .side-dropdown{
+    background-color:#22242A !important;
+    width: 100%;
+  }
   
   label #sidebar_btn:hover{
     color: #19B3D3;
-  }
-  
-  #check:checked ~ .sidebar{
-    left: -185px;
-  }
-  
-  #check:checked ~ .sidebar a span{
-    display: none;
-  }
-  
-  #check:checked ~ .sidebar a{
-    font-size: 20px;
-    margin-left: 165px;
-    width: 100%;
   }
   
   .content{
     width: (100% - 250px);
     margin-top: 60px;
     padding: 20px;
-    margin-left:10px;
+    margin-left:55px;
     background-position: center;
     background-size: cover;
     height: 100vh;
     transition: 0.5s;
   }
   
-  #check:checked ~ .content{
-    margin-left: 60px;
-  }
-  
-  #check:checked ~ .sidebar .profile_info{
-    display: none;
-  }
-  
-  #check{
-    display: none;
-  }
   
   .mobile_nav{
     display: none;

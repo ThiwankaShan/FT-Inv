@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-md navbar-dark shadow-sm fixed-top" m-0 p-0 style="height:60px;">
     <div class="container-fluid m-0 p-0">
 
-        <button class="navbar-toggler mr-5 d-block" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+        <button class="navbar-toggler mr-5 d-block" type="button" 
+        data-toggle="collapse" data-target="#side_bar" aria-controls="navbarSupportedContent" aria-expanded="false"
             aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
         </button>

@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
     //Send ajax request to Filter Controller and retreving subLocations Object
     var _token = $('input[name="_token"]').val();
