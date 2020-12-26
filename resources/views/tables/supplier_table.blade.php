@@ -4,7 +4,7 @@
   </div>
 
   <div class="row mt-4">
-    <table class="table" id="supplierTable">
+    <table class="table table-striped table-bordered table-hover" id="supplierTable">
       <thead>
         <tr>
         <th scope="col">Supplier Code</th>
