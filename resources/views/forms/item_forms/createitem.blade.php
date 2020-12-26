@@ -31,7 +31,7 @@
                             <small style="color:red"><strong>{{ $message }}</strong></small>
                         </span>
                         @enderror
-                    </div>
+                    </div> 
                 </div>
                 <div class="col-3">
                     <a class="btn form-control button-style" href="" id="buttonCreateLocation" data-toggle="modal"  data-target="#Add_new_Location" class="button">Add New Location</a>
@@ -44,14 +44,14 @@
                         <label for="item-name ">Sub Location</label>
                     </div>
                     <div class="col-sm-9 mb-1">
-                        <select class="form-control {{ $errors->has('subLocation') ? 'has_error' : ''}}" id="sublocation" name="subLocation_code">
+                        <select class="form-control {{ $errors->has('subLocation_code') ? 'has_error' : ''}}" id="sublocation" name="subLocation_code">
                             <option value="">Select Sub Location</option>
                             @foreach($subLocations as $subLocation)
                             <option value="{{$subLocation->subLocation_code}}" {{ $subLocation->subLocation_code === old('subLocation_code') ? 'selected' : ''}}>{{$subLocation->subLocation_name}}</option>
                             @endforeach
                         </select>
 
-                        @error('subLocation')
+                        @error('subLocation_code')
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
                         </span>
