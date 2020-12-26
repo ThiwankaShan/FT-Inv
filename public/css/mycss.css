@@ -36,6 +36,10 @@ body{
     font-weight: 900;
   }
   
+  .cursor-pointer{
+    cursor: default ;
+  }
+
   .left_area span{
     color: #19B3D3;
   }
@@ -73,7 +77,9 @@ body{
     overflow-y: auto;
   }
 
+
   .sidebar a{
+    cursor: default ;
     color: #fff;
     display: block;
     width: 100%;
@@ -88,7 +94,7 @@ body{
   .sidebar span{
     transition-duration: 0.9s;
     transition: ease;
-    margin-right: 50px;
+    margin-right: 70px;
     margin-left: 5px;
   }
 
