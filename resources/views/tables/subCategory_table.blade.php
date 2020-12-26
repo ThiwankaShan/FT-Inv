@@ -15,6 +15,7 @@
       </thead>
       <tbody id="location_data">
         @foreach($subCategories as $subCategory)
+        @if($subCategory->category_code != -1)
         <tr>
           <td scope="row">{{$subCategory->subCategory_code}}</td>
           <td>{{$subCategory->subCategory_name}}</td>
@@ -31,6 +32,7 @@
             @endif
           </td>
         </tr>
+        @endif
         @endforeach
       </tbody>
     </table>
