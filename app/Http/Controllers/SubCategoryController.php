@@ -122,11 +122,12 @@ class SubCategoryController extends Controller
         
         $subcategory = SubCategory::where('subCategory_code','=',$request->SubCategory)->where('category_code','=',$request->Category)->first();
         $subcategory->update($validatedata);
+
+        session()->flash('updated_crud_row',$request->subCategory_code.'-'.$request->category_code);
+        $subCategories = SubCategory::all();
        
-        $categories = Category::all();
-        $subcategory = SubCategory::where('subCategory_code','=',$validatedata['subCategory_code'])->where('category_code','=',$validatedata['category_code'])->first();
       
-        return view('forms.subCategory_forms.editSubCategory',compact('categories','subcategory'))->with('status',"Sub Category updated successfully!");
+        return view('pages.subCategory',compact('subCategories'));
     }
 
     /**

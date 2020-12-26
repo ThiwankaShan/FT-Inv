@@ -15,7 +15,7 @@
       </thead>
       <tbody id="location_data">
         @foreach($subLocations as $subLocation)
-        <tr>
+        <tr id="{{ $subLocation->subLocation_code}}-{{$subLocation->location_code}}">
           <td scope="row">{{$subLocation->subLocation_code}}</td>
           <td>{{$subLocation->subLocation_name}}</td>
           <td>{{$subLocation->locations->location_name ?? 'Deleted'}}</td>
@@ -36,3 +36,8 @@
     </table>
   </div>
 </div>
+
+@if(Session::has('updated_crud_row'))
+<input type="hidden" name="" id="highlighted_row_crud" value="{{ Session::get('updated_crud_row') }}">
+
+@endif

@@ -17,7 +17,7 @@
       </thead>
       <tbody id="location_data">
         @foreach($grns as $grn)
-        <tr>
+        <tr id="{{ $grn->GRN_number }}">
           <td scope="row">{{$grn->GRN_number}}</td>
           <td>{{$grn->GRN_date}}</td>
           <td>{{$grn->invoice_number}}</td>
@@ -39,3 +39,8 @@
     </table>
   </div>
 </div>
+
+@if(Session::has('updated_crud_row'))
+<input type="hidden" name="" id="highlighted_row_crud" value="{{ Session::get('updated_crud_row') }}">
+
+@endif

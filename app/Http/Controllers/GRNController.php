@@ -143,10 +143,10 @@ class GRNController extends Controller
          $grn_details = Grn::find($id);
          $grn_details -> update($validatedata);
 
-         $grn = Grn::find($validatedata['GRN_number']);
-         $Suppliers = Supplier::all();
-
-         return view('forms.grn_forms.editGRN',compact('grn','Suppliers'))->with('status',"Grn Details Updated!");
+         session()->flash('updated_crud_row',$id);
+         $grns = Grn::all();
+        
+         return view('pages.GRN',compact('grns'));
     }
 
     /**

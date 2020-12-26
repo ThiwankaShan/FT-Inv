@@ -12,13 +12,14 @@
         <h5 class="text-center form-card-header-custom"><strong class="text-light">Add New Supplier</strong></h5>
     </div>
     <div class="card-body">
-        <form action="{{route('supplier.store')}}" method="post">
+        <form action="{{route('supplier.store')}}" method="post" id="supplier_form">
             @csrf
 
             <div class="form-group row">
                 <label for="SupplierCode" class="col-sm-2 col-form-label">Supplier Code</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control {{ $errors->has('supplier_code') ? 'has_error' : '' }}" id="supplier_code" placeholder="Enter Supplier Code" name="supplier_code" value="{{ old('supplier_code') }}">
+                    <span id="live_supplier_code" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                     @error('supplier_code')
                     <span class="" role="alert">
                         <small style="color:red"><strong>{{ $message }}</strong></small>
@@ -78,7 +79,8 @@
             <div class="form-group row">
                 <label for="vat" class="col-sm-2 col-form-label">VAT Registration No.</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control {{ $errors->has('vat_register_no') ? 'has_error' : '' }}" id="vat_register_no" placeholder="Enter Supplier Address" name="vat_register_no" value="{{ old('vat_registration_no') }}"> 
+                    <input type="text" class="form-control {{ $errors->has('vat_register_no') ? 'has_error' : '' }}" id="vat_register_no" placeholder="Enter Supplier Address" name="vat_register_no" value="{{ old('vat_register_no') }}"> 
+                    <span id="live_vat_register_no" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                     @error('vat_register_no')
                     <span class="" role="alert">
                         <small style="color:red"><strong>{{ $message }}</strong></small>
@@ -96,11 +98,12 @@
             </div>
             @endif
             <div class="text-center">
-                <button class="btn form-tab-custom bg-color-custom text-light form-card-header-custom " type="submit">Save Supplier Details</button>
+                <button class="btn form-tab-custom bg-color-custom text-light form-card-header-custom " id="saveSupplier" type="submit">Save Supplier Details</button>
             </div>
 
         </form>
     </div>
 </div>
 
+<script src="{{ asset('js/real_time_validation.js') }}"> </script>
 @endsection

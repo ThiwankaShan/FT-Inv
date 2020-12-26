@@ -112,9 +112,10 @@ class CategoryController extends Controller
         ]);
 
         Category::find($category)->update($validateData);
-        $category = Category::find($validateData['category_code']);
+        $categories = Category::all();
+        session()->flash('updated_crud_row',$request->category_code);
 
-        return view('forms.category_forms.editCategory',compact('category'))->with('status','Category edited sucessfully');
+        return view('pages.category',compact('categories'));
     }
 
     /**

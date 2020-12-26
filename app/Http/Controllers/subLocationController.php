@@ -136,10 +136,10 @@ class subLocationController extends Controller
         $subLocation = SubLocation::where('subLocation_code','=',$request->subLocation)->where('location_code','=',$request->location)->first();
       
         $subLocation->update($validatedata);
-        $subLocation = SubLocation::find($validatedata['subLocation_code']);
-        $locations = Location::all();
+        $subLocations = SubLocation::all();
+        session()->flash('updated_crud_row',$request->subLocation_code.'-'.$request->location_code);
         
-        return view('forms.subLocation_forms.editSubLocation',compact('subLocation','locations'))->with('status','Sub Location edited sucessfully');
+        return view('pages.subLocation',compact('subLocations'));
     }
 
     /**

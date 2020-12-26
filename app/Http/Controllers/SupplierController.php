@@ -38,7 +38,10 @@ class SupplierController extends Controller
         $supplier = Supplier::find($request->supplier_code);
         $supplier->update($validatedata);
 
-        return view('forms.supplier_forms.editSupplier',compact('supplier'))->with('status','supplier details updated sucessfully');
+        $suppliers = Supplier::all();
+        session()->flash('updated_crud_row',$request->supplier_code);
+
+        return view('pages.supplier',compact('suppliers'));
     }
 
     public function delete($supplier,Request $request)

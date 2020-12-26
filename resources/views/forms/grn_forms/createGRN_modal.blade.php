@@ -39,7 +39,7 @@
                     <div class="form-group form-custom">
                         <label for="invoice_no">Invoice No.</label>
                         <input type="text" class="form-control" id="invoice_number" name="invoice_number" placeholder="Enter Invoice Number">
-
+                        <span id="live_invoice_number" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                         <span class="" role="alert" style="display:none; margin-bottom:5px" id="invoice_error">
                             <small style="color:red"><strong id="invoice_msg"></strong></small>
                         </span>
@@ -65,8 +65,8 @@
                         </div>
 
 
-                        <div class="text-center">
-                            <button type="button" class="btn form-card-header-custom text-light" id="save_GRN">Create</button>
+                        <div class="text-center row">
+                            <button type="button" class="btn form-card-header-custom text-light mr-2" id="save_GRN">Create</button>
                             <button class="btn btn-secondary cancel_modal text-light  " type="button" >Cancel</button>
                         </div>
 
