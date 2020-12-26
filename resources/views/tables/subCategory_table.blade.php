@@ -4,7 +4,7 @@
   </div>
 
   <div class="row mt-4">
-    <table class="table" id="subLocationTable">
+    <table class="table table-striped table-bordered table-hover" id="subLocationTable">
       <thead>
         <tr>
         <th scope="col">Sub Category Code</th>
@@ -15,14 +15,16 @@
       </thead>
       <tbody id="location_data">
         @foreach($subCategories as $subCategory)
-        <tr>
-          <td scope="row">{{$subCategory->subCategory_code}}</td>
+        @if($subCategory->category_code != -1)
+        
+        <tr id="{{$subCategory->subCategory_code}}-{{$subCategory->category_code}}">
+          <td scope="row">{{ str_pad( $subCategory->subCategory_code,'3',0, STR_PAD_LEFT )}}</td>
           <td>{{$subCategory->subCategory_name}}</td>
-          <td>{{$subCategory->category->category_name}}</td>
+          <td>{{$subCategory->category->category_name ?? 'Deleted'}}</td>
           <td class="">
             @if(auth()->user()->role == 'admin')
 
-            <a class="btn btn-primary text-light highlight_row" href="/subCategory/edit/{{ $subCategory->subCategory_code }}/{{$subCategory->category->category_code }}">Edit</a>
+            <a class="btn btn-primary text-light highlight_row" href="/subCategory/edit/{{ $subCategory->subCategory_code }}/{{$subCategory->category_code }}">Edit</a>
             <a class="btn btn-danger delete-item text-light"  href="/subCategory/delete/{{ $subCategory->subCategory_code }}/{{ $subCategory->category_code }}" data-method="POST" token='{!! csrf_token() !!}'>Delete</a>
            
 
@@ -31,8 +33,14 @@
             @endif
           </td>
         </tr>
+        @endif
         @endforeach
       </tbody>
     </table>
   </div>
 </div>
+
+@if(Session::has('updated_crud_row'))
+<input type="hidden" name="" id="highlighted_row_crud" value="{{ Session::get('updated_crud_row') }}">
+
+@endif

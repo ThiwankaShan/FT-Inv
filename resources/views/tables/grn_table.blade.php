@@ -4,7 +4,7 @@
   </div>
 
   <div class="row mt-4">
-    <table class="table" id="subLocationTable">
+    <table class="table table-striped table-bordered table-hover" id="subLocationTable">
       <thead>
         <tr>
           <th scope="col">GRN Number</th>
@@ -17,8 +17,8 @@
       </thead>
       <tbody id="location_data">
         @foreach($grns as $grn)
-        <tr>
-          <td scope="row">{{$grn->GRN_number}}</td>
+        <tr id="{{ $grn->GRN_number }}">
+          <td scope="row">{{ str_pad( $grn->GRN_number,'3',0, STR_PAD_LEFT )}}</td>
           <td>{{$grn->GRN_date}}</td>
           <td>{{$grn->invoice_number}}</td>
           <td>{{$grn->invoice_date}}</td>
@@ -39,3 +39,8 @@
     </table>
   </div>
 </div>
+
+@if(Session::has('updated_crud_row'))
+<input type="hidden" name="" id="highlighted_row_crud" value="{{ Session::get('updated_crud_row') }}">
+
+@endif

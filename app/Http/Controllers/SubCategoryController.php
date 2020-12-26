@@ -8,6 +8,7 @@ use App\SubCategory;
 use Validator;
 use URL;
 use Illuminate\Validation\Rule;
+use Log;
 class SubCategoryController extends Controller
 {
     public function __construct()
@@ -63,7 +64,7 @@ class SubCategoryController extends Controller
 
         if(URL::previous() == URL::route('subcategory.create')){
             $categories = Category::all();
-            return view('forms.subCategory_forms.createSubCategory',compact('categories'))->with('status','Sub LOcation Created Successfully!');   
+            return back()->with('status','Sub LOcation Created Successfully!');   
         }
 
         $subCategories = SubCategory::where('category_code',$request->category_code_form)->get();
@@ -104,27 +105,30 @@ class SubCategoryController extends Controller
      */
     public function update(Request $request)
     {
-        $validatedata = $request->validate([
-            'category_code' =>'required',
-                                Rule::unique('category_code','subCategory_code')->ignore($request->category_code)->where(function ($query) {
-                                    $query->where('subCategory_code', $request->subCategory_code);
-                                }),
-                    
-            'subCategory_name' => 'required|unique:sub_categories,subCategory_name,'.$request->subCategory_name.',subCategory_name',
-            'subCategory_code' => 'required',              
-                                Rule::unique('subCategory_code','category_code')->ignore($request->subCategory_code)->where(function ($query) {
-                                    $query->where('category_code', $request->category_code);
-                                }),
-         ]);
-
-   
+        if($request->SubCategory != $request->subCategory_code || $request->Category != $request->category_code){
+            $validatedata = $request->validate([
+                'category_code' =>'required|unique:sub_categories,category_code,NULL,category_code,subCategory_code,'.$request->subCategory_code,    
+                'subCategory_name' => 'required|unique:sub_categories,subCategory_name,'.$request->subCategory_name.',subCategory_name',
+                'subCategory_code' => 'required|unique:sub_categories,subCategory_code,NULL,subCategory_code,category_code,'.$request->category_code,              
+                                   
+             ]);
+        }else{
+            $validatedata = $request->validate([
+                'category_code' =>'required',    
+                'subCategory_name' => 'required|unique:sub_categories,subCategory_name,'.$request->subCategory_name.',subCategory_name',
+                'subCategory_code' => 'required',              
+                                   
+             ]);
+        }
+        
         $subcategory = SubCategory::where('subCategory_code','=',$request->SubCategory)->where('category_code','=',$request->Category)->first();
         $subcategory->update($validatedata);
+
+        session()->flash('updated_crud_row',$request->subCategory_code.'-'.$request->category_code);
+        $subCategories = SubCategory::all();
        
-        $categories = Category::all();
-        $subcategory = SubCategory::where('subCategory_code','=',$validatedata['subCategory_code'])->where('category_code','=',$validatedata['category_code'])->first();
       
-        return view('forms.subCategory_forms.editSubCategory',compact('categories','subcategory'))->with('status',"Sub Category updated successfully!");
+        return view('pages.subCategory',compact('subCategories'));
     }
 
     /**
@@ -133,9 +137,18 @@ class SubCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($subCategory, $category)
+    public function destroy($subCategory, $category,Request $request)
     {
+        if ($category == -1){
+            return ;
+        }
         $subcategory = SubCategory::where('subCategory_code','=',$subCategory)->where('category_code','=',$category)->first();
-        $subcategory->delete();
+        if ($request->force=="True"){
+            Log::info('came to force');
+            $subcategory->forceDelete();
+        }else{
+            $subcategory->delete();
+        }
+        
     }
 }

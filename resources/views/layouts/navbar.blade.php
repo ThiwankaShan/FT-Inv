@@ -1,26 +1,15 @@
-<nav class="navbar navbar-expand-md navbar-dark shadow-sm fixed-top" style="height:70px;">
-    <div class="container-fluid">
-        
-        <button class="navbar-toggler ml-2" type="button" id="side_bar" aria-controls="navbarSupportedContent"
-            aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+<nav class="navbar navbar-expand-md navbar-dark shadow-sm fixed-top" m-0 p-0 style="height:60px;">
+    <div class="container-fluid m-0 p-0">
 
-        <button class="navbar-toggler mr-5 d-block" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+        <button class="navbar-toggler mr-5 d-block" type="button" 
+        data-toggle="collapse" data-target="#side_bar" aria-controls="navbarSupportedContent" aria-expanded="false"
             aria-label="{{ __('Toggle navigation') }}">
-            <span class="navbar-toggler-icon"></span>
+            <i class="fa fa-bars" id="sideBar-icon"></i>
         </button>
 
-        <a class="navbar-brand text-center " href="{{ url('/') }}">
-            <strong class="text-light ">FT-IMS</strong>
-        </a>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Left Side Of Navbar -->
-            <ul class="navbar-nav mr-auto">
-
-            </ul>
+        <h4><a class="text-center nounderline" href="{{ url('/') }}">
+            <strong class="text-light ">Inventory Managment System</strong>
+        </a></h4>
 
             <div class=" mr-5">
 
@@ -59,5 +48,4 @@
                     @endguest
                 </ul>
             </div>
-        </div>
 </nav>

@@ -8,6 +8,7 @@ use App\Location;
 
 use Illuminate\Http\Request;
 
+
 // use Illuminate\Support\Facades\Validator;
 use App\Category;
 use App\Items;
@@ -39,19 +40,27 @@ class locationController extends Controller
         
     }
 
-    public function delete($location_code)
-    { 
-        Location::destroy($location_code);
+    public function delete($location_code,Request $request)
+    {   
+        if ($request->force=="True"){
+            Location::find($location_code)->forceDelete();
+        }else{
+            Location::find($location_code)->delete();
+        }
+        
     }
 
-    public function edit($location_code)
+    public function edit(Request $request,$location_code)
     { 
+
         $location = Location::find($location_code);
         return view('forms.location_forms.editLocation',compact('location'));
     }
 
     public function update(Request $request,$location)
     { 
+
+
         $validatedata = $request->validate([
             'location_code' => 'required|string|unique:locations,location_code,'.$request->location_code.',location_code',
             'location_name' => 'required|string|unique:locations,location_name,'.$request->location_name.',location_name',
@@ -59,9 +68,10 @@ class locationController extends Controller
         ]);
 
         Location::find($location)->update($validatedata);
-        $location = Location::find($validatedata['location_code']);
+         $locations = Location::all();
+        session()->flash('updated_crud_row',$request->location_code);
 
-        return view('forms.location_forms.editLocation',compact('location'))->with('status','Location edited sucessfully');
+        return view('pages.location',compact('locations'));
     }
    
     public function storeLocation(Request $request)

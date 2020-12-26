@@ -8,8 +8,8 @@
 <hr>
 
 @if (session('status'))
-    <div class="alert alert-success">
-        {{ session('status') }}
+    <div class="alert alert-success text-center">
+      <strong>  {{ session('status') }}</strong>
     </div>
 @endif
 
@@ -38,6 +38,7 @@
                 <label for="category_code" class="col-sm-2 col-form-label">Category Code</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control {{ $errors->has('category_code') ? 'has_error' : '' }}" id="category_code" placeholder="Enter Category Code" name="category_code" value="{{ old('category_code') }}">
+                    <span id="live_category_code" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                     @error('category_code')
                     <span class="" role="alert">
                         <small style="color:red"><strong>{{ $message }}</strong></small>
@@ -48,11 +49,12 @@
             </div>
 
             <div class="text-center">
-                <button class="btn form-tab-custom bg-color-custom text-light form-card-header-custom " type="submit">Save Category</button>
+                <button class="btn form-tab-custom bg-color-custom text-light form-card-header-custom mx-auto" type="submit" id="saveCategory">Save Category</button>
             </div>
           
         </form>
     </div>
 </div>
 
+<script src="{{ asset('js/real_time_validation.js') }}"> </script>
 @endsection

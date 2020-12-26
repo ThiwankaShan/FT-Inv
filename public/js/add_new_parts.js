@@ -8,6 +8,7 @@ $(document).ready(function(){
        $('#location_code_error').css('display',"none");
        $('#location_name').removeClass("has_error");
        $('#location_code').removeClass("has_error");
+       $('#validLocation').css('display',"none");
    })
 
 
@@ -20,6 +21,7 @@ $(document).ready(function(){
             $('#location_code_error').css('display',"none");
             $('#location_name').removeClass("has_error");
             $('#location_code').removeClass("has_error");
+            
 
             var locationId = $('#location_code').val();
             var locationName = $('#location_name').val();
@@ -91,27 +93,30 @@ $(document).ready(function(){
         $('#subLocation_name').removeClass("has_error");
         $('#subLocation_code_error').css('display','none');
         $('#subLocation_code').removeClass("has_error");
+        $('#validSubLocation').css('display',"none");  
     })
 
 
         $('#saveSubLocation').click(function(){
-
+ 
             //if alert boxes appear because of inserting data before it will remove
             $('#subLocation_name_error').css('display','none');
             $('#subLocation_name').removeClass("has_error");
             $('#subLocation_code_error').css('display','none');
             $('#subLocation_code').removeClass("has_error");
+           
 
             var subLocationId = $('#subLocation_code').val();
             var subLocationName = $('#subLocation_name').val();
             var loactionCode =  $('#selectedLoaction').val();
             var location_code_form = $('#location').val();  //this value also send to the controller because of we dont know coreectly what is the category in the create Item Form
-                 console.log(loactionCode); 
+          
+            
             $.ajax({
-                url:"/sublocation",
+                url:"/subLocation/store",
                 method:"POST",
                 data:{
-                    Location_code:loactionCode,
+                    location_code:loactionCode,
                     subLocation_name:subLocationName,
                     subLocation_code:subLocationId,
                     location_code_form:location_code_form,
@@ -184,7 +189,8 @@ $(document).ready(function(){
             $('#category_name_error').css('display','none');
             $('#category_name').removeClass("has_error");
             $('#category_code_error').css('display','none');
-            $('#category_id').removeClass("has_error");
+            $('#category_code').removeClass("has_error");
+            $('#valid_category').css('display','none');
         })
 
 
@@ -194,9 +200,9 @@ $(document).ready(function(){
             $('#category_name_error').css('display','none');
             $('#category_name').removeClass("has_error");
             $('#category_code_error').css('display','none');
-            $('#category_id').removeClass("has_error");
+            $('#category_code').removeClass("has_error");
 
-            var category_code = $('#category_id').val();
+            var category_code = $('#category_code').val();
             var category_name = $('#category_name').val();
            
               
@@ -241,7 +247,7 @@ $(document).ready(function(){
                     }
                     if(error_type.category_code){
                         $('#category_code_error').css('display','block');
-                        $('#category_id').addClass("has_error");
+                        $('#category_code').addClass("has_error");
                         $('#category_code_msg').html(error_type.category_code[0]);
                     }
                     
@@ -264,6 +270,7 @@ $(document).ready(function(){
             $('#subCategory_name').removeClass("has_error");
             $('#subCategory_code_error').css('display','none');
             $('#subCategory_code').removeClass("has_error");
+            $('#valid_subCategory').css('display',"none");
         })
 
 
@@ -366,6 +373,7 @@ $(document).ready(function(){
             $('#invoice_number').removeClass("has_error");
             $('#invoice_date_error').css('display','none');
             $('#invoice_date').removeClass("has_error");
+            $('#valid_grn').css('display',"none");
         })
 
 

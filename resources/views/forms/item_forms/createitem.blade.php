@@ -31,7 +31,7 @@
                             <small style="color:red"><strong>{{ $message }}</strong></small>
                         </span>
                         @enderror
-                    </div>
+                    </div> 
                 </div>
                 <div class="col-3">
                     <a class="btn form-control button-style" href="" id="buttonCreateLocation" data-toggle="modal"  data-target="#Add_new_Location" class="button">Add New Location</a>
@@ -44,14 +44,14 @@
                         <label for="item-name ">Sub Location</label>
                     </div>
                     <div class="col-sm-9 mb-1">
-                        <select class="form-control {{ $errors->has('subLocation') ? 'has_error' : ''}}" id="sublocation" name="subLocation_code">
+                        <select class="form-control {{ $errors->has('subLocation_code') ? 'has_error' : ''}}" id="sublocation" name="subLocation_code">
                             <option value="">Select Sub Location</option>
                             @foreach($subLocations as $subLocation)
                             <option value="{{$subLocation->subLocation_code}}" {{ $subLocation->subLocation_code === old('subLocation_code') ? 'selected' : ''}}>{{$subLocation->subLocation_name}}</option>
                             @endforeach
                         </select>
 
-                        @error('subLocation')
+                        @error('subLocation_code')
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
                         </span>
@@ -213,7 +213,7 @@
                         <label for="item-name ">Model Number</label>
                     </div>
                     <div class="col-sm-9 mb-1 ">
-                        <input type="text" name="model_number" id="model_number" class="form-control {{ $errors->has('Vat') ? 'has_error' : ''}}" value="{{ old('Vat')}}">
+                        <input type="text" name="model_number" id="model_number" class="form-control {{ $errors->has('Vat') ? 'has_error' : ''}}" value="{{ old('model_number')}}">
                         <span id="real_time_model_number" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                         @error('model_number')
                         <span class="" role="alert">
@@ -273,7 +273,7 @@
                         <label for="rate">Price/Item</label>
                     </div>
                     <div class="col-sm-9 mb-1"> 
-                        <input type="text" name="gross_price" id="gross_price" class="form-control {{ $errors->has('gross_price') ? 'has_error' : ''}}" value="{{ old('Rate') }}">
+                        <input type="text" name="gross_price" id="gross_price" class="form-control {{ $errors->has('gross_price') ? 'has_error' : ''}}" value="{{ old('gross_price') }}">
                         <span id="real_time_gross_price" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
 
                         @error('gross_price')
@@ -329,12 +329,16 @@
     </div>
 </div>
 
-<script src="{{ asset('js/real_time_validation.js') }}"> </script>
+
 
 @include('forms.location_forms.createLocation_modal')
 @include('forms.subLocation_forms.createSubLocation_modal')
 @include('forms.category_forms.createCategory_modal')
 @include('forms.subCategory_forms.createSubCategory_modal')
 @include('forms.grn_forms.createGRN_modal')
+
+<script src="{{ asset('js/add_new_parts.js') }}"> </script>
+<script src="{{ asset('js/real_time_validation.js') }}"> </script>
+
 
 @endsection

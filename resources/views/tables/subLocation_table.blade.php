@@ -4,7 +4,7 @@
   </div>
 
   <div class="row mt-4">
-    <table class="table" id="subLocationTable">
+    <table class="table table-striped table-bordered table-hover" id="subLocationTable">
       <thead>
         <tr>
         <th scope="col">Sub Location Code</th>
@@ -15,10 +15,10 @@
       </thead>
       <tbody id="location_data">
         @foreach($subLocations as $subLocation)
-        <tr>
-          <td scope="row">{{$subLocation->subLocation_code}}</td>
+        <tr id="{{ $subLocation->subLocation_code}}-{{$subLocation->location_code}}">
+          <td scope="row">{{ str_pad( $subLocation->subLocation_code,'3',0, STR_PAD_LEFT )}}</td>
           <td>{{$subLocation->subLocation_name}}</td>
-          <td>{{$subLocation->locations->location_name}}</td>
+          <td>{{$subLocation->locations->location_name ?? 'Deleted'}}</td>
           <td class="">
             @if(auth()->user()->role == 'admin')
 
@@ -36,3 +36,8 @@
     </table>
   </div>
 </div>
+
+@if(Session::has('updated_crud_row'))
+<input type="hidden" name="" id="highlighted_row_crud" value="{{ Session::get('updated_crud_row') }}">
+
+@endif

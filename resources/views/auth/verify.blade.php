@@ -4,7 +4,7 @@
     <div id="app">
         @include('layouts.navbar')
 
-        <div class="content pr-0">
+        <div class="window">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-8">

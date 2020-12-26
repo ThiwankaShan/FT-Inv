@@ -14,7 +14,7 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -28,7 +28,8 @@
 
     <!-- Custom js scripts -->
     <script src="{{ asset('js/filter_sort.js') }}"> </script>
-    <script src="{{ asset('js/add_new_parts.js') }}"> </script>
+    <script src="{{ asset('js/ui.js') }}"> </script>
+    <!-- <script src="{{ asset('js/add_new_parts.js') }}"> </script> -->
     
 
     <!--Live search -->

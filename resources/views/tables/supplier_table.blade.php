@@ -1,10 +1,10 @@
 <div class="container" id="supplier_container">
   <div class="row justify-content-md-center">
-    <a class="btn btn-primary text-light" href="{{ route('supplier.create') }}">Create</a>
+    <a class="btn btn-primary text-light" href="{{ route('supplier.create') }}" >Create</a>
   </div>
 
   <div class="row mt-4">
-    <table class="table" id="supplierTable">
+    <table class="table table-striped table-bordered table-hover" id="supplierTable">
       <thead>
         <tr>
         <th scope="col">Supplier Code</th>
@@ -18,8 +18,8 @@
       </thead>
       <tbody id="location_data">
         @foreach($suppliers as $supplier)
-        <tr>
-          <td scope="row">{{$supplier->supplier_code}}</td>
+        <tr id="{{$supplier->supplier_code}}">
+          <td scope="row">{{ str_pad( $supplier->supplier_code,'3',0, STR_PAD_LEFT )}}</td>
           <td>{{$supplier->supplier_name}}</td>
           <td>{{$supplier->supplier_address}}</td>
           <td>{{$supplier->telephone_number}}</td>
@@ -42,3 +42,8 @@
     </table>
   </div>
 </div>
+
+@if(Session::has('updated_crud_row'))
+<input type="hidden" name="" id="highlighted_row_crud" value="{{ Session::get('updated_crud_row') }}">
+
+@endif

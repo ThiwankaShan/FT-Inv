@@ -19,21 +19,22 @@
                 <form method="" action="" class="form-align-custom" id="Location_form">
 
                     <label for="location_name">Location Name</label>
-                    <input type="text" class="form-control form-custom" id="location_name">
+                    <input type="text" class="form-control form-custom" id="location_name" placeholder="Enter Location Name">
                     
                     <span class="" role="alert" style="display:none; margin-bottom:5px" id="location_name_error">
                         <small style="color:red"><strong id="location_name_msg"></strong></small>
                     </span>
                    
                     <label for="location_name">Location Code</label>
-                    <input type="text" class="form-control form-custom" id="location_code">
+                    <input type="text" class="form-control form-custom" id="location_code" placeholder="Enter Location Code">
+                    <span id="live_location_code" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
 
                     <span class="" role="alert" style="display:none; margin-bottom:5px" id="location_code_error">
                             <small style="color:red"><strong id="location_code_msg"></strong></small>
                     </span>
 
-                    <div class="text-center ">
-                        <button type="button" class="btn btn-primary form-card-header-custom text-light mt-4 " id="saveLocation">Create</button>
+                    <div class="text-center row justify-content-center">
+                        <button type="button" class="btn btn-primary form-card-header-custom text-light mt-4 mr-2" id="saveLocation">Create</button>
                         <button class="btn btn-secondary cancel_modal text-light  mt-4 mr-5" type="button" >Cancel</button>
                     </div>
 

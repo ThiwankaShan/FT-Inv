@@ -19,7 +19,8 @@ class CreateGrnsTable extends Migration
             $table->string('invoice_number');
             $table->date('invoice_date');
             $table->integer('supplier_code');
-            $table->foreign('supplier_code')->references('supplier_code')->on('suppliers')->onUpdate('cascade');
+            $table->foreign('supplier_code')->references('supplier_code')->on('suppliers')->onUpdate('cascade')->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

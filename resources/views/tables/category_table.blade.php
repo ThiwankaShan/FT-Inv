@@ -4,7 +4,7 @@
   </div>
 
   <div class="row mt-4">
-    <table class="table" id="Table">
+    <table class="table table-striped table-bordered table-hover" id="Table">
       <thead>
         <tr>
           <th scope="col">Category Code</th>
@@ -14,7 +14,7 @@
       </thead>
       <tbody id="location_data">
         @foreach($categories as $category)
-        <tr>
+        <tr id="{{$category->category_code}}">
           <td scope="row">{{$category->category_code}}</td>
           <td>{{$category->category_name}}</td>
           <td class="">
@@ -34,3 +34,8 @@
     </table>
   </div>
 </div>
+
+@if(Session::has('updated_crud_row'))
+<input type="hidden" name="" id="highlighted_row_crud" value="{{ Session::get('updated_crud_row') }}">
+
+@endif

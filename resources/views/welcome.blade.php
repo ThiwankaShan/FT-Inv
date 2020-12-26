@@ -84,12 +84,18 @@
         @endif
 
         <div class="content">
-            <div class="title m-b-md">
-                Faculty of Technology <br>
-                Sabaragamuwa University of Srilanka<br>
-                Inventory Managment System
+            <div class="title">
+                <h2 class="mb-0">Inventory Managment System</h2>
             </div>
-
+            
+            <h1 class="text-right">
+                Faculty of Technology
+                <br>
+                Sabaragamuwa University of Srilanka
+            </h1>
+            
+        </div>
+    </div>
 
 </body>
 

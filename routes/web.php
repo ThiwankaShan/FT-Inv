@@ -22,14 +22,16 @@ Route::post('/search', 'SearchController@search')->name('search');
 Route::get('/dashboard/show/{id}','ItemController@ShowItems')->name('dashBoard.show');
 
 Route::resource('/user', 'UserController');
+
 Route::resource('grn', 'GRNController');
 Route::post('/grn/delete/{grn_number?}','GRNController@destroy')->name('grn.delete');
 
+
 //=======================SUB CATEGORY ==============================================================================================================
 Route::resource('/subcategory', 'SubCategoryController');
-Route::get('/subCategory/edit/{subCategory?}/{category?}','subCategoryController@edit')->name('subCategory.edit');
-Route::post('/subCategory/update','subCategoryController@update')->name('subCategory.update');
-Route::post('/subCategory/delete/{subCategory?}/{category?}','subCategoryController@destroy')->name('subCategory.delete');
+Route::get('/subCategory/edit/{subCategory?}/{category?}','SubCategoryController@edit')->name('subCategory.edit');
+Route::post('/subCategory/update','SubCategoryController@update')->name('subCategory.update');
+Route::post('/subCategory/delete/{subCategory?}/{category?}','SubCategoryController@destroy')->name('subCategory.delete');
 
 //======================= CATEGORY ==============================================================================================================
 Route::resource('/category', 'CategoryController');
@@ -62,6 +64,7 @@ Route::post('location/update/{location?}', 'locationController@update')->name('l
 Route::resource('/subLocation', 'subLocationController');
 Route::get('/subLocation/edit/{subLocation?}/{location?}','subLocationController@edit')->name('subLocation.edit');
 Route::post('/subLocation/update','subLocationController@update')->name('subLocation.update');
+Route::post('/subLocation/store','subLocationController@store')->name('subLocation.store');
 Route::post('/subLocation/delete/{subLocation?}/{location?}','subLocationController@delete')->name('subLocation.delete');
 
 //======================= SUPPLIER ==============================================================================================================

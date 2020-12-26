@@ -65,7 +65,7 @@ class ItemController extends Controller
             'procument_id' => 'string|nullable',
             'Quantity' => 'required|integer',
             'tax' => 'required',
-            'gross_price' => 'required|regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
+            'gross_price' => 'required',
             'category_code' => 'required',
             'purchased_date' => 'required|date',
             'subCategory_code' => 'string|nullable',
@@ -80,7 +80,7 @@ class ItemController extends Controller
             'category_code' => $request->category_code,
             'subCategory_code' => $request->subCategory_code,
             'tax' => floatval(str_replace(',',"",$request->tax)),
-            'gross_price' => $request->gross_price,
+            'gross_price' => floatval(str_replace(',',"",$request->gross_price)),
             'subItem' => $request->sub_item,
             'purchased_date' => $request->purchased_date,
             'GRN_number' => $request->GRN_number,
@@ -223,9 +223,9 @@ class ItemController extends Controller
 
        
         $item = $request->item;
-        $new_rate = $request->gross_price;
-        $new_vat = ((str_replace(',',"",$request->tax) * $new_rate) / 100);
-        $new_vat_rate = $new_rate+$new_vat;
+        $new_gross_price = str_replace(',',"",$request->gross_price);
+        $new_tax = str_replace(',',"",$request->tax) ;
+        $new_net_price = $new_gross_price+$new_tax;
         $new_grn = $request->GRN_number;
         $new_type = $request->types;
         $new_procumentID = $request->procument_id;
@@ -238,9 +238,9 @@ class ItemController extends Controller
         DB::table('items')
             ->where('item_code', $request->item)
             ->update([
-                'gross_price' => $new_rate,
-                "net_price" => $new_vat_rate,
-                'tax' => $new_vat,
+                'gross_price' => $new_gross_price,
+                "net_price" => $new_net_price,
+                'tax' => $new_tax,
                 'type' => $new_type,
                 'GRN_number' => $new_grn,
                 'procurement_id' => $new_procumentID,
@@ -255,14 +255,13 @@ class ItemController extends Controller
     }
 
 
-    public function destroy(Items $item)
+    public function destroy($item, Request $request)
     {
-        //delete item permanently
-        //return to home
-
-        $item->delete();
-        return redirect()->route('home')
-            ->with('success', 'item deleted successfully');
+        if ($request->force=="True"){
+            Items::find($item)->forceDelete();
+        }else{
+            Items::find($item)->delete();
+        } 
     }
 
     public function ShowItems($id){

@@ -23,7 +23,7 @@ class subLocationController extends Controller
     public function index()
     {
         $subLocations = SubLocation::all();
-
+        Log::info($subLocations);
         return view('pages.subLocation', compact('subLocations'));
     }
 
@@ -49,21 +49,23 @@ class subLocationController extends Controller
 
     public function store(Request $request)
     {
-       //Getting subLocation_code , Name and The Location code that new sub location Belongs.
-      // Send Updated Sublocations array of Selected Location OF Item Form
-
-// sub location code , Name and The location code that new sub location Belongs. Send Updated sub locations array  of Selected location OF Item Form
+        //Getting subLocation_code , Name and The Location code that new sub location Belongs.
+        // Send Updated Sublocations array of Selected Location OF Item Form
+        // sub location code , Name and The location code that new sub location Belongs. Send Updated sub locations array  of Selected location OF Item Form
+        
         $validatedData = $request->validate([
+            'location_code' => 'required',
             'subLocation_name' => 'required|unique:sub_locations',
             'subLocation_code' => 'required|unique:sub_locations,subLocation_code,NULL,subLocation_code,location_code,'.$request->location_code,
         ]);
 
+        
         $subLocation = new SubLocation;
         $subLocation->Location_code = $request->location_code;
         $subLocation->subLocation_name = $request->subLocation_name;
         $subLocation->subLocation_code = $request->subLocation_code;
 
-
+        
         $subLocation->save();
 
         if(URL::previous()==URL::route('subLocation.create')){
@@ -108,20 +110,36 @@ class subLocationController extends Controller
      */
     public function update(Request $request)
     {
-        $validatedata = $request->validate([
-            'location_code' =>'required|string|unique:sub_locations,location_code,'.$request->location_code.',location_code,subLocation_code,'.$request->subLocation_code,
-            'subLocation_name' => 'required|unique:sub_locations,subLocation_name,'.$request->subLocation_name.',subLocation_name',
-            'subLocation_code' => 'required|unique:sub_locations,subLocation_code,'.$request->subLocation_code.',subLocation_code,location_code,'.$request->location_code,
-        ]);
+           
+        if($request->subLocation != $request->subLocation_code || $request->location != $request->location_code){
+
+            $validatedata = $request->validate([
+                'location_code' =>'required|string|unique:sub_locations,location_code,NULL,location_code,subLocation_code,'.$request->subLocation_code,
+                'subLocation_name' => 'required|unique:sub_locations,subLocation_name,'.$request->subLocation_name.',subLocation_name',
+                'subLocation_code' => 'required|unique:sub_locations,subLocation_code,NULL,subLocation_code,location_code,'.$request->location_code,
+            ],[
+                'location_code.unique' => 'This location Allready have this Sub location code',
+                'subLocation_code.unique' => 'This Sub location Allready have taken for selected location'
+            ]);
+
+        }else{
+            $validatedata = $request->validate([
+                'location_code' =>'required|string',
+                'subLocation_name' => 'required|unique:sub_locations,subLocation_name,'.$request->subLocation_name.',subLocation_name',
+                'subLocation_code' => 'required',
+            ]);
+        }
+
+        
         
         
         $subLocation = SubLocation::where('subLocation_code','=',$request->subLocation)->where('location_code','=',$request->location)->first();
       
         $subLocation->update($validatedata);
-        $subLocation = SubLocation::find($validatedata['subLocation_code']);
-        $locations = Location::all();
+        $subLocations = SubLocation::all();
+        session()->flash('updated_crud_row',$request->subLocation_code.'-'.$request->location_code);
         
-        return view('forms.subLocation_forms.editSubLocation',compact('subLocation','locations'))->with('status','Sub Location edited sucessfully');
+        return view('pages.subLocation',compact('subLocations'));
     }
 
     /**
@@ -130,11 +148,16 @@ class subLocationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete($subLocation,$location)
+    public function delete($subLocation,$location,Request $request)
     {
-        $subLocation = SubLocation::where('subLocation_code','=',$subLocation)->where('location_code','=',$location);
-        Log::info(json_encode($subLocation)); 
-        $subLocation->delete();
+        $subLocation = SubLocation::where('subLocation_code','=',$subLocation)->where('location_code','=',$location); 
+        
+        if ($request->force=="True"){
+            $subLocation->forceDelete();
+        }else{
+            $subLocation->delete();
+        }
+        
        
         return 1; 
     }

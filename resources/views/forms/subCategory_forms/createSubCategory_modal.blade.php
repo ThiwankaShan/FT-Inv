@@ -18,7 +18,7 @@
 
                         <form  class=" form-align-custom" id="subCategory_form">
                             @csrf
-
+ 
                             <div class="form-group ">
                                 <label for="item-name ">Categories</label>
                                 <select class="form-control form-custom" id="categoryID" name="Category_code">
@@ -34,8 +34,7 @@
                             <div class="form-group">
 
                                 <label for="subCategory_name">Sub Category Name</label>
-                                <input type="text" class="form-control form-custom" id="subCategory_name" name="subCategory_name">
-
+                                <input type="text" class="form-control form-custom" id="subCategory_name" name="subCategory_name" placeholder="Enter Sub Category Name">
 
                                 <span class="" role="alert" style="display:none; margin-bottom:5px" id="subCategory_name_error">
                                     <small style="color:red"><strong id="subCategory_name_msg"></strong></small>
@@ -43,9 +42,9 @@
 
                             </div>
                             <div class="form-group form-custom">
-                                <label for="subLocarion_code">Sub Category Code</label>
-                                <input type="text" class="form-control" name="subCategory_code" id="subCategory_code">
-
+                                <label for="subCategory_code">Sub Category Code</label>
+                                <input type="text" class="form-control" name="subCategory_code" id="subCategory_code" placeholder="Enter Sub Category Code">
+                                <span id="live_subCategory_code" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                                 <span class="" role="alert" style="display:none; margin-bottom:5px" id="subCategory_code_error">
                                     <small style="color:red"><strong id="subCategory_code_msg"></strong></small>
                                 </span>
@@ -53,8 +52,8 @@
                             </div>
 
 
-                            <div class="text-center">
-                                <button  class="btn form-card-header-custom text-light " id="save_subCategory" type="button">Create</button>
+                            <div class="text-center row justify-content-center">
+                                <button  class="btn form-card-header-custom text-light mr-2" id="save_subCategory" type="button">Create</button>
                                 <button class="btn btn-secondary cancel_modal text-light  " type="button" >Cancel</button>
                             </div>
                     </form>

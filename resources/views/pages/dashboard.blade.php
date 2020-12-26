@@ -1,13 +1,13 @@
 @extends('layouts.PageLayout')
 @section('content')
 
-  <div class="card mt-0 px-0" id="con">
+  <div class="card mr-1 p-1" id="itemsCard" style="min-width: 1500px !important; ">
 
-  <div class="card-header ">
+  <div class="card-header mr-1 p-1" style="min-width: 1250px;" >
     @include('tables.filter_sort')
   </div>
 
-  <div class="card-body px-0" id="items_table">
+  <div class="card-body p-1" style="min-width: 1250px;" id="items_table">
     @include('tables.item_table')
   </div>
   

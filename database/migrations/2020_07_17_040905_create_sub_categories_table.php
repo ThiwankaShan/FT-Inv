@@ -17,13 +17,23 @@ class CreateSubCategoriesTable extends Migration
         Schema::create('sub_categories', function (Blueprint $table) {
             $table->integer('subCategory_code');
             $table->string('subCategory_name');
-            $table->integer('category_code');
-            $table->foreign('category_code')->references('category_code')->on('categories')->onUpdate('cascade');
+            $table->integer('category_code')->index();
+            $table->foreign('category_code')->references('category_code')->on('categories')->onUpdate('cascade')->onDelete('cascade');
             $table->primary(['subCategory_code','category_code']);
-            $table->timestamps();
-            
-            
+            $table->softDeletes();
+            $table->timestamps();     
         });
+
+        Schema::disableForeignKeyConstraints();
+
+        DB::table('sub_categories')->insert(
+            array(
+                'subCategory_code' => 000,
+                'subCategory_name' => 'Default',
+                'category_code' =>-1,            
+            ));
+
+        Schema::enableForeignKeyConstraints();
     }
 
     /**

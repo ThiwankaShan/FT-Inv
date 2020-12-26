@@ -69,7 +69,7 @@ margin-left: 30%;
     color: aliceblue !important;
     font-weight: 700 !important;
 }
-
+ 
 #Table{
     align-self: center !important;
     max-width: 60% !important;
@@ -121,4 +121,30 @@ margin-left: 30%;
 
 #supplier_container{
     max-width: 95% !important;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color:   #e9d6db !important;
+  }
+  
+#itemsCard{
+    min-width: 720px !important;
+}
+
+.window{
+    margin-top:150px !important;
+}
+
+.nounderline {
+    text-decoration: none !important
+  }
+
+#sideBar-icon{
+    color: white !important;
+    font-size:x-large;
+    border-color: black !important;
+}
+
+#sideBar-icon:active{
+    color: #19B3D3 !important;
 }

@@ -8,8 +8,8 @@
 <hr>
 
 @if (!empty($status))
-    <div class="alert alert-success">
-        {{ $status }}
+    <div class="alert alert-success text-center">
+      <strong>{{ $status }}</strong>  
     </div>
 @endif
 
@@ -28,20 +28,22 @@
             <div class="form-group row">
                 <label for="item-name " class="col-sm-2 col-form-label">Location</label>
                 <div class="col-sm-10">
-                <select class="form-control " name="location_code">
+                <select class="form-control {{ $errors->has('location_code') ? 'has_error' : '' }}" name="location_code" >
                     @foreach($locations as $location)
-                        <option 
-                        @if($subLocation->location_code == $location->location_code ) 
-                        selected="selected" @endif  
-                        value="{{$location->location_code}}">{{$location->location_name}}</option>
+                        <option value="{{$location->location_code}}" 
+
+                           {{ ($subLocation->location_code === $location->location_code) ? 'selected' : '' }} 
+                           {{ $location->location_code === old('location_code') ? 'selected' : ''}} >{{ $location->location_name }}
+
+                        </option>
                     @endforeach
                 </select>
-                </div>
                 @error('location_code')
                     <span class="" role="alert">
                         <small style="color:red"><strong>{{ $message }}</strong></small>
                     </span>
                 @enderror
+                </div>
             </div>
 
             <div class="form-group row">
@@ -61,21 +63,23 @@
                 <label for="LocationCode" class="col-sm-2 col-form-label">Sub Location Code</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control {{ $errors->has('subLocation_code') ? 'has_error' : '' }}" id="subLocation_code" placeholder="Sub Location Code" name="subLocation_code" value="{{ old('subLocation_code') ?? $subLocation->subLocation_code}}">
+                    <span id="live_subLocation_code" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                     @error('subLocation_code')
-                    <span class="" role="alert">
-                        <small style="color:red"><strong>{{ $message }}</strong></small>
-                    </span>
+                        <span class="" role="alert">
+                            <small style="color:red"><strong>{{ $message }}</strong></small>
+                        </span>
 
                     @enderror
                 </div>
             </div>
 
             <div class="text-center">
-                <button class="btn form-tab-custom bg-color-custom text-light form-card-header-custom " type="submit">Update Sub Location</button>
+                <button class="btn form-tab-custom bg-color-custom text-light form-card-header-custom mx-auto" type="submit" id="saveSubLocation">Update Sub Location</button>
             </div>
           
         </form>
     </div>
 </div>
 
+<script src="{{ asset('js/real_time_validation.js') }}"> </script>
 @endsection

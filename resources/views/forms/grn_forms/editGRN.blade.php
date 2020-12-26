@@ -8,7 +8,7 @@
 <hr>
 
 @if (!empty($status))
-    <div class="alert alert-success justify-content-center align-items-center">
+    <div class="alert alert-success text-center ">
         <strong>{{ $status }}</strong> 
     </div>
 @endif
@@ -50,7 +50,7 @@
                     <div class="form-group form-custom">
                         <label for="invoice_no">Invoice No.</label>
                         <input type="text" class="form-control {{ $errors->has('invoice_number') ? 'has_error' : '' }}" id="invoice_number" name="invoice_number" value="{{ old('invoice_number') ?? $grn->invoice_number }}">
-
+                        <span id="live_invoice_number" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                         @error('invoice_number')
                             <span class="" role="alert">
                                 <small style="color:red"><strong>{{ $message }}</strong></small>
@@ -84,7 +84,7 @@
 
 
                         <div class="text-center">
-                            <button type="submit" class="btn form-card-header-custom text-light" id="">Update</button>
+                            <button type="submit" class="btn form-card-header-custom text-light" id="save_GRN">Update</button>
                           
                         </div>
 
@@ -92,4 +92,5 @@
             </div>
         </div>
 
+        <script src="{{ asset('js/real_time_validation.js') }}"> </script>
 @endsection

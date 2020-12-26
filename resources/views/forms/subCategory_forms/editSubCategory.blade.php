@@ -8,8 +8,8 @@
 <hr>
 
 @if (!empty($status))
-    <div class="alert alert-success">
-        {{ $status }}
+    <div class="alert alert-success text-center">
+        <strong>{{ $status }}</strong> 
     </div>
 @endif
 
@@ -31,11 +31,11 @@
                 <div class="col-sm-10">
                 <select class="form-control " id="category" name="category_code">
                     @foreach($categories as $category)
-                         <option 
-                           @if($subcategory->category_code == $category->category_code)
-                               selected="selected"  @endif 
-                          
-                              value="{{$category->category_code}}">{{$category->category_name}} 
+                         <option  value="{{$category->category_code}}" 
+                             
+                            {{ $subcategory->category_code == $category->category_code ? 'selected' : '' }}
+                            {{ $category->category_code == old('category_code') ? 'selected' : '' }}> {{$category->category_name}} 
+                         
                           </option>
                     @endforeach
                 </select>
@@ -63,6 +63,7 @@
                 <label for="LocationCode" class="col-sm-2 col-form-label">Sub Category Code</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control {{ $errors->has('subCategory_code') ? 'has_error' : '' }}" id="subCategory_code" placeholder="Enter Sub Category Code" name="subCategory_code" value="{{ old('subCategory_code') ?? $subcategory->subCategory_code }}">
+                    <span id="live_subCategory_code" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                     @error('subCategory_code')
                     <span class="" role="alert">
                         <small style="color:red"><strong>{{ $message }}</strong></small>
@@ -72,11 +73,12 @@
             </div>
 
             <div class="text-center">
-                <button class="btn form-tab-custom bg-color-custom text-light form-card-header-custom " type="submit">Save Sub Category</button>
+                <button class="btn form-tab-custom bg-color-custom text-light form-card-header-custom mx-auto" type="submit" id="save_subCategory">Save Sub Category</button>
             </div>
           
         </form>
     </div>
 </div>
 
+<script src="{{ asset('js/real_time_validation.js') }}"> </script>
 @endsection
