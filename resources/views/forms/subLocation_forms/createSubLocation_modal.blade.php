@@ -27,9 +27,9 @@
                         </select>
 
                     </div>
-                    <div class="form-group  form-custom">
+                    <div class="form-group ">
                         <label for="subLocation_name">Sub Location Name</label>
-                        <input type="text" class="form-control form-custom" id="subLocation_name" name="subLocation_name">
+                        <input type="text" class="form-control form-custom" id="subLocation_name" name="subLocation_name"  placeholder="Enter Sub Location Name">
 
                         <span class="" role="alert" style="display:none; margin-bottom:5px" id="subLocation_name_error">
                             <small style="color:red"><strong id="subLocation_name_msg"></strong></small>
@@ -39,7 +39,7 @@
 
                     <div class="form-group ">
                         <label for="subLocarion_code ">Sub Location Code</label>
-                        <input type="text" class="form-control form-custom" name="subLocation_code"  id ="subLocation_code" aria-describedby="emailHelp">
+                        <input type="text" class="form-control form-custom" name="subLocation_code"  id ="subLocation_code" aria-describedby="emailHelp" placeholder="Enter Sub Location Code">
                         <span id="live_subLocation_code" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                         <span class="" role="alert" style="display:none; margin-bottom:5px" id="subLocation_code_error">
                             <small style="color:red"><strong id="subLocation_code_msg"></strong></small>

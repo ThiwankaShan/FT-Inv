@@ -7,9 +7,9 @@
 </div>
 <hr>
 
-@if (!empty($status))
-    <div class="alert alert-success">
-        {{ $status }}
+@if (session('status'))
+    <div class="alert alert-success text-center">
+       <strong> {{ session('status') }}</strong>
     </div>
 @endif
 

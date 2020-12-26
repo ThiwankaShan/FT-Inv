@@ -8,8 +8,8 @@
 <hr>
 
 @if (session('status'))
-    <div class="alert alert-success">
-        {{ session('status') }}
+    <div class="alert alert-success text-center">
+       <strong> {{ session('status') }}</strong>
     </div>
 @endif
 
@@ -26,61 +26,84 @@
                             <ul ></ul>
                         </div>
 
-                <form  class="form-align-custom" id="Grn_form">
+             <form  class="form-align-custom" id="" action="{{ route('grn.store') }}"  method="post">
                     @csrf
-
+                   
                     <div class="form-group form-custom">
                         <label for="GRN_no">GRN No.</label>
-                        <input type="text" class="form-control form-custom" id="GRN_number" name="GRN_number" value="{{$suggest_grnNo}}">
+                        <input type="text" class="form-control form-custom {{ $errors->has('GRN_number') ? 'has_error' : '' }}" id="GRN_number" name="GRN_number" value="{{$suggest_grnNo}}">
+
+                        @error('GRN_number')
+                            <span class="" role="alert">
+                                <small style="color:red"><strong>{{ $message }}</strong></small>
+                            </span>
+
+                        @enderror
 
                     </div>
 
                     <div class="form-group form-custom">
                         <label for="GRN_date">GRN Date</label>
-                        <input type="date" class="form-control" name="GRN_date" id="GRN_date">
+                        <input type="date" class="form-control {{ $errors->has('GRN_date') ? 'has_error' : '' }}" name="GRN_date" id="GRN_date" >
 
-                        <span class="" role="alert" style="display:none; margin-bottom:5px" id="GRN_date_error">
-                            <small style="color:red"><strong id="GRN_date_msg"></strong></small>
-                        </span>
-                   
+                        @error('GRN_date')
+                            <span class="" role="alert">
+                                <small style="color:red"><strong>{{ $message }}</strong></small>
+                            </span>
+
+                        @enderror
 
                     </div>
 
                     <div class="form-group form-custom">
                         <label for="invoice_no">Invoice No.</label>
-                        <input type="text" class="form-control" id="invoice_number" name="invoice_number">
+                        <input type="text" class="form-control {{ $errors->has('invoice_number') ? 'has_error' : '' }}" id="invoice_number" name="invoice_number" value="{{ old('invoice_number') }}">
 
-                        <span class="" role="alert" style="display:none; margin-bottom:5px" id="invoice_error">
-                            <small style="color:red"><strong id="invoice_msg"></strong></small>
-                        </span>
+                        @error('invoice_number')
+                            <span class="" role="alert">
+                                <small style="color:red"><strong>{{ $message }}</strong></small>
+                            </span>
+
+                        @enderror
 
                     </div>
 
                     <div class="form-group form-custom">
                         <label for="invoice_date">Invoice Date.</label>
-                        <input type="date" class="form-control" id="invoice_date" name="invoice_date">
+                        <input type="date" class="form-control {{ $errors->has('invoice_date') ? 'has_error' : '' }}" id="invoice_date" name="invoice_date" >
 
-                        <span class="" role="alert" style="display:none; margin-bottom:5px" id="invoice_date_error">
-                            <small style="color:red"><strong id="invoice_date_msg"></strong></small>
-                        </span>
+                        @error('invoice_date')
+                            <span class="" role="alert">
+                                <small style="color:red"><strong>{{ $message }}</strong></small>
+                            </span>
+
+                        @enderror
+
 
                         <div class="form-group form-custom">
                             <label for="supplier_code">Supplier</label>
-                            <select class="form-control" id="supplier_code" name="supplier_code">
+                            <select class="form-control {{ $errors->has('supplier_code') ? 'has_error' : '' }}" id="supplier_code" name="supplier_code">
                                 @foreach($Suppliers as $Supplier)
                                 <option value="{{$Supplier->supplier_code}}" class="form-custom">{{$Supplier->supplier_name}}</option>
                                 @endforeach
                             </select>
 
+                            @error('supplier_code')
+                            <span class="" role="alert">
+                                <small style="color:red"><strong>{{ $message }}</strong></small>
+                            </span>
+
+                        @enderror
+
                         </div>
 
 
                         <div class="text-center">
-                            <button type="button" class="btn form-card-header-custom text-light" id="save_GRN">Create</button>
-                           
+                            <button type="submit" class="btn form-card-header-custom text-light" id="">Create</button>
+                          
                         </div>
 
-                </form>
+               
             </div>
         </div>
 

@@ -63,7 +63,7 @@ class SubCategoryController extends Controller
 
         if(URL::previous() == URL::route('subcategory.create')){
             $categories = Category::all();
-            return view('forms.subCategory_forms.createSubCategory',compact('categories'))->with('status','Sub LOcation Created Successfully!');   
+            return back()->with('status','Sub LOcation Created Successfully!');   
         }
 
         $subCategories = SubCategory::where('category_code',$request->category_code_form)->get();
