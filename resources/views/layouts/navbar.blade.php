@@ -4,7 +4,7 @@
         <button class="navbar-toggler mr-5 d-block" type="button" 
         data-toggle="collapse" data-target="#side_bar" aria-controls="navbarSupportedContent" aria-expanded="false"
             aria-label="{{ __('Toggle navigation') }}">
-            <span class="navbar-toggler-icon"></span>
+            <i class="fa fa-bars" id="sideBar-icon"></i>
         </button>
 
         <h4><a class="text-center nounderline" href="{{ url('/') }}">
