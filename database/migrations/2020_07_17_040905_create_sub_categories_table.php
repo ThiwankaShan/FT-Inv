@@ -24,7 +24,7 @@ class CreateSubCategoriesTable extends Migration
             $table->timestamps();     
         });
 
-        Schema::disableForeignKeyConstraints();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
         DB::table('sub_categories')->insert(
             array(
@@ -33,7 +33,7 @@ class CreateSubCategoriesTable extends Migration
                 'category_code' =>-1,            
             ));
 
-        Schema::enableForeignKeyConstraints();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 
     /**
