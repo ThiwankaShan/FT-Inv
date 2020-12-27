@@ -62,7 +62,7 @@
             <div class="form-group row">
                 <label for="LocationCode" class="col-sm-2 col-form-label">Sub Category Code</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control {{ $errors->has('subCategory_code') ? 'has_error' : '' }}" id="subCategory_code" placeholder="Enter Sub Category Code" name="subCategory_code" value="{{ old('subCategory_code') ?? $subcategory->subCategory_code }}">
+                    <input type="text" class="form-control {{ $errors->has('subCategory_code') ? 'has_error' : '' }}" id="subCategory_code" placeholder="Enter Sub Category Code" name="subCategory_code" value="{{ str_pad(old('subCategory_code') ?? $subcategory->subCategory_code,'3',0, STR_PAD_LEFT ) }}">
                     <span id="live_subCategory_code" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                     @error('subCategory_code')
                     <span class="" role="alert">

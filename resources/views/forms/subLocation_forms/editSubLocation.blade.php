@@ -62,7 +62,7 @@
             <div class="form-group row">
                 <label for="LocationCode" class="col-sm-2 col-form-label">Sub Location Code</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control {{ $errors->has('subLocation_code') ? 'has_error' : '' }}" id="subLocation_code" placeholder="Sub Location Code" name="subLocation_code" value="{{ old('subLocation_code') ?? $subLocation->subLocation_code}}">
+                    <input type="text" class="form-control {{ $errors->has('subLocation_code') ? 'has_error' : '' }}" id="subLocation_code" placeholder="Sub Location Code" name="subLocation_code" value="{{ str_pad(old('subLocation_code') ?? $subLocation->subLocation_code,'3',0, STR_PAD_LEFT )}}">
                     <span id="live_subLocation_code" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                     @error('subLocation_code')
                         <span class="" role="alert">

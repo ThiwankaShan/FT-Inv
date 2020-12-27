@@ -149,12 +149,12 @@ class SubCategoryController extends Controller
         if ($category == -1){
             return ;
         }
-        $subcategory = SubCategory::where('subCategory_code','=',$subCategory)->where('category_code','=',$category)->first();
+        $subcategory = DB::table('sub_categories')->where('subCategory_code','=',$subCategory)->where('category_code','=',$category);
         if ($request->force=="True"){
             Log::info('came to force');
-            $subcategory->forceDelete();
-        }else{
             $subcategory->delete();
+        }else{
+            $subcategory->update(['deleted_at'=>date('Y-m-d')]);
         }
         
     }

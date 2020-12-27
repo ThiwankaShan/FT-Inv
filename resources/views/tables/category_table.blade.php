@@ -15,7 +15,7 @@
       <tbody id="location_data">
         @foreach($categories as $category)
         <tr id="{{$category->category_code}}">
-          <td scope="row">{{$category->category_code}}</td>
+          <td scope="row">{{ str_pad($category->category_code,'3',0, STR_PAD_LEFT ) }}</td>
           <td>{{$category->category_name}}</td>
           <td class="">
             @if(auth()->user()->role == 'admin')

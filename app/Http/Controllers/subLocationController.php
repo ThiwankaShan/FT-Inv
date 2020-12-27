@@ -156,12 +156,12 @@ class subLocationController extends Controller
      */
     public function delete($subLocation,$location,Request $request)
     {
-        $subLocation = SubLocation::where('subLocation_code','=',$subLocation)->where('location_code','=',$location); 
+        $subLocation = DB::table('sub_locations')->where('subLocation_code','=',$subLocation)->where('location_code','=',$location); 
         
         if ($request->force=="True"){
-            $subLocation->forceDelete();
-        }else{
             $subLocation->delete();
+        }else{
+            $subLocation->update(['deleted_at'=>date('Y-m-d')]);
         }
         
        

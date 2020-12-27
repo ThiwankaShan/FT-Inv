@@ -39,7 +39,7 @@
             <div class="form-group row">
                 <label for="category_code" class="col-sm-2 col-form-label">Category Code</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control {{ $errors->has('category_code') ? 'has_error' : '' }}" id="category_code" placeholder="Enter Category Code" name="category_code" value="{{$category->category_code }}">
+                    <input type="text" class="form-control {{ $errors->has('category_code') ? 'has_error' : '' }}" id="category_code" placeholder="Enter Category Code" name="category_code" value="{{ str_pad($category->category_code,'3',0, STR_PAD_LEFT ) }}">
                     <span id="live_category_code" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                     @error('category_code')
                     <span class="" role="alert">
