@@ -81,7 +81,7 @@
       </tr>
       @endforeach
       <tr>
-      <td colspan="8">Grand Total</td>
+      <td colspan="9">Grand Total</td>
       <td class="text-right">{{ number_format($gross_total,2)}}</td>
       <td class="text-right">{{ number_format($tax_total,2)}}</td>
       <td class="text-right">{{ number_format($grand_total,2)}}</td>
