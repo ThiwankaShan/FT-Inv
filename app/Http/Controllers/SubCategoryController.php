@@ -7,6 +7,7 @@ use App\Category;
 use App\SubCategory;
 use Validator;
 use URL;
+use DB;
 use Illuminate\Validation\Rule;
 use Log;
 class SubCategoryController extends Controller
@@ -121,8 +122,14 @@ class SubCategoryController extends Controller
              ]);
         }
         
-        $subcategory = SubCategory::where('subCategory_code','=',$request->SubCategory)->where('category_code','=',$request->Category)->first();
-        $subcategory->update($validatedata);
+        //$subcategory = SubCategory::where('subCategory_code','=',$request->SubCategory)->where('category_code','=',$request->Category)->first();
+        //Log::info($validatedata);
+        //$subcategory->update($validatedata);
+        
+        DB::table('sub_categories')
+              ->where('subCategory_code', $request->SubCategory)
+              ->where('category_code',$request->Category)
+              ->update($validatedata);
 
         session()->flash('updated_crud_row',$request->subCategory_code.'-'.$request->category_code);
         $subCategories = SubCategory::all();

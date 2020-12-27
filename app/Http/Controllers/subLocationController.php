@@ -8,6 +8,7 @@ use App\Location;
 use Validator;
 use URL;
 use Log;
+use DB;
 
 class subLocationController extends Controller
 {
@@ -133,9 +134,14 @@ class subLocationController extends Controller
         
         
         
-        $subLocation = SubLocation::where('subLocation_code','=',$request->subLocation)->where('location_code','=',$request->location)->first();
-      
-        $subLocation->update($validatedata);
+        //$subLocation = SubLocation::where('subLocation_code','=',$request->subLocation)->where('location_code','=',$request->location)->first();
+        //$subLocation->update($validatedata);
+
+        DB::table('sub_locations')
+              ->where('subLocation_code', $request->subLocation)
+              ->where('location_code',$request->location)
+              ->update($validatedata);
+
         $subLocations = SubLocation::all();
         session()->flash('updated_crud_row',$request->subLocation_code.'-'.$request->location_code);
         
