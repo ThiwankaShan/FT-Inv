@@ -4,14 +4,15 @@ $(document).on('click', 'a.delete-item', function(e) {
     var $this = $(this);
     var token=$this.attr('token');
     Swal.fire({
-        title: 'Delete will permanantly delete the record and every dependent record',
-        text: 'Disposed record can be restored later',
+        text: 'Delete will permanantly delete the record and every dependent record',
+        //title: 'Disposed record can be restored later',
         icon: 'warning',
         showDenyButton: true,
         showCancelButton: true,
-        confirmButtonText: `Cancel`,
+        showConfirmButton: false,
+        cancelButtonText: `Cancel`,
         denyButtonText: `Delete`,
-        confirmButtonText : 'Dispose',
+        //confirmButtonText : 'Dispose',
  
     }).then(function(result){
       var force = 'False';

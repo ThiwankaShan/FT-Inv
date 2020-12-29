@@ -1,5 +1,7 @@
 <form action="/reports/preview" id="reportForm" method="POST">
 @csrf
+
+<!--
 <div class="custom-control custom-radio custom-control-inline">
   <input type="radio" id="disposed" name="option" class="custom-control-input">
   <label class="custom-control-label" for="disposed">Disposed</label>
@@ -14,6 +16,7 @@
   <input type="radio" id="available" name="option" class="custom-control-input">
   <label class="custom-control-label" for="available">Available</label>
 </div>
+-->
 
 <hr>
   <h5>Period</h5>
@@ -21,12 +24,12 @@
   
     <div class="form-group col-md-4">
       <label for="inputState">Start</label>
-      <input type="date" class="form-control" name="period_start">
+      <input type="date" class="form-control" id="period_start" name="period_start">
     </div>
 
     <div class="form-group col-md-4">
       <label for="inputState">End</label>
-      <input type="date" class="form-control" name="period_end">
+      <input type="date" class="form-control" id="period_end" name="period_end">
     </div>
 
   </div>
@@ -61,12 +64,12 @@
 
     <div class="form-group col-md-4">
       <label for="inputState">Start Date</label>
-      <input type="date" class="form-control" name="purchased_start">
+      <input type="date" class="form-control" id="purchased_start" name="purchased_start">
     </div>
 
     <div class="form-group col-md-4">
       <label for="inputState">End Date</label>
-      <input type="date" class="form-control" name="purchased_end">
+      <input type="date" class="form-control" id="purchased_end" name="purchased_end">
     </div>
 
   </div>

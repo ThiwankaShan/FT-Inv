@@ -107,6 +107,12 @@ body{
     padding-left: 10px ;
     margin: 0px;
   }
+
+  .dropdown-menu{
+    position:sticky !important;
+    margin-top: 60px !important;
+  }
+
   .sidebar i{
     padding-right: 9px;
     padding-left: 4px;
@@ -224,7 +230,7 @@ body{
     .mobile_nav_items i{
       padding-right: 10px;
     }
-  
+   
     .active{
       display: block;
     }

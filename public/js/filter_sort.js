@@ -127,5 +127,30 @@ $(document).ready(function() {
             fetchData(location, subLocation, category, subCategory, type, pID, column, order);
             
     });
+
+    // report disable purchase dates when period dates selected
+    $('#period_start,#period_end').on('change',function() {
+        if( $('#period_start').val()!='' || $('#period_end').val()!=''){
+            $('#purchased_start').prop( "readonly", true );
+            $('#purchased_end').prop( "readonly", true );
+        }else if( $('#period_start').val()=='' && $('#period_end').val()==''){
+            $('#purchased_start').prop( "readonly", false );
+            $('#purchased_end').prop( "readonly", false );
+        }
+            
+    });
+
+    // report disable period dates when purchased dates selected
+    $('#purchased_start,#purchased_end').on('change',function() {
+        if( $('#purchased_start').val()!='' || $('#purchased_end').val()!=''){
+            $('#period_start').prop( "readonly", true );
+            $('#period_end').prop( "readonly", true );
+        }else if( $('#purchased_start').val()=='' && $('#purchased_end').val()==''){
+            $('#period_start').prop( "readonly", false );
+            $('#period_end').prop( "readonly", false );
+        }
+            
+    });
+
    
 })
