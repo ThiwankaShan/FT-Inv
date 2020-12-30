@@ -48,3 +48,9 @@ td{
     text-align: right !important;
     align-self: flex-end;
 }
+
+#itemCode{
+    margin-left: 0px !important;
+    text-align: left !important;
+    align-self: flex-start;
+}

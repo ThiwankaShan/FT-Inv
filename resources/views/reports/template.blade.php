@@ -55,7 +55,7 @@
     <tbody id="dataBody">
       @foreach($items as $item)
       <tr>
-      <th scope="row">{{$item->item_code}}</th>
+      <th scope="row" id="itemCode">{{$item->item_code}}</th>
       <td>{{$item->subCategory->subCategory_name}}</td>
       <td>{{$item->GRN_number}}</td>
       <td>{{$item->procurement_id}}</td>
@@ -100,7 +100,7 @@
       
       @foreach($items as $item)
       <tr>
-      <th scope="row">{{$item->item_code}}</th>
+      <th scope="row" id="itemCode">{{$item->item_code}}</th>
       <td>{{$item->location_code}}</td>
       <td>{{$item->type}}</td>
       <td>{{$item->GRN_number}}</td>
