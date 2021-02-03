@@ -1,6 +1,3 @@
-<!-- here is the filter form -->
-
-
 <div class="container-fluid" id="dataTable">
   <table class="table table-striped table-bordered table-hover">
     <thead class="thead text-white" style="background-color:#691330">
@@ -17,6 +14,7 @@
         <th scope="col">Rate</th>
         <th scope="col">Tax</th>
         <th scope="col">Total</th>
+        <th scope="col">Deleted At</th>
 
         @if(auth()->user()->role == 'admin' || auth()->user()->role == 'manager')
         <th scope="col" class="text-center">Action</th>
@@ -24,7 +22,7 @@
       </tr>
     </thead>
     <tbody id="dataBody">
-      @foreach($items as $item)
+      @foreach($disposed_items as $item)
 
       <tr id="{{ str_replace('/', '', $item->item_code) }}">
         <th scope="row">{{$item->item_code}}</th>
@@ -39,16 +37,12 @@
         <td class="text-right">{{number_format($item->gross_price,2)}}</td>
         <td class="text-right">{{number_format($item->tax,2)}}</td>
         <td class="text-right">{{number_format($item->net_price,2)}}</td>
-
-        <td class="d-flex flex-row justify-content-end">
+        <td class="text-right">{{$item->deleted_at}}</td>
+        <td class="">
           @if(auth()->user()->role == 'admin')
-         
-          <a id="actionButton" class="btn btn-primary mr-1 text-light highlight_row" href="/item/edit/{{$item->item_code}}">Edit</a>
-          <a id="actionButton"  href="/item/delete/{{$item->item_code}}" data-method="POST" class="btn btn-danger delete-item text-light"
-            token='{!! csrf_token() !!}'>Delete</a>
 
-          @elseif(auth()->user()->role == 'manager')
-          <a id="actionButton"  class="btn btn-primary mr-1 text-light" href="/item/edit/{{$item->item_code}}">Edit</a>
+          <a id="actionButton" class="btn btn-primary mr-1 text-light highlight_row restore_item" href="{{ route('dispose.restore',$item->item_code) }}">Restore</a>
+         
           @endif
         </td>
 
@@ -63,4 +57,3 @@
 </div>
 
 <div >
-<script src="{{ asset('js/real_time_validation.js') }}"> </script>

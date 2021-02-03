@@ -1,3 +1,6 @@
+
+<input type="hidden" id="is_dashbord" value="Dashbord">
+
 <div class="row ">
   <div class="col-sm-5 d-flex flex-row">
 
@@ -41,6 +44,9 @@
   </div>
 </div>
 <hr>
+
+
+
 <div>
   <form action="" class="  form-inline">
     <select class="form-control selector  mb-1 diseble2 diseble3 diseble4 bg-light mr-2"

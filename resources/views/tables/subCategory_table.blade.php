@@ -17,7 +17,7 @@
         @foreach($subCategories as $subCategory)
         @if($subCategory->category_code != -1)
         
-        <tr id="{{$subCategory->subCategory_code}}-{{$subCategory->category_code}}">
+        <tr id="{{ str_pad( $subCategory->subCategory_code,'3',0, STR_PAD_LEFT )}}-{{$subCategory->category_code}}">
           <td scope="row">{{ str_pad( $subCategory->subCategory_code,'3',0, STR_PAD_LEFT )}}</td>
           <td>{{$subCategory->subCategory_name}}</td>
           <td>{{$subCategory->category->category_name ?? 'Deleted'}}</td>

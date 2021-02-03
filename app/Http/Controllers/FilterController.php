@@ -51,8 +51,8 @@ class FilterController extends Controller
             'procurement_id'=>$request->pid,
         );
 
-    
-       //checking the conditions and get the sorted filtered  item object 
+
+             //checking the conditions and get the sorted filtered  item object 
         $gadgets = Items::whereNested(function($query) use ($searchmap) {
             foreach ($searchmap as $key => $value)
                 {
@@ -61,10 +61,11 @@ class FilterController extends Controller
                     }
                 }
         }, 'and')->orderBy($request->column,$request->order)->orderBy('item_code', 'ASC');
-
+ 
         $items = $gadgets->get();
 
         $html = view('tables.item_table')->with(compact('items'))->render();
+       
         return response()->json(['authType'=>Auth::user()->role,'html'=>$html, 'success'=>true]);
           
     }

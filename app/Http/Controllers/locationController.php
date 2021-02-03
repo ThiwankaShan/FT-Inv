@@ -69,7 +69,7 @@ class locationController extends Controller
 
         Location::find($location)->update($validatedata);
          $locations = Location::all();
-        session()->flash('updated_crud_row',$request->location_code);
+         session()->flash('updated_crud_row',$request->location_code);
 
         return view('pages.location',compact('locations'));
     }

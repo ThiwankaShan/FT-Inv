@@ -16,7 +16,12 @@
             <a href="{{ route('reports.create') }}"><i class="fa fa-lg fa-suitcase"></i><span  >Reports</span></a>
 
         </li>
-        </div>
+
+        <li>
+            <a href="{{ route('dispose.index') }}"><i class="fa fa-lg fa-suitcase"></i><span >Bin</span></a>
+        </li>
+
+       
 
         <li>
             <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle" id="side_bar">
@@ -41,11 +46,15 @@
                 <li>
                     <a href="{{ route('grn.show',1) }}"><i class="fa fa-lg fa-suitcase"></i><span  >GRN</span></a>
                 </li>
+                
             </ul>
         </li>
 
 
+
     </ul>
+
+</div>
 </div>
 <script>
 
