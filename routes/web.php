@@ -16,7 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () { return view('welcome'); });
 Auth::routes();
+
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/restored', 'HomeController@AfterRestored');
 Route::post('/home', 'LiveSearchController@autofill')->name('liveSearch');
 Route::post('/search', 'SearchController@search')->name('search');
 Route::get('/dashboard/show/{id}','ItemController@ShowItems')->name('dashBoard.show');
@@ -80,5 +82,7 @@ Route::get('/reports/download', 'reportsController@pdfDownload')->name('reports.
 Route::get('/reports/create', 'reportsController@create')->name('reports.create');
 Route::post('/reports/preview', 'reportsController@preview')->name('reports.preview');
 
+//======================= Dispose ==============================================================================================================
 
-
+Route::get('dispose','DisposedController@index')->name('dispose.index');
+Route::get('dispose/restore/{id?}', 'DisposedController@restore')->name('dispose.restore')->where('id','(.*)');

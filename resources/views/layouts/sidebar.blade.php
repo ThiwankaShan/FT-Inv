@@ -28,6 +28,8 @@
                     id="side_bar">Sub Category</span></a>
             <a href="{{ route('grn.show',1) }}"><i class="fa fa-lg fa-suitcase"></i><span class="collapse"
                     id="side_bar">GRN</span></a>
+            <a href="{{ route('dispose.index') }}"><i class="fa fa-lg fa-suitcase"></i><span class="collapse"
+                    id="">Bin</span></a>
         </div>
 
     </div>

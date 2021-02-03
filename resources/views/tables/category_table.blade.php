@@ -14,7 +14,7 @@
       </thead>
       <tbody id="location_data">
         @foreach($categories as $category)
-        <tr id="{{$category->category_code}}">
+        <tr id="{{ str_pad($category->category_code,'3',0, STR_PAD_LEFT ) }}">
           <td scope="row">{{ str_pad($category->category_code,'3',0, STR_PAD_LEFT ) }}</td>
           <td>{{$category->category_name}}</td>
           <td class="">
