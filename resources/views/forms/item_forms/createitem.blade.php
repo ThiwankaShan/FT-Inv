@@ -25,7 +25,7 @@
                             <option value="{{$location->location_code}}" {{ $location->location_code === old('location_code') ? 'selected' : ''}}>{{$location->location_name}}</option>
                             @endforeach
                         </select>
-
+                        <span id="locationError" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                         @error('location_code')
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
@@ -50,6 +50,7 @@
                             <option value="{{$subLocation->subLocation_code}}" {{ $subLocation->subLocation_code === old('subLocation_code') ? 'selected' : ''}}>{{$subLocation->subLocation_name}}</option>
                             @endforeach
                         </select>
+                        <span id="subLocationError" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
 
                         @error('subLocation_code')
                         <span class="" role="alert">
@@ -74,6 +75,7 @@
                             <option value="{{$category->category_code}}" {{ $category->category_code === old('category_code') ? 'selected' : '' }}>{{$category->category_name}}</option>
                             @endforeach
                         </select>
+                        <span id="categoryError" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
 
                         @error('category_code')
                         <span class="" role="alert">
@@ -176,6 +178,7 @@
                     <div class="col-sm-9 mb-1">
                         <div class="form-group form-custom">
                             <input type="date" class="form-control {{ $errors->has('purchased_date') ? 'has_error' : ''}}" name="purchased_date" id="purchased_date" value="{{ old('purchased_date') }}"> 
+                            <span id="real_time_purchased_date" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                             @error('purchased_date')
                                 <span class="" role="alert">
                                     <small style="color:red"><strong>{{ $message }}</strong></small>
@@ -308,8 +311,8 @@
     <div class="modal fade  ml-5" style="top:10%" id="itemCodes" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog ">
             <div class="modal-content">
-                <div class="modal-header bg-dark text-white">
-                    <h1 class="text-white">Item Codes</h1>
+                <div style="background-color:#691330" class="modal-header  text-white">
+                    <h4 class="text-white">Item Codes</h>
                 </div>
                 <div class="modal-body">
                     <table class="w-100">
