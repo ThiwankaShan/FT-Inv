@@ -27,9 +27,9 @@ if(document.querySelector('#create_item_form')){
         return x.toLocaleString();
     }
    
-    if(target.value.length >= 13){
+    if(target.value.length >= 20){
         target.classList.add('validOne');
-        document.getElementById('real_time_'+target.name).innerHTML = "Input is too long.Must be less than 10 characters";
+        document.getElementById('real_time_'+target.name).innerHTML = "Input is too long.Must be less than 20 characters";
         document.getElementById('real_time_'+target.name).style.display = 'block';
         
     }else{
@@ -40,7 +40,7 @@ if(document.querySelector('#create_item_form')){
     }
     
     //disable the submit button to prevent submitting invalid length of values
-    if(tax.value.length >= 13 || Procument_id.value.length >= 13 || gross_price.value.length >= 13 || modal_number.value.length >= 13 || brand_name.value.length >=13 ){
+    if(tax.value.length >= 13 || Procument_id.value.length >= 20 || gross_price.value.length >= 13 || modal_number.value.length >= 20 || brand_name.value.length >=13 ){
         document.getElementById('btn_submit').disabled = true;
         document.getElementById('preview').disabled = true;
     }else{
@@ -154,7 +154,7 @@ $('#tax').keyup(function(event) {
       ;
     });
   });
-
+  
 
 // **************************************Serial Number Inputs Real Time Validation  End**************************
 

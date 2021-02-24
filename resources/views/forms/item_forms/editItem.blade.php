@@ -11,7 +11,7 @@
     <h5 class="card-header form-card-header-custom"><strong class="text-light"> Update Item Form</strong></h5>
     <div class="card-body">
 
-        <form action="/item/update/{{$item->item_code}}" method="POST" id="create_item_form">
+        <form action="/item/update/{{$item->item_code}}" nonvalidate method="POST" id="create_item_form">
             @csrf
             <div class="card text-center" style="margin-bottom:30px;">
                 <div class="card-header">
@@ -67,7 +67,7 @@
                         <label for="item-name ">Brand Name</label>
                     </div>
                     <div class="col-sm-9 mb-1 ">
-                        <input type="text" name="brandName" id="brandName" class="form-control {{ $errors->has('brandName') ? 'has_error' : ''}}" value="{{ old('brandName') ?? $item->brandName}}">
+                        <input type="text" name="brandName" id="brandName" class="form-control {{ $errors->has('brandName') ? 'has_error' : ''}}" value="{{ old('brandName') ?? $item->brandName}}" required>
                         <span id="real_time_brandName" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                         @error('brandName')
                         <span class="" role="alert">
@@ -87,7 +87,7 @@
                         <label for="item-name ">Model Number</label>
                     </div>
                     <div class="col-sm-9 mb-1 ">
-                        <input type="text" name="model_number" id="model_number" class="form-control {{ $errors->has('model_number') ? 'has_error' : ''}}" value="{{ old('model_number') ?? $item->model_number}}">
+                        <input type="text" name="model_number" id="model_number" class="form-control {{ $errors->has('model_number') ? 'has_error' : ''}}" value="{{ old('model_number') ?? $item->model_number}}" data-pristine-maxlength-message="model number must be below 20 characters" data-pristine-maxlength="20" required>
                         <span id="real_time_model_number" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                         @error('model_number')
                         <span class="" role="alert">
@@ -108,7 +108,7 @@
                         <label for="item-name ">Tax</label>
                     </div>
                     <div class="col-sm-9 mb-1">
-                        <input type="text" name="tax" id="tax" class="form-control" value="{{$item->tax}}">
+                        <input type="text" name="tax" id="tax" class="form-control" value="{{$item->tax}}" required>
                         <span id="real_time_tax" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
 
                         @error('tax')
@@ -129,7 +129,7 @@
                         <label for="pro">Procurement ID (Optional)</label>
                     </div>
                     <div class="col-sm-9 mb-1">
-                        <input type="text" name="procument_id" id="procument_id" class="form-control" value="{{$item->procurement_id}}">
+                        <input type="text" name="procument_id" id="procument_id" class="form-control" value="{{$item->procurement_id}}" data-pristine-maxlength-message="procument ID must be below 20 characters" data-pristine-maxlength="20">
                         <span id="real_time_procument_id" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
  
                         @error('procument_id')
@@ -150,7 +150,7 @@
                         <label for="rate">Price/Item</label>
                     </div>
                     <div class="col-sm-9 mb-1">
-                        <input type="text" name="gross_price" id="gross_price" class="form-control" value="{{$item->gross_price}}">
+                        <input type="text" name="gross_price" id="gross_price" class="form-control" value="{{$item->gross_price}}" required>
                         <span id="real_time_gross_price" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
 
                         @error('gross_price')
@@ -171,7 +171,7 @@
                         <label for="purchased_date">Purchased date</label>
                     </div>
                     <div class="col-sm-9 mb-1">
-                        <input type="date" name="purchased_date" id="purchased_date" class="form-control" value="{{$item->purchased_date}}">
+                        <input type="date" name="purchased_date" id="purchased_date" class="form-control" value="{{$item->purchased_date}}" required>
                         @error('purchased_date')
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
@@ -221,7 +221,7 @@
                
                {{ csrf_field() }}
 
-                <button type="submit" class="btn form-card-header-custom text-light" id="btn_submit" type="button" name="action" value="save">Update Item Details</button>
+                <button class="btn form-card-header-custom text-light" id="btn_submit" type="button" name="action" value="save">Update Item Details</button>
                 <button class="btn form-card-header-custom text-light "  style="display:none" id="preview" data-target="#itemCodes" type="button">show Item codes</button>
             </div>
         </form>
@@ -315,5 +315,7 @@
 
 <!-- Here is the js file that including ajax functions for add new GRN -->
 <script src="{{ asset('js/add_new_parts.js') }}"> </script>
-<script src="{{ asset('js/real_time_validation.js') }}"> </script>
+<script src="{{asset('js/pristine.js')}}"></script>
+<script src="{{asset('js/validation.js')}}"></script>
+
 @endsection

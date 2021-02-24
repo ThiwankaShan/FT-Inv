@@ -67,7 +67,10 @@
     <script src="{{ asset('js/itemCodes.js') }}"> </script>
     <script src="{{ asset('js/todelete.js') }}"> </script>
 
+
     <!--item code end -->
+
+    <script src="https://cdn.jsdelivr.net/npm/autonumeric@4.5.4"></script>
 
 </head>
 

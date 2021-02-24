@@ -10,7 +10,7 @@
     <h5 class="card-header form-card-header-custom"><strong class="text-light"> Add Item Form</strong></h5>
     <div class="card-body">
 
-        <form action="{{ route('item.store') }}" method="POST" id="create_item_form">
+        <form action="{{ route('item.store') }}" novalidate method="POST" id="create_item_form">
             @csrf
 
             <div class="form-group row">
@@ -19,7 +19,7 @@
                         <label for="item-name ">Location</label>
                     </div>
                     <div class="col-sm-9 mb-1">
-                        <select class="form-control {{ $errors->has('location_code') ? 'has_error' : ''}} " id="location" name="location_code" >
+                        <select class="form-control {{ $errors->has('location_code') ? 'has_error' : ''}} " id="location" name="location_code"  required>
                             <option value="">Select Location</option>
                             @foreach($locations as $location)
                             <option value="{{$location->location_code}}" {{ $location->location_code === old('location_code') ? 'selected' : ''}}>{{$location->location_name}}</option>
@@ -44,7 +44,7 @@
                         <label for="item-name ">Sub Location</label>
                     </div>
                     <div class="col-sm-9 mb-1">
-                        <select class="form-control {{ $errors->has('subLocation_code') ? 'has_error' : ''}}" id="sublocation" name="subLocation_code">
+                        <select class="form-control {{ $errors->has('subLocation_code') ? 'has_error' : ''}}" id="sublocation" name="subLocation_code" required>
                             <option value="">Select Sub Location</option>
                             @foreach($subLocations as $subLocation)
                             <option value="{{$subLocation->subLocation_code}}" {{ $subLocation->subLocation_code === old('subLocation_code') ? 'selected' : ''}}>{{$subLocation->subLocation_name}}</option>
@@ -69,7 +69,7 @@
                         <label for="item-name ">Category</label>
                     </div>
                     <div class="col-sm-9 mb-1">
-                        <select class="form-control {{ $errors->has('category_code') ? 'has_error' : ''}}" id="category" name="category_code">
+                        <select class="form-control {{ $errors->has('category_code') ? 'has_error' : ''}}" id="category" name="category_code" required>
                             <option value="">Select Category</option>
                             @foreach($categories as $category)
                             <option value="{{$category->category_code}}" {{ $category->category_code === old('category_code') ? 'selected' : '' }}>{{$category->category_name}}</option>
@@ -97,7 +97,7 @@
                         <label for="item-name ">Sub Category</label>
                     </div>
                     <div class="col-sm-9">
-                        <select class="form-control " id="subCategory" name="subCategory_code">
+                        <select class="form-control " id="subCategory" name="subCategory_code" required>
                             <option value="000" class="default_option">Select Sub Category</option>
                             @foreach($subCategories as $subcategory)
                             <option value="{{$subcategory->subCategory_code}}" {{$subcategory->subCategory_code === old('subCategory') ? 'selected' : ''}}>{{$subcategory->subCategory_name}}</option>
@@ -114,7 +114,7 @@
             <div class="form-row col-sm-9 pl-0">
                 <div class="form-group col-sm-6">
                     <label for="quantiy">No. Of Items</label>
-                    <input type="number" class="form-control {{ $errors->has('Quantity') ? 'has_error' : ''}}" id="noItems" placeholder="" name="Quantity" value="{{ old('Quantity') }}">
+                    <input type="number" class="form-control {{ $errors->has('Quantity') ? 'has_error' : ''}}" id="noItems" placeholder="" name="Quantity" value="{{ old('Quantity') }}" required>
                     @error('Quantity')
                     <span class="" role="alert">
                         <small style="color:red"><strong>{{ $message }}</strong></small>
@@ -132,7 +132,7 @@
             </div>
             <div class=" col-sm-9 row pl-0">
                 <div class="col-sm-3">
-                    <label for="item-name ">Type</label>
+                    <label for="item-name">Type</label>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-check form-check-inline">
@@ -177,7 +177,9 @@
                     </div>
                     <div class="col-sm-9 mb-1">
                         <div class="form-group form-custom">
-                            <input type="date" class="form-control {{ $errors->has('purchased_date') ? 'has_error' : ''}}" name="purchased_date" id="purchased_date" value="{{ old('purchased_date') }}"> 
+
+                            <input type="date" class="form-control {{ $errors->has('purchased_date') ? 'has_error' : ''}}" name="purchased_date" id="purchased_date" value="{{ old('purchased_date') }}" data-pristine-maxlength="20" required> 
+
                             <span id="real_time_purchased_date" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                             @error('purchased_date')
                                 <span class="" role="alert">
@@ -196,7 +198,7 @@
                         <label for="item-name ">Brand Name</label>
                     </div>
                     <div class="col-sm-9 mb-1 ">
-                        <input type="text" name="brandName" id="brandName" class="form-control {{ $errors->has('brandName') ? 'has_error' : ''}}" value="{{ old('brandName')}}">
+                        <input type="text" name="brandName" id="brandName" class="form-control {{ $errors->has('brandName') ? 'has_error' : ''}}" value="{{ old('brandName')}}"  data-pristine-maxlength-message="brand name must be below 20 characters" data-pristine-maxlength="20" required>
                         <span id="real_time_brandName" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                         @error('brandName')
                         <span class="" role="alert">
@@ -216,7 +218,7 @@
                         <label for="item-name ">Model Number</label>
                     </div>
                     <div class="col-sm-9 mb-1 ">
-                        <input type="text" name="model_number" id="model_number" class="form-control {{ $errors->has('Vat') ? 'has_error' : ''}}" value="{{ old('model_number')}}">
+                        <input type="text" name="model_number" id="model_number" class="form-control {{ $errors->has('Vat') ? 'has_error' : ''}}" value="{{ old('model_number')}}"  data-pristine-maxlength-message="Model number must be below 20 characters" data-pristine-maxlength="20" required>
                         <span id="real_time_model_number" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                         @error('model_number')
                         <span class="" role="alert">
@@ -236,7 +238,7 @@
                         <label for="item-name ">Tax</label>
                     </div>
                     <div class="col-sm-9 mb-1 ">
-                        <input type="text" name="tax" id="tax" class="form-control {{ $errors->has('tax') ? 'has_error' : ''}}" value="{{ old('tax')}}">
+                        <input type="text" name="tax" id="tax" class="form-control {{ $errors->has('tax') ? 'has_error' : ''}}" value="{{ old('tax')}}" data-pristine-maxlength="20" required>
                         <span id="real_time_tax" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                         @error('tax')
                         <span class="" role="alert">
@@ -256,7 +258,7 @@
                         <label for="pro">Procurement ID (Optional)</label>
                     </div>
                     <div class="col-sm-9 mb-1">
-                        <input type="text" name="procument_id" id="procument_id" class="form-control" value="{{ old('procument_id') }}">
+                        <input type="text" name="procument_id" id="procument_id" class="form-control" value="{{ old('procument_id') }}"  data-pristine-maxlength-message="procument ID must be below 20 characters" data-pristine-maxlength="20">
                         <span id="real_time_procument_id" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                         @error('procument_id')
                         <span class="" role="alert">
@@ -270,13 +272,13 @@
 
             </div>
 
-            <div class="form-group row">
+            <div class="form-group row required">
                 <div class="col-9 row">
                     <div class="col-sm-3">
                         <label for="rate">Price/Item</label>
                     </div>
                     <div class="col-sm-9 mb-1"> 
-                        <input type="text" name="gross_price" id="gross_price" class="form-control {{ $errors->has('gross_price') ? 'has_error' : ''}}" value="{{ old('gross_price') }}">
+                        <input type="text" name="gross_price" id="gross_price" class="form-control {{ $errors->has('gross_price') ? 'has_error' : ''}}" value="{{ old('gross_price') }}"  data-pristine-maxlength="20" required>
                         <span id="real_time_gross_price" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
 
                         @error('gross_price')
@@ -290,17 +292,10 @@
                 </div>
 
             </div>
-
-           
-
-
             <div class="text-center">
-
-
                 {{ csrf_field() }}
-
-                <button type="submit" class="btn form-card-header-custom text-light" id="btn_submit" type="button" name="action" value="save">Save Item Details</button>
-                <button class="btn form-card-header-custom text-light" id="preview" data-target="#itemCodes" type="button">show Item codes</button>
+                <button class="btn form-card-header-custom text-light" id="btn_submit" type="button" name="action" value="save">Save Item Details</button>
+                <button class="btn form-card-header-custom text-light" id="preview" type="button" data-target="#itemCodes" >show Item codes</button>
             </div>
         </form>
 
@@ -341,7 +336,8 @@
 @include('forms.grn_forms.createGRN_modal')
 
 <script src="{{ asset('js/add_new_parts.js') }}"> </script>
-<script src="{{ asset('js/real_time_validation.js') }}"> </script>
+<script src="{{asset('js/pristine.js')}}"></script>
+<script src="{{asset('js/validation.js')}}"></script>
 
 
 @endsection

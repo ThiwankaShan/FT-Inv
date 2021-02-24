@@ -148,3 +148,12 @@ margin-left: 30%;
 #sideBar-icon:active{
     color: #19B3D3 !important;
 }
+
+.has-danger .form-control {
+    border: 2px solid red !important;
+}
+
+.text-help{
+    color:red;
+    margin-left:19%;
+}
