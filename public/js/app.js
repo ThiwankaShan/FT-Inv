@@ -37354,8 +37354,8 @@ if (token) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! F:\Campus project\New folder\FT-Inv-1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! F:\Campus project\New folder\FT-Inv-1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/shan/Projects/ft-inv/FTINV/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/shan/Projects/ft-inv/FTINV/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
