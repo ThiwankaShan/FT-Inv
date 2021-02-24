@@ -5,6 +5,7 @@ const showCodesButton = document.querySelector('#preview');
 
 pristineCreateForm = new Pristine(createForm);
 
+
 new AutoNumeric('#gross_price', {
     decimalCharacter : '.',
     digitGroupSeparator : ',',
@@ -26,13 +27,4 @@ submitButton.addEventListener("click", async function () {
 })
 })
 
-submitButton.addEventListener("click", async function () {
-
-    var valid = pristineCreateForm.validate();
-
-    if (valid){
-        
-    }
-
-})
 
