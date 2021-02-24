@@ -258,7 +258,9 @@ class ItemController extends Controller
     public function destroy($item, Request $request)
     {
         if ($request->force=="True"){
-            Items::find($item)->forceDelete();
+            
+         Items::find($item)->forceDelete();
+           
         }else{
             Items::find($item)->delete();
         } 

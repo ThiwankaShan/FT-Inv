@@ -169,6 +169,7 @@ if(document.getElementById('highlighted_row')){
     var row_id = val.replace(/\/+/g, '');
     
     document.getElementById(row_id).style.backgroundColor = "#A5D6A7";
+    document.getElementById(row_id).style.borderLeft = "5px solid #33691E";
 
     //scroll automatically to updated row
     $(window).scrollTop($('#'+row_id).position().top);
@@ -182,7 +183,7 @@ if(document.getElementById('highlighted_row_crud')){
     // var row_id = val.replace(/\/+/g, '');
     
     document.getElementById(val).style.backgroundColor = "#A5D6A7";
-
+    document.getElementById(val).style.borderLeft = "5px solid #33691E";
     //scroll automatically to updated row
     $(window).scrollTop($('#'+val).position().top);
 

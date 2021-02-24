@@ -15,7 +15,7 @@
       </thead>
       <tbody id="location_data">
         @foreach($subLocations as $subLocation)
-        <tr id="{{ $subLocation->subLocation_code}}-{{$subLocation->location_code}}">
+        <tr id="{{ str_pad( $subLocation->subLocation_code,'3',0, STR_PAD_LEFT )}}-{{$subLocation->location_code}}">
           <td scope="row">{{ str_pad( $subLocation->subLocation_code,'3',0, STR_PAD_LEFT )}}</td>
           <td>{{$subLocation->subLocation_name}}</td>
           <td>{{$subLocation->locations->location_name ?? 'Deleted'}}</td>

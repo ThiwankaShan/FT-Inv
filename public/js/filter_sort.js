@@ -89,6 +89,7 @@ $(document).ready(function() {
                 order : order,
                 purchased_start : purchased_start,
                 purchased_end : purchased_end,
+              
             },
             success: function(data) {  
                 $('#items_table').html(data.html);
@@ -105,6 +106,7 @@ $(document).ready(function() {
     var pID = "" ;
     var column = "location_code";
     var order = "ASC";
+    
 
     //Here is the above Function call
     $('#filter').click(function() {
@@ -115,8 +117,11 @@ $(document).ready(function() {
         subCategory = $('#subCategory').val();
         type = $('#Type').val();
         pID = $('#ProID').val();
+       
+          
         fetchData(location, subLocation, category, subCategory, type, pID, column, order);
-            
+
+        
     });
 
     // sort and filter function 
