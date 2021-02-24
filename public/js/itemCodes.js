@@ -6,8 +6,8 @@ $(document).on("click","#preview",function(){//get input from create item blade 
     var subcategory = $('#subcategory').val();
     var no_of_items = $('#noItems').val();
     var no_sub_items=$('#NoSub').val();
-    var Vat=$('#Vat').val();
-    var rate= $('#Rate').val();
+    var Vat=$('#tax').val();
+    var rate= $('#gross_price').val();
     var procument_id=$('#procument_id').val();
     var action='show';
     var purchased_date = $('#purchased_date').val();
@@ -53,11 +53,32 @@ $(document).on("click","#preview",function(){//get input from create item blade 
             console.log(request.responseJSON.errors)
             var error="";
             $.each(request.responseJSON.errors, function (index, object) {
-                if(index=='Vat'){
+                if(index=='location_code'){
                     error="";
                     error+='<strong>'+object[0]+'</strong>'
-                    $('#vatError').html("");
-                    $('#vatError').append(error);
+                    $('#locationError').html("");
+                    $('#locationError').append(error);
+
+                }
+                else if(index=='subLocation_code'){
+                    error="";
+                    error+='<strong>'+object[0]+'</strong>'
+                    $('#subLocationError').html("");
+                    $('#subLocationError').append(error);
+
+                }
+                else if(index=='category_code'){
+                    error="";
+                    error+='<strong>'+object[0]+'</strong>'
+                    $('#categoryError').html("");
+                    $('#categoryError').append(error);
+
+                }
+                else if(index=='tax'){
+                    error="";
+                    error+='<strong>'+object[0]+'</strong>'
+                    $('#real_time_tax').html("");
+                    $('#real_time_tax').append(error);
                 }
                 else if(index=='Quantity'){
                     error="";
@@ -65,17 +86,17 @@ $(document).on("click","#preview",function(){//get input from create item blade 
                     $('#quantityError').html("");
                     $('#quantityError').append(error);
                 }
-                else if(index=='procument_id'){
+                else if(index=='purchased_date'){
                     error="";
                     error+='<strong>'+object[0]+'</strong>'
-                    $('#procumentIdError').html("");
-                    $('#procumentIdError').append(error);
+                    $('#real_time_purchased_date').html("");
+                    $('#real_time_purchased_date').append(error);
                 }
-                else if(index=='Rate'){
+                else if(index=='gross_price'){
                     error="";
                     error+='<strong>'+object[0]+'</strong>'
-                    $('#rateError').html("");
-                    $('#rateError').append(error);
+                    $('#real_time_gross_price').html("");
+                    $('#real_time_gross_price').append(error);
                 }
 
             });
