@@ -10,33 +10,29 @@
 
     <title>Inventory Managment System</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <script src="https://use.fontawesome.com/6a3acfdd48.js"></script>
 
     <!-- Styles -->
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" >
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/mycss.css') }}" rel="stylesheet">
 
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://use.fontawesome.com/6a3acfdd48.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/autonumeric@4.5.4"></script>
+    
     <!-- Custom js scripts -->
     <script src="{{ asset('js/filter_sort.js') }}"> </script>
     <script src="{{ asset('js/ui.js') }}"> </script>
-    <!-- <script src="{{ asset('js/add_new_parts.js') }}"> </script> -->
     
 
-    <!--Live search -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous">
-    </script>
+    <!--Live search configs-->
+
     <script>
         var config = {
             routes: {
@@ -48,12 +44,8 @@
         };
     </script>
     <script src="{{ asset('js/liveSearch.js') }}"> </script>
-    <!--Live search end -->
 
-    <!--item code -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
+    <!--item code config-->
     <script>
         var config = {
             routes: {
@@ -66,11 +58,7 @@
     </script>
     <script src="{{ asset('js/itemCodes.js') }}"> </script>
     <script src="{{ asset('js/todelete.js') }}"> </script>
-
-
-    <!--item code end -->
-
-    <script src="https://cdn.jsdelivr.net/npm/autonumeric@4.5.4"></script>
+    
 
 </head>
 
