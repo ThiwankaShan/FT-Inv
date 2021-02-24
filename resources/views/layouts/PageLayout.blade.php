@@ -1,17 +1,16 @@
 @include('layouts.app')
 <body>
 
-    <div id="app">
+    <div id="app" class="wrapper">
+    @include('layouts.sidebar')
         @include('layouts.navbar')
-        @include('layouts.sidebar')
-
-        <div class="content pr-0">
+        <div class="content-fluid w-100">
             @yield('content')
         </div>
     </div>
 
-    
+
 
 </body>
 
-</html>
+

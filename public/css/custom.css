@@ -69,7 +69,7 @@ margin-left: 30%;
     color: aliceblue !important;
     font-weight: 700 !important;
 }
- 
+
 #Table{
     align-self: center !important;
     max-width: 60% !important;
@@ -85,13 +85,13 @@ margin-left: 30%;
 }
 
 #subLocationTable th{
-    
+
     background-color:  #691330 !important;
     color: white !important;
 }
 
 #Table th{
-    
+
     background-color:  #691330 !important;
     color: white !important;
 }
@@ -126,7 +126,7 @@ margin-left: 30%;
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
     background-color:   #e9d6db !important;
   }
-  
+
 #itemsCard{
     min-width: 720px !important;
 }
@@ -146,7 +146,7 @@ margin-left: 30%;
 }
 
 #sideBar-icon:active{
-    color: #19B3D3 !important;
+    color: #ffffff !important;
 }
 
 .has-danger .form-control {

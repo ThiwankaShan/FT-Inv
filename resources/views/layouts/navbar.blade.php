@@ -1,19 +1,18 @@
-<nav class="navbar navbar-expand-md navbar-dark shadow-sm fixed-top" m-0 p-0 style="height:60px;">
-    <div class="container-fluid m-0 p-0">
+ <!-- Page Content  -->
+ <div  class="content-fluid">
+<nav class="navbar navbar-expand navbar-dark shadow-sm fixed-top" >
+    <div class="container-fluid ">
+    <button type="button" id="sidebarCollapse" class="btn btn-custom">
+    <i class="fa fa-bars" id="sideBar-icon"></i>
+                        <span></span>
+                    </button>
 
-        <button class="navbar-toggler mr-5 d-block" type="button" 
-        data-toggle="collapse" data-target="#side_bar" aria-controls="navbarSupportedContent" aria-expanded="false"
-            aria-label="{{ __('Toggle navigation') }}">
-            <i class="fa fa-bars" id="sideBar-icon"></i>
-        </button>
 
         <h4><a class="text-center nounderline" href="{{ url('/') }}">
             <strong class="text-light ">Inventory Managment System</strong>
         </a></h4>
 
-            <div class=" mr-5">
-
-
+            <div>
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
@@ -49,3 +48,13 @@
                 </ul>
             </div>
 </nav>
+</div>
+<script>
+    $(document).ready(function () {
+
+$('#sidebarCollapse').on('click', function () {
+    $('#sidebar').toggleClass('active');
+});
+
+});
+</script>
