@@ -24,16 +24,17 @@
 
             <input type="hidden" name="subLocation" value="{{$subLocation->subLocation_code}}">
             <input type="hidden" name="location" value="{{$subLocation->location_code}}">
-            
+            <input type="hidden" name="subLocationName" value="{{$subLocation->subLocation_name}}">
+
             <div class="form-group row">
                 <label for="item-name " class="col-sm-2 col-form-label">Location</label>
                 <div class="col-sm-10">
                 <select class="form-control {{ $errors->has('location_code') ? 'has_error' : '' }}" name="location_code" >
                     @foreach($locations as $location)
                         <option value="{{$location->location_code}}" 
-
-                           {{ ($subLocation->location_code === $location->location_code) ? 'selected' : '' }} 
-                           {{ $location->location_code === old('location_code') ? 'selected' : ''}} >{{ $location->location_name }}
+                      
+                           {{ old('location_code') ?   (($location->location_code === old('location_code')) ? 'selected' : '') }}  :
+                            (($subLocation->location_code === $location->location_code) ? 'selected' : '') >{{ $location->location_name }}
 
                         </option>
                     @endforeach
