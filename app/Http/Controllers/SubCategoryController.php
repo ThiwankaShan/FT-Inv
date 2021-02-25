@@ -50,8 +50,9 @@ class SubCategoryController extends Controller
     {
         // sub category code , Name and The category code that new sub category Belongs. Send Updated sub categories array  of Selected category OF Item Form 
         $validatedata = $request->validate([
+            'Category_code' => 'required',
             'subCategory_name' => 'required|unique:sub_categories',
-            'subCategory_code' => 'required|unique:sub_categories,subCategory_code,NULL,subCategory_code,category_code,',$request->Category_code,
+            'subCategory_code' => 'required|unique:sub_categories,subCategory_code,NULL,subCategory_code,category_code,'.$request->Category_code,
             
         ]);
 
@@ -106,20 +107,27 @@ class SubCategoryController extends Controller
      */
     public function update(Request $request)
     {
-        if($request->SubCategory != $request->subCategory_code || $request->Category != $request->category_code){
+        if($request->subCategoryName == $request->subCategory_name ){
+
             $validatedata = $request->validate([
-                'category_code' =>'required|unique:sub_categories,category_code,NULL,category_code,subCategory_code,'.$request->subCategory_code,    
-                'subCategory_name' => 'required|unique:sub_categories,subCategory_name,'.$request->subCategory_name.',subCategory_name',
-                'subCategory_code' => 'required|unique:sub_categories,subCategory_code,NULL,subCategory_code,category_code,'.$request->category_code,              
+                'category_code' =>'required|exclude_if:category_code,'.$request->Category.'|unique:sub_categories,category_code,NULL,category_code,subCategory_code,'.$request->subCategory_code,    
+                'subCategory_name' => 'required',
+                'subCategory_code' => 'required|exclude_if:subCategory_code,'.$request->SubCategory.'|unique:sub_categories,subCategory_code,NULL,subCategory_code,category_code,'.$request->category_code,              
                                    
-             ]);
+            ],[
+                'category_code.unique' => 'This Category Already has bellow Sub Category Code',
+                'subCategory_code.unique' => 'This Sub Category Code Already have taken for selected Category'
+            ]);
         }else{
             $validatedata = $request->validate([
-                'category_code' =>'required',    
-                'subCategory_name' => 'required|unique:sub_categories,subCategory_name,'.$request->subCategory_name.',subCategory_name',
-                'subCategory_code' => 'required',              
+                'category_code' =>'required|exclude_if:category_code,'.$request->Category.'|unique:sub_categories,category_code,NULL,category_code,subCategory_code,'.$request->subCategory_code,    
+                'subCategory_name' => 'required|exclude_if:location_code,'.$request->Category.'|unique:sub_categories',
+                'subCategory_code' => 'required|exclude_if:subCategory_code,'.$request->SubCategory.'|unique:sub_categories,subCategory_code,NULL,subCategory_code,category_code,'.$request->category_code,              
                                    
-             ]);
+            ],[
+                'category_code.unique' => 'This Category Already has bellow Sub Category Code',
+                'subCategory_code.unique' => 'This Sub Category Code Already have taken for selected Category'
+            ]);
         }
         
         //$subcategory = SubCategory::where('subCategory_code','=',$request->SubCategory)->where('category_code','=',$request->Category)->first();

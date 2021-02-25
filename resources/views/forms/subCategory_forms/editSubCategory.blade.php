@@ -25,6 +25,7 @@
 
             <input type="hidden" name="SubCategory" value="{{ $subcategory->subCategory_code}}">
             <input type="hidden" name="Category" value="{{$subcategory->category_code}}">
+            <input type="hidden" name="subCategoryName" value="{{$subcategory->subCategory_name}}">
 
             <div class="form-group row">
                 <label for="item-name " class="col-sm-2 col-form-label">Category</label>
@@ -32,9 +33,9 @@
                 <select class="form-control " id="category" name="category_code">
                     @foreach($categories as $category)
                          <option  value="{{$category->category_code}}" 
-                             
-                            {{ $subcategory->category_code == $category->category_code ? 'selected' : '' }}
-                            {{ $category->category_code == old('category_code') ? 'selected' : '' }}> {{$category->category_name}} 
+                        
+                            {{ old('category_code') ?  (($category->category_code == old('category_code')) ? 'selected' : ''):
+                                (($subcategory->category_code == $category->category_code) ? 'selected' : '' )  }}> {{$category->category_name}} 
                          
                           </option>
                     @endforeach
