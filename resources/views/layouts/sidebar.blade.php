@@ -7,11 +7,11 @@
             </div>
             <ul class="list-unstyled components">
                 <!-- <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <a href="#inventorySubMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="fas fa-home"></i>
                         Home
                     </a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <ul class="collapse list-unstyled" id="inventorySubMenu">
                         <li>
                             <a href="#">Home 1</a>
                         </li>
@@ -44,7 +44,7 @@
                         </li>
                     </ul>
                 </li> -->
-                <li class="active"git >
+                <li class="active" >
             <a href="/"><i class="fa fa-lg fa-home"></i><span  >Home</span></a>
         </li>
         <li>
@@ -64,10 +64,10 @@
             <a href="{{ route('dispose.index') }}"><i class="fa fa-lg fa-suitcase"></i><span >Bin</span></a>
         </li>
         <li >
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <a href="#inventorySubMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                     <i class="fa fa-lg fa-suitcase"></i><span >Inventory</span>
                     </a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <ul class="collapse list-unstyled" id="inventorySubMenu">
                     <li>
                     <a href="{{ route('supplier.index') }}"><i class="fa fa-lg fa-address-card"></i><span  >Suppliers</span></a>
                 </li>
