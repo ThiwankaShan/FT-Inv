@@ -330,6 +330,7 @@ body{
     padding: 10px;
     font-size: 1.1em;
     display: block;
+    color: #fff;
 }
 
 #sidebar ul li a:hover {
@@ -339,6 +340,7 @@ body{
 
 #sidebar ul li a i {
     margin-right: 10px;
+
 }
 
 #sidebar ul li.active>a,
