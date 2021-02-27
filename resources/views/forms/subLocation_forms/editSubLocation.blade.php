@@ -33,8 +33,8 @@
                     @foreach($locations as $location)
                         <option value="{{$location->location_code}}" 
                       
-                           {{ old('location_code') ?   (($location->location_code === old('location_code')) ? 'selected' : '') }}  :
-                            (($subLocation->location_code === $location->location_code) ? 'selected' : '') >{{ $location->location_name }}
+                           {{ old('location_code') ?   (($location->location_code === old('location_code')) ? 'selected' : '')  :
+                            (($subLocation->location_code === $location->location_code) ? 'selected' : '') }}>{{ $location->location_name }}
 
                         </option>
                     @endforeach
