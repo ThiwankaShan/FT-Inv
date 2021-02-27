@@ -6,8 +6,7 @@
     <thead class="thead text-white" style="background-color:#691330">
       <tr class="text-center">
         <th scope="col">Asset Code</th>
-        <th scope="col">Location</th>
-        <th scope="col">Type</th>
+        <th scope="col">Name</th>
         <th scope="col">GRN No</th>
         <th scope="col">Purchased date</th>
         <th scope="col">Supplier</th>
@@ -28,8 +27,12 @@
 
       <tr id="{{ str_replace('/', '', $item->item_code) }}">
         <th scope="row">{{$item->item_code}}</th>
-        <td>{{$item->locations->location_code ?? 'Deleted'}}</td>
-        <td>{{$item->type}}</td>
+        @if($item->subCategory->subCategory_name == 'Default')
+        <td>{{$item->category->category_name}}</td>
+        
+        @else
+        <td>{{$item->subCategory->subCategory_name}}</td>
+        @endif
         <td>{{$item->GRN_number}}</td>
         <td>{{$item->purchased_date}}</td>
         <td>{{$item->GRN->supplier->supplier_name ?? 'Deleted'}}</td>
