@@ -110,7 +110,7 @@ class reportsController extends Controller
         $tax_total=0;
         $grand_total=0;
         //This is for testing purposes
-        //return view('reports.template',compact('items','data'));
+        //return view('reports.template',compact('items','data','grand_total','gross_total','tax_total'));
         foreach($items as $item){
             $grand_total += $item->net_price;
             $gross_total += $item->gross_price;
@@ -119,6 +119,7 @@ class reportsController extends Controller
         
 
         $pdf = PDF::loadView('reports.template',compact('items','data','grand_total','gross_total','tax_total'));
+        $pdf->setPaper('A4', 'landscape');
         return $pdf->download('report.pdf');
 
     }
