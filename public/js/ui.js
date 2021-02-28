@@ -11,3 +11,10 @@ $(function () {
   });
 });
 
+// side bar toggle
+$(function () {
+  $('.content-body').click(function (event) {
+    console.log('body clicked');
+    $('#sidebar').addClass('active');
+  });
+});
