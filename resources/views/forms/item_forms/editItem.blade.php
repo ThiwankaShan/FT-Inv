@@ -3,7 +3,7 @@
 
 <div class="container-fluid pt-2 ">
 
-    <a class="btn btn-dark text-light" href="{{ $request_url }}">Back</a>
+    <a class="btn btn-dark text-light" href="">Back</a>
 </div>
 <hr>
 
@@ -43,7 +43,7 @@
                         <label for="item-name ">GRN No.</label>
                     </div>
                     <div class="col-sm-9 mb-1">
-                        <select class="form-control " id="GRN_number" name="GRN_number">
+                        <select class="form-control " id="grn_number" name="GRN_number">
                             <option value="{{$item->GRN_number}}">{{ $item->GRN_number }}</option>
                             @foreach($grns as $grn)
                             <option value="{{$grn}}">{{ $grn }}</option>
@@ -52,8 +52,6 @@
                     </div>
                 </div>
                 <div class="col-3">
-
-
 
                 <a class="btn form-control button-style" href="" id="button_create_grn" data-toggle="modal"  data-target="#Add_new_GRN" class="button">Add New GRN</a>  
 
@@ -67,14 +65,8 @@
                         <label for="item-name ">Brand Name</label>
                     </div>
                     <div class="col-sm-9 mb-1 ">
-                        <input type="text" name="brandName" id="brandName" class="form-control {{ $errors->has('brandName') ? 'has_error' : ''}}" value="{{ old('brandName') ?? $item->brandName}}" required>
-                        <span id="real_time_brandName" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
-                        @error('brandName')
-                        <span class="" role="alert">
-                            <small style="color:red"><strong>{{ $message }}</strong></small>
-                        </span>
-
-                        @enderror
+                        <input type="text" name="brandName" id="brandName" class="form-control {{ $errors->has('brandName') ? 'has_error' : ''}}" value="{{ old('brandName') ?? $item->brandName}}" >
+                       
                         
                     </div>
                 </div>
@@ -87,14 +79,7 @@
                         <label for="item-name ">Model Number</label>
                     </div>
                     <div class="col-sm-9 mb-1 ">
-                        <input type="text" name="model_number" id="model_number" class="form-control {{ $errors->has('model_number') ? 'has_error' : ''}}" value="{{ old('model_number') ?? $item->model_number}}" data-pristine-maxlength-message="model number must be below 20 characters" data-pristine-maxlength="20" required>
-                        <span id="real_time_model_number" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
-                        @error('model_number')
-                        <span class="" role="alert">
-                            <small style="color:red"><strong>{{ $message }}</strong></small>
-                        </span>
-
-                        @enderror
+                        <input type="text" name="model_number" id="model_number" class="form-control {{ $errors->has('model_number') ? 'has_error' : ''}}" value="{{ old('model_number') ?? $item->model_number}}" data-pristine-maxlength-message="model number must be below 20 characters" data-pristine-maxlength="20">
                        
                     </div>
                 </div>
@@ -109,15 +94,7 @@
                     </div>
                     <div class="col-sm-9 mb-1">
                         <input type="text" name="tax" id="tax" class="form-control" value="{{$item->tax}}" required>
-                        <span id="real_time_tax" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
-
-                        @error('tax')
-                        <span class="" role="alert">
-                            <small style="color:red"><strong>{{ $message }}</strong></small>
-                        </span>
-
-                        @enderror
-                       
+                      
                     </div>
                 </div>
 
@@ -130,15 +107,7 @@
                     </div>
                     <div class="col-sm-9 mb-1">
                         <input type="text" name="procument_id" id="procument_id" class="form-control" value="{{$item->procurement_id}}" data-pristine-maxlength-message="procument ID must be below 20 characters" data-pristine-maxlength="20">
-                        <span id="real_time_procument_id" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
- 
-                        @error('procument_id')
-                        <span class="" role="alert">
-                            <small style="color:red"><strong>{{ $message }}</strong></small>
-                        </span>
-
-                        @enderror
-                        
+                   
                     </div>
                 </div>
 
@@ -151,15 +120,7 @@
                     </div>
                     <div class="col-sm-9 mb-1">
                         <input type="text" name="gross_price" id="gross_price" class="form-control" value="{{$item->gross_price}}" required>
-                        <span id="real_time_gross_price" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
-
-                        @error('gross_price')
-                        <span class="" role="alert">
-                            <small style="color:red"><strong>{{ $message }}</strong></small>
-                        </span>
-
-                        @enderror
-                        
+                     
                     </div>
                 </div>
 
@@ -172,12 +133,6 @@
                     </div>
                     <div class="col-sm-9 mb-1">
                         <input type="date" name="purchased_date" id="purchased_date" class="form-control" value="{{$item->purchased_date}}" required>
-                        @error('purchased_date')
-                        <span class="" role="alert">
-                            <small style="color:red"><strong>{{ $message }}</strong></small>
-                        </span>
-
-                        @enderror
                        
                     </div>
                 </div>
@@ -190,11 +145,11 @@
                         <label for="purchased_date">Serial Number</label>
                     </div>
                     <div class="col-sm-9 mb-1">
-                        <input type="text" name="serial_number" id="serial_number" class="form-control" value="{{$item->serial_number}}">
+                        <input type="text" name="serial_number" id="serial_number" class="form-control" value="{{$item->serial_number}}" data-pristine-maxlength-message="Serial number must be below 20 characters" data-pristine-maxlength="20">
                         <span id="real_time_serial_number" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                         @error('serial_number')
                         <span class="" role="alert">
-                            <small style="color:red"><strong>{{ $message }}</strong></small>
+                            <small style="color:red;"><strong>{{ $message }}</strong></small>
                         </span>
 
                         @enderror
@@ -217,7 +172,7 @@
 
             <div class="text-center">
 
-               <input type="hidden" name="back_to" value="{{  $request_url }}">
+               <input type="hidden" name="back_to" id="back_to" value="">
                
                {{ csrf_field() }}
 
@@ -253,7 +208,7 @@
                    
                     <div class="form-group form-custom">
                         <label for="GRN_no">GRN No.</label>
-                        <input type="text" class="form-control form-custom" id="grn_number" name="GRN_number" value="{{$suggest_grnNo}}">
+                        <input type="text" class="form-control form-custom" id="GRN_number" name="GRN_number" value="{{$suggest_grnNo}}">
 
                     </div>
 
@@ -289,7 +244,7 @@
 
                         <div class="form-group form-custom">
                             <label for="supplier_code">Supplier</label>
-                            <select class="form-control" id="supplier_name" name="supplier_code">
+                            <select class="form-control" id="supplier_code" name="supplier_code">
                                 @foreach($Suppliers as $Supplier)
 
                                 <option value="{{$Supplier->supplier_code}}" class="form-custom">{{$Supplier->supplier_name}}</option>

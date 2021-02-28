@@ -167,9 +167,6 @@ class ItemController extends Controller
         //get the input from grn
         //auto increment functionality
         //return to edit item form
-
-        //previous url
-        $request_url = (string)($request->server('HTTP_REFERER'));
        
         $grns = Grn::all()->except($item->GRN_number)->pluck('GRN_number');
         
@@ -183,7 +180,7 @@ class ItemController extends Controller
         }
         $Suppliers = Supplier::all();
 
-        return view('forms.item_forms.editItem', compact('grns', 'item','Suppliers', 'suggest_grnNo','request_url'));
+        return view('forms.item_forms.editItem', compact('grns', 'item','Suppliers', 'suggest_grnNo'));
 
     }
 
@@ -198,13 +195,15 @@ class ItemController extends Controller
         //return to the current page on dashbord
         
         $url = $request->back_to; //current page url in dashbord
-      
+   
         $this->validate($request, [
             
             'procument_id' => 'string|nullable',
             'tax' => 'required',
             'gross_price' => 'required',
             'purchased_date' => 'required',
+            'brandName' => 'nullable',
+            'model_number' => 'nullable',
             
         ]);
 
@@ -231,6 +230,8 @@ class ItemController extends Controller
         $new_procumentID = $request->procument_id;
         $new_purchased_date = $request->purchased_date;
         $new_serial_number = $request->serial_number;
+        $new_brand_name = $request->brandName;
+        $new_model_number = $request->model_number;
 
         //supplier name fetched via grn relation
        
@@ -246,6 +247,8 @@ class ItemController extends Controller
                 'procurement_id' => $new_procumentID,
                 'purchased_date' => $new_purchased_date,
                 'serial_number' => $new_serial_number,
+                'brandName' => $new_brand_name,
+                'model_number' => $new_model_number,
             ]);
 
             session()->flash('updated_row',$request->item);

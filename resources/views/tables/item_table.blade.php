@@ -46,7 +46,7 @@
         <td class="d-flex flex-row justify-content-end">
           @if(auth()->user()->role == 'admin')
          
-          <a id="actionButton" class="btn btn-primary mr-1 text-light highlight_row" href="/item/edit/{{$item->item_code}}">Edit</a>
+          <a id="actionButton" class="btn btn-primary mr-1 text-light highlight_row item_edit_button" href="/item/edit/{{$item->item_code}}">Edit</a>
           <a id="actionButton"  href="/item/delete/{{$item->item_code}}" data-method="POST" class="btn btn-danger delete-item text-light"
             token='{!! csrf_token() !!}'>Delete</a>
 
@@ -66,4 +66,4 @@
 </div>
 
 <div >
-<script src="{{ asset('js/real_time_validation.js') }}"> </script>
+<script src="{{ asset('js/validation.js') }}"> </script>

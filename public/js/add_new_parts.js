@@ -414,9 +414,9 @@ $(document).ready(function(){
                          $("#GRN_date").val('mm/dd/yy');
                          $("#invoice_number").val("");
                          $("#invoice_date").val('mm/dd/yy');
-                         $("#supplier_name").html("");
+                         $("#supplier_code").html("");
                          $.each(data.supplier , function(key, value){
-                            $("#supplier_name").append('<option value="'+value.supplier_code+'">'+value.supplier_name+'</option>');
+                            $("#supplier_code").append('<option value="'+value.supplier_code+'">'+value.supplier_name+'</option>');
                         })
                         $("#GRN_number").val(parseInt(GRN_number)+1);
 

@@ -11,5 +11,5 @@
 
 <script src="{{ asset('js/delete.js') }}"></script>
 <script src="{{ asset('js/filter_sort.js') }}"> </script>
-<script src="{{ asset('js/real_time_validation.js') }}"> </script>
+<script src="{{ asset('js/validation.js') }}"> </script>
 @endsection

@@ -16,17 +16,17 @@ class GRNController extends Controller
      */
     public function index()
     {
-        $last_grnNo = Grn::latest('GRN_number')->first();
-        error_log($last_grnNo);
-        if ($last_grnNo == '') {
-            $suggest_grnNo = '01';
-        } else {
-            $suggest_grnNo = sprintf('%02d', $last_grnNo->GRN_number + 1);
-        }
+        // $last_grnNo = Grn::latest('GRN_number')->first();
+        // error_log($last_grnNo);
+        // if ($last_grnNo == '') {
+        //     $suggest_grnNo = '01';
+        // } else {
+        //     $suggest_grnNo = sprintf('%02d', $last_grnNo->GRN_number + 1);
+        // }
 
 
-        $Suppliers = Supplier::all();
-        return view('forms.createGRN', compact('Suppliers', 'suggest_grnNo'));
+        // $Suppliers = Supplier::all();
+        // return view('forms.grn_forms.createGRN', compact('Suppliers', 'suggest_grnNo'));
     }
 
     /**

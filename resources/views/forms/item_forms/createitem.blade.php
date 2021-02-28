@@ -25,12 +25,7 @@
                             <option value="{{$location->location_code}}" {{ $location->location_code === old('location_code') ? 'selected' : ''}}>{{$location->location_name}}</option>
                             @endforeach
                         </select>
-                        <span id="locationError" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
-                        @error('location_code')
-                        <span class="" role="alert">
-                            <small style="color:red"><strong>{{ $message }}</strong></small>
-                        </span>
-                        @enderror
+                        
                     </div> 
                 </div>
                 <div class="col-3">
@@ -50,13 +45,7 @@
                             <option value="{{$subLocation->subLocation_code}}" {{ $subLocation->subLocation_code === old('subLocation_code') ? 'selected' : ''}}>{{$subLocation->subLocation_name}}</option>
                             @endforeach
                         </select>
-                        <span id="subLocationError" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
-
-                        @error('subLocation_code')
-                        <span class="" role="alert">
-                            <small style="color:red"><strong>{{ $message }}</strong></small>
-                        </span>
-                        @enderror
+                       
 
                     </div>
                 </div>
@@ -75,14 +64,7 @@
                             <option value="{{$category->category_code}}" {{ $category->category_code === old('category_code') ? 'selected' : '' }}>{{$category->category_name}}</option>
                             @endforeach
                         </select>
-                        <span id="categoryError" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
-
-                        @error('category_code')
-                        <span class="" role="alert">
-                            <small style="color:red"><strong>{{ $message }}</strong></small>
-                        </span>
-
-                        @enderror
+                      
                     </div>
                 </div>
                 <div class="col-3">
@@ -179,8 +161,6 @@
                         <div class="form-group form-custom">
 
                             <input type="date" class="form-control {{ $errors->has('purchased_date') ? 'has_error' : ''}}" name="purchased_date" id="purchased_date" value="{{ old('purchased_date') }}" data-pristine-maxlength="20" required> 
-
-                            <span id="real_time_purchased_date" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                             @error('purchased_date')
                                 <span class="" role="alert">
                                     <small style="color:red"><strong>{{ $message }}</strong></small>
@@ -198,8 +178,8 @@
                         <label for="item-name ">Brand Name</label>
                     </div>
                     <div class="col-sm-9 mb-1 ">
-                        <input type="text" name="brandName" id="brandName" class="form-control {{ $errors->has('brandName') ? 'has_error' : ''}}" value="{{ old('brandName')}}"  data-pristine-maxlength-message="brand name must be below 20 characters" data-pristine-maxlength="20" required>
-                        <span id="real_time_brandName" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
+                        <input type="text" name="brandName" id="brandName" class="form-control {{ $errors->has('brandName') ? 'has_error' : ''}}" value="{{ old('brandName')}}"  data-pristine-maxlength-message="brand name must be below 20 characters" data-pristine-maxlength="20" >
+                       
                         @error('brandName')
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
@@ -218,8 +198,8 @@
                         <label for="item-name ">Model Number</label>
                     </div>
                     <div class="col-sm-9 mb-1 ">
-                        <input type="text" name="model_number" id="model_number" class="form-control {{ $errors->has('Vat') ? 'has_error' : ''}}" value="{{ old('model_number')}}"  data-pristine-maxlength-message="Model number must be below 20 characters" data-pristine-maxlength="20" required>
-                        <span id="real_time_model_number" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
+                        <input type="text" name="model_number" id="model_number" class="form-control {{ $errors->has('Vat') ? 'has_error' : ''}}" value="{{ old('model_number')}}"  data-pristine-maxlength-message="Model number must be below 20 characters" data-pristine-maxlength="20" >
+                      
                         @error('model_number')
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
@@ -239,7 +219,7 @@
                     </div>
                     <div class="col-sm-9 mb-1 ">
                         <input type="text" name="tax" id="tax" class="form-control {{ $errors->has('tax') ? 'has_error' : ''}}" value="{{ old('tax')}}" data-pristine-maxlength="20" required>
-                        <span id="real_time_tax" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
+                      
                         @error('tax')
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
@@ -259,7 +239,7 @@
                     </div>
                     <div class="col-sm-9 mb-1">
                         <input type="text" name="procument_id" id="procument_id" class="form-control" value="{{ old('procument_id') }}"  data-pristine-maxlength-message="procument ID must be below 20 characters" data-pristine-maxlength="20">
-                        <span id="real_time_procument_id" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
+                      
                         @error('procument_id')
                         <span class="" role="alert">
                             <small style="color:red"><strong>{{ $message }}</strong></small>
@@ -279,7 +259,7 @@
                     </div>
                     <div class="col-sm-9 mb-1"> 
                         <input type="text" name="gross_price" id="gross_price" class="form-control {{ $errors->has('gross_price') ? 'has_error' : ''}}" value="{{ old('gross_price') }}"  data-pristine-maxlength="20" required>
-                        <span id="real_time_gross_price" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
+                      
 
                         @error('gross_price')
                         <span class="" role="alert">
