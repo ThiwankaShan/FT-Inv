@@ -327,6 +327,8 @@ body{
 }
 
 #sidebar ul li a {
+    margin-top:15px;
+    margin-bottom:15px;
     padding: 10px;
     font-size: 1.1em;
     display: block;
@@ -455,7 +457,4 @@ a.article:hover {
         display: none;
     }
 }
-.btn-custom
-{
 
-}
