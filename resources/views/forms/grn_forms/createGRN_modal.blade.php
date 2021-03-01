@@ -37,7 +37,7 @@
                     </div>
 
                     <div class="form-group form-custom">
-                        <label for="invoice_no">Invoice No.</label>
+                        <label for="invoice_number">Invoice No.</label>
                         <input type="text" class="form-control" id="invoice_number" name="invoice_number" placeholder="Enter Invoice Number">
                         <span id="live_invoice_number" style="disply:none; color:red; font-size:10px; font-weight:bold"></span>
                         <span class="" role="alert" style="display:none; margin-bottom:5px" id="invoice_error">
