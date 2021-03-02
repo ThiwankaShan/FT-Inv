@@ -52,7 +52,7 @@ class SubCategoryController extends Controller
         $validatedata = $request->validate([
             'Category_code' => 'required',
             'subCategory_name' => 'required|unique:sub_categories',
-            'subCategory_code' => 'required|unique:sub_categories,subCategory_code,NULL,subCategory_code,category_code,'.$request->Category_code,
+            'subCategory_code' => 'required|numeric|unique:sub_categories,subCategory_code,NULL,subCategory_code,category_code,'.$request->Category_code,
             
         ]);
 

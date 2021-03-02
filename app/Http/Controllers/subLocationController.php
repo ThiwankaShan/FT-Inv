@@ -57,7 +57,7 @@ class subLocationController extends Controller
         $validatedData = $request->validate([
             'location_code' => 'required',
             'subLocation_name' => 'required|unique:sub_locations',
-            'subLocation_code' => 'required|unique:sub_locations,subLocation_code,NULL,subLocation_code,location_code,'.$request->location_code,
+            'subLocation_code' => 'required|numeric|unique:sub_locations,subLocation_code,NULL,subLocation_code,location_code,'.$request->location_code,
         ]);
 
         
