@@ -21,7 +21,7 @@ $(document).on('click', 'a.restore_item', function(e) {
         url: $this.attr('href'),
         success: function (res) {
             
-              window.open('http://127.0.0.1:8000/home?restore=true', '_self');
+              window.open('/home?restore=true', '_self');
               $(window).scrollTop($('#'+res.id).position().top)
             
         }

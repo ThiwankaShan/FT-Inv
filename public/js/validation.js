@@ -258,7 +258,7 @@ $('#invoice_number').click(function(){
     function validation(e){
 
         var target = e.target;
-        if(target.value.length >= 5){
+        if(target.value.length >= 8){
             live_validate_fail('invoice_number', 'live_invoice_number','save_GRN');        
         }else{
             live_validate_pass('invoice_number', 'live_invoice_number','save_GRN');
