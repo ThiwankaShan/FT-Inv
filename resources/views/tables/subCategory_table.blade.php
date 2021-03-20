@@ -16,7 +16,7 @@
       <tbody id="location_data">
         @foreach($subCategories as $subCategory)
         @if($subCategory->category_code != -1)
-        
+
         <tr id="{{ str_pad( $subCategory->subCategory_code,'3',0, STR_PAD_LEFT )}}-{{$subCategory->category_code}}">
           <td scope="row">{{ str_pad( $subCategory->subCategory_code,'3',0, STR_PAD_LEFT )}}</td>
           <td>{{$subCategory->subCategory_name}}</td>
@@ -25,8 +25,8 @@
             @if(auth()->user()->role == 'admin')
 
             <a class="btn btn-primary text-light highlight_row" href="/subCategory/edit/{{ $subCategory->subCategory_code }}/{{$subCategory->category_code }}">Edit</a>
-            <a class="btn btn-danger delete-item text-light"  href="/subCategory/delete/{{ $subCategory->subCategory_code }}/{{ $subCategory->category_code }}" data-method="POST" token='{!! csrf_token() !!}'>Delete</a>
-           
+            <a class="btn btn-danger not-disposal-delete-item text-light"  href="/subCategory/delete/{{ $subCategory->subCategory_code }}/{{ $subCategory->category_code }}" data-method="POST" token='{!! csrf_token() !!}'>Delete</a>
+
 
             @elseif(auth()->user()->role == 'manager')
             <a class="btn btn-primary text-light" href="">Edit</a>

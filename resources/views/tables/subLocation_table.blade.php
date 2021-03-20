@@ -23,9 +23,9 @@
             @if(auth()->user()->role == 'admin')
 
             <a class="btn btn-primary text-light highlight_row mr-1" href="/subLocation/edit/{{$subLocation->subLocation_code}}/{{$subLocation->location_code}}">Edit</a>
-            <a class="btn btn-danger delete-item text-light"  href="/subLocation/delete/{{$subLocation->subLocation_code}}/{{$subLocation->location_code}}" data-method="POST" token='{!! csrf_token() !!}'>Delete</a>
-           
- 
+            <a class="btn btn-danger not-disposal-delete-item text-light"  href="/subLocation/delete/{{$subLocation->subLocation_code}}/{{$subLocation->location_code}}" data-method="POST" token='{!! csrf_token() !!}'>Delete</a>
+
+
             @elseif(auth()->user()->role == 'manager')
             <a class="btn btn-primary text-light" href="/subLocation/edit/{{$subLocation->subLocation_code}}/{{$subLocation->location_code}}">Edit</a>
             @endif
