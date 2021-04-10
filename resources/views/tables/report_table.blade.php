@@ -96,7 +96,7 @@
       <tr>
         <th scope="col" class="text-center">No</th>
         <th scope="col" class="text-center">Asset Code</th>
-        <th scope="col" class="text-center">Location</th>
+        <th scope="col" class="text-center">Name</th>
         <th scope="col" class="text-center">Type</th>
         <th scope="col" class="text-center">GRN No</th>
         <th scope="col" class="text-center">Purchased date</th>
@@ -115,7 +115,11 @@
       <tr id="{{ str_replace('/', '', $item->item_code) }}">
         <td>{{$no}}</td>
         <th scope="row">{{$item->item_code}}</th>
-        <td>{{$item->location_code}}</td>
+        @if($item->subCategory->subCategory_name == 'Default')
+        <td>{{$item->category->category_name}}</td>
+        @else
+        <td>{{$item->subCategory->subCategory_name}}</td>
+        @endif
         <td>{{$item->type}}</td>
         <td>{{$item->GRN_number}}</td>
         <td>{{$item->purchased_date}}</td>

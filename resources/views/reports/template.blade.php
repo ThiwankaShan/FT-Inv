@@ -83,7 +83,7 @@
     <thead>
       <tr>
         <th scope="col">Asset Code</th>
-        <th scope="col">Location</th>
+        <th scope="col">Name</th>
         <th scope="col">Type</th>
         <th scope="col">GRN No</th>
         <th scope="col">Purchased date</th>
@@ -98,10 +98,14 @@
     </thead>
     <tbody id="dataBody">
       
-      @foreach($items as $item)
+      @foreach($items as $item) 
       <tr>
       <th scope="row" id="itemCode">{{$item->item_code}}</th>
-      <td>{{$item->location_code}}</td>
+      @if($item->subCategory->subCategory_name == 'Default')
+      <td>{{$item->category->category_name}}</td>
+      @else
+      <td>{{$item->subCategory->subCategory_name}}</td>
+      @endif
       <td>{{$item->type}}</td>
       <td>{{$item->GRN_number}}</td>
       <td>{{$item->purchased_date}}</td>
