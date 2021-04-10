@@ -27,8 +27,8 @@
             @if(auth()->user()->role == 'admin')
 
             <a class="btn btn-primary text-light highlight_row" href="{{ route('grn.edit',$grn->GRN_number) }}">Edit</a>
-            <a class="btn btn-danger delete-item text-light"  href="{{ route('grn.delete', $grn->GRN_number) }}" data-method="POST" token='{!! csrf_token() !!}'>Delete</a>
-           
+            <a class="btn btn-danger not-disposal-delete-item text-light"  href="{{ route('grn.delete', $grn->GRN_number) }}" data-method="POST" token='{!! csrf_token() !!}'>Delete</a>
+
             @elseif(auth()->user()->role == 'manager')
             <a class="btn btn-primary text-light" href="">Edit</a>
             @endif

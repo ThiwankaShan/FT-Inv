@@ -29,8 +29,8 @@
             @if(auth()->user()->role == 'admin')
 
             <a class="btn btn-primary text-light highlight_row" href="/supplier/edit/{{$supplier->supplier_code}}">Edit</a>
-            <a class="btn btn-danger delete-item text-light"  href="/supplier/delete/{{$supplier->supplier_code}}" data-method="POST" token='{!! csrf_token() !!}'>Delete</a>
-           
+            <a class="btn btn-danger not-disposal-delete-item text-light"  href="/supplier/delete/{{$supplier->supplier_code}}" data-method="POST" token='{!! csrf_token() !!}'>Delete</a>
+
 
             @elseif(auth()->user()->role == 'manager')
             <a class="btn btn-primary text-light" href="/supplier/edit/{{$supplier->supplier_code}}">Edit</a>

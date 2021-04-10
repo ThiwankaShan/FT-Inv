@@ -3,7 +3,7 @@
 
 <div class="container-fluid pt-2 ">
 
-    <a class="btn btn-dark text-light" href="">Back</a>
+    <a class="btn btn-dark text-light" href="/home">Back</a>
 </div>
 <hr>
 
@@ -53,7 +53,7 @@
                 </div>
                 <div class="col-3">
 
-                <a class="btn form-control button-style" href="" id="button_create_grn" data-toggle="modal"  data-target="#Add_new_GRN" class="button">Add New GRN</a>  
+                <a class="btn form-control button-style" href="" id="button_create_grn" data-toggle="modal"  data-target="#Add_new_GRN" class="button">Add New GRN</a>
 
                 </div>
             </div>
@@ -66,8 +66,8 @@
                     </div>
                     <div class="col-sm-9 mb-1 ">
                         <input type="text" name="brandName" id="brandName" class="form-control {{ $errors->has('brandName') ? 'has_error' : ''}}" value="{{ old('brandName') ?? $item->brandName}}" >
-                       
-                        
+
+
                     </div>
                 </div>
 
@@ -80,7 +80,7 @@
                     </div>
                     <div class="col-sm-9 mb-1 ">
                         <input type="text" name="model_number" id="model_number" class="form-control {{ $errors->has('model_number') ? 'has_error' : ''}}" value="{{ old('model_number') ?? $item->model_number}}" data-pristine-maxlength-message="model number must be below 20 characters" data-pristine-maxlength="20">
-                       
+
                     </div>
                 </div>
 
@@ -94,7 +94,7 @@
                     </div>
                     <div class="col-sm-9 mb-1">
                         <input type="text" name="tax" id="tax" class="form-control" value="{{$item->tax}}" required>
-                      
+
                     </div>
                 </div>
 
@@ -107,7 +107,7 @@
                     </div>
                     <div class="col-sm-9 mb-1">
                         <input type="text" name="procument_id" id="procument_id" class="form-control" value="{{$item->procurement_id}}" data-pristine-maxlength-message="procument ID must be below 20 characters" data-pristine-maxlength="20">
-                   
+
                     </div>
                 </div>
 
@@ -120,7 +120,7 @@
                     </div>
                     <div class="col-sm-9 mb-1">
                         <input type="text" name="gross_price" id="gross_price" class="form-control" value="{{$item->gross_price}}" required>
-                     
+
                     </div>
                 </div>
 
@@ -133,7 +133,7 @@
                     </div>
                     <div class="col-sm-9 mb-1">
                         <input type="date" name="purchased_date" id="purchased_date" class="form-control" value="{{$item->purchased_date}}" required>
-                       
+
                     </div>
                 </div>
 
@@ -153,13 +153,13 @@
                         </span>
 
                         @enderror
-                        
+
                     </div>
                 </div>
 
             </div>
 
-           
+
 
             @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
@@ -173,7 +173,7 @@
             <div class="text-center">
 
                <input type="hidden" name="back_to" id="back_to" value="">
-               
+
                {{ csrf_field() }}
 
                 <button class="btn form-card-header-custom text-light" id="btn_submit" type="button" name="action" value="save">Update Item Details</button>
@@ -189,14 +189,14 @@
 <div class="modal fade bd-example-modal-lg" style="top:40px"  tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="Add_new_GRN" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content ">
-  
+
             <div class='card w-100  item-create'>
             <h5 class="form-card-header-custom text-white p-3">Add New GRN</h5>
 
             <div class="card-body">
 
                          <div class="alert alert-success text-center" role="alert" style="display:none" id="valid_grn">
-                                <strong>New GRN Created Successfully!!</strong> 
+                                <strong>New GRN Created Successfully!!</strong>
                         </div>
 
                         <div class="alert alert-danger  " id="invalid_grn" style="display:none">
@@ -205,7 +205,7 @@
 
                 <form  class="form-align-custom" id="Grn_form">
                     @csrf
-                   
+
                     <div class="form-group form-custom">
                         <label for="GRN_no">GRN No.</label>
                         <input type="text" class="form-control form-custom" id="GRN_number" name="GRN_number" value="{{$suggest_grnNo}}">
@@ -219,7 +219,7 @@
                         <span class="" role="alert" style="display:none; margin-bottom:5px" id="GRN_date_error">
                             <small style="color:red"><strong id="GRN_date_msg"></strong></small>
                         </span>
-                      
+
                     </div>
 
                     <div class="form-group form-custom">
@@ -230,7 +230,7 @@
                             <small style="color:red"><strong id="invoice_msg"></strong></small>
                         </span>
 
-                       
+
                     </div>
 
                     <div class="form-group form-custom">
@@ -240,7 +240,7 @@
                         <span class="" role="alert" style="display:none; margin-bottom:5px" id="invoice_date_error">
                             <small style="color:red"><strong id="invoice_date_msg"></strong></small>
                         </span>
-                       
+
 
                         <div class="form-group form-custom">
                             <label for="supplier_code">Supplier</label>
@@ -252,8 +252,8 @@
                             </select>
 
                         </div>
-                       
-        
+
+
                         <div class="text-center">
                             <button type="button" class="btn form-card-header-custom text-light" id="save_GRN">Create</button>
                             <button class="btn btn-secondary cancel_modal text-light  " type="button" >Cancel</button>
@@ -263,7 +263,7 @@
             </div>
         </div>
 
-   
+
     </div>
   </div>
 </div>
