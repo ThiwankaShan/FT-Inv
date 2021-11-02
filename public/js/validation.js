@@ -57,9 +57,9 @@ $(".real_time_input").click(function(){
     var serial_inputs =document.getElementById(input_id);
     var error =  btn_id.replace(/\/+/g, '_');
     var save_serial = btn_id.replace(/\/+/g, '2');
-    
+
     serial_inputs.addEventListener('input', validation_serial_number);
-    
+
     //validation
     function validation_serial_number(e){
        var serial_target = e.target;
@@ -89,7 +89,7 @@ if(document.getElementById('highlighted_row')){
     var input_id = document.getElementById('highlighted_row');
     var val = input_id.value;
     var row_id = val.replace(/\/+/g, '');
-    
+
     document.getElementById(row_id).style.backgroundColor = "#A5D6A7";
     document.getElementById(row_id).style.borderLeft = "5px solid #33691E";
 
@@ -103,18 +103,18 @@ if(document.getElementById('highlighted_row_crud')){
     var input_id = document.getElementById('highlighted_row_crud');
     var val = input_id.value;
     // var row_id = val.replace(/\/+/g, '');
-    
+
     document.getElementById(val).style.backgroundColor = "#A5D6A7";
     document.getElementById(val).style.borderLeft = "5px solid #33691E";
     //scroll automatically to updated row
     $(window).scrollTop($('#'+val).position().top);
-                                                         
+
 }
 
 $('.item_edit_button').click(function(e){
-    
+
     var url = window.location.href;
-  
+
     localStorage.setItem("backToUrl", url);
     console.log(localStorage.getItem('backToUrl'))
 })
@@ -122,14 +122,14 @@ $('.item_edit_button').click(function(e){
 //========================================================Live Validation Functions for Location,Sub Location,Category,Sub Category,GRN  ============================================
 function live_validate_fail (input_id, error_span, button_save){
     document.getElementById(input_id).classList.add('validOne');
-    document.getElementById(error_span).innerHTML="Input is too Long.Must be less than 5 characters"; 
+    document.getElementById(error_span).innerHTML="Input is too Long.Must be less than 5 characters";
     document.getElementById(error_span).style.display="block";
     document.getElementById(button_save).disabled=true;
 }
 
 function live_validate_pass(input_id, error_span, button_save){
     document.getElementById(input_id).classList.remove('validOne');
-    document.getElementById(error_span).innerHTML=""; 
+    document.getElementById(error_span).innerHTML="";
     document.getElementById(error_span).style.display="none";
     document.getElementById(button_save).disabled=false;
 }
@@ -137,7 +137,7 @@ function live_validate_pass(input_id, error_span, button_save){
 function remove_all_live_validation_functions(form_type,input_id, error_span, button_save){
     $("#"+form_type).trigger('reset');
     document.getElementById(input_id).classList.remove('validOne');
-    document.getElementById(error_span).innerHTML=""; 
+    document.getElementById(error_span).innerHTML="";
     document.getElementById(error_span).style.display="none";
     document.getElementById(button_save).disabled=false;
 }
@@ -154,7 +154,7 @@ $('#location_code').click(function(){
 
         var target = e.target;
         if(target.value.length >= 5){
-            live_validate_fail('location_code', 'live_location_code','saveLocation');        
+            live_validate_fail('location_code', 'live_location_code','saveLocation');
         }else{
             live_validate_pass('location_code', 'live_location_code','saveLocation');
         }
@@ -162,10 +162,10 @@ $('#location_code').click(function(){
     }
 
     // Hide errors when the modal open back
-    $('#buttonCreateLocation').click(function(){     
-        remove_all_live_validation_functions('Location_form','location_code', 'live_location_code','saveLocation');      
+    $('#buttonCreateLocation').click(function(){
+        remove_all_live_validation_functions('Location_form','location_code', 'live_location_code','saveLocation');
     })
-  
+
 })
 
 //========================================================Sub Location Create Modal Live Validation  ============================================
@@ -180,7 +180,7 @@ $('#subLocation_code').click(function(){
 
         var target = e.target;
         if(target.value.length >= 5){
-            live_validate_fail('subLocation_code', 'live_subLocation_code','saveSubLocation');        
+            live_validate_fail('subLocation_code', 'live_subLocation_code','saveSubLocation');
         }else{
             live_validate_pass('subLocation_code', 'live_subLocation_code','saveSubLocation');
         }
@@ -188,10 +188,10 @@ $('#subLocation_code').click(function(){
     }
 
     //Hide errors when the modal open back
-    $('#buttonCreateSubLoaction').click(function(){     
-        remove_all_live_validation_functions('subLocation_form','subLocation_code', 'live_subLocation_code','saveSubLocation');      
+    $('#buttonCreateSubLoaction').click(function(){
+        remove_all_live_validation_functions('subLocation_form','subLocation_code', 'live_subLocation_code','saveSubLocation');
     })
-  
+
 })
 
 //========================================================Category Create Modal Live Validation  ============================================
@@ -206,7 +206,7 @@ $('#category_code').click(function(){
 
         var target = e.target;
         if(target.value.length >= 5){
-            live_validate_fail('category_code', 'live_category_code','saveCategory');        
+            live_validate_fail('category_code', 'live_category_code','saveCategory');
         }else{
             live_validate_pass('category_code', 'live_category_code','saveCategory');
         }
@@ -214,10 +214,10 @@ $('#category_code').click(function(){
     }
 
     //Hide errors when the modal open back
-    $('#button_create_category').click(function(){     
-        remove_all_live_validation_functions('category_form','category_code', 'live_category_code','saveCategory');      
+    $('#button_create_category').click(function(){
+        remove_all_live_validation_functions('category_form','category_code', 'live_category_code','saveCategory');
     })
-  
+
 })
 
 
@@ -233,7 +233,7 @@ $('#subCategory_code').click(function(){
 
         var target = e.target;
         if(target.value.length >= 5){
-            live_validate_fail('subCategory_code', 'live_subCategory_code','save_subCategory');        
+            live_validate_fail('subCategory_code', 'live_subCategory_code','save_subCategory');
         }else{
             live_validate_pass('subCategory_code', 'live_subCategory_code','save_subCategory');
         }
@@ -241,10 +241,10 @@ $('#subCategory_code').click(function(){
     }
 
     //Hide errors when the modal open back
-    $('#button_create_subCategory').click(function(){     
-        remove_all_live_validation_functions('category_form','subCategory_code', 'live_subCategory_code','save_subCategory');      
+    $('#button_create_subCategory').click(function(){
+        remove_all_live_validation_functions('category_form','subCategory_code', 'live_subCategory_code','save_subCategory');
     })
-  
+
 })
 
 
@@ -258,19 +258,19 @@ $('#invoice_number').click(function(){
     function validation(e){
 
         var target = e.target;
-        if(target.value.length >= 8){
-            live_validate_fail('invoice_number', 'live_invoice_number','save_GRN');        
-        }else{
-            live_validate_pass('invoice_number', 'live_invoice_number','save_GRN');
-        }
+        // if(target.value.length >= 8){
+        //     live_validate_fail('invoice_number', 'live_invoice_number','save_GRN');
+        // }else{
+        //     live_validate_pass('invoice_number', 'live_invoice_number','save_GRN');
+        // }
 
     }
 
     //Hide errors when the modal open back
-    $('#button_create_grn').click(function(){     
-        remove_all_live_validation_functions('Grn_form','invoice_number', 'live_invoice_number','save_GRN');      
+    $('#button_create_grn').click(function(){
+        remove_all_live_validation_functions('Grn_form','invoice_number', 'live_invoice_number','save_GRN');
     })
-  
+
 })
 
 
@@ -283,38 +283,38 @@ if(document.querySelector('#supplier_form')){
 
     let  supplier_code = forms.elements.namedItem('supplier_code');
     let  vat_register_no  = forms.elements.namedItem('vat_register_no');
-   
+
 
     supplier_code.addEventListener('input', validation);
     vat_register_no.addEventListener('input', validation);
-    
+
     //Real Time Validation Function
     function validation(e){
 
             let target = e.target;
-            let supplier_code = document.getElementById('supplier_code'); 
-            let vat_register_no = document.getElementById('vat_register_no'); 
-        
+            let supplier_code = document.getElementById('supplier_code');
+            let vat_register_no = document.getElementById('vat_register_no');
+
             if(target.value.length >= 8){
                 target.classList.add('validOne');
                 document.getElementById('live_'+target.name).innerHTML = "Input is too long.Must be less than 8 characters";
                 document.getElementById('live_'+target.name).style.display = 'block';
-                
+
             }else{
                 target.classList.remove('validOne');
                 document.getElementById('live_'+target.name).innerHTML = "";
                 document.getElementById('live_'+target.name).style.display = 'none';
-                
+
             }
-            
+
             //disable the submit button to prevent submitting invalid length of values
             if(supplier_code.value.length >= 8 || vat_register_no.value.length >= 8  ){
                 document.getElementById('saveSupplier').disabled = true;
             }else{
                 document.getElementById('saveSupplier').disabled = false;
-            
+
             }
-      
+
 
     }
 }
