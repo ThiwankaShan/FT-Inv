@@ -10,12 +10,8 @@
 * Run server `php artisan serve`
 
 ### To do
-
-- [ ] Item sort module
-- [ ] Refactor everything :-)
 - [ ] Live search 
-- [ ] Log module
-- [ ] Document generate module
+- [ ] Activity Log module
 
 ### Completed tasks
 - [x] Create users
@@ -27,6 +23,8 @@
 - [x] Create Category
 - [x] Create Subcategory
 - [x] Item filter module
+- [x] Item sort module
+- [x] Document generate module
 
 ### Theme Colors
 * C21E56 - ![](https://img.shields.io/badge/-C21E56-C21E56)
