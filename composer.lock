@@ -4495,16 +4495,16 @@
         },
         {
             "name": "wandersonwhcr/romans",
-            "version": "v1.2.0",
+            "version": "v1.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wandersonwhcr/romans.git",
-                "reference": "7e8394d396fe6397d3d8cb017aebdd7fc08c38b2"
+                "reference": "fe09d21c4a1498fad1acb28a585b6c3333feb88e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wandersonwhcr/romans/zipball/7e8394d396fe6397d3d8cb017aebdd7fc08c38b2",
-                "reference": "7e8394d396fe6397d3d8cb017aebdd7fc08c38b2",
+                "url": "https://api.github.com/repos/wandersonwhcr/romans/zipball/fe09d21c4a1498fad1acb28a585b6c3333feb88e",
+                "reference": "fe09d21c4a1498fad1acb28a585b6c3333feb88e",
                 "shasum": ""
             },
             "require": {
@@ -4544,9 +4544,9 @@
             ],
             "support": {
                 "issues": "https://github.com/wandersonwhcr/romans/issues",
-                "source": "https://github.com/wandersonwhcr/romans/tree/v1.2.0"
+                "source": "https://github.com/wandersonwhcr/romans/tree/v1.2.3"
             },
-            "time": "2019-12-18T12:02:40+00:00"
+            "time": "2021-03-18T14:38:41+00:00"
         }
     ],
     "packages-dev": [
