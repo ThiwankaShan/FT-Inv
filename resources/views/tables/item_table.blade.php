@@ -1,6 +1,7 @@
 <!-- here is the filter form -->
-
-
+<?php
+use App\SubCategory;
+?>
 <div class="container-fluid" id="dataTable">
   <table class="table table-striped table-bordered table-hover">
     <thead class="thead text-white" style="background-color:#691330">
@@ -31,7 +32,7 @@
         <td>{{$item->category->category_name}}</td>
         
         @else
-        <td>{{$item->subCategory->subCategory_name}}</td>
+        <td><?php echo(SubCategory::select('subCategory_name')->where('category_code',"=", $item->category_code)->where('subCategory_code',"=" ,$item->subCategory_code )->get()[0]["subCategory_name"])?></td>
         @endif
         <td>{{$item->GRN_number}}</td>
         <td>{{$item->purchased_date}}</td>
