@@ -35,7 +35,7 @@ $(document).ready(function() {
 
    //Send ajax request to Filter Controller and retrive  subCategories as a Object
     $('#category').change(function() {
-      
+
         var categoryCode = $(this).val();
         var a = $(this).parent();
         var op = '';
@@ -52,7 +52,7 @@ $(document).ready(function() {
                 for (var i = 0; i < data.length; i++) {
                     op += '<option value="' + data[i].subCategory_code + '" >' + data[i].subCategory_name + '</option>';
                 }
-                $('#subCategory').children(':not(.default_option)').remove();            
+                $('#subCategory').children(':not(.default_option)').remove();
                 $('#subCategory').append(op);
             },
             error: function() {
@@ -61,15 +61,15 @@ $(document).ready(function() {
         });
 
     })
-    
 
-    function fetchData(loactionCode = "", subLoactionCode = "", categoryCode = "", subCategoryCode = "",type = "", pid = "", column="location_code", order="ASC",purchased_start='',purchased_end='') {
-              
+
+    function fetchData(loactionCode = "", subLoactionCode = "", categoryCode = "", subCategoryCode = "",type = "", pid = "",sn="", column="location_code", order="ASC",purchased_start='',purchased_end='',serial_now='') {
+
         // input filter and sort paramters
         // send data to ajaxcontroller get filter method
         // output item data as item rows to dashboard (sorted and filterd)
-        // this function double as standalone sort function  
-        
+        // this function double as standalone sort function
+
         var _token = $('input[name="_token"]').val();
         $.ajax({
 
@@ -85,16 +85,17 @@ $(document).ready(function() {
                 subCategory_code: subCategoryCode,
                 type: type,
                 pid: pid,
+                serial_number:serial_number,
                 column : column,
                 order : order,
                 purchased_start : purchased_start,
                 purchased_end : purchased_end,
-              
+
             },
-            success: function(data) {  
+            success: function(data) {
                 $('#items_table').html(data.html);
             }
-        })  
+        })
     }
 
     // global variables to keep both sort and filter independent
@@ -104,9 +105,10 @@ $(document).ready(function() {
     var subCategory = "";
     var type = "";
     var pID = "" ;
+    var serial_number="";
     var column = "location_code";
     var order = "ASC";
-    
+
 
     //Here is the above Function call
     $('#filter').click(function() {
@@ -117,20 +119,20 @@ $(document).ready(function() {
         subCategory = $('#subCategory').val();
         type = $('#Type').val();
         pID = $('#ProID').val();
-       
-          
-        fetchData(location, subLocation, category, subCategory, type, pID, column, order);
+        serial_number=$('#sn').val();
 
-        
+
+        fetchData(location, subLocation, category, subCategory, type, pID,serial_number, column, order);
+
+
     });
 
-    // sort and filter function 
+    // sort and filter function
     $('#sort').click(function() {
         console.log('Sort js function');
         column = $('#column').val();
         order = $('#order').val();
             fetchData(location, subLocation, category, subCategory, type, pID, column, order);
-            
     });
 
     // report disable purchase dates when period dates selected
@@ -142,7 +144,7 @@ $(document).ready(function() {
             $('#purchased_start').prop( "readonly", false );
             $('#purchased_end').prop( "readonly", false );
         }
-            
+
     });
 
     // report disable period dates when purchased dates selected
@@ -154,8 +156,8 @@ $(document).ready(function() {
             $('#period_start').prop( "readonly", false );
             $('#period_end').prop( "readonly", false );
         }
-            
+
     });
 
-   
+
 })

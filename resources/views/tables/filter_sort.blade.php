@@ -38,11 +38,11 @@
 
   </div>
   <div class="col-sm-3 d-flex flex-row">
-    
+
     <h6 style="font-size:16px; font-weight:bold" class="mt-2 mr-2">Pages</h6>
     <div calss="ml-auto">{{$items->links() }}</div>
 
-    
+
   </div>
 </div>
 <hr>
@@ -96,6 +96,7 @@
       <option value="{{$pId->procurement_id}}">{{$pId->procurement_id}}</option>
       @endforeach
     </select>
+    <input type="text" id="sn" name="sn" class="form-control mb-1 diseble1 diseble2 diseble3 bg-light mr-3" placeholder="Serial number">
 
 
     <button class="btn btn-outline-success ml-auto  mr-2" id="filter" type='button'>Filter</button>

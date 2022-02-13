@@ -15,17 +15,17 @@ use Validator;
 class FilterController extends Controller
 {
 
-  
-    //requesting loaction_code and returning  subLocations  object 
+
+    //requesting loaction_code and returning  subLocations  object
     public function getSubLocation(Request $request)
     {
-        
+
         $data = SubLocation::where('Location_code', $request->locationCode)->get();
 
         return response()->json($data);
     }
 
-     //requesting category_code and returning subCategories object  
+     //requesting category_code and returning subCategories object
     public function getSubCategory(Request $request)
     {
         $data = SubCategory::where('category_code', $request->categoryCode)->get();
@@ -41,7 +41,7 @@ class FilterController extends Controller
         // input locationCode,subLocationCode,category_code,subCategory_code,type,pid,column,order
         // get filtered items by given sort argument
         // output filterd and sorted value
-       
+
         $searchmap = array(
             'location_code'=>$request->loactionCode,
             'subLocation_code'=>$request->subLoactionCode,
@@ -49,10 +49,11 @@ class FilterController extends Controller
             'subCategory_code'=>$request->subCategory_code,
             'type'=>$request->type,
             'procurement_id'=>$request->pid,
+            'serial_number'=>$request->serial_number,
         );
 
 
-             //checking the conditions and get the sorted filtered  item object 
+             //checking the conditions and get the sorted filtered  item object
         $gadgets = Items::whereNested(function($query) use ($searchmap) {
             foreach ($searchmap as $key => $value)
                 {
@@ -61,13 +62,13 @@ class FilterController extends Controller
                     }
                 }
         }, 'and')->orderBy($request->column,$request->order)->orderBy('item_code', 'ASC');
- 
+
         $items = $gadgets->get();
 
         $html = view('tables.item_table')->with(compact('items'))->render();
-       
+
         return response()->json(['authType'=>Auth::user()->role,'html'=>$html, 'success'=>true]);
-          
+
     }
 
 
@@ -75,7 +76,7 @@ class FilterController extends Controller
     // returning converted numbers object
     public function getRomanNumber(Request $request)
     {
-       
+
         $sub = $request->no_of_sub;
         $data = array();
         for ($i = 1; $i <= $sub; $i++) {
@@ -87,5 +88,5 @@ class FilterController extends Controller
         return response()->json([$data]);
     }
 
-    
+
 }
